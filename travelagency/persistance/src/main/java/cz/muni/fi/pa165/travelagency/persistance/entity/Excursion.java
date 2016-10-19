@@ -17,7 +17,7 @@ public class Excursion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     private String name;
@@ -42,7 +42,7 @@ public class Excursion {
     public Excursion() {
     }
 
-    public Excursion(long id) {
+    public Excursion(Long id) {
         this.id = id;
     }
 
@@ -59,7 +59,7 @@ public class Excursion {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
