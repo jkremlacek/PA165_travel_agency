@@ -14,7 +14,7 @@ import java.util.Set;
  * Represents reservation of trip for specific customer with choice of excursions. 
  */
 public class Reservation {
-	private int id;
+	private int id; // TO DO it should be Integer/Long(better) type because null posibility
 	private Customer customer;
 	private Set<Excursion> excursionSet;
 	private Trip trip;
