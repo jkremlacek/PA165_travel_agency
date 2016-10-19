@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.travelagency.persistance.entity;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class Customer {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Integer personalNumber;
     
     @Column(length = 50, nullable = true)
@@ -44,9 +45,8 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.name);
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.personalNumber);
         return hash;
     }
 
@@ -62,11 +62,13 @@ public class Customer {
             return false;
         }
         final Customer other = (Customer) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.personalNumber, other.personalNumber)) {
             return false;
         }
         return true;
     }
+
+    
 
     public String getName() {
         return name;
@@ -109,7 +111,7 @@ public class Customer {
     }
 
     public Set<Reservation> getReservations() {
-        return reservations;
+        return Collections.unmodifiableSet(reservations);
     }
 
     public void setReservations(Set<Reservation> reservations) {
