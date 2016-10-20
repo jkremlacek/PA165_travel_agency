@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 
 /**
  *
+ * Represents a customer of travel agency
+ * 
  * @author Josef Pavelec, jospavelec@gmail.com
  */
 
@@ -68,7 +70,17 @@ public class Customer {
         return true;
     }
 
-    
+    public Customer() {
+    }
+
+    public Customer(String name, Date birthDate, Integer personalNumber, String mail, Integer phoneNumber) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.personalNumber = personalNumber;
+        this.mail = mail;
+        this.phoneNumber = phoneNumber;
+    }
+
 
     public String getName() {
         return name;
