@@ -23,9 +23,11 @@ public class Excursion {
     private String name;
 
     @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @NotNull
+    @Temporal(TemporalType.TIME)
     private Date duration;
 
     @NotNull
