@@ -60,5 +60,5 @@ public interface CustomerDao extends GenericDao<Customer, Long> {
      * @param reservations to find
      * @return list of customers with given reservations
      */
-    List<Customer> findByExcursions(Set<Reservation> reservations);
+    List<Customer> findByReservation(Reservation reservations);
 }
