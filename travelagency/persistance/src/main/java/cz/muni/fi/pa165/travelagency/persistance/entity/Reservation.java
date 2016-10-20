@@ -5,28 +5,42 @@
  */
 package cz.muni.fi.pa165.travelagency.persistance.entity;
 
+import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 
 /**
- *
- * @author jkrem
- * 
  * Represents reservation of trip for specific customer with choice of excursions. 
+ * 
+ * @author Jakub Kremláček 
+ * 
  */
+@Entity
 public class Reservation {
-	private int id; // TO DO it should be Integer/Long(better) type because null posibility
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
+	@NotNull
 	private Customer customer;
+	
+	@NotNull
 	private Set<Excursion> excursionSet;
+	
+	@NotNull
 	private Trip trip;
 	
-	public Reservation (int id, Customer customer, Set<Excursion> excursionSet, Trip trip) {
+	public Reservation () {}
+	
+	public Reservation (long id, Customer customer, Set<Excursion> excursionSet, Trip trip) {
 		this.id = id;
 		this.customer = customer;
 		this.excursionSet = excursionSet;
 		this.trip = trip;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
@@ -39,7 +53,7 @@ public class Reservation {
 	}
 
 	public Set<Excursion> getExcursionSet() {
-		return excursionSet;
+		return Collections.unmodifiableSet(excursionSet);
 	}
 
 	public void setExcursionSet(Set<Excursion> excursionSet) {
@@ -53,4 +67,29 @@ public class Reservation {
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
+	
+	@Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.customer) * 43 + Objects.hashCode(this.trip);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Reservation)) {
+            return false;
+        }
+        final Reservation other = (Reservation) obj;
+        if (!Objects.equals(this.customer, other.customer) || !Objects.equals(this.trip, other.trip)) {
+            return false;
+        }
+        return true;
+    }
 }
