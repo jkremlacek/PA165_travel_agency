@@ -46,6 +46,9 @@ public class Trip {
    
    @OneToMany(mappedBy="trip")
    private Set<Excursion> excursions = new HashSet<Excursion>();
+   
+   @OneToMany(mappedBy="trip")
+   private Set<Reservation> reservations = new HashSet<Reservation>();
 
     public Trip() {
     }
@@ -174,6 +177,19 @@ public class Trip {
      */
     public void addExcursion(Excursion e) {
         excursions.add(e);
+    }
+    
+    /**
+     * @return the excursions
+     */
+    public Set<Reservation> getReservations() {
+        return Collections.unmodifiableSet(reservations);
+    }
+    /**
+     * @param e the excursion to add
+     */
+    public void addReservation(Reservation r) {
+        reservations.add(r);
     }
 
     @Override
