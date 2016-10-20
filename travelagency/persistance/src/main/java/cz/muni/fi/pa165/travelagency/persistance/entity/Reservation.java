@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.travelagency.persistance.entity;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,9 +22,9 @@ public class Reservation {
 	private Customer customer;
 	
 	@NotNull
-	private Set<Excursion> excursionSet;
+	private Set<Excursion> excursionSet = new HashSet<Excursion>();
 	
-	@NotNull
+	@OneToMany
 	private Trip trip;
 	
 	public Reservation () {}
@@ -56,8 +52,8 @@ public class Reservation {
 		return Collections.unmodifiableSet(excursionSet);
 	}
 
-	public void setExcursionSet(Set<Excursion> excursionSet) {
-		this.excursionSet = excursionSet;
+	public void addExcursion(Excursion excursion) {
+		excursionSet.add(excursion);
 	}
 
 	public Trip getTrip() {
