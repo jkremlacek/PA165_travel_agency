@@ -1,4 +1,3 @@
-
 package cz.muni.fi.pa165.travelagency.persistance.entity;
 
 import java.math.BigDecimal;
@@ -12,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
 /**
  * Entity trip in travel agency
  * @author Katerina Caletkova
@@ -23,30 +24,43 @@ public class Trip {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id; 
    
+   @NotNull
    private String name;
+   
+   @NotNull
    private Date dateFrom;
+   
+   @NotNull
    private Date dateTo;
+   
+   @NotNull
    private String destination;
+   
    private String description;
+   
+   @NotNull
    private Integer capacity;
+   
+   @NotNull
    private BigDecimal price;
    
    @OneToMany(mappedBy="trip")
    private Set<Excursion> excursions = new HashSet<Excursion>();
 
-   
+    public Trip() {
+    }
    
     /**
      * @return the id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -63,6 +77,7 @@ public class Trip {
     public void setName(String name) {
         this.name = name;
     }
+    
     /**
      * @return the dateFrom
      */
@@ -154,18 +169,25 @@ public class Trip {
     public Set<Excursion> getExcursions() {
         return Collections.unmodifiableSet(excursions);
     }
-
     /**
-     * @param excursions the excursions to set
+     * @param e the excursion to add
      */
-    public void setExcursions(Set<Excursion> excursions) {
-        this.excursions = excursions;
+    public void addExcursion(Excursion e) {
+        excursions.add(e);
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" + "id=" + id + ", name=" + name + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", destination=" + destination + ", description=" + description + ", capacity=" + capacity + ", price=" + price + ", excursions=" + excursions + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.dateFrom);
+        hash = 23 * hash + Objects.hashCode(this.dateTo);
+        hash = 23 * hash + Objects.hashCode(this.destination);
         return hash;
     }
 
@@ -181,23 +203,18 @@ public class Trip {
             return false;
         }
         final Trip other = (Trip) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.destination, other.destination)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateFrom, other.dateFrom)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateTo, other.dateTo)) {
             return false;
         }
         return true;
     }
-    /**
-     * @param e the excursion to add
-     */
-    public addExcursion(Excursion e) {
-        excursions.add(e);
-    }
-
-    @Override
-    public String toString() {
-        return "Trip{" + "id=" + id + ", name=" + name + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", destination=" + destination + ", description=" + description + ", capacity=" + capacity + ", price=" + price + ", excursions=" + excursions + '}';
-    }
-    
-
-    
 }
