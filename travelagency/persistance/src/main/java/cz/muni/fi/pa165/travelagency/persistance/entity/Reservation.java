@@ -5,6 +5,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 /**
  * Represents reservation of trip for specific customer with choice of excursions. 
  * 
@@ -18,13 +24,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull
+	@ManyToOne
 	private Customer customer;
 	
-	@NotNull
-	private Set<Excursion> excursionSet = new HashSet<Excursion>();
-	
 	@OneToMany
+	private Set<Excursion> excursionSet = new HashSet<>();
+	
+	@ManyToOne
 	private Trip trip;
 	
 	public Reservation () {}
