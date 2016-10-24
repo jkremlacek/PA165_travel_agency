@@ -58,8 +58,8 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public List<Customer> findByExcursions(Reservation reservation) { 
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.reservation = (:reservation) ",Customer.class)
+    public List<Customer> findByReservation(Reservation reservation) { 
+        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.reservation = :reservation ",Customer.class)
             .setParameter("reservation", reservation).getResultList());
     }
 
