@@ -11,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Entity trip in travel agency
@@ -24,7 +26,7 @@ public class Trip {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id; 
    
-   @NotNull
+   @NotBlank
    private String name;
    
    @NotNull
@@ -33,15 +35,15 @@ public class Trip {
    @NotNull
    private Date dateTo;
    
-   @NotNull
+   @NotBlank
    private String destination;
    
    private String description;
    
-   @NotNull
+   @Min(1)
    private Integer capacity;
    
-   @NotNull
+   @Min(0)
    private BigDecimal price;
    
    @OneToMany(mappedBy="trip")
@@ -122,8 +124,8 @@ public class Trip {
     public void setDestination(String destination) {
         this.destination = destination;
     }
+    
     /**
-     * 
      * @return the description
      */
     public String getDescription() {
@@ -131,7 +133,6 @@ public class Trip {
     }
     
     /**
-     * 
      * @param description the description to set
      */
     public void setDescription(String description) {
@@ -151,15 +152,15 @@ public class Trip {
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
+    
     /**
-     * 
      * @return the price
      */
     public BigDecimal getPrice() {
         return price;
     }
+    
     /**
-     * 
      * @param price the price to set
      */
     public void setPrice(BigDecimal price) {
@@ -172,6 +173,7 @@ public class Trip {
     public Set<Excursion> getExcursions() {
         return Collections.unmodifiableSet(excursions);
     }
+    
     /**
      * @param e the excursion to add
      */
@@ -180,21 +182,36 @@ public class Trip {
     }
     
     /**
-     * @return the excursions
+     * @param e the excursion to delete
+     */
+    public void deleteExcursion(Excursion e){
+        excursions.remove(e);
+    }
+    
+    /**
+     * @return the reservations
      */
     public Set<Reservation> getReservations() {
         return Collections.unmodifiableSet(reservations);
     }
+    
     /**
-     * @param e the excursion to add
+     * @param r the reservation to add
      */
     public void addReservation(Reservation r) {
         reservations.add(r);
     }
+    
+    /**
+     * @param e the reservation to delete
+     */
+    public void deleteReservation(Reservation r){
+        reservations.remove(r);
+    }
 
     @Override
     public String toString() {
-        return "Trip{" + "id=" + id + ", name=" + name + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", destination=" + destination + ", description=" + description + ", capacity=" + capacity + ", price=" + price + ", excursions=" + excursions + '}';
+        return "Trip{" + "id=" + id + ", name=" + name + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", destination=" + destination + ", description=" + description + ", capacity=" + capacity + ", price=" + price + ", excursions=" + excursions + ", reservations=" + reservations + '}';
     }
 
     @Override
