@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
+import org.hibernate.validator.constraints.Email;
 
 /**
  *
@@ -36,6 +37,7 @@ public class Customer {
     @Column(nullable = false)
     private Integer personalNumber;
     
+    @Email
     @Column(length = 50, nullable = true)
     private String mail;
     
@@ -128,6 +130,14 @@ public class Customer {
 
     public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
+    }
+    
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+    }
+    
+    public void deleteReservation(Reservation reservation) {
+        this.reservations.remove(reservation);
     }
 
     public Long getId() {
