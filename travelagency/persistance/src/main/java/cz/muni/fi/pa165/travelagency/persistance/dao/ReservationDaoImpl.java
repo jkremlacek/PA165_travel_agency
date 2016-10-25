@@ -7,12 +7,14 @@ import cz.muni.fi.pa165.travelagency.persistance.entity.Trip;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created on 20.10.2016.
  *
  * @author Martin Salata
  */
+@Repository
 public class ReservationDaoImpl implements ReservationDao {
 
     @PersistenceContext

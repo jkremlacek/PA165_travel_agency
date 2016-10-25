@@ -10,11 +10,13 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
+@Repository
 public class TripDaoImpl implements TripDao {
     
     @PersistenceContext

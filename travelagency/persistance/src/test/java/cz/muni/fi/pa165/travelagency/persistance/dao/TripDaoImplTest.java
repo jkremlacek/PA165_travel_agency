@@ -8,14 +8,16 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+import static org.testng.Assert.assertFalse;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -24,10 +26,9 @@ import org.testng.annotations.Test;
  */
 
 @ContextConfiguration(classes = InMemorySpring.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
-    
-    @PersistenceUnit(name = "default")
-    private EntityManagerFactory emf;
     
     @Inject
     private TripDao tripDao;
@@ -43,7 +44,7 @@ public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
     private Reservation reservation1;
     private Reservation reservation2;
     
-    @BeforeClass
+    @BeforeTest
     public void setup() {
         
         Calendar calendar = Calendar.getInstance();
@@ -52,7 +53,7 @@ public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
         calendar.set(2017,9,28);
         Date dateTo = calendar.getTime();
         trip1 = new Trip("Podzim ve Francii",dateFrom, dateTo, "Francie", 20, BigDecimal.valueOf(5000));
-        
+        System.out.println(trip1.toString());
         calendar.set(2017,5,12);
         dateFrom = calendar.getTime();
         calendar.set(2017,5,26);
@@ -62,9 +63,9 @@ public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void TestCreate() throws Exception {
+    public void TestCreate() throws Exception {       
         assertTrue(tripDao.findAll().isEmpty());
-        tripDao.create(trip1);
+        tripDao.create(trip1);        
         assertNotNull(trip1.getId());
         assertEquals(tripDao.findAll().size(), 1);
         tripDao.create(trip2);
@@ -73,51 +74,67 @@ public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void TestUpdate() throws Exception {
-
+        tripDao.create(trip1);
+        assertEquals(trip1.getDestination(), "Francie");
+        trip1.setDestination("Italie");
+        tripDao.update(trip1);
+         assertEquals(trip1.getDestination(), "Italie");
     }
 
     @Test
     public void TestDelete() throws Exception {
-
+        tripDao.create(trip1);
+        assertFalse(tripDao.findAll().isEmpty());
+        tripDao.delete(trip1);
+        assertTrue(tripDao.findAll().isEmpty());
     }
 
     @Test
     public void TestFindById() throws Exception {
-
+        tripDao.create(trip1);
+        assertEquals(tripDao.findById(trip1.getId()),trip1);
     }
 
     @Test
     public void TestFindAll() throws Exception {
-    
+        assertTrue(tripDao.findAll().isEmpty());
+        tripDao.create(trip1);
+        tripDao.create(trip2);
+        assertEquals(tripDao.findAll().size(), 2);
     }
     
     @Test
     public void TestFindByName() throws Exception {
-        
+        tripDao.create(trip1);
+        assertEquals(tripDao.findByName(trip1.getName()),trip1);
     }
     
     @Test
     public void TestFindByDate() throws Exception {
-        
+        tripDao.create(trip1);
+        assertEquals(tripDao.findByDate(trip1.getDateFrom(),trip1.getDateTo()),trip1);
     }
     
     @Test
     public void TestFindByDestination() throws Exception {
-        
+        tripDao.create(trip1);
+        assertEquals(tripDao.findByDestination(trip1.getDestination()),trip1);
     }
     
     @Test
     public void TestFindByPrice() throws Exception {
-        
+        tripDao.create(trip1);
+        assertEquals(tripDao.findByPrice(trip1.getPrice().subtract(BigDecimal.valueOf(10)),trip1.getPrice().add(BigDecimal.valueOf(10))),trip1);
     }
     
     @Test
     public void TestFindByCapacity() throws Exception {
-        
+        tripDao.create(trip1);
+        assertEquals(tripDao.findByCapacity(trip1.getCapacity()),trip1);
     }
     
     @Test
     public void TestFindByExcursions() throws Exception {
-        
+        // TODO dodelat az to bude opravene v TripDao a v TripDaoImpl
     }                          
 }
