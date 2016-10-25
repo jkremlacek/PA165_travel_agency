@@ -54,7 +54,16 @@ public class Trip {
 
     public Trip() {
     }
-   
+
+    public Trip(String name, Date dateFrom, Date dateTo, String destination, Integer capacity, BigDecimal price) {
+        this.name = name;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.destination = destination;
+        this.capacity = capacity;
+        this.price = price;
+    }
+    
     /**
      * @return the id
      */
