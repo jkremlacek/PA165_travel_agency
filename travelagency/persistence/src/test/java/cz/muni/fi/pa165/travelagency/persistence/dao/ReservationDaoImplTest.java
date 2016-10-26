@@ -6,7 +6,9 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
-import org.junit.Assert;
+import static org.assertj.core.api.Assertions.*;
+
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,7 +49,7 @@ public class ReservationDaoImplTest {
     @PersistenceContext
     private EntityManager em;
 
-    private Customer c1;
+    private Customer c1, c2;
     private Trip t1;
     private Excursion e1;
     private Reservation r1;
@@ -57,6 +59,10 @@ public class ReservationDaoImplTest {
         c1 = new Customer();
         c1.setName("Martin");
         c1.setPersonalNumber(12345);
+
+        c2 = new Customer();
+        c2.setName("Pepa");
+        c2.setPersonalNumber(54321);
 
         Calendar cal = Calendar.getInstance();
         cal.set(2017,8,15);
@@ -93,47 +99,170 @@ public class ReservationDaoImplTest {
     }
 
     @Test
+    @Transactional
     public void create() throws Exception {
+        reservationDaoImpl.create(r1);
 
+        assertThat(r1.getId())
+                .as("Persisted reservation should have id assigned")
+                .isNotNull();
+
+        assertThat(em.find(Reservation.class,r1.getId()).getId())
+                .as("Persisted reservation should be accessible by entity manager")
+                .isEqualTo(r1.getId());
     }
 
     @Test
+    @Transactional
     public void update() throws Exception {
+        em.persist(r1);
+        em.persist(c2);
+        em.persist(e1);
+        r1.setCustomer(c2);
 
+        reservationDaoImpl.update(r1);
+
+        assertThat(em.find(Reservation.class, r1.getId()).getCustomer().getId())
+                .as("Updated reservation should have new customer")
+                .isEqualTo(c2.getId());
     }
 
     @Test
+    @Transactional
     public void delete() throws Exception {
+        reservationDaoImpl.delete(r1);
 
+        assertThat(em.find(Reservation.class,r1.getId()))
+                .as("Deleted reservation should not be accessible by entity manager")
+                .isNull();
+
+        em.persist(r1);
+
+        reservationDaoImpl.delete(r1);
+
+        assertThat(em.find(Reservation.class,r1.getId()))
+                .as("Deleted reservation should not be accessible by entity manager")
+                .isNull();
     }
 
     @Test
+    @Transactional
     public void findById() throws Exception {
+        assertThat(reservationDaoImpl.findById(r1.getId()+5))
+                .as("No reservation should be found")
+                .isNull();
 
+        em.persist(r1);
+
+        Reservation found = reservationDaoImpl.findById(r1.getId());
+
+        assertThat(found)
+                .as("Found Reservation should be accessible by findById")
+                .isNotNull();
+
+        assertThat(found.getId())
+                .as("Found Reservation should have the same id as the persisted one")
+                .isEqualTo(r1.getId());
     }
 
     @Test
     @Transactional
     public void findAll() throws Exception {
+        List<Reservation> all = reservationDaoImpl.findAll();
+        assertThat(all.size())
+                .as("No reservation should be found")
+                .isEqualTo(0);
+
         em.persist(c1);
         em.persist(t1);
         em.persist(e1);
         em.persist(r1);
-        List<Reservation> all = reservationDaoImpl.findAll();
-        Assert.assertEquals(1, all.size());
-        Assert.assertEquals(r1.getId(), all.get(0).getId());
+        all = reservationDaoImpl.findAll();
+
+        assertThat(all.size())
+                .as("Exactly 1 object should be found by dao")
+                .isEqualTo(1);
+
+        assertThat(all.get(0).getId())
+                .as("The only reservation found should have ID of reservation persisted earlier")
+                .isEqualTo(r1.getId());
     }
 
     @Test
     @Transactional
     public void testFindByCustomer() throws Exception {
-        List<Reservation> all = reservationDaoImpl.findAll();
-        Assert.assertEquals(0, all.size());
+        em.persist(c1);
+        em.persist(t1);
+        em.persist(e1);
+        em.persist(r1);
+
+        List<Reservation> found = reservationDaoImpl.findByCustomer(c1);
+
+        assertThat(found)
+                .as("Found list of reservations should have exactly 1 item")
+                .hasSize(1);
+
+        assertThat(found.get(0).getId())
+                .as("The only found reservation should be the one we persisted")
+                .isEqualTo(r1.getId());
     }
 
     @Test
+    @Transactional
     public void testFindByTrip() throws Exception {
+        em.persist(c1);
+        em.persist(t1);
+        em.persist(e1);
+        em.persist(r1);
+
+        List<Reservation> found = reservationDaoImpl.findByTrip(t1);
+
+        assertThat(found)
+                .as("Found list of reservations should have exactly 1 item")
+                .hasSize(1);
+
+        assertThat(found.get(0).getId())
+                .as("The only found reservation should be the one we persisted")
+                .isEqualTo(r1.getId());
+    }
+
+    @Test
+    public void nullParameters(){
+        assertThatThrownBy(() -> reservationDaoImpl.create(null))
+                .as("create(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> reservationDaoImpl.update(null))
+                .as("update(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> reservationDaoImpl.delete(null))
+                .as("delete(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> reservationDaoImpl.findByCustomer(null))
+                .as("findByCustomer(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> reservationDaoImpl.findByTrip(null))
+                .as("findByTrip(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> reservationDaoImpl.findById(null))
+                .as("findById(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
 
     }
+
+    @Test
+    @Transactional
+    public void invalidUpdate() throws Exception {
+        em.persist(c2);
+        em.persist(e1);
+        r1.setCustomer(c2);
+
+        reservationDaoImpl.update(r1);
+
+        assertThat(em.find(Reservation.class, r1.getId()))
+                .as("Reservation should not be persisted by update without previous create")
+                .isNull();
+    }
+
+
 
 }
