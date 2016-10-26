@@ -1,0 +1,14 @@
+cz/muni/fi/pa165/travelagency/persistence/dao/ExcursionDaoImpl.class
+cz/muni/fi/pa165/travelagency/persistence/dao/GenericDao.class
+cz/muni/fi/pa165/travelagency/persistence/dao/TripDaoImpl.class
+cz/muni/fi/pa165/travelagency/persistence/entity/Excursion.class
+cz/muni/fi/pa165/travelagency/persistence/dao/ExcursionDao.class
+cz/muni/fi/pa165/travelagency/persistence/entity/Trip.class
+cz/muni/fi/pa165/travelagency/persistence/entity/Reservation.class
+cz/muni/fi/pa165/travelagency/persistence/config/InMemorySpring.class
+cz/muni/fi/pa165/travelagency/persistence/dao/ReservationDaoImpl.class
+cz/muni/fi/pa165/travelagency/persistence/dao/CustomerDao.class
+cz/muni/fi/pa165/travelagency/persistence/dao/TripDao.class
+cz/muni/fi/pa165/travelagency/persistence/entity/Customer.class
+cz/muni/fi/pa165/travelagency/persistence/dao/CustomerDaoImpl.class
+cz/muni/fi/pa165/travelagency/persistence/dao/ReservationDao.class
