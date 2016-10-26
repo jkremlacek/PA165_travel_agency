@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static org.testng.Assert.*;
+//import static org.testng.Assert.*;
 
 /**
  * Created on 21.10.2016.

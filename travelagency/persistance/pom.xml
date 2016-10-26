@@ -58,11 +58,12 @@
             <artifactId>h2</artifactId>
             <version>1.4.192</version>
         </dependency>
+        <!-- When testng dependency in pom.xml, junit tests aren't executable in netbaens 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.8</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>

@@ -9,26 +9,31 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.inject.Inject;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import static org.testng.Assert.assertFalse;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+//import static org.testng.Assert.assertFalse;
+//import org.testng.annotations.BeforeTest;
+//import org.testng.annotations.Test;
 
 /**
  * Testing DAO implementation of Trip 
  * @author Katerina Caletkova
  */
-
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = InMemorySpring.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
+//@TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
+public class TripDaoImplTest /*extends AbstractTestNGSpringContextTests*/ {
     
     @Inject
     private TripDao tripDao;
@@ -44,7 +49,7 @@ public class TripDaoImplTest extends AbstractTestNGSpringContextTests {
     private Reservation reservation1;
     private Reservation reservation2;
     
-    @BeforeTest
+    @Before
     public void setup() {
         
         Calendar calendar = Calendar.getInstance();
