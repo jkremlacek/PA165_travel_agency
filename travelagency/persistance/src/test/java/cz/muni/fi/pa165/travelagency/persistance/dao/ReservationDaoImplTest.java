@@ -6,11 +6,19 @@ import cz.muni.fi.pa165.travelagency.persistance.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistance.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistance.entity.Trip;
 import org.junit.Assert;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
+import org.junit.Before;
+import org.junit.Test;
+
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
@@ -27,20 +35,23 @@ import static org.testng.Assert.*;
  *
  * @author Martin Salata
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = InMemorySpring.class)
-public class ReservationDaoImplTest extends AbstractTestNGSpringContextTests {
+@Transactional
+public class ReservationDaoImplTest {
+
+    @Inject
+    private ReservationDao reservationDaoImpl;
+
     @PersistenceContext
     private EntityManager em;
-
-    @PersistenceUnit(name = "default")
-    private EntityManagerFactory emf;
 
     private Customer c1;
     private Trip t1;
     private Excursion e1;
     private Reservation r1;
 
-    @BeforeClass
+    @Before
     public void setup() {
         c1 = new Customer();
         c1.setName("Martin");
@@ -78,19 +89,6 @@ public class ReservationDaoImplTest extends AbstractTestNGSpringContextTests {
         r1.setCustomer(c1);
         r1.setTrip(t1);
         r1.addExcursion(e1);
-
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-
-        em.persist(c1);
-        em.persist(t1);
-        em.persist(e1);
-        em.persist(r1);
-
-        em.getTransaction().commit();
-        em.close();
-
-
     }
 
     @Test
@@ -114,16 +112,22 @@ public class ReservationDaoImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    @Transactional
     public void findAll() throws Exception {
-        EntityManager em = emf.createEntityManager();
-        List<Reservation> all = em.createQuery("SELECT r FROM Reservation r", Reservation.class).getResultList();
+        em.persist(c1);
+        em.persist(t1);
+        em.persist(e1);
+        em.persist(r1);
+        List<Reservation> all = reservationDaoImpl.findAll();
         Assert.assertEquals(1, all.size());
         Assert.assertEquals(r1.getId(), all.get(0).getId());
     }
 
     @Test
+    @Transactional
     public void testFindByCustomer() throws Exception {
-
+        List<Reservation> all = reservationDaoImpl.findAll();
+        Assert.assertEquals(0, all.size());
     }
 
     @Test
