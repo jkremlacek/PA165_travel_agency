@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,43 +19,55 @@ import org.springframework.stereotype.Repository;
 public class ReservationDaoImpl implements ReservationDao {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
-    public void create(Reservation entity) {
-        em.persist(entity);
+    public void create(Reservation reservation) {
+        if (reservation == null)
+            throw new NullPointerException("Reservation can not be null");
+        em.persist(reservation);
     }
 
     @Override
-    public void update(Reservation entity) {
-        em.merge(entity);
+    public void update(Reservation reservation) {
+        if (reservation == null)
+            throw new NullPointerException("Reservation can not be null");
+        em.merge(reservation);
     }
 
     @Override
-    public void delete(Reservation entity) {
-        em.remove(entity);
+    public void delete(Reservation reservation) {
+        if (reservation == null)
+            throw new NullPointerException("Reservation can not be null");
+        em.remove(reservation);
     }
 
     @Override
     public Reservation findById(Long id) {
+        if (id == null)
+            throw new NullPointerException("ID can not be null");
         return em.find(Reservation.class, id);
     }
 
     @Override
     public List<Reservation> findAll() {
-        return em.createQuery("SELECT r FROM Reservation r",Reservation.class).getResultList();
+        return em.createQuery("SELECT r FROM Reservation r", Reservation.class).getResultList();
     }
 
     @Override
     public List<Reservation> findByCustomer(Customer customer) {
-        return em.createQuery("SELECT r FROM Reservation r WHERE r.customer=:customer",Reservation.class)
+        if (customer == null)
+            throw new NullPointerException("Customer can not be null");
+        return em.createQuery("SELECT r FROM Reservation r WHERE r.customer=:customer", Reservation.class)
                 .setParameter("customer", customer)
                 .getResultList();
     }
 
     @Override
     public List<Reservation> findByTrip(Trip trip) {
-        return em.createQuery("SELECT r FROM Reservation r WHERE r.trip=:trip",Reservation.class)
+        if (trip == null)
+            throw new NullPointerException("Trip can not be null");
+        return em.createQuery("SELECT r FROM Reservation r WHERE r.trip=:trip", Reservation.class)
                 .setParameter("trip", trip)
                 .getResultList();
     }
