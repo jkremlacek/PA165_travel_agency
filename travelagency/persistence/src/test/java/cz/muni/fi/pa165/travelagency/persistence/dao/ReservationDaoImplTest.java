@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.travelagency.persistance.dao;
+package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;
 import cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring;
