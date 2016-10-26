@@ -1,57 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.216" tests="11" errors="3" skipped="0" failures="2">
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="11" failures="0" name="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="5.968" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
-    <property name="java.vm.version" value="25.111-b14"/>
+    <property name="sun.boot.library.path" value="/usr/local/jdk1.8.0_101/jre/lib/amd64"/>
+    <property name="java.vm.version" value="25.101-b13"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/pepa/data/prog/java/pa165/PA165_travel_agency/travelagency"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="user.country" value="US"/>
+    <property name="user.country" value="CZ"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
+    <property name="test" value="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/pepa/data/prog/java/pa165/PA165_travel_agency/travelagency"/>
-    <property name="java.runtime.version" value="1.8.0_111-b14"/>
+    <property name="user.dir" value="/home/katuska/Skola/FI/3.semestr/PA165_java/projekt_travel_agency/PA165_travel_agency/PA165_travel_agency/travelagency/persistence"/>
+    <property name="java.runtime.version" value="1.8.0_101-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed"/>
+    <property name="java.endorsed.dirs" value="/usr/local/jdk1.8.0_101/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="line.separator" value="&#10;"/>
+    <property name="line.separator" value="
+"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
+    <property name="maven.ext.class.path" value="/usr/local/netbeans-8.1/java/maven-nblib/netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="/usr/local/netbeans-8.1/java/maven/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/local/jdk1.8.0_101/jre/lib/amd64:/usr/local/jdk1.8.0_101/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="4.4.0-45-generic"/>
-    <property name="user.home" value="/home/pepa"/>
+    <property name="os.version" value="4.7.4-200.fc24.x86_64"/>
+    <property name="user.home" value="/home/katuska"/>
     <property name="user.timezone" value="Europe/Prague"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
-    <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="user.name" value="pepa"/>
-    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="katuska"/>
+    <property name="java.class.path" value="/usr/local/netbeans-8.1/java/maven/boot/plexus-classworlds-2.4.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="/usr/lib/jvm/java-8-oracle/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
+    <property name="java.home" value="/usr/local/jdk1.8.0_101/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest -Dmaven.ext.class.path=/usr/local/netbeans-8.1/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.language" value="en"/>
+    <property name="user.language" value="cs"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="1.8.0_111"/>
-    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="java.version" value="1.8.0_101"/>
+    <property name="java.ext.dirs" value="/usr/local/jdk1.8.0_101/jre/lib/ext:/usr/java/packages/lib/ext"/>
     <property name="securerandom.source" value="file:/dev/./urandom"/>
-    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/resources.jar:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar:/usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar:/usr/lib/jvm/java-8-oracle/jre/classes"/>
+    <property name="sun.boot.class.path" value="/usr/local/jdk1.8.0_101/jre/lib/resources.jar:/usr/local/jdk1.8.0_101/jre/lib/rt.jar:/usr/local/jdk1.8.0_101/jre/lib/sunrsasign.jar:/usr/local/jdk1.8.0_101/jre/lib/jsse.jar:/usr/local/jdk1.8.0_101/jre/lib/jce.jar:/usr/local/jdk1.8.0_101/jre/lib/charsets.jar:/usr/local/jdk1.8.0_101/jre/lib/jfr.jar:/usr/local/jdk1.8.0_101/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="maven.home" value="/usr/local/netbeans-8.1/java/maven"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -59,144 +61,15 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="TestFindByDate" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.059">
-    <error message="Unknown parameter name : :from" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Unknown parameter name : :from
-	at org.hibernate.query.internal.QueryParameterBindingsImpl.getBinding(QueryParameterBindingsImpl.java:191)
-	at org.hibernate.query.internal.AbstractProducedQuery.setParameter(AbstractProducedQuery.java:480)
-	at org.hibernate.query.internal.AbstractProducedQuery.setParameter(AbstractProducedQuery.java:102)
-	at cz.muni.fi.pa165.travelagency.persistence.dao.TripDaoImpl.findByDate(TripDaoImpl.java:38)
-	at cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest.TestFindByDate(TripDaoImplTest.java:121)
-</error>
-    <system-out><![CDATA[Trip{id=null, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}
-Hibernate: 
-    insert 
-    into
-        Trip
-        (id, capacity, dateFrom, dateTo, description, destination, name, price) 
-    values
-        (null, ?, ?, ?, ?, ?, ?, ?)
-]]></system-out>
-    <system-err><![CDATA[3828 [main] INFO org.springframework.test.context.TestContextManager - Could not instantiate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener]. Specify custom listener classes or make the default listener classes (and their required dependencies) available. Offending class: [javax/servlet/ServletContext]
-3863 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Began transaction (1) for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@45acdd11, testMethod = TestFindByDate@TripDaoImplTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25e49cb2]; rollback [true]
-3909 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Rolled back transaction after test execution for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@45acdd11, testMethod = TestFindByDate@TripDaoImplTest, testException = java.lang.IllegalArgumentException: Unknown parameter name : :from, mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
-]]></system-err>
-  </testcase>
-  <testcase name="TestFindByName" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.019">
-    <failure message="expected:&lt;[Trip{id=3, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}]&gt; but was:&lt;Trip{id=3, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<[Trip{id=3, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}]> but was:<Trip{id=3, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest.TestFindByName(TripDaoImplTest.java:115)
-]]></failure>
-    <system-out><![CDATA[Trip{id=null, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}
-Hibernate: 
-    insert 
-    into
-        Trip
-        (id, capacity, dateFrom, dateTo, description, destination, name, price) 
-    values
-        (null, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: 
-    select
-        trip0_.id as id1_5_,
-        trip0_.capacity as capacity2_5_,
-        trip0_.dateFrom as dateFrom3_5_,
-        trip0_.dateTo as dateTo4_5_,
-        trip0_.description as descript5_5_,
-        trip0_.destination as destinat6_5_,
-        trip0_.name as name7_5_,
-        trip0_.price as price8_5_ 
-    from
-        Trip trip0_ 
-    where
-        trip0_.name=?
-]]></system-out>
-    <system-err><![CDATA[3926 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Began transaction (2) for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@5a1c3cb4, testMethod = TestFindByName@TripDaoImplTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25e49cb2]; rollback [true]
-3941 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Rolled back transaction after test execution for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@5a1c3cb4, testMethod = TestFindByName@TripDaoImplTest, testException = java.lang.AssertionError: expected:<[Trip{id=3, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}]> but was:<Trip{id=3, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}>, mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
-]]></system-err>
-  </testcase>
-  <testcase name="TestFindByDestination" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.021">
-    <error message="Unknown parameter name : name" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Unknown parameter name : name
-	at org.hibernate.query.internal.QueryParameterBindingsImpl.getBinding(QueryParameterBindingsImpl.java:191)
-	at org.hibernate.query.internal.AbstractProducedQuery.setParameter(AbstractProducedQuery.java:480)
-	at org.hibernate.query.internal.AbstractProducedQuery.setParameter(AbstractProducedQuery.java:102)
-	at cz.muni.fi.pa165.travelagency.persistence.dao.TripDaoImpl.findByDestination(TripDaoImpl.java:47)
-	at cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest.TestFindByDestination(TripDaoImplTest.java:127)
-</error>
-    <system-out><![CDATA[Trip{id=null, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}
-Hibernate: 
-    insert 
-    into
-        Trip
-        (id, capacity, dateFrom, dateTo, description, destination, name, price) 
-    values
-        (null, ?, ?, ?, ?, ?, ?, ?)
-]]></system-out>
-    <system-err><![CDATA[3944 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Began transaction (3) for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@2f5b8250, testMethod = TestFindByDestination@TripDaoImplTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25e49cb2]; rollback [true]
-3961 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Rolled back transaction after test execution for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@2f5b8250, testMethod = TestFindByDestination@TripDaoImplTest, testException = java.lang.IllegalArgumentException: Unknown parameter name : name, mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
-]]></system-err>
-  </testcase>
-  <testcase name="TestFindByExcursions" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.004"/>
-  <testcase name="TestCreate" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.019"/>
-  <testcase name="TestDelete" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.021"/>
-  <testcase name="TestUpdate" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.012"/>
-  <testcase name="TestFindByPrice" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.015">
-    <error message="Unknown parameter name : :minPrice" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Unknown parameter name : :minPrice
-	at org.hibernate.query.internal.QueryParameterBindingsImpl.getBinding(QueryParameterBindingsImpl.java:191)
-	at org.hibernate.query.internal.AbstractProducedQuery.setParameter(AbstractProducedQuery.java:480)
-	at org.hibernate.query.internal.AbstractProducedQuery.setParameter(AbstractProducedQuery.java:102)
-	at cz.muni.fi.pa165.travelagency.persistence.dao.TripDaoImpl.findByPrice(TripDaoImpl.java:56)
-	at cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest.TestFindByPrice(TripDaoImplTest.java:133)
-</error>
-    <system-out><![CDATA[Trip{id=null, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}
-Hibernate: 
-    insert 
-    into
-        Trip
-        (id, capacity, dateFrom, dateTo, description, destination, name, price) 
-    values
-        (null, ?, ?, ?, ?, ?, ?, ?)
-]]></system-out>
-    <system-err><![CDATA[4024 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Began transaction (8) for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@173a6728, testMethod = TestFindByPrice@TripDaoImplTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25e49cb2]; rollback [true]
-4037 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Rolled back transaction after test execution for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@173a6728, testMethod = TestFindByPrice@TripDaoImplTest, testException = java.lang.IllegalArgumentException: Unknown parameter name : :minPrice, mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
-]]></system-err>
-  </testcase>
-  <testcase name="TestFindById" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.012"/>
-  <testcase name="TestFindAll" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.021"/>
-  <testcase name="TestFindByCapacity" classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" time="0.013">
-    <failure message="expected:&lt;[Trip{id=13, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}]&gt; but was:&lt;Trip{id=13, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<[Trip{id=13, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}]> but was:<Trip{id=13, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest.TestFindByCapacity(TripDaoImplTest.java:139)
-]]></failure>
-    <system-out><![CDATA[Trip{id=null, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}
-Hibernate: 
-    insert 
-    into
-        Trip
-        (id, capacity, dateFrom, dateTo, description, destination, name, price) 
-    values
-        (null, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: 
-    select
-        trip0_.id as id1_5_,
-        trip0_.capacity as capacity2_5_,
-        trip0_.dateFrom as dateFrom3_5_,
-        trip0_.dateTo as dateTo4_5_,
-        trip0_.description as descript5_5_,
-        trip0_.destination as destinat6_5_,
-        trip0_.name as name7_5_,
-        trip0_.price as price8_5_ 
-    from
-        Trip trip0_ 
-    where
-        trip0_.capacity>=?
-]]></system-out>
-    <system-err><![CDATA[4074 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Began transaction (11) for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@1e9469b8, testMethod = TestFindByCapacity@TripDaoImplTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25e49cb2]; rollback [true]
-4085 [main] INFO org.springframework.test.context.transaction.TransactionalTestExecutionListener - Rolled back transaction after test execution for test context [DefaultTestContext@3a082ff4 testClass = TripDaoImplTest, testInstance = cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest@1e9469b8, testMethod = TestFindByCapacity@TripDaoImplTest, testException = java.lang.AssertionError: expected:<[Trip{id=13, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}]> but was:<Trip{id=13, name=Podzim ve Francii, dateFrom=Fri Oct 20 18:19:53 CEST 2017, dateTo=Sat Oct 28 18:19:53 CEST 2017, destination=Francie, description=null, capacity=20, price=5000, excursions=[], reservations=[]}>, mergedContextConfiguration = [MergedContextConfiguration@3f0d6038 testClass = TripDaoImplTest, locations = '{}', classes = '{class cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
-]]></system-err>
-  </testcase>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindByDate" time="5.052"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindByName" time="0.278"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindByDestination" time="0.025"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestCreate" time="0.035"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestDelete" time="0.048"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestUpdate" time="0.015"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindByPrice" time="0.013"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindByExcursion" time="0.023"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindById" time="0.028"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindAll" time="0.041"/>
+  <testcase classname="cz.muni.fi.pa165.travelagency.persistance.dao.TripDaoImplTest" name="TestFindByCapacity" time="0.028"/>
 </testsuite>
