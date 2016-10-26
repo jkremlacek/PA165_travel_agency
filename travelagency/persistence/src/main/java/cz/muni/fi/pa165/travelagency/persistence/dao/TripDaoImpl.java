@@ -44,7 +44,7 @@ public class TripDaoImpl implements TripDao {
     public List<Trip> findByDestination(String destination) {
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE t.destination = :destination", Trip.class)
-                                .setParameter("name", destination)
+                                .setParameter("destination", destination)
                                 .getResultList());
     }
 
