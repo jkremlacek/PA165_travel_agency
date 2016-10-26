@@ -67,10 +67,10 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
-    public List<Trip> findByExcursions(Set<Excursion> excursions) {
-        return Collections.unmodifiableList(
-                em.createQuery("SELECT t FROM Trip t WHERE t.excursions IN (:excursions)", Trip.class)
-                                                .setParameter("excursions", excursions)
+    public List<Trip> findByExcursion(Excursion excursion) {
+       return Collections.unmodifiableList(
+                em.createQuery("SELECT t FROM Trip t WHERE :excursion IN t.excursions", Trip.class)
+                                                .setParameter("excursion", excursion)
                                                 .getResultList());
     }
 
@@ -98,5 +98,5 @@ public class TripDaoImpl implements TripDao {
     public List<Trip> findAll() {
         return em.createQuery("SELECT t FROM Trip t",Trip.class).getResultList();
     }
-    
+
 }

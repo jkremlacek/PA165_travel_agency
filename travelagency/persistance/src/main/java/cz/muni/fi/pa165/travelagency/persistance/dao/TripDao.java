@@ -64,14 +64,14 @@ public interface TripDao extends GenericDao<Trip, Long>{
      */
     public List<Trip> findByCapacity(Integer capacity);
 	
-	/**
-	 * 
-	 * Method for find all trips with specific excursions
-	 * 
-	 * @param excursions set of required excurions
-	 * @return trips with specified excursions
-	 */
 	
-	public List<Trip> findByExcursions(Set<Excursion> excursions);
+    /**
+     * 
+     * Method for find all trips with excursion
+     * 
+     * @param excursion to find
+     * @return trips with excursion as List
+     */
+    public List<Trip> findByExcursion(Excursion excursion);
     
 }
