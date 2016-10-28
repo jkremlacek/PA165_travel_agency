@@ -24,6 +24,9 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public List<Trip> findByName(String name) {
+        if (name == null) {
+            throw new NullPointerException("Argument name cannot be null.");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE t.name = :name", Trip.class)
                                 .setParameter("name", name)
@@ -32,6 +35,12 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public List<Trip> findByDate(Date from, Date to) {
+        if (from == null) {
+            throw new NullPointerException("Argument from cannot be null.");
+        }
+        if (to == null) {
+            throw new NullPointerException("Argument to cannot be null.");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE "+
                                 "t.dateFrom >= :from AND t.dateTo <= :to", Trip.class)
@@ -42,6 +51,9 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public List<Trip> findByDestination(String destination) {
+        if (destination == null) {
+            throw new NullPointerException("Argument destination cannot be null.");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE t.destination = :destination", Trip.class)
                                 .setParameter("destination", destination)
@@ -50,6 +62,12 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public List<Trip> findByPrice(BigDecimal minPrice, BigDecimal maxPrice) {
+        if (minPrice == null) {
+            throw new NullPointerException("Argument minPrice cannot be null.");
+        }
+        if (maxPrice == null) {
+            throw new NullPointerException("Argument maxPrice cannot be null.");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE "+
                                 "t.price >= :minPrice AND t.price <= :maxPrice", Trip.class)
@@ -60,6 +78,9 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public List<Trip> findByCapacity(Integer capacity) {
+        if (capacity == null) {
+            throw new NullPointerException("Argument capacity cannot be null.");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE t.capacity >= :capacity", Trip.class)
                                                 .setParameter("capacity", capacity)
@@ -68,7 +89,10 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public List<Trip> findByExcursion(Excursion excursion) {
-       return Collections.unmodifiableList(
+        if (excursion == null) {
+            throw new NullPointerException("Argument excursion cannot be null.");
+        }
+        return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE :excursion IN t.excursions", Trip.class)
                                                 .setParameter("excursion", excursion)
                                                 .getResultList());
@@ -76,21 +100,33 @@ public class TripDaoImpl implements TripDao {
 
     @Override
     public void create(Trip entity) {
+        if (entity == null) {
+            throw new NullPointerException("Argument entity cannot be null.");
+        }
         em.persist(entity);
     }
 
     @Override
     public void update(Trip entity) {
+        if (entity == null) {
+            throw new NullPointerException("Argument entity cannot be null.");
+        }
         em.merge(entity);
     }
 
     @Override
     public void delete(Trip entity) {
+        if (entity == null) {
+            throw new NullPointerException("Argument entity cannot be null.");
+        }
         em.remove(entity);
     }
 
     @Override
     public Trip findById(Long id) {
+        if (id == null) {
+            throw new NullPointerException("Argument id cannot be null.");
+        }
         return em.find(Trip.class, id);
     }
 
