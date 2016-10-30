@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.validation.ValidationException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.assertj.core.api.Assertions.*;
@@ -326,7 +327,7 @@ public class ExcursionDaoImplTest {
         excursionDao.create(bigHillExcursion);
     }
     
-    @Test(expected = ValidationException.class)
+    @Test(expected = PersistenceException.class)
     public void testCreateWithNonNullId() {
         bigHillExcursion.setId(Long.valueOf("1"));
         excursionDao.create(bigHillExcursion);
