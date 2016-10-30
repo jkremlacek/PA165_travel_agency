@@ -35,14 +35,13 @@ public class Reservation {
 	
 	public Reservation () {}
 	
-	public Reservation (long id, Customer customer, Set<Excursion> excursionSet, Trip trip) {
-		this.id = id;
+	public Reservation (Customer customer, Set<Excursion> excursionSet, Trip trip) {
 		this.customer = customer;
 		this.excursionSet = excursionSet;
 		this.trip = trip;
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	
