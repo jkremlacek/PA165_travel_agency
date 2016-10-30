@@ -39,7 +39,7 @@ public interface GenericDao<E, K> {
      * Find an entity by her unique id number.
      * 
      * @param id number
-     * @return an entity with entered id.
+     * @return an entity with entered id or null when entity doesn't exist
      */
     public E findById(K id);
     

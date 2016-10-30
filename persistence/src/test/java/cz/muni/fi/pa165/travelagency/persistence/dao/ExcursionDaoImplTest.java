@@ -66,6 +66,7 @@ public class ExcursionDaoImplTest {
         waterTrip.setDescription("Relaxing in pools and outdoor swimming pools");
         waterTrip.setDateFrom(startDay);
         waterTrip.setDateTo(endDay);
+        em.persist(waterTrip);
         
         cal.set(2017, 1, 16, 9, 30);
         startDay = cal.getTime();
@@ -92,6 +93,7 @@ public class ExcursionDaoImplTest {
         pragueBrnoTrip.setDestination("Prague & Brno");
         pragueBrnoTrip.setDateFrom(startDay);
         pragueBrnoTrip.setDateTo(endDay);
+        em.persist(pragueBrnoTrip);
                 
         
         cal.set(2016, 12, 10, 14, 30);
@@ -128,12 +130,14 @@ public class ExcursionDaoImplTest {
      */
     @Test
     public void testFindByName() {
-        assertThat(excursionDao.findByName("").isEmpty());
+        assertThat(excursionDao.findByName(""))
+                              .isEmpty();
         excursionDao.create(bigHillExcursion);
         excursionDao.create(aquaParkExcursion);
-        assertThat(excursionDao.findByName("Aqua park").contains(aquaParkExcursion));
+        assertThat(excursionDao.findByName("Aqua park"))
+                                .contains(aquaParkExcursion);
         assertThat(excursionDao.findByName("Aqua park").size(),is(1));
-        assertThat(excursionDao.findByName("Cow mountain").isEmpty());
+        assertThat(excursionDao.findByName("NonExist Name")).isEmpty();
     }
     
     @Test(expected = NullPointerException.class)
@@ -149,12 +153,12 @@ public class ExcursionDaoImplTest {
         excursionDao.findByPrice(new BigDecimal("200.00"), new BigDecimal("199.99"));
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testFindByNullFromPrice() {
         excursionDao.findByPrice(null, BigDecimal.TEN);
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testFindByNullToPrice() {
         excursionDao.findByPrice(BigDecimal.ONE, null);
     }
@@ -168,14 +172,14 @@ public class ExcursionDaoImplTest {
         excursionDao.create(bigHillExcursion);
         assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500"))
                                                 .size(),is(2));
-        assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500"))
-                                                .contains(aquaParkExcursion));
-        assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500"))
-                                                .contains(artGalleryExcursion));
+        assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500")))
+                                                .contains(aquaParkExcursion);
+        assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500")))
+                                                .contains(artGalleryExcursion);
         assertThat(excursionDao.findByPrice(new BigDecimal("200.01"), new BigDecimal("500"))
                                                 .size(),is(1));
-        assertThat(excursionDao.findByPrice(new BigDecimal("200.01"), new BigDecimal("500"))
-                                                .contains(aquaParkExcursion));
+        assertThat(excursionDao.findByPrice(new BigDecimal("200.01"), new BigDecimal("500")))
+                                                .contains(aquaParkExcursion);
     }
 
     
@@ -216,40 +220,42 @@ public class ExcursionDaoImplTest {
      * Test of create method, of class ExcursionDaoImpl.
      */
     @Test
+    @Transactional
     public void testCreate() {
+        assertThat(excursionDao.findAll()).isEmpty();
         excursionDao.create(bigHillExcursion);
         assertThat(bigHillExcursion.getId()).isNotNull();
-        
         assertThat(em.find(Excursion.class, bigHillExcursion.getId()))
                 .isEqualToComparingFieldByField(bigHillExcursion);
+        assertThat(excursionDao.findAll().size(),is(1));
         
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithNullName() {
         bigHillExcursion.setName(null);
         excursionDao.create(bigHillExcursion);
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithNullTrip() {
         bigHillExcursion.setTrip(null);
         excursionDao.create(bigHillExcursion);
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithNullDate() {
         bigHillExcursion.setDate(null);
         excursionDao.create(bigHillExcursion);
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithNullDuration() {
         bigHillExcursion.setDuration(null);
         excursionDao.create(bigHillExcursion);
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithNullDestination() {
         bigHillExcursion.setDestination(null);
         excursionDao.create(bigHillExcursion);
@@ -278,28 +284,48 @@ public class ExcursionDaoImplTest {
                 .isEqualToComparingFieldByField(bigHillExcursion);
     }
 
-//    /**
-//     * Test of delete method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testDelete() {
-//        
-//    }
-//
-//    /**
-//     * Test of findById method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testFindById() {
-//        
-//    }
-//
-//    /**
-//     * Test of findAll method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testFindAll() {
-//        
-//    }
+    /**
+     * Test of delete method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testDelete() {
+        excursionDao.create(bigHillExcursion);
+        excursionDao.create(aquaParkExcursion);
+        excursionDao.create(artGalleryExcursion);
+        
+        assertThat(excursionDao.findAll().size(),is(3));
+        
+        excursionDao.delete(bigHillExcursion);
+        
+        assertThat(excursionDao.findAll().size(),is(2));
+        assertThat(excursionDao.findAll()).containsOnly(aquaParkExcursion,artGalleryExcursion);
+        
+    }
+
+    /**
+     * Test of findById method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testFindById() {
+        assertThat(excursionDao.findById(Long.MIN_VALUE)).isNull();
+        excursionDao.create(aquaParkExcursion);
+        excursionDao.create(artGalleryExcursion);
+        assertThat(excursionDao.findById(artGalleryExcursion.getId()))
+                .isEqualToComparingFieldByField(artGalleryExcursion);
+        
+    }
+
+    /**
+     * Test of findAll method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testFindAll() {
+        assertThat(excursionDao.findAll()).isEmpty();
+        
+        excursionDao.create(bigHillExcursion);
+        excursionDao.create(artGalleryExcursion);
+        
+        assertThat(excursionDao.findAll()).containsOnly(bigHillExcursion, artGalleryExcursion);
+    }
     
 }
