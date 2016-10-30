@@ -26,6 +26,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.validation.ValidationException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -148,10 +149,6 @@ public class ReservationDaoImplTest {
     @Test
     @Transactional
     public void findById() throws Exception {
-        assertThat(reservationDaoImpl.findById(r1.getId()+5))
-                .as("No reservation should be found")
-                .isNull();
-
         em.persist(r1);
 
         Reservation found = reservationDaoImpl.findById(r1.getId());
@@ -227,7 +224,23 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullParameters(){
+    public void nullCustomerCreateTest(){
+        r1.setCustomer(null);
+        assertThatThrownBy(() -> reservationDaoImpl.create(r1))
+                .as("create(null) should throw NullPointerException")
+                .isInstanceOf(ValidationException.class);
+    }
+
+    @Test
+    public void nullTripCreateTest(){
+        r1.setTrip(null);
+        assertThatThrownBy(() -> reservationDaoImpl.create(r1))
+                .as("create(null) should throw NullPointerException")
+                .isInstanceOf(ValidationException.class);
+    }
+
+    @Test
+    public void nullAttributes(){
         assertThatThrownBy(() -> reservationDaoImpl.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
@@ -246,7 +259,6 @@ public class ReservationDaoImplTest {
         assertThatThrownBy(() -> reservationDaoImpl.findById(null))
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-
     }
 
     @Test
