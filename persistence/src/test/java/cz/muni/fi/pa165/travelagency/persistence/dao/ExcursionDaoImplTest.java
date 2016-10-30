@@ -149,12 +149,12 @@ public class ExcursionDaoImplTest {
         excursionDao.findByPrice(new BigDecimal("200.00"), new BigDecimal("199.99"));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testFindByNullFromPrice() {
         excursionDao.findByPrice(null, BigDecimal.TEN);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testFindByNullToPrice() {
         excursionDao.findByPrice(BigDecimal.ONE, null);
     }
