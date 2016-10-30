@@ -45,14 +45,18 @@ public class ExcursionDaoImplTest {
     private Excursion artGalleryExcursion;
     private Excursion bigHillExcursion;
     
+    private Calendar calNow;
+    
 
     @Before
     public void setUp() {
         
-        Calendar cal = Calendar.getInstance();
-        cal.set(2017, 1, 15, 10, 0);
+        calNow = Calendar.getInstance();
+        Calendar cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 10);
         Date startDay = cal.getTime();
-        cal.set(2017, 1, 22, 18, 0);
+        cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 20);
         Date endDay = cal.getTime();
         waterTrip = new Trip();
         waterTrip.setName("Water & relax");
@@ -64,7 +68,8 @@ public class ExcursionDaoImplTest {
         waterTrip.setDateTo(endDay);
         em.persist(waterTrip);
         
-        cal.set(2017, 1, 16, 9, 30);
+        cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 15);
         startDay = cal.getTime();
         cal.set(0, 0, 0, 7, 0);
         Date duration = cal.getTime();
@@ -77,10 +82,11 @@ public class ExcursionDaoImplTest {
         aquaParkExcursion.setDescription("Nice excursion to nice crowded aqua park");
         aquaParkExcursion.setTrip(waterTrip);
         
-        
-        cal.set(2016, 12, 10, 14, 30);
+        cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 40);
         startDay = cal.getTime();
-        cal.set(2016, 12, 14, 10, 0);
+        cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 45);
         endDay = cal.getTime();
         pragueBrnoTrip = new Trip();
         pragueBrnoTrip.setName("Sight in Prague & Brno");
@@ -92,7 +98,8 @@ public class ExcursionDaoImplTest {
         em.persist(pragueBrnoTrip);
                 
         
-        cal.set(2016, 12, 10, 14, 30);
+        cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 41);
         startDay = cal.getTime();
         cal.set(0, 0, 0, 2, 0);
         duration = cal.getTime();
@@ -106,7 +113,8 @@ public class ExcursionDaoImplTest {
         artGalleryExcursion.setTrip(pragueBrnoTrip);
         
         
-        cal.set(2016, 12, 11, 5, 00);
+        cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 41);
         startDay = cal.getTime();
         cal.set(0, 0, 0, 18, 30);
         duration = cal.getTime();
@@ -203,11 +211,11 @@ public class ExcursionDaoImplTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testFindByDateFromAfterDateTo() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(2017, 10, 22);
-        Date dateFrom = cal.getTime();
-        cal.set(2017, 10, 21);
+        Calendar cal = (Calendar) calNow.clone();
+        cal.add(Calendar.DAY_OF_MONTH, 1);
         Date dateTo = cal.getTime();
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        Date dateFrom = cal.getTime();
         excursionDao.findByDate(dateFrom, dateTo);
     }
 
@@ -235,7 +243,7 @@ public class ExcursionDaoImplTest {
         Date durFrom = cal.getTime();
         cal.set(0, 0, 0, 8, 0, 0);
         Date durTo = cal.getTime();
-        assertThat(excursionDao.findByDate(durFrom, durTo)).isEmpty();
+        assertThat(excursionDao.findByDuration(durFrom, durTo)).isEmpty();
         cal.set(0, 0, 0, 5, 0, 1);
         Date durOfExcursion = cal.getTime();
         aquaParkExcursion.setDuration(durOfExcursion);
