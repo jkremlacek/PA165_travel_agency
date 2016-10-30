@@ -114,12 +114,6 @@ public class TripDaoImpl implements TripDao {
         if (entity == null) {
             throw new NullPointerException("Argument trip entity cannot be null.");
         }
-        if (entity.getDateFrom().compareTo(Calendar.getInstance().getTime())<1) {
-            throw new IllegalArgumentException("Starting date of trip is in past.");
-        }
-        if (entity.getDateTo().compareTo(Calendar.getInstance().getTime())<1) {
-            throw new IllegalArgumentException("Ending date of trip is in past.");
-        }
         if (entity.getDateFrom().after(entity.getDateTo())) {
             throw new IllegalArgumentException("Starting date is after ending date of trip.");
         }
@@ -134,9 +128,6 @@ public class TripDaoImpl implements TripDao {
     @Override
     public void create(Trip entity) {
         validate(entity);
-        if (entity.getId() != null) {
-            throw new ValidationException("Trip id is not null.");
-        }
         em.persist(entity);
     }
 
