@@ -95,6 +95,7 @@ public class CustomerDaoImplTest {
     @Transactional
     public void update() throws Exception {
         em.persist(c1);
+		
         c1.setName("Bobek");
 
         customerDaoImpl.update(c1);

@@ -36,9 +36,14 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public List<Excursion> findByPrice(BigDecimal minPrice, BigDecimal maxPrice) {
+		if (minPrice == null) throw new NullPointerException("Parameter minPrice cannot be null.");
+		if (maxPrice == null) throw new NullPointerException("Parameter maxPrice cannot be null.");
+		
+		if (maxPrice.compareTo(minPrice) == -1) throw new IllegalArgumentException("Attribute maxPrice must be higher or equal to minPrice.");
+		
 		return Collections.unmodifiableList(
 				em.createQuery(
-						"SELECT e FROM Excursion e WHERE e.minPrice >= :minPrice AND e.maxPrice <= :maxPrice"
+						"SELECT e FROM Excursion e WHERE e.price >= :minPrice AND e.price <= :maxPrice"
 						,Excursion.class)
             .setParameter("minPrice", minPrice).setParameter("maxPrice", maxPrice).getResultList());
 	}
@@ -47,6 +52,8 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	public List<Excursion> findByDate(Date dateFrom, Date dateTo) {
 		if (dateFrom == null) throw new NullPointerException("Parameter dateFrom cannot be null.");
 		if (dateTo == null) throw new NullPointerException("Parameter dateTo cannot be null.");
+		
+		if (dateTo.getTime() - dateFrom.getTime() < 0) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
 		
 		return Collections.unmodifiableList(
 				em.createQuery(
@@ -68,6 +75,8 @@ public class ExcursionDaoImpl implements ExcursionDao {
 		if (dateFrom == null) throw new NullPointerException("Parameter dateFrom cannot be null.");
 		if (dateTo == null) throw new NullPointerException("Parameter dateTo cannot be null.");
 		
+		if (dateTo.getTime() > dateFrom.getTime()) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
+		
 		return Collections.unmodifiableList(
 				em.createQuery(
 						"SELECT e FROM Excursion e WHERE e.duration >= :dateFrom AND e.duration <= :dateTo"
@@ -86,6 +95,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	@Override
 	public void create(Excursion entity) {
 		if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
+		if (entity.getTrip() == null) throw new NullPointerException("Trip must be set!");
 		em.persist(entity);
 	}
 
