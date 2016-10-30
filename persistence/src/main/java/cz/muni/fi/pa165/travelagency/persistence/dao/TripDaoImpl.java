@@ -4,12 +4,14 @@ package cz.muni.fi.pa165.travelagency.persistence.dao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ValidationException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -107,19 +109,42 @@ public class TripDaoImpl implements TripDao {
                                                 .setParameter("excursion", excursion)
                                                 .getResultList());
     }
+    
+    public void validate(Trip entity) {
+        if (entity == null) {
+            throw new NullPointerException("Argument trip entity cannot be null.");
+        }
+        if (entity.getDateFrom().compareTo(Calendar.getInstance().getTime())<1) {
+            throw new IllegalArgumentException("Starting date of trip is in past.");
+        }
+        if (entity.getDateTo().compareTo(Calendar.getInstance().getTime())<1) {
+            throw new IllegalArgumentException("Ending date of trip is in past.");
+        }
+        if (entity.getDateFrom().after(entity.getDateTo())) {
+            throw new IllegalArgumentException("Starting date is after ending date of trip.");
+        }
+        if (entity.getCapacity().compareTo(Integer.valueOf("1"))<1) {
+            throw new IllegalArgumentException("Capacity of trip is smaller than 1.");
+        }
+        if (entity.getPrice().compareTo(BigDecimal.ZERO)<1) {
+            throw new IllegalArgumentException("Price of trip is smaller than 0.");
+        }
+    }
 
     @Override
     public void create(Trip entity) {
-        if (entity == null) {
-            throw new NullPointerException("Argument trip entity cannot be null.");
+        validate(entity);
+        if (entity.getId() != null) {
+            throw new ValidationException("Trip id is not null.");
         }
         em.persist(entity);
     }
 
     @Override
     public void update(Trip entity) {
-        if (entity == null) {
-            throw new NullPointerException("Argument trip entity cannot be null.");
+        validate(entity);
+        if (entity.getId() == null) {
+            throw new ValidationException("Trip id is null.");
         }
         em.merge(entity);
     }

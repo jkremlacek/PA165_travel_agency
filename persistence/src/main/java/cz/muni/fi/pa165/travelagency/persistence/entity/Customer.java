@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -28,13 +29,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(length = 50, nullable = false)
+    @NotBlank
     private String name;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Integer personalNumber;
     
     @Email
@@ -44,7 +45,7 @@ public class Customer {
     @Column(nullable = true)
     private Integer phoneNumber;
     
-    @ManyToMany//TO DO I'm not sure about mapping
+    @ManyToMany
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
     @Override
