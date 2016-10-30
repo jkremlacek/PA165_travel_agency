@@ -240,8 +240,8 @@ public class Trip {
         }
         if (obj == null) {
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        }        
+        if(!(obj instanceof Trip)) {
             return false;
         }
         final Trip other = (Trip) obj;

@@ -64,7 +64,7 @@ public class TripDaoImplTest {
     }
     
     @Test
-    public void TestCreate() throws Exception {        
+    public void testCreate() throws Exception {        
         assertTrue(tripDao.findAll().isEmpty());
         tripDao.create(trip1);        
         assertNotNull(trip1.getId());
@@ -74,7 +74,7 @@ public class TripDaoImplTest {
     }
 
     @Test
-    public void TestUpdate() throws Exception {
+    public void testUpdate() throws Exception {
         tripDao.create(trip1);
         assertEquals(trip1.getDestination(), "Francie");
         trip1.setDestination("Italie");
@@ -83,7 +83,7 @@ public class TripDaoImplTest {
     }
 
     @Test
-    public void TestDelete() throws Exception {
+    public void testDelete() throws Exception {
         tripDao.create(trip1);
         assertFalse(tripDao.findAll().isEmpty());
         tripDao.delete(trip1);
@@ -91,13 +91,13 @@ public class TripDaoImplTest {
     }
 
     @Test
-    public void TestFindById() throws Exception {
+    public void testFindById() throws Exception {
         tripDao.create(trip1);        
         assertEquals(tripDao.findById(trip1.getId()),trip1);
     }
 
     @Test
-    public void TestFindAll() throws Exception {
+    public void testFindAll() throws Exception {
        assertTrue(tripDao.findAll().isEmpty());
        tripDao.create(trip1);      
        assertEquals(tripDao.findAll().size(), 1);
@@ -106,39 +106,39 @@ public class TripDaoImplTest {
     }
     
     @Test
-    public void TestFindByName() throws Exception {
+    public void testFindByName() throws Exception {
         tripDao.create(trip1);
         assertEquals(tripDao.findByName(trip1.getName()).get(0),trip1);
     }
     
     @Test
-    public void TestFindByDate() throws Exception {
+    public void testFindByDate() throws Exception {
         tripDao.create(trip2);        
        // TODO dodelat
        //assertEquals(tripDao.findByDate(trip1.getDateFrom(),trip1.getDateTo()).get(0),trip1);
     }
     
     @Test
-    public void TestFindByDestination() throws Exception {
+    public void testFindByDestination() throws Exception {
         tripDao.create(trip1);
         assertEquals(tripDao.findByDestination(trip1.getDestination()).get(0),trip1);
     }
     
     @Test
-    public void TestFindByPrice() throws Exception {
+    public void testFindByPrice() throws Exception {
         tripDao.create(trip1);
         // TODO dodelat
         //assertEquals(tripDao.findByPrice(trip1.getPrice().subtract(BigDecimal.valueOf(10)),trip1.getPrice().add(BigDecimal.valueOf(10))).get(0),trip1);
     }
     
     @Test
-    public void TestFindByCapacity() throws Exception {
+    public void testFindByCapacity() throws Exception {
         tripDao.create(trip1);
         assertEquals(tripDao.findByCapacity(trip1.getCapacity()).get(0),trip1);
     }
     
     @Test
-    public void TestFindByExcursion() throws Exception {
+    public void testFindByExcursion() throws Exception {
         // TODO dodelat
         tripDao.create(trip2);
         //assertEquals(tripDao.findByExcursion(excursion1).get(0),trip2);
