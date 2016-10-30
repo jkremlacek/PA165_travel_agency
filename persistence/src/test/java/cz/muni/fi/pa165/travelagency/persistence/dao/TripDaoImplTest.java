@@ -45,20 +45,20 @@ public class TripDaoImplTest {
         
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017,9,20);
-        Date dateFrom = calendar.getTime();
+        Date dateFrom1 = calendar.getTime();
         calendar.set(2017,9,28);
-        Date dateTo = calendar.getTime();
+        Date dateTo1 = calendar.getTime();
         
-        trip1 = new Trip("Podzim ve Francii",dateFrom, dateTo, "Francie", 20, BigDecimal.valueOf(5000));
+        trip1 = new Trip("Podzim ve Francii",dateFrom1, dateTo1, "Francie", 20, BigDecimal.valueOf(5000));           
         calendar.set(0,0,0,5,0,0);
         Date excursionDuration = calendar.getTime();
-        excursion1 = new Excursion("Vylet do Parize",dateFrom, excursionDuration, "Pariz",BigDecimal.valueOf(500));
-                
+        excursion1 = new Excursion("Vylet do Parize",dateFrom1, excursionDuration, "Pariz",BigDecimal.valueOf(500));
+        em.persist(excursion1);
         calendar.set(2017,5,12);
-        dateFrom = calendar.getTime();
+        Date dateFrom2 = calendar.getTime();
         calendar.set(2017,5,26);
-        dateTo = calendar.getTime();
-        trip2 = new Trip("Odpocinek na Malte",dateFrom, dateTo, "Malta", 55, BigDecimal.valueOf(12000));
+        Date dateTo2 = calendar.getTime();
+        trip2 = new Trip("Odpocinek na Malte",dateFrom2, dateTo2, "Malta", 55, BigDecimal.valueOf(12000));       
         trip2.addExcursion(excursion1);
         
     }
@@ -84,9 +84,9 @@ public class TripDaoImplTest {
 
     @Test
     public void testDelete() throws Exception {
-        tripDao.create(trip1);
+        tripDao.create(trip1);       
         assertFalse(tripDao.findAll().isEmpty());
-        tripDao.delete(trip1);
+        tripDao.delete(trip1);       
         assertTrue(tripDao.findAll().isEmpty());
     }
 
@@ -113,9 +113,9 @@ public class TripDaoImplTest {
     
     @Test
     public void testFindByDate() throws Exception {
-        tripDao.create(trip2);        
-       // TODO dodelat
-       //assertEquals(tripDao.findByDate(trip1.getDateFrom(),trip1.getDateTo()).get(0),trip1);
+        tripDao.create(trip1);       
+     
+        assertEquals(tripDao.findByDate(trip1.getDateFrom(),trip1.getDateTo()).get(0),trip1);
     }
     
     @Test
@@ -128,7 +128,7 @@ public class TripDaoImplTest {
     public void testFindByPrice() throws Exception {
         tripDao.create(trip1);
         // TODO dodelat
-        //assertEquals(tripDao.findByPrice(trip1.getPrice().subtract(BigDecimal.valueOf(10)),trip1.getPrice().add(BigDecimal.valueOf(10))).get(0),trip1);
+        assertEquals(tripDao.findByPrice(trip1.getPrice().subtract(BigDecimal.valueOf(10)),trip1.getPrice().add(BigDecimal.valueOf(10))).get(0),trip1);
     }
     
     @Test
@@ -142,5 +142,10 @@ public class TripDaoImplTest {
         // TODO dodelat
         tripDao.create(trip2);
         //assertEquals(tripDao.findByExcursion(excursion1).get(0),trip2);
-    }                       
+    } 
+    @Test
+    public void nullAttributes() {
+        //TODO
+    }
+    
 }
