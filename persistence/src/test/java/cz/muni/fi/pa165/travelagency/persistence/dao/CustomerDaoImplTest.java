@@ -56,7 +56,7 @@ public class CustomerDaoImplTest {
         c1.setName("Bob");
         c1.setPersonalNumber(12345);
 		c1.setBirthDate(calendar.getTime());
-		c1.setPersonalNumber(123456789);
+		c1.setPhoneNumber(123456789);
 		c1.setMail("bob@bobspage.com");
 
         calendar.set(1992,6,2);
@@ -65,7 +65,7 @@ public class CustomerDaoImplTest {
         c2.setName("Eva");
         c2.setPersonalNumber(54321);
 		c2.setBirthDate(calendar.getTime());
-		c2.setPersonalNumber(987654321);
+		c2.setPhoneNumber(987654321);
 		c2.setMail("eva@evaspage.com");
 	
 		r1 = new Reservation();
