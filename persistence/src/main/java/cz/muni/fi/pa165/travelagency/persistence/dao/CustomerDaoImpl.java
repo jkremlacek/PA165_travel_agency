@@ -7,10 +7,10 @@ package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -39,6 +39,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> findByBirthDate(Date birthDate) {
         if (birthDate == null)
             throw new NullPointerException("BirthDate can not be null.");
+        
         return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.birthDate = :birthDate ",Customer.class)
             .setParameter("birthDate", birthDate).getResultList());
     }
@@ -80,6 +81,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public void create(Customer customer) {
          if (customer == null)
             throw new NullPointerException("Customer can not be null.");
+        validate(customer);
         em.persist(customer);
     }
 
@@ -87,6 +89,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public void update(Customer customer) {
         if (customer == null)
             throw new NullPointerException("Customer can not be null.");
+        validate(customer);
         em.merge(customer);
     }
 
@@ -108,5 +111,11 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> findAll() {
         return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c ",Customer.class).getResultList());
     }
+    
+     public void validate(Customer customer) {
+     if (customer.getBirthDate().compareTo(Calendar.getInstance().getTime())>=1) {
+            throw new IllegalArgumentException("Birthday of customer is in the future.");
+        } 
+     }
     
 }
