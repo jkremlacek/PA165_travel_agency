@@ -28,6 +28,8 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	
 	@Override
 	public List<Excursion> findByName(String name) {
+		if (name == null) throw new NullPointerException("Parameter name cannot be null.");
+		
 		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e WHERE e.name = :name ",Excursion.class)
             .setParameter("name", name).getResultList());
 	}
@@ -43,6 +45,9 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public List<Excursion> findByDate(Date dateFrom, Date dateTo) {
+		if (dateFrom == null) throw new NullPointerException("Parameter dateFrom cannot be null.");
+		if (dateTo == null) throw new NullPointerException("Parameter dateTo cannot be null.");
+		
 		return Collections.unmodifiableList(
 				em.createQuery(
 						"SELECT e FROM Excursion e WHERE e.date >= :dateFrom AND e.date <= :dateTo"
@@ -52,12 +57,17 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public List<Excursion> findByDestination(String destination) {
+		if (destination == null) throw new NullPointerException("Parameter destination cannot be null.");
+		
 		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e WHERE e.destination = :destination ",Excursion.class)
             .setParameter("destination", destination).getResultList());
 	}
 
 	@Override
 	public List<Excursion> findByDuration(Date dateFrom, Date dateTo) {
+		if (dateFrom == null) throw new NullPointerException("Parameter dateFrom cannot be null.");
+		if (dateTo == null) throw new NullPointerException("Parameter dateTo cannot be null.");
+		
 		return Collections.unmodifiableList(
 				em.createQuery(
 						"SELECT e FROM Excursion e WHERE e.duration >= :dateFrom AND e.duration <= :dateTo"
@@ -67,22 +77,27 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public List<Excursion> findByTrip(Trip trip) {
+		if (trip == null) throw new NullPointerException("Parameter trip cannot be null.");
+		
 		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e WHERE e.trip = :trip ",Excursion.class)
             .setParameter("trip", trip).getResultList());
 	}
 
 	@Override
 	public void create(Excursion entity) {
+		if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
 		em.persist(entity);
 	}
 
 	@Override
 	public void update(Excursion entity) {
+		if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
 		em.merge(entity);
 	}
 
 	@Override
 	public void delete(Excursion entity) {
+		if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
 		em.remove(entity);
 	}
 

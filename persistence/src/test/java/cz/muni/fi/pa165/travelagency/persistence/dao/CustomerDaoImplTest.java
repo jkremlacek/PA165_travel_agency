@@ -21,6 +21,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
 /**
  *
  * Testing implementation of Customer
@@ -38,8 +43,8 @@ public class CustomerDaoImplTest {
 	@PersistenceContext
     private EntityManager em;
 	
-	private Customer c1, c2;
-	private Reservation r1, r2;	
+	private Customer c1, c2, c3;
+	private Reservation r1, r2, r3;	
 	
 	@Before
     public void setup() {
@@ -62,15 +67,6 @@ public class CustomerDaoImplTest {
 		c2.setBirthDate(calendar.getTime());
 		c2.setPersonalNumber(987654321);
 		c2.setMail("eva@evaspage.com");
-		
-		calendar.set(1994,8,31);
-				
-        c3 = new Customer();
-        c3.setName("Alice");
-        c3.setPersonalNumber(14725);
-		c3.setBirthDate(calendar.getTime());
-		c3.setPersonalNumber(147258369);
-		c3.setMail("alice@alicepage.com");
 	
 		r1 = new Reservation();
         r1.setCustomer(c1);
@@ -79,10 +75,6 @@ public class CustomerDaoImplTest {
 		r2 = new Reservation();
         r2.setCustomer(c2);
 		c2.addReservation(r2);
-		
-		r3 = new Reservation();
-        r3.setCustomer(c3);
-		c3.addReservation(r3);
 	}
 	
 	@Test
@@ -116,10 +108,11 @@ public class CustomerDaoImplTest {
     @Transactional
     public void delete() throws Exception {
         em.persist(c1);
+		em.persist(r1);
 
         customerDaoImpl.delete(c1);
 
-        assertThat(em.find(Reservation.class,r1.getId()))
+        assertThat(em.find(Customer.class,c1.getId()))
                 .as("Deleted customer should not be accessible by entity manager")
                 .isNull();
     }
@@ -127,11 +120,12 @@ public class CustomerDaoImplTest {
 	@Test
     @Transactional
     public void findById() throws Exception {
+		em.persist(c1);
+		em.persist(r1);
+		
         assertThat(customerDaoImpl.findById(c1.getId()+1))
                 .as("No customer should be found")
                 .isNull();
-
-        em.persist(c1);
 
         Customer found = customerDaoImpl.findById(c1.getId());
 
@@ -147,13 +141,14 @@ public class CustomerDaoImplTest {
 	@Test
     @Transactional
     public void findAll() throws Exception {
-        List<Customer> all = reservationDaoImpl.findAll();
+        List<Customer> all = customerDaoImpl.findAll();
         assertThat(all.size())
                 .as("No customer should be found")
                 .isEqualTo(0);
 
         em.persist(c1);
         em.persist(r1);
+		
         all = customerDaoImpl.findAll();
 
         assertThat(all.size())
@@ -196,6 +191,9 @@ public class CustomerDaoImplTest {
     public void testFindByName() throws Exception {
         em.persist(c1);
 		em.persist(c2);
+		
+		em.persist(r1);
+		em.persist(r2);
 
         List<Customer> found = customerDaoImpl.findByName(c1.getName());
 
@@ -213,6 +211,9 @@ public class CustomerDaoImplTest {
     public void testFindByBirthDate() throws Exception {
         em.persist(c1);
 		em.persist(c2);
+		
+		em.persist(r1);
+		em.persist(r2);
 
         List<Customer> found = customerDaoImpl.findByBirthDate(c1.getBirthDate());
 
@@ -230,6 +231,9 @@ public class CustomerDaoImplTest {
     public void testFindByPersonalNumber() throws Exception {
         em.persist(c1);
 		em.persist(c2);
+		
+		em.persist(r1);
+		em.persist(r2);
 
         List<Customer> found = customerDaoImpl.findByPersonalNumber(c1.getPersonalNumber());
 
@@ -247,6 +251,9 @@ public class CustomerDaoImplTest {
     public void testFindByMail() throws Exception {
         em.persist(c1);
 		em.persist(c2);
+		
+		em.persist(r1);
+		em.persist(r2);
 
         List<Customer> found = customerDaoImpl.findByMail(c1.getMail());
 
@@ -265,6 +272,9 @@ public class CustomerDaoImplTest {
         em.persist(c1);
 		em.persist(c2);
 
+		em.persist(r1);
+		em.persist(r2);
+		
         List<Customer> found = customerDaoImpl.findByPhoneNumber(c1.getPhoneNumber());
 
         assertThat(found)
@@ -281,6 +291,7 @@ public class CustomerDaoImplTest {
     public void testFindByReservation() throws Exception {
         em.persist(c1);
 		em.persist(c2);
+		
 		em.persist(r1);
 		em.persist(r2);
 
