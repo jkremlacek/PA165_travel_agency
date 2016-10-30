@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ValidationException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -75,7 +76,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
 		if (dateFrom == null) throw new NullPointerException("Parameter dateFrom cannot be null.");
 		if (dateTo == null) throw new NullPointerException("Parameter dateTo cannot be null.");
 		
-		if (dateTo.getTime() > dateFrom.getTime()) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
+		if (dateTo.getTime() < dateFrom.getTime()) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
 		
 		return Collections.unmodifiableList(
 				em.createQuery(
@@ -95,7 +96,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	@Override
 	public void create(Excursion entity) {
 		if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
-		if (entity.getTrip() == null) throw new NullPointerException("Trip must be set!");
+		if (entity.getTrip() == null) throw new ValidationException("Trip must be set!");
 		em.persist(entity);
 	}
 
