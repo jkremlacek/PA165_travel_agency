@@ -1,36 +1,28 @@
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
-import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;
 import cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
-import static org.assertj.core.api.Assertions.*;
-
-import org.assertj.core.api.ThrowableAssert;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
-
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.validation.ValidationException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 //import static org.testng.Assert.*;
 
@@ -66,9 +58,9 @@ public class ReservationDaoImplTest {
         c2.setPersonalNumber(54321);
 
         Calendar cal = Calendar.getInstance();
-        cal.set(2017,8,15);
+        cal.set(2017, 8, 15);
         Date dFrom = cal.getTime();
-        cal.set(2017,8,25);
+        cal.set(2017, 8, 25);
         Date dTo = cal.getTime();
 
         t1 = new Trip();
@@ -79,9 +71,9 @@ public class ReservationDaoImplTest {
         t1.setCapacity(100);
         t1.setPrice(BigDecimal.valueOf(10000));
 
-        cal.set(2017,8,20,10,0,0);
+        cal.set(2017, 8, 20, 10, 0, 0);
         Date excursionDate = cal.getTime();
-        cal.set(0,0,0,5,0,0);
+        cal.set(0, 0, 0, 5, 0, 0);
         Date excursionDuration = cal.getTime();
 
         e1 = new Excursion();
@@ -108,7 +100,7 @@ public class ReservationDaoImplTest {
                 .as("Persisted reservation should have id assigned")
                 .isNotNull();
 
-        assertThat(em.find(Reservation.class,r1.getId()).getId())
+        assertThat(em.find(Reservation.class, r1.getId()).getId())
                 .as("Persisted reservation should be accessible by entity manager")
                 .isEqualTo(r1.getId());
     }
@@ -133,15 +125,15 @@ public class ReservationDaoImplTest {
     public void delete() throws Exception {
         reservationDaoImpl.delete(r1);
 
-        assertThat(em.find(Reservation.class,r1.getId()))
+        assertThatThrownBy(() -> em.find(Reservation.class, r1.getId()))
                 .as("Deleted reservation should not be accessible by entity manager")
-                .isNull();
+                .isInstanceOf(IllegalArgumentException.class);
 
         em.persist(r1);
 
         reservationDaoImpl.delete(r1);
 
-        assertThat(em.find(Reservation.class,r1.getId()))
+        assertThat(em.find(Reservation.class, r1.getId()))
                 .as("Deleted reservation should not be accessible by entity manager")
                 .isNull();
     }
@@ -224,7 +216,7 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullCustomerCreateTest(){
+    public void nullCustomerCreateTest() {
         r1.setCustomer(null);
         assertThatThrownBy(() -> reservationDaoImpl.create(r1))
                 .as("create(null) should throw NullPointerException")
@@ -232,7 +224,7 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullTripCreateTest(){
+    public void nullTripCreateTest() {
         r1.setTrip(null);
         assertThatThrownBy(() -> reservationDaoImpl.create(r1))
                 .as("create(null) should throw NullPointerException")
@@ -240,7 +232,7 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullAttributes(){
+    public void nullAttributes() {
         assertThatThrownBy(() -> reservationDaoImpl.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
@@ -270,11 +262,10 @@ public class ReservationDaoImplTest {
 
         reservationDaoImpl.update(r1);
 
-        assertThat(em.find(Reservation.class, r1.getId()))
+        assertThatThrownBy(() -> em.find(Reservation.class, r1.getId()))
                 .as("Reservation should not be persisted by update without previous create")
-                .isNull();
+                .isInstanceOf(IllegalArgumentException.class);
     }
-
 
 
 }
