@@ -214,7 +214,7 @@ public class Trip {
     }
     
     /**
-     * @param e the reservation to delete
+     * @param r the reservation to delete
      */
     public void deleteReservation(Reservation r){
         reservations.remove(r);

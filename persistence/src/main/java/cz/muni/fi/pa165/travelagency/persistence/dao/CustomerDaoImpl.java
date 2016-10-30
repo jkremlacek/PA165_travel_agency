@@ -113,7 +113,8 @@ public class CustomerDaoImpl implements CustomerDao {
     }
     
      public void validate(Customer customer) {
-     if (customer.getBirthDate().compareTo(Calendar.getInstance().getTime())>=1) {
+         Date date = new Date();
+     if (customer.getBirthDate().compareTo(date) >=1 ) {
             throw new IllegalArgumentException("Birthday of customer is in the future.");
         } 
      }
