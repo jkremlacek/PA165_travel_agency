@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,10 +13,7 @@ import javax.validation.ValidationException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -170,51 +166,112 @@ public class ExcursionDaoImplTest {
         excursionDao.create(aquaParkExcursion);
         excursionDao.create(artGalleryExcursion);
         excursionDao.create(bigHillExcursion);
-        assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500"))
-                                                .size(),is(2));
         assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500")))
-                                                .contains(aquaParkExcursion);
-        assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500")))
-                                                .contains(artGalleryExcursion);
-        assertThat(excursionDao.findByPrice(new BigDecimal("200.01"), new BigDecimal("500"))
-                                                .size(),is(1));
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion, artGalleryExcursion);
         assertThat(excursionDao.findByPrice(new BigDecimal("200.01"), new BigDecimal("500")))
-                                                .contains(aquaParkExcursion);
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion);
     }
 
     
     
-//    /**
-//     * Test of findByDate method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testFindByDate() {
-//        
-//    }
-//
-//    /**
-//     * Test of findByDestination method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testFindByDestination() {
-//        
-//    }
-//
-//    /**
-//     * Test of findByDuration method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testFindByDuration() {
-//        
-//    }
-//
-//    /**
-//     * Test of findByTrip method, of class ExcursionDaoImpl.
-//     */
-//    @Test
-//    public void testFindByTrip() {
-//        
-//    }
+    /**
+     * Test of findByDate method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testFindByDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2017, 10, 20);
+        Date dateFrom = cal.getTime();
+        cal.set(2017, 10, 22);
+        Date dateTo = cal.getTime();
+        assertThat(excursionDao.findByDate(dateFrom, dateTo)).isEmpty();
+        cal.set(2017, 10, 21);
+        Date dateOfExcursion = cal.getTime();
+        aquaParkExcursion.setDate(dateOfExcursion);
+        excursionDao.create(aquaParkExcursion);
+        cal.set(2017, 10, 23);
+        dateOfExcursion = cal.getTime();
+        artGalleryExcursion.setDate(dateOfExcursion);
+        excursionDao.create(artGalleryExcursion);
+        assertThat(excursionDao.findByDate(dateFrom, dateTo))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion);
+                
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindByDateFromAfterDateTo() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2017, 10, 22);
+        Date dateFrom = cal.getTime();
+        cal.set(2017, 10, 21);
+        Date dateTo = cal.getTime();
+        excursionDao.findByDate(dateFrom, dateTo);
+    }
+
+    /**
+     * Test of findByDestination method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testFindByDestination() {
+        
+        assertThat(excursionDao.findByDestination("Pasohlavky")).isEmpty();
+        excursionDao.create(aquaParkExcursion);
+        assertThat(excursionDao.findByDestination("Pasohlavky"))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion);
+        
+    }
+
+    /**
+     * Test of findByDuration method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testFindByDuration() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(0, 0, 0, 5, 0, 0);
+        Date durFrom = cal.getTime();
+        cal.set(0, 0, 0, 8, 0, 0);
+        Date durTo = cal.getTime();
+        assertThat(excursionDao.findByDate(durFrom, durTo)).isEmpty();
+        cal.set(0, 0, 0, 5, 0, 1);
+        Date durOfExcursion = cal.getTime();
+        aquaParkExcursion.setDuration(durOfExcursion);
+        excursionDao.create(aquaParkExcursion);
+        cal.set(0, 0, 0, 8, 0, 1);
+        durOfExcursion = cal.getTime();
+        artGalleryExcursion.setDuration(durOfExcursion);
+        excursionDao.create(artGalleryExcursion);
+        assertThat(excursionDao.findByDuration(durFrom, durTo))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion);
+        
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindByDurationFromLongerThanDurationTo() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(0, 0, 0, 8, 0 , 1);
+        Date durationFrom = cal.getTime();
+        cal.set(0, 0, 0, 8, 0, 0);
+        Date durationTo = cal.getTime();
+        excursionDao.findByDuration(durationFrom, durationTo);
+    }
+
+    /**
+     * Test of findByTrip method, of class ExcursionDaoImpl.
+     */
+    @Test
+    public void testFindByTrip() {
+        assertThat(excursionDao.findByTrip(waterTrip)).isEmpty();
+        excursionDao.create(aquaParkExcursion);
+        assertThat(excursionDao.findByTrip(waterTrip))
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion);
+        
+    }
 
     /**
      * Test of create method, of class ExcursionDaoImpl.
@@ -298,7 +355,9 @@ public class ExcursionDaoImplTest {
         excursionDao.delete(bigHillExcursion);
         
         assertThat(excursionDao.findAll().size(),is(2));
-        assertThat(excursionDao.findAll()).containsOnly(aquaParkExcursion,artGalleryExcursion);
+        assertThat(excursionDao.findAll())
+                .usingFieldByFieldElementComparator()
+                .containsOnly(aquaParkExcursion,artGalleryExcursion);
         
     }
 
@@ -325,7 +384,9 @@ public class ExcursionDaoImplTest {
         excursionDao.create(bigHillExcursion);
         excursionDao.create(artGalleryExcursion);
         
-        assertThat(excursionDao.findAll()).containsOnly(bigHillExcursion, artGalleryExcursion);
+        assertThat(excursionDao.findAll())
+                .usingFieldByFieldElementComparator()
+                .containsOnly(bigHillExcursion, artGalleryExcursion);
     }
     
 }
