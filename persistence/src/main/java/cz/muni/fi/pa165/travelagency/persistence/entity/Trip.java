@@ -41,9 +41,11 @@ public class Trip {
    private String description;
    
    @Min(1)
+   @NotNull
    private Integer capacity;
    
    @Min(0)
+   @NotNull
    private BigDecimal price;
    
    @OneToMany(mappedBy="trip")
