@@ -4,11 +4,9 @@ package cz.muni.fi.pa165.travelagency.persistence.dao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ValidationException;
@@ -89,7 +87,7 @@ public class TripDaoImpl implements TripDao {
         if (capacity == null) {
             throw new NullPointerException("Argument capacity cannot be null.");
         }
-        if (capacity.compareTo(Integer.valueOf("1"))<1) {
+        if (capacity.compareTo(Integer.valueOf("1"))<0) {
             throw new IllegalArgumentException("Input capacity to find cannot be smaller than 1");
         }
         // TO DO finding total capacity of trip, not acutal!
@@ -117,7 +115,7 @@ public class TripDaoImpl implements TripDao {
         if (entity.getDateFrom().after(entity.getDateTo())) {
             throw new IllegalArgumentException("Starting date is after ending date of trip.");
         }
-        if (entity.getCapacity().compareTo(Integer.valueOf("1"))<1) {
+        if (entity.getCapacity().compareTo(Integer.valueOf("1"))<0) {
             throw new IllegalArgumentException("Capacity of trip is smaller than 1.");
         }
         if (entity.getPrice().compareTo(BigDecimal.ZERO)<1) {
