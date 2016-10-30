@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
@@ -81,7 +76,6 @@ public class CustomerDaoImpl implements CustomerDao {
     public void create(Customer customer) {
          if (customer == null)
             throw new NullPointerException("Customer can not be null.");
-        validate(customer);
         em.persist(customer);
     }
 
@@ -89,7 +83,6 @@ public class CustomerDaoImpl implements CustomerDao {
     public void update(Customer customer) {
         if (customer == null)
             throw new NullPointerException("Customer can not be null.");
-        validate(customer);
         em.merge(customer);
     }
 
@@ -112,11 +105,5 @@ public class CustomerDaoImpl implements CustomerDao {
         return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c ",Customer.class).getResultList());
     }
     
-     public void validate(Customer customer) {
-         Date date = new Date();
-     if (customer.getBirthDate().compareTo(date) >=1 ) {
-            throw new IllegalArgumentException("Birthday of customer is in the future.");
-        } 
-     }
     
 }
