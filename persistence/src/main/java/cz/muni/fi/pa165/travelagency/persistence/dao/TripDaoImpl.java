@@ -41,11 +41,14 @@ public class TripDaoImpl implements TripDao {
         if (to == null) {
             throw new NullPointerException("Argument to cannot be null.");
         }
+        if (from.after(to)) {
+            throw new IllegalArgumentException("Date from cannot be greater than date to");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE "+
                                 "t.dateFrom >= :from AND t.dateTo <= :to", Trip.class)
-                                .setParameter(":from", from)
-                                .setParameter(":to", to)
+                                .setParameter("from", from)
+                                .setParameter("to", to)
                                 .getResultList());
     }
 
@@ -68,11 +71,14 @@ public class TripDaoImpl implements TripDao {
         if (maxPrice == null) {
             throw new NullPointerException("Argument maxPrice cannot be null.");
         }
+        if (minPrice.compareTo(maxPrice)>0) {
+            throw new IllegalArgumentException("Argument minPrice cannot be greater than maxPrice");
+        }
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE "+
                                 "t.price >= :minPrice AND t.price <= :maxPrice", Trip.class)
-                                .setParameter(":minPrice", minPrice)
-                                .setParameter(":maxPrice", maxPrice)
+                                .setParameter("minPrice", minPrice)
+                                .setParameter("maxPrice", maxPrice)
                                 .getResultList());
     }
 
@@ -81,6 +87,10 @@ public class TripDaoImpl implements TripDao {
         if (capacity == null) {
             throw new NullPointerException("Argument capacity cannot be null.");
         }
+        if (capacity.compareTo(Integer.valueOf("1"))<1) {
+            throw new IllegalArgumentException("Input capacity to find cannot be smaller than 1");
+        }
+        // TO DO finding total capacity of trip, not acutal!
         return Collections.unmodifiableList(
                 em.createQuery("SELECT t FROM Trip t WHERE t.capacity >= :capacity", Trip.class)
                                                 .setParameter("capacity", capacity)
@@ -93,7 +103,7 @@ public class TripDaoImpl implements TripDao {
             throw new NullPointerException("Argument excursion cannot be null.");
         }
         return Collections.unmodifiableList(
-                em.createQuery("SELECT t FROM Trip t WHERE :excursion IN t.excursions", Trip.class)
+                em.createQuery("SELECT t FROM Trip t WHERE :excursion IN elements(t.excursions)", Trip.class)
                                                 .setParameter("excursion", excursion)
                                                 .getResultList());
     }
@@ -101,7 +111,7 @@ public class TripDaoImpl implements TripDao {
     @Override
     public void create(Trip entity) {
         if (entity == null) {
-            throw new NullPointerException("Argument entity cannot be null.");
+            throw new NullPointerException("Argument trip entity cannot be null.");
         }
         em.persist(entity);
     }
@@ -109,7 +119,7 @@ public class TripDaoImpl implements TripDao {
     @Override
     public void update(Trip entity) {
         if (entity == null) {
-            throw new NullPointerException("Argument entity cannot be null.");
+            throw new NullPointerException("Argument trip entity cannot be null.");
         }
         em.merge(entity);
     }
@@ -117,7 +127,7 @@ public class TripDaoImpl implements TripDao {
     @Override
     public void delete(Trip entity) {
         if (entity == null) {
-            throw new NullPointerException("Argument entity cannot be null.");
+            throw new NullPointerException("Argument trip entity cannot be null.");
         }
         em.remove(entity);
     }
