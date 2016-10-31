@@ -2,10 +2,10 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
   <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>cz.muni.fi.pa165.travelagency.persistance.entity.Reservation</class>
-    <class>cz.muni.fi.pa165.travelagency.persistance.entity.Trip</class>
-    <class>cz.muni.fi.pa165.travelagency.persistance.entity.Excursion</class>
-    <class>cz.muni.fi.pa165.travelagency.persistance.entity.Customer</class>
+    <class>cz.muni.fi.pa165.travelagency.persistence.entity.Reservation</class>
+    <class>cz.muni.fi.pa165.travelagency.persistence.entity.Trip</class>
+    <class>cz.muni.fi.pa165.travelagency.persistence.entity.Excursion</class>
+    <class>cz.muni.fi.pa165.travelagency.persistence.entity.Customer</class>
     <properties>
       <property name="hibernate.connection.url" value="jdbc:h2:file:~/database"/>
       <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
