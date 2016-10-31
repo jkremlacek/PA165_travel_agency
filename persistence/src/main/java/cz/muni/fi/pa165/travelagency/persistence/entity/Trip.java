@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
@@ -30,9 +32,11 @@ public class Trip {
    private String name;
    
    @NotNull
+   @Temporal(TemporalType.TIMESTAMP)
    private Date dateFrom;
    
    @NotNull
+   @Temporal(TemporalType.TIMESTAMP)
    private Date dateTo;
    
    @NotBlank

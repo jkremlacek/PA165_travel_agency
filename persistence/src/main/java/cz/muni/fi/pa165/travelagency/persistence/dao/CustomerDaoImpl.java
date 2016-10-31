@@ -2,8 +2,6 @@ package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,8 +23,8 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> findByName(String name) {
        if (name == null)
             throw new NullPointerException("Name can not be null.");
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.name = :name ",Customer.class)
-            .setParameter("name", name).getResultList());
+        return em.createQuery("SELECT c FROM Customer c WHERE c.name = :name ",Customer.class)
+            .setParameter("name", name).getResultList();
 
     }
 
@@ -35,32 +33,32 @@ public class CustomerDaoImpl implements CustomerDao {
         if (birthDate == null)
             throw new NullPointerException("BirthDate can not be null.");
         
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.birthDate = :birthDate ",Customer.class)
-            .setParameter("birthDate", birthDate).getResultList());
+        return em.createQuery("SELECT c FROM Customer c WHERE c.birthDate = :birthDate ",Customer.class)
+            .setParameter("birthDate", birthDate).getResultList();
     }
 
     @Override
     public List<Customer> findByPersonalNumber(Integer personalNumber) {
         if (personalNumber == null)
             throw new NullPointerException("PersonalNumber can not be null.");
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.personalNumber = :personalNumber ",Customer.class)
-            .setParameter("personalNumber", personalNumber).getResultList());
+        return em.createQuery("SELECT c FROM Customer c WHERE c.personalNumber = :personalNumber ",Customer.class)
+            .setParameter("personalNumber", personalNumber).getResultList();
     }
 
     @Override
     public List<Customer> findByMail(String mail) {
         if (mail == null)
             throw new NullPointerException("Mail can not be null.");
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.mail = :mail ",Customer.class)
-            .setParameter("mail", mail).getResultList());
+        return em.createQuery("SELECT c FROM Customer c WHERE c.mail = :mail ",Customer.class)
+            .setParameter("mail", mail).getResultList();
     }
 
     @Override
     public List<Customer> findByPhoneNumber(Integer phoneNumber) {
         if (phoneNumber == null)
             throw new NullPointerException("PhoneNumber can not be null.");
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber ",Customer.class)
-            .setParameter("phoneNumber", phoneNumber).getResultList());
+        return em.createQuery("SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber ",Customer.class)
+            .setParameter("phoneNumber", phoneNumber).getResultList();
     }
 
     @Override
@@ -68,8 +66,8 @@ public class CustomerDaoImpl implements CustomerDao {
         if (reservation == null)
             throw new NullPointerException("Reservation can not be null.");
         
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c WHERE :reservation IN elements(c.reservations) ",Customer.class)
-            .setParameter("reservation", reservation).getResultList());
+        return em.createQuery("SELECT c FROM Customer c WHERE :reservation IN elements(c.reservations) ",Customer.class)
+            .setParameter("reservation", reservation).getResultList();
     }
 
     @Override
@@ -102,7 +100,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<Customer> findAll() {
-        return Collections.unmodifiableList(em.createQuery("SELECT c FROM Customer c ",Customer.class).getResultList());
+        return em.createQuery("SELECT c FROM Customer c ",Customer.class).getResultList();
     }
     
     
