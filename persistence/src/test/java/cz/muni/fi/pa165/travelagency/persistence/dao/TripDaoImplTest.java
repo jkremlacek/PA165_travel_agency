@@ -47,17 +47,22 @@ public class TripDaoImplTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017,9,20);
         Date dateFrom1 = calendar.getTime();
+        calendar.clear() ;
         calendar.set(2017,9,28);
         Date dateTo1 = calendar.getTime();
+        calendar.clear() ;
         
         trip1 = new Trip("Podzim ve Francii",dateFrom1, dateTo1, "Francie", 20, BigDecimal.valueOf(5000));           
         calendar.set(0,0,0,5,0,0);
         Date excursionDuration = calendar.getTime();
+        calendar.clear() ;
         excursion1 = new Excursion("Vylet do Parize",dateFrom1, excursionDuration, "Pariz",BigDecimal.valueOf(500));
         calendar.set(2017,5,12);
         Date dateFrom2 = calendar.getTime();
+        calendar.clear() ;
         calendar.set(2017,5,26);
         Date dateTo2 = calendar.getTime();
+        calendar.clear() ;
         trip2 = new Trip("Odpocinek na Malte",dateFrom2, dateTo2, "Malta", 55, BigDecimal.valueOf(12000)); 
     }
     
