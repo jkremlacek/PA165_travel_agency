@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
@@ -10,10 +5,10 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
- *
+ * Trip interface
+ * 
  * @author Jakub Kremláček
  */
 public interface TripDao extends GenericDao<Trip, Long>{

@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 
-import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -43,8 +36,8 @@ public class CustomerDaoImplTest {
 	@PersistenceContext
     private EntityManager em;
 	
-	private Customer c1, c2, c3;
-	private Reservation r1, r2, r3;	
+	private Customer c1, c2;
+	private Reservation r1, r2;	
 	
 	@Before
     public void setup() {

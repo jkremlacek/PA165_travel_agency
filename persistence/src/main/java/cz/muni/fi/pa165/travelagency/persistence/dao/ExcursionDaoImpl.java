@@ -31,8 +31,8 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	public List<Excursion> findByName(String name) {
 		if (name == null) throw new NullPointerException("Parameter name cannot be null.");
 		
-		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e WHERE e.name = :name ",Excursion.class)
-            .setParameter("name", name).getResultList());
+		return em.createQuery("SELECT e FROM Excursion e WHERE e.name = :name ",Excursion.class)
+            .setParameter("name", name).getResultList();
 	}
 
 	@Override
@@ -42,11 +42,10 @@ public class ExcursionDaoImpl implements ExcursionDao {
 		
 		if (maxPrice.compareTo(minPrice) == -1) throw new IllegalArgumentException("Attribute maxPrice must be higher or equal to minPrice.");
 		
-		return Collections.unmodifiableList(
-				em.createQuery(
+		return em.createQuery(
 						"SELECT e FROM Excursion e WHERE e.price >= :minPrice AND e.price <= :maxPrice"
 						,Excursion.class)
-            .setParameter("minPrice", minPrice).setParameter("maxPrice", maxPrice).getResultList());
+            .setParameter("minPrice", minPrice).setParameter("maxPrice", maxPrice).getResultList();
 	}
 
 	@Override
@@ -56,19 +55,18 @@ public class ExcursionDaoImpl implements ExcursionDao {
 		
 		if (dateTo.getTime() - dateFrom.getTime() < 0) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
 		
-		return Collections.unmodifiableList(
-				em.createQuery(
+		return em.createQuery(
 						"SELECT e FROM Excursion e WHERE e.date >= :dateFrom AND e.date <= :dateTo"
 						,Excursion.class)
-            .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo).getResultList());
+            .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo).getResultList();
 	}
 
 	@Override
 	public List<Excursion> findByDestination(String destination) {
 		if (destination == null) throw new NullPointerException("Parameter destination cannot be null.");
 		
-		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e WHERE e.destination = :destination ",Excursion.class)
-            .setParameter("destination", destination).getResultList());
+		return em.createQuery("SELECT e FROM Excursion e WHERE e.destination = :destination ",Excursion.class)
+            .setParameter("destination", destination).getResultList();
 	}
 
 	@Override
@@ -78,19 +76,18 @@ public class ExcursionDaoImpl implements ExcursionDao {
 		
 		if (dateTo.getTime() < dateFrom.getTime()) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
 		
-		return Collections.unmodifiableList(
-				em.createQuery(
+		return em.createQuery(
 						"SELECT e FROM Excursion e WHERE e.duration >= :dateFrom AND e.duration <= :dateTo"
 						,Excursion.class)
-            .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo).getResultList());
+            .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo).getResultList();
 	}
 
 	@Override
 	public List<Excursion> findByTrip(Trip trip) {
 		if (trip == null) throw new NullPointerException("Parameter trip cannot be null.");
 		
-		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e WHERE e.trip = :trip ",Excursion.class)
-            .setParameter("trip", trip).getResultList());
+		return em.createQuery("SELECT e FROM Excursion e WHERE e.trip = :trip ",Excursion.class)
+            .setParameter("trip", trip).getResultList();
 	}
 
 	@Override
@@ -119,7 +116,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public List<Excursion> findAll() {
-		return Collections.unmodifiableList(em.createQuery("SELECT e FROM Excursion e ",Excursion.class).getResultList());
+		return em.createQuery("SELECT e FROM Excursion e ",Excursion.class).getResultList();
 	}
 	
 }
