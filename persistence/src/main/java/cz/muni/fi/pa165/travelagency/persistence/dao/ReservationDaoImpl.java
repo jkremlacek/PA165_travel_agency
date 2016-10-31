@@ -28,7 +28,7 @@ public class ReservationDaoImpl implements ReservationDao {
         if(reservation.getCustomer() == null)
             throw new ValidationException("Customer attribute should not be null");
         if(reservation.getTrip() == null)
-            throw new ValidationException("Trip atribute should not be null");
+            throw new ValidationException("Trip attribute should not be null");
     }
 
     @Override
