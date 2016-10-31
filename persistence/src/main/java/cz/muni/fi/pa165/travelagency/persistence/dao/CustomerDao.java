@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created on 20.10.2016.

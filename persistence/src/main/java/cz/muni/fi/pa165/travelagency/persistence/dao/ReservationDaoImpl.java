@@ -22,7 +22,7 @@ public class ReservationDaoImpl implements ReservationDao {
     @PersistenceContext
     private EntityManager em;
 
-    private void validateAttributes(Reservation reservation) throws ValidationException, NullPointerException {
+    private void validateAttributes(Reservation reservation) {
         if(reservation == null)
             throw new NullPointerException("Reservation should not be null");
         if(reservation.getCustomer() == null)
