@@ -41,11 +41,10 @@ public class Excursion {
 
     private String description;
 
+    /**
+     * Non-parametric constructor for Excursion entity
+     */
     public Excursion() {
-    }
-
-    public Excursion(Long id) {
-        this.id = id;
     }
 
     public Excursion(String name, Date date, Date duration, String destination, BigDecimal price) {
