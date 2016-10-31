@@ -85,7 +85,6 @@ public class TripDaoImpl implements TripDao {
         if (capacity.compareTo(Integer.valueOf("1"))<0) {
             throw new IllegalArgumentException("Input capacity to find cannot be smaller than 1");
         }
-        // TO DO finding total capacity of trip, not acutal!
         return em.createQuery("SELECT t FROM Trip t WHERE t.capacity >= :capacity", Trip.class)
                                                 .setParameter("capacity", capacity)
                                                 .getResultList();
