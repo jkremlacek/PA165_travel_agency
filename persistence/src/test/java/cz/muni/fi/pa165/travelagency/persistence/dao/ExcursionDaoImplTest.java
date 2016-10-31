@@ -264,6 +264,7 @@ public class ExcursionDaoImplTest {
         Calendar cal = Calendar.getInstance();
         cal.set(0, 0, 0, 8, 0 , 1);
         Date durationFrom = cal.getTime();
+        cal.clear();
         cal.set(0, 0, 0, 8, 0, 0);
         Date durationTo = cal.getTime();
         excursionDao.findByDuration(durationFrom, durationTo);
