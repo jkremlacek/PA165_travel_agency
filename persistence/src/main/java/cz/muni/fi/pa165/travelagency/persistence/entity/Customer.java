@@ -50,13 +50,38 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.name);
         hash = 47 * hash + Objects.hashCode(this.personalNumber);
+        hash = 47 * hash + Objects.hashCode(this.mail);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Customer)) {
+            return false;
+        }
+        final Customer other = (Customer) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.mail, other.mail)) {
+            return false;
+        }
+        if (!Objects.equals(this.personalNumber, other.personalNumber)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean aequals(Object obj) {
         if (this == obj) {
             return true;
         }
