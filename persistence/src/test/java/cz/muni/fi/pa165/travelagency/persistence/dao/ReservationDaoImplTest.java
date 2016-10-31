@@ -24,7 +24,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-//import static org.testng.Assert.*;
 
 /**
  * Created on 21.10.2016.
@@ -93,7 +92,7 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void create() throws Exception {
+    public void testCreate() throws Exception {
         reservationDaoImpl.create(r1);
 
         assertThat(r1.getId())
@@ -107,7 +106,7 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void update() throws Exception {
+    public void testUpdate() throws Exception {
         em.persist(r1);
         em.persist(c2);
         em.persist(e1);
@@ -122,7 +121,7 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         reservationDaoImpl.delete(r1);
 
         assertThatThrownBy(() -> em.find(Reservation.class, r1.getId()))
@@ -140,7 +139,7 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void findById() throws Exception {
+    public void testFindById() throws Exception {
         em.persist(r1);
 
         Reservation found = reservationDaoImpl.findById(r1.getId());
@@ -156,7 +155,7 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void findAll() throws Exception {
+    public void testFindAll() throws Exception {
         List<Reservation> all = reservationDaoImpl.findAll();
         assertThat(all.size())
                 .as("No reservation should be found")
@@ -216,7 +215,7 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullCustomerCreateTest() {
+    public void testCreateWithNullCustomer() {
         r1.setCustomer(null);
         assertThatThrownBy(() -> reservationDaoImpl.create(r1))
                 .as("create(null) should throw NullPointerException")
@@ -224,7 +223,7 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullTripCreateTest() {
+    public void testCreateWithNullTrip() {
         r1.setTrip(null);
         assertThatThrownBy(() -> reservationDaoImpl.create(r1))
                 .as("create(null) should throw NullPointerException")
@@ -232,7 +231,7 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void nullAttributes() {
+    public void testNullArguments() {
         assertThatThrownBy(() -> reservationDaoImpl.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
@@ -255,7 +254,7 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void invalidUpdate() throws Exception {
+    public void testInvalidUpdate() throws Exception {
         em.persist(c2);
         em.persist(e1);
         r1.setCustomer(c2);
