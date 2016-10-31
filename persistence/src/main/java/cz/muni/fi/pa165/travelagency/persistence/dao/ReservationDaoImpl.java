@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ValidationException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,17 +22,24 @@ public class ReservationDaoImpl implements ReservationDao {
     @PersistenceContext
     private EntityManager em;
 
+    private void validateAttributes(Reservation reservation) throws ValidationException, NullPointerException {
+        if(reservation == null)
+            throw new NullPointerException("Reservation should not be null");
+        if(reservation.getCustomer() == null)
+            throw new ValidationException("Customer attribute should not be null");
+        if(reservation.getTrip() == null)
+            throw new ValidationException("Trip atribute should not be null");
+    }
+
     @Override
     public void create(Reservation reservation) {
-        if (reservation == null)
-            throw new NullPointerException("Reservation can not be null");
+        validateAttributes(reservation);
         em.persist(reservation);
     }
 
     @Override
     public void update(Reservation reservation) {
-        if (reservation == null)
-            throw new NullPointerException("Reservation can not be null");
+        validateAttributes(reservation);
         em.merge(reservation);
     }
 
