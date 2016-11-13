@@ -5,5 +5,5 @@ package cz.muni.fi.pa165.travelagency.service;
  *
  * @author Martin Salata
  */
-public class ExcursionServiceImpl implements ExcursionService {
+public class ReservationServiceImpl implements ReservationService {
 }

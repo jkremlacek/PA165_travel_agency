@@ -5,5 +5,5 @@ package cz.muni.fi.pa165.travelagency.facade.dto;
  *
  * @author Martin Salata
  */
-public class ExcursionDto {
+public class ReservationDto {
 }

@@ -4,5 +4,5 @@ package cz.muni.fi.pa165.travelagency.facade;
  *
  * @author Martin Salata
  */
-public interface ExcursionFacade {
+public interface ReservationFacade {
 }
