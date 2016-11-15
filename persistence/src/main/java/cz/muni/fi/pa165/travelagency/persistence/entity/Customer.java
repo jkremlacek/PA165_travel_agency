@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -45,7 +45,7 @@ public class Customer {
     @Column(nullable = true)
     private Integer phoneNumber;
     
-    @ManyToMany
+    @OneToMany
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
     @Override
@@ -69,30 +69,13 @@ public class Customer {
             return false;
         }
         final Customer other = (Customer) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.name, other.getName())) {
             return false;
         }
-        if (!Objects.equals(this.mail, other.mail)) {
+        if (!Objects.equals(this.mail, other.getMail())) {
             return false;
         }
-        if (!Objects.equals(this.personalNumber, other.personalNumber)) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean aequals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Customer)) {
-            return false;
-        }
-        final Customer other = (Customer) obj;
-        if (!Objects.equals(this.personalNumber, other.personalNumber)) {
+        if (!Objects.equals(this.personalNumber, other.getPersonalNumber())) {
             return false;
         }
         return true;
