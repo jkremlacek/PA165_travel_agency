@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.travelagency.service;
 
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 
@@ -15,6 +16,8 @@ public interface ReservationService {
 
     void create(Reservation reservation);
 
+    void delete(Reservation reservation);
+
     Reservation findById(Long id);
 
     List<Reservation> findAll();
@@ -22,4 +25,6 @@ public interface ReservationService {
     List<Reservation> findByCustomer(Customer customer);
 
     List<Reservation> findByTrip(Trip trip);
+
+    Reservation addExcursion(Long reservationId, Excursion excursion);
 }

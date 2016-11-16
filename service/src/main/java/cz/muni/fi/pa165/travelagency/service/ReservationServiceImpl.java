@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.travelagency.service;
 
 import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class ReservationServiceImpl implements ReservationService {
         reservationDao.create(reservation);
     }
 
+    public void delete(Reservation reservation) {
+        reservationDao.delete(reservation);
+    }
+
     public Reservation findById(Long id) {
         return reservationDao.findById(id);
     }
@@ -38,5 +43,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     public List<Reservation> findByTrip(Trip trip) {
         return reservationDao.findByTrip(trip);
+    }
+
+    public Reservation addExcursion(Long reservationId, Excursion excursion) {
+        Reservation toUpdate = reservationDao.findById(reservationId);
+        toUpdate.addExcursion(excursion);
+        reservationDao.update(toUpdate);
+        return reservationDao.findById(reservationId);
     }
 }
