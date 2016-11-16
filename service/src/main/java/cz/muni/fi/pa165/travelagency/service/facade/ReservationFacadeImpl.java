@@ -10,6 +10,8 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.service.MappingService;
 import cz.muni.fi.pa165.travelagency.service.ReservationService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.Set;
  *
  * @author Martin Salata
  */
+@Service
+@Transactional
 public class ReservationFacadeImpl implements ReservationFacade{
 
     @Inject
