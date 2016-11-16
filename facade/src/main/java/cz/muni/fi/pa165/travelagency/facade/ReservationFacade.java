@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
 import cz.muni.fi.pa165.travelagency.facade.dto.CustomerDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 
@@ -12,7 +13,8 @@ import java.util.List;
  * @author Martin Salata
  */
 public interface ReservationFacade {
-    void create(ReservationDto reservation);
+
+    void create(ReservationCreateDto reservation);
 
     ReservationDto findById(Long id);
 

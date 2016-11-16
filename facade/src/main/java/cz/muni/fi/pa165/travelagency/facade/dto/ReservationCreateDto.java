@@ -1,31 +1,24 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created on 13.11.2016.
+ * Created on 16.11.2016.
  *
  * @author Martin Salata
  */
-public class ReservationDto {
+public class ReservationCreateDto {
 
-    private Long id;
-
+    @NotNull
     private CustomerDto customer;
 
-    private Set<ExcursionDto> excursionSet = new HashSet<>();
-
+    @NotNull
     private TripDto trip;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Set<ExcursionDto> excursionSet = new HashSet<>();
 
     public CustomerDto getCustomer() {
         return customer;
@@ -33,14 +26,6 @@ public class ReservationDto {
 
     public void setCustomer(CustomerDto customer) {
         this.customer = customer;
-    }
-
-    public Set<ExcursionDto> getExcursionSet() {
-        return Collections.unmodifiableSet(excursionSet);
-    }
-
-    public void addExcursion(ExcursionDto excursionDto) {
-        this.excursionSet.add(excursionDto);
     }
 
     public TripDto getTrip() {
@@ -51,12 +36,20 @@ public class ReservationDto {
         this.trip = trip;
     }
 
+    public Set<ExcursionDto> getExcursionSet() {
+        return Collections.unmodifiableSet(excursionSet);
+    }
+
+    public void addExcursion(ExcursionDto excursion) {
+        this.excursionSet.add(excursion);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReservationDto that = (ReservationDto) o;
+        ReservationCreateDto that = (ReservationCreateDto) o;
 
         if (!getCustomer().equals(that.getCustomer())) return false;
         return getTrip().equals(that.getTrip());
@@ -72,11 +65,10 @@ public class ReservationDto {
 
     @Override
     public String toString() {
-        return "ReservationDto{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", excursionSet=" + excursionSet +
+        return "ReservationCreateDto{" +
+                "customer=" + customer +
                 ", trip=" + trip +
+                ", excursionSet=" + excursionSet +
                 '}';
     }
 }
