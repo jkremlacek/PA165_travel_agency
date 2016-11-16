@@ -5,7 +5,7 @@ import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created on 13.11.2016.
@@ -18,9 +18,9 @@ public interface ReservationFacade {
 
     ReservationDto findById(Long id);
 
-    List<ReservationDto> findAll();
+    Set<ReservationDto> findAll();
 
-    List<ReservationDto> findByCustomer(CustomerDto customer);
+    Set<ReservationDto> findByCustomer(CustomerDto customer);
 
-    List<ReservationDto> findByTrip(TripDto trip);
+    Set<ReservationDto> findByTrip(TripDto trip);
 }
