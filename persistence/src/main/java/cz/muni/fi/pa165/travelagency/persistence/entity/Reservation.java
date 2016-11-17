@@ -11,13 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+
 /**
  * Represents reservation of trip for specific customer with choice of excursions. 
  * 
  * @author Jakub Kremláček 
  * 
  */
+
 @Entity
 public class Reservation {
 	
