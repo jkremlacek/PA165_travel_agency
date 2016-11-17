@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 
  * Trip interface
  * 
  * @author Jakub Kremláček
