@@ -226,16 +226,16 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "Trip{" + "id=" + id + ", name=" + name + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", destination=" + destination + ", description=" + description + ", capacity=" + capacity + ", price=" + price + ", excursions=" + excursions + ", reservations=" + reservations + '}';
+        return "Trip{" + "id=" + getId() + ", name=" + getName() + ", dateFrom=" + getDateFrom() + ", dateTo=" + getDateTo() + ", destination=" + getDestination() + ", description=" + getDescription() + ", capacity=" + getCapacity() + ", price=" + getPrice() + ", excursions=" + getExcursions() + ", reservations=" + getReservations() + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.name);
-        hash = 23 * hash + Objects.hashCode(this.dateFrom);
-        hash = 23 * hash + Objects.hashCode(this.dateTo);
-        hash = 23 * hash + Objects.hashCode(this.destination);
+        hash = 23 * hash + Objects.hashCode(this.getName());
+        hash = 23 * hash + Objects.hashCode(this.getDateFrom());
+        hash = 23 * hash + Objects.hashCode(this.getDateTo());
+        hash = 23 * hash + Objects.hashCode(this.getDestination());
         return hash;
     }
 
@@ -251,16 +251,16 @@ public class Trip {
             return false;
         }
         final Trip other = (Trip) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.getName(), other.getName())) {
             return false;
         }
-        if (!Objects.equals(this.destination, other.destination)) {
+        if (!Objects.equals(this.getDestination(), other.getDestination())) {
             return false;
         }
-        if (!Objects.equals(this.dateFrom, other.dateFrom)) {
+        if (!Objects.equals(this.getDateFrom(), other.getDateFrom())) {
             return false;
         }
-        if (!Objects.equals(this.dateTo, other.dateTo)) {
+        if (!Objects.equals(this.getDateTo(), other.getDateTo())) {
             return false;
         }
         return true;
