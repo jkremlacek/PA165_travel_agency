@@ -18,6 +18,13 @@ public class UserDto {
     @NotNull    
     private Long id;
     
+    @NotNull
+    @Column(nullable = false)
+    private String passwordHash;
+    
+    @NotNull
+    private boolean isAdmin;
+    
     @NotBlank 
     private String name;
     
@@ -131,6 +138,23 @@ public class UserDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+        
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+    
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
     
 }

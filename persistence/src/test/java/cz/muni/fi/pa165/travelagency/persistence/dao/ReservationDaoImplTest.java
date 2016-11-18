@@ -51,10 +51,14 @@ public class ReservationDaoImplTest {
         c1 = new User();
         c1.setName("Martin");
         c1.setPersonalNumber(12345);
+        c1.setPasswordHash("password");
+        c1.setIsAdmin(false);
 
         c2 = new User();
         c2.setName("Pepa");
         c2.setPersonalNumber(54321);
+        c2.setPasswordHash("password");
+        c2.setIsAdmin(false);
 
         Calendar cal = Calendar.getInstance();
         cal.set(2017, 8, 15);
