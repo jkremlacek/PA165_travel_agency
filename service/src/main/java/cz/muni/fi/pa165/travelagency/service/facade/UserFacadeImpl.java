@@ -91,7 +91,6 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public boolean isUserAdmin(UserDto user) {
         return userService.isUserAdmin(mappingService.mapTo(user, User.class));
-
     }
 
     @Override

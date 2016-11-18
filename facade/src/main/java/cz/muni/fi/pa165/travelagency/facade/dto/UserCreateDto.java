@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
@@ -12,7 +9,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- *
+ * DTO for create user entity
  * @author Katerina Caletkova
  */
 public class UserCreateDto {
@@ -39,7 +36,6 @@ public class UserCreateDto {
     @Column(nullable = true)
     private Integer phoneNumber;
     
-    private Set<ReservationDto> reservations = new HashSet<ReservationDto>();
 
     @Override
     public int hashCode() {
@@ -114,21 +110,6 @@ public class UserCreateDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<ReservationDto> getReservations() {
-        return Collections.unmodifiableSet(reservations);
-    }
-
-    public void setReservations(Set<ReservationDto> reservations) {
-        this.reservations = reservations;
-    }
-    
-    public void addReservation(ReservationDto reservation) {
-        this.reservations.add(reservation);
-    }
-    
-    public void deleteReservation(ReservationDto reservation) {
-        this.reservations.remove(reservation);
-    }
         
     public String getPasswordHash() {
         return passwordHash;
