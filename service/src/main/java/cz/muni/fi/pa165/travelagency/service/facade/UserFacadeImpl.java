@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.travelagency.facade.UserFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.UserAuthenticateDto;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.service.UserService;
@@ -75,6 +76,26 @@ public class UserFacadeImpl implements UserFacade {
     public Set<UserDto> findByReservation(ReservationDto reservation) {
         Reservation mapped = mappingService.mapTo(reservation, Reservation.class);
         return mappingService.mapTo(userService.findByReservation(mapped), UserDto.class);
+    }
+
+    @Override
+    public void update(UserDto user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(UserDto user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isUserAdmin(UserDto user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean userAuthenticate(UserAuthenticateDto user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

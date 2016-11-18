@@ -21,7 +21,6 @@ public class UserCreateDto {
     private String name;
     
     @NotNull
-    @Column(nullable = false)
     private String passwordHash;
     
     @NotNull

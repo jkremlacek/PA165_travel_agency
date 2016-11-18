@@ -138,8 +138,7 @@ public class UserDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-    
+    }    
         
     public String getPasswordHash() {
         return passwordHash;
