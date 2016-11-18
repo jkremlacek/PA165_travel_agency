@@ -10,20 +10,20 @@ import org.hibernate.validator.constraints.Email;
  */
 public class UserAuthenticateDto {
     
-    @Email
-    @Column(length = 50, nullable = true)
-    private String mail;
+    @NotNull    
+    private Long id;
 
     @NotNull
     private String password;
 
-    public String getMail() {
-        return mail;
+    public Long getId() {
+        return id;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
+    public void setId(Long id) {
+        this.id = id;
+    }    
+      
 
     public String getPassword() {
         return password;

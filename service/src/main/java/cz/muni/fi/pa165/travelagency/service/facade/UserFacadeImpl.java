@@ -33,7 +33,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void create(UserCreateDto user) {
         User mapped = mappingService.mapTo(user, User.class);
-		userService.create(mapped);
+	userService.createRegisteredUser(mapped, user.getPasswordHash());
         
     }
 
@@ -80,22 +80,24 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public void update(UserDto user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        userService.update(mappingService.mapTo(user, User.class));
     }
 
     @Override
     public void delete(UserDto user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        userService.delete(mappingService.mapTo(user, User.class));
     }
 
     @Override
     public boolean isUserAdmin(UserDto user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return userService.isUserAdmin(mappingService.mapTo(user, User.class));
+
     }
 
     @Override
     public boolean userAuthenticate(UserAuthenticateDto user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User userEntity = userService.findById(user.getId());
+        return userService.userAuthenticate(userEntity, user.getPassword());
     }
     
 }

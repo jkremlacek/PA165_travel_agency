@@ -66,16 +66,22 @@ public interface UserService {
      */
     List<User> findAll();
     
-    /**
-     * Create an entity.
-     * @param user to create
-     */
-    public void create(User user);
     
+    public void createRegisteredUser(User user, String password);
+    
+      /**
+     * Update an entity.
+     * @param user to update
+     */
+    public void update(User user);
     
     /**
      * Delete user.
      * @param user to delete
      */
     public void delete(User user);
+    
+    boolean isUserAdmin(User user);
+    
+    boolean userAuthenticate(User user, String passwordHash);
 }
