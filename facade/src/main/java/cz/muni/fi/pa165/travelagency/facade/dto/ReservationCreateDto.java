@@ -13,19 +13,19 @@ import java.util.Set;
 public class ReservationCreateDto {
 
     @NotNull
-    private CustomerDto customer;
+    private UserDto user;
 
     @NotNull
     private TripDto trip;
 
     private Set<ExcursionDto> excursionSet = new HashSet<>();
 
-    public CustomerDto getCustomer() {
-        return customer;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setCustomer(CustomerDto customer) {
-        this.customer = customer;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     public TripDto getTrip() {
@@ -51,14 +51,14 @@ public class ReservationCreateDto {
 
         ReservationCreateDto that = (ReservationCreateDto) o;
 
-        if (!getCustomer().equals(that.getCustomer())) return false;
+        if (!getUser().equals(that.getUser())) return false;
         return getTrip().equals(that.getTrip());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getCustomer().hashCode();
+        int result = getUser().hashCode();
         result = 31 * result + getTrip().hashCode();
         return result;
     }
@@ -66,7 +66,7 @@ public class ReservationCreateDto {
     @Override
     public String toString() {
         return "ReservationCreateDto{" +
-                "customer=" + customer +
+                "user=" + user +
                 ", trip=" + trip +
                 ", excursionSet=" + excursionSet +
                 '}';

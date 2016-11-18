@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * Represents reservation of trip for specific customer with choice of excursions. 
+ * Represents reservation of trip for specific user with choice of excursions. 
  * 
  * @author Jakub Kremláček 
  * 
@@ -27,7 +27,7 @@ public class Reservation {
 	private Long id;
 	
 	@ManyToOne
-	private Customer customer;
+	private User user;
 	
 	@OneToMany
 	private Set<Excursion> excursionSet = new HashSet<>();
@@ -37,8 +37,8 @@ public class Reservation {
 	
 	public Reservation () {}
 	
-	public Reservation (Customer customer, Set<Excursion> excursionSet, Trip trip) {
-		this.customer = customer;
+	public Reservation (User user, Set<Excursion> excursionSet, Trip trip) {
+		this.user = user;
 		this.excursionSet = excursionSet;
 		this.trip = trip;
 	}
@@ -47,12 +47,12 @@ public class Reservation {
 		return id;
 	}
 	
-	public Customer getCustomer() {
-		return customer;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Set<Excursion> getExcursionSet() {
@@ -74,7 +74,7 @@ public class Reservation {
 	@Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.customer) * 43 + Objects.hashCode(this.trip);
+        hash = 59 * hash + Objects.hashCode(this.user) * 43 + Objects.hashCode(this.trip);
         return hash;
     }
 
@@ -90,7 +90,7 @@ public class Reservation {
             return false;
         }
         final Reservation other = (Reservation) obj;
-        if (!Objects.equals(this.customer, other.customer) || !Objects.equals(this.trip, other.trip)) {
+        if (!Objects.equals(this.user, other.user) || !Objects.equals(this.trip, other.trip)) {
             return false;
         }
         return true;

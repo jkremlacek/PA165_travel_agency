@@ -2,7 +2,7 @@ package cz.muni.fi.pa165.travelagency.service;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;
-import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
@@ -66,9 +66,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
-    public List<Reservation> findByCustomer(Customer customer) {
+    public List<Reservation> findByUser(User user) {
         try {
-            return reservationDao.findByCustomer(customer);
+            return reservationDao.findByUser(user);
         } catch (NullPointerException | ValidationException ex) {
             throw ex;
         } catch (Exception ex) {

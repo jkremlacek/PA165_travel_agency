@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
-import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 
@@ -25,8 +25,8 @@ public class ReservationDaoImpl implements ReservationDao {
     private void validateAttributes(Reservation reservation) {
         if(reservation == null)
             throw new NullPointerException("Reservation should not be null");
-        if(reservation.getCustomer() == null)
-            throw new ValidationException("Customer attribute should not be null");
+        if(reservation.getUser() == null)
+            throw new ValidationException("User attribute should not be null");
         if(reservation.getTrip() == null)
             throw new ValidationException("Trip attribute should not be null");
     }
@@ -63,11 +63,11 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public List<Reservation> findByCustomer(Customer customer) {
-        if (customer == null)
-            throw new NullPointerException("Customer can not be null");
-        return em.createQuery("SELECT r FROM Reservation r WHERE r.customer=:customer", Reservation.class)
-                .setParameter("customer", customer)
+    public List<Reservation> findByUser(User user) {
+        if (user == null)
+            throw new NullPointerException("User can not be null");
+        return em.createQuery("SELECT r FROM Reservation r WHERE r.user=:user", Reservation.class)
+                .setParameter("user", user)
                 .getResultList();
     }
 

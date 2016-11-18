@@ -17,13 +17,13 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * Represents a customer of travel agency
+ * Represents a user of travel agency
  * 
  * @author Josef Pavelec, jospavelec@gmail.com
  */
 
 @Entity
-public class Customer {
+public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,10 +65,10 @@ public class Customer {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Customer)) {
+        if (!(obj instanceof User)) {
             return false;
         }
-        final Customer other = (Customer) obj;
+        final User other = (User) obj;
         if (!Objects.equals(this.name, other.getName())) {
             return false;
         }
@@ -81,10 +81,10 @@ public class Customer {
         return true;
     }
 
-    public Customer() {
+    public User() {
     }
 
-    public Customer(String name, Date birthDate, Integer personalNumber, String mail, Integer phoneNumber) {
+    public User(String name, Date birthDate, Integer personalNumber, String mail, Integer phoneNumber) {
         this.name = name;
         this.birthDate = birthDate;
         this.personalNumber = personalNumber;

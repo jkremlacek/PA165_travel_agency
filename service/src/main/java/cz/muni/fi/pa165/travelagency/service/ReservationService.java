@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.travelagency.service;
 
-import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
@@ -22,7 +22,7 @@ public interface ReservationService {
 
     List<Reservation> findAll();
 
-    List<Reservation> findByCustomer(Customer customer);
+    List<Reservation> findByUser(User user);
 
     List<Reservation> findByTrip(Trip trip);
 

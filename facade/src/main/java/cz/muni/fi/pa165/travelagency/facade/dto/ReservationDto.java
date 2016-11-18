@@ -13,7 +13,7 @@ public class ReservationDto {
 
     private Long id;
 
-    private CustomerDto customer;
+    private UserDto user;
 
     private Set<ExcursionDto> excursionSet = new HashSet<>();
 
@@ -27,12 +27,12 @@ public class ReservationDto {
         this.id = id;
     }
 
-    public CustomerDto getCustomer() {
-        return customer;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setCustomer(CustomerDto customer) {
-        this.customer = customer;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     public Set<ExcursionDto> getExcursionSet() {
@@ -58,14 +58,14 @@ public class ReservationDto {
 
         ReservationDto that = (ReservationDto) o;
 
-        if (!getCustomer().equals(that.getCustomer())) return false;
+        if (!getUser().equals(that.getUser())) return false;
         return getTrip().equals(that.getTrip());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getCustomer().hashCode();
+        int result = getUser().hashCode();
         result = 31 * result + getTrip().hashCode();
         return result;
     }
@@ -74,7 +74,7 @@ public class ReservationDto {
     public String toString() {
         return "ReservationDto{" +
                 "id=" + id +
-                ", customer=" + customer +
+                ", user=" + user +
                 ", excursionSet=" + excursionSet +
                 ", trip=" + trip +
                 '}';

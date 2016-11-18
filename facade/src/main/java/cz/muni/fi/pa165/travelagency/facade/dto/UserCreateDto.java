@@ -1,27 +1,25 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
+
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
-import javax.validation.constraints.NotNull;
-import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
 /**
  *
- * @author Kateřina Caletková
+ * @author Katerina Caletkova
  */
-public class CustomerDto {
-    
-    @NotNull    
-    private Long id;
-    
+public class UserCreateDto {
+       
     @NotBlank 
     private String name;
     
-    @Temporal(javax.persistence.TemporalType.DATE) 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
     @Column(nullable = false, unique = true)
@@ -53,10 +51,10 @@ public class CustomerDto {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof CustomerDto)) {
+        if (!(obj instanceof UserCreateDto)) {
             return false;
         }
-        final CustomerDto other = (CustomerDto) obj;
+        final UserCreateDto other = (UserCreateDto) obj;
         if (!Objects.equals(this.getName(), other.getName())) {
             return false;
         }
@@ -125,13 +123,5 @@ public class CustomerDto {
         this.reservations.remove(reservation);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     
 }
-

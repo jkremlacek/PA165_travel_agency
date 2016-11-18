@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
 import cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring;
-import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
@@ -41,18 +41,18 @@ public class ReservationDaoImplTest {
     @PersistenceContext
     private EntityManager em;
 
-    private Customer c1, c2;
+    private User c1, c2;
     private Trip t1;
     private Excursion e1;
     private Reservation r1;
 
     @Before
     public void setup() {
-        c1 = new Customer();
+        c1 = new User();
         c1.setName("Martin");
         c1.setPersonalNumber(12345);
 
-        c2 = new Customer();
+        c2 = new User();
         c2.setName("Pepa");
         c2.setPersonalNumber(54321);
 
@@ -85,7 +85,7 @@ public class ReservationDaoImplTest {
         t1.addExcursion(e1);
 
         r1 = new Reservation();
-        r1.setCustomer(c1);
+        r1.setUser(c1);
         r1.setTrip(t1);
         r1.addExcursion(e1);
     }
@@ -110,12 +110,12 @@ public class ReservationDaoImplTest {
         em.persist(r1);
         em.persist(c2);
         em.persist(e1);
-        r1.setCustomer(c2);
+        r1.setUser(c2);
 
         reservationDaoImpl.update(r1);
 
-        assertThat(em.find(Reservation.class, r1.getId()).getCustomer().getId())
-                .as("Updated reservation should have new customer")
+        assertThat(em.find(Reservation.class, r1.getId()).getUser().getId())
+                .as("Updated reservation should have new user")
                 .isEqualTo(c2.getId());
     }
 
@@ -178,13 +178,13 @@ public class ReservationDaoImplTest {
 
     @Test
     @Transactional
-    public void testFindByCustomer() throws Exception {
+    public void testFindByUser() throws Exception {
         em.persist(c1);
         em.persist(t1);
         em.persist(e1);
         em.persist(r1);
 
-        List<Reservation> found = reservationDaoImpl.findByCustomer(c1);
+        List<Reservation> found = reservationDaoImpl.findByUser(c1);
 
         assertThat(found)
                 .as("Found list of reservations should have exactly 1 item")
@@ -215,8 +215,8 @@ public class ReservationDaoImplTest {
     }
 
     @Test
-    public void testCreateWithNullCustomer() {
-        r1.setCustomer(null);
+    public void testCreateWithNullUser() {
+        r1.setUser(null);
         assertThatThrownBy(() -> reservationDaoImpl.create(r1))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(ValidationException.class);
@@ -241,8 +241,8 @@ public class ReservationDaoImplTest {
         assertThatThrownBy(() -> reservationDaoImpl.delete(null))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> reservationDaoImpl.findByCustomer(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+        assertThatThrownBy(() -> reservationDaoImpl.findByUser(null))
+                .as("findByUser(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
         assertThatThrownBy(() -> reservationDaoImpl.findByTrip(null))
                 .as("findByTrip(null) should throw NullPointerException")
@@ -257,7 +257,7 @@ public class ReservationDaoImplTest {
     public void testInvalidUpdate() throws Exception {
         em.persist(c2);
         em.persist(e1);
-        r1.setCustomer(c2);
+        r1.setUser(c2);
 
         reservationDaoImpl.update(r1);
 

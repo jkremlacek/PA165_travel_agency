@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.travelagency.persistence.dao;
 
-import cz.muni.fi.pa165.travelagency.persistence.entity.Customer;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.util.List;
@@ -15,12 +15,12 @@ public interface ReservationDao extends GenericDao<Reservation, Long>{
     
     /**
      * 
-     * Method for find all reservations of customer
+     * Method for find all reservations of user
      * 
-     * @param customer reservation of this customer will be find
-     * @return reservations of customer as List
+     * @param user reservation of this user will be find
+     * @return reservations of user as List
      */
-    public List<Reservation> findByCustomer(Customer customer);
+    public List<Reservation> findByUser(User user);
     
     /**
      * 

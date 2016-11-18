@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.CustomerDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
@@ -20,7 +20,7 @@ public interface ReservationFacade {
 
     Set<ReservationDto> findAll();
 
-    Set<ReservationDto> findByCustomer(CustomerDto customer);
+    Set<ReservationDto> findByUser(UserDto user);
 
     Set<ReservationDto> findByTrip(TripDto trip);
 }

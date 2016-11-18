@@ -5,7 +5,7 @@
     <class>cz.muni.fi.pa165.travelagency.persistence.entity.Reservation</class>
     <class>cz.muni.fi.pa165.travelagency.persistence.entity.Trip</class>
     <class>cz.muni.fi.pa165.travelagency.persistence.entity.Excursion</class>
-    <class>cz.muni.fi.pa165.travelagency.persistence.entity.Customer</class>
+    <class>cz.muni.fi.pa165.travelagency.persistence.entity.User</class>
     <properties>
       <property name="hibernate.connection.url" value="jdbc:h2:file:~/database"/>
       <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
