@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
+ * Implementation of user facade.
  * @author Kateřina Caletková
  */
 
@@ -32,14 +32,27 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public void create(UserCreateDto user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User is null");
+        }
+        if (user.getPasswordHash() == null ) {
+            throw new IllegalArgumentException("Password is null");
+        }
+        if (user.getPasswordHash().isEmpty()) {
+            throw new IllegalArgumentException("Password is empty");
+        }
         User mapped = mappingService.mapTo(user, User.class);
 	userService.createRegisteredUser(mapped, user.getPasswordHash());
         
     }
 
     @Override
-    public UserDto findById(Long id) {
-        return mappingService.mapTo(userService.findById(id), UserDto.class);
+    public UserDto findById(Long id) {        
+        User user = userService.findById(id);
+        if (user == null) {
+            return null;
+        }
+        return mappingService.mapTo(user, UserDto.class);
     }
 
     @Override
