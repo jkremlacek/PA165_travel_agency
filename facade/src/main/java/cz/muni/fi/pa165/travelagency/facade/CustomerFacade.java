@@ -4,7 +4,7 @@ import cz.muni.fi.pa165.travelagency.facade.dto.CustomerCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.CustomerDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -16,18 +16,18 @@ public interface CustomerFacade {
     
     CustomerDto findById(Long id);
     
-    CustomerDto findAll();
+    Set<CustomerDto> findAll();
     
-    List<CustomerDto> findByName(String name);
+    Set<CustomerDto> findByName(String name);
     
-    List<CustomerDto> findByBirthDate(Date date);
+    Set<CustomerDto> findByBirthDate(Date date);
     
-    List<CustomerDto> findByPersonalNumber(Integer personalNumber);
+    Set<CustomerDto> findByPersonalNumber(Integer personalNumber);
     
-    List<CustomerDto> findByMail(String mail);
+    Set<CustomerDto> findByMail(String mail);
     
-    List<CustomerDto> findByPhoneNumber(Integer phoneNumber);
+    Set<CustomerDto> findByPhoneNumber(Integer phoneNumber);
     
-    List<CustomerDto> findByReservation(ReservationDto reservation);
+    Set<CustomerDto> findByReservation(ReservationDto reservation);
     
 }
