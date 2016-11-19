@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.travelagency.service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,6 +11,8 @@ import java.util.Set;
  */
 public interface MappingService {
     <T> Set<T> mapTo(Collection<?> objects, Class<T> mapToClass);
+    
+    <T> List<T> mapTo(Class<T> mapToClass,Collection<?> objects);
 
     <T> T mapTo(Object u, Class<T> mapToClass);
 }

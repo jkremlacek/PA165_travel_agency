@@ -56,6 +56,10 @@ public class User {
     @OneToMany
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
+    public User(long id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -173,7 +177,7 @@ public class User {
         this.passwordHash = passwordHash;
     }
     
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 

@@ -69,6 +69,10 @@ public class Trip {
         this.capacity = capacity;
         this.price = price;
     }
+
+    public Trip(long id) {
+        this.id = id;
+    }
     
     /**
      * @return the id
