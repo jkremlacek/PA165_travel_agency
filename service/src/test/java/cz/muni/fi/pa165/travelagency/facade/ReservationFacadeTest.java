@@ -52,34 +52,34 @@ public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringCont
     @Mock
     private  MappingService mappingService;
     
-   @InjectMocks
-   private final ReservationFacade reservationFacade = new ReservationFacadeImpl();
+    @InjectMocks
+    private final ReservationFacade reservationFacade = new ReservationFacadeImpl();
    
-   @Captor
-   ArgumentCaptor<Reservation> argumentCaptor;
+    @Captor
+    ArgumentCaptor<Reservation> argumentCaptor;
      
-   private Reservation reservation1;
-   private ReservationDto reservationDto1;
-   
-   private Reservation reservation2;
-   private ReservationDto reservationDto2;
-   
-   private User user1;
-   private UserDto userDto1;
-   private User user2;
-   private UserDto userDto2;
-   
-   private Trip trip;
-   private TripDto tripDto;
+    private Reservation reservation1;
+    private ReservationDto reservationDto1;
 
-   
-   @BeforeClass
-   public void setup() {
-       MockitoAnnotations.initMocks(this);
-   }
-   
-   @BeforeMethod
-   public void init() {
+    private Reservation reservation2;
+    private ReservationDto reservationDto2;
+
+    private User user1;
+    private UserDto userDto1;
+    private User user2;
+    private UserDto userDto2;
+
+    private Trip trip;
+    private TripDto tripDto;
+
+
+    @BeforeClass
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @BeforeMethod
+    public void init() {
         Calendar calendar = Calendar.getInstance();
         // create user1
         user1 = new User(1l);

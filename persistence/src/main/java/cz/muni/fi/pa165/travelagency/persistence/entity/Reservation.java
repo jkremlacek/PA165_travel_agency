@@ -95,4 +95,8 @@ public class Reservation {
         }
         return true;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

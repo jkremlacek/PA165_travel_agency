@@ -55,6 +55,10 @@ public class Excursion {
         this.price = price;
     }
 
+    public Excursion(long id) {
+        this.id = id;
+    }
+
 
     public Long getId() {
         return id;
