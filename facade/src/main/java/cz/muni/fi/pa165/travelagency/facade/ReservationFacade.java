@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface ReservationFacade {
     List<ReservationDto> findByUser(UserDto user);
 
     List<ReservationDto> findByTrip(TripDto trip);
+
+    BigDecimal getTotalPrice(Long id);
 }

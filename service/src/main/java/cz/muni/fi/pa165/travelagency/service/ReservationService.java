@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -27,4 +28,6 @@ public interface ReservationService {
     List<Reservation> findByTrip(Trip trip);
 
     Reservation addExcursion(Long reservationId, Excursion excursion);
+
+    BigDecimal getTotalPrice(Long reservationId);
 }

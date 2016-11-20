@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -31,26 +32,36 @@ public class ReservationFacadeImpl implements ReservationFacade{
     @Inject
     ReservationService reservationService;
 
+    @Override
     public void create(ReservationCreateDto reservation) {
         Reservation mapped = mappingService.mapTo(reservation, Reservation.class);
         reservationService.create(mapped);
     }
 
+    @Override
     public ReservationDto findById(Long id) {
         return mappingService.mapTo(reservationService.findById(id), ReservationDto.class);
     }
 
+    @Override
     public List<ReservationDto> findAll() {
         return mappingService.mapTo(reservationService.findAll(), ReservationDto.class);
     }
 
+    @Override
     public List<ReservationDto> findByUser(UserDto user) {
         User mapped = mappingService.mapTo(user, User.class);
         return mappingService.mapTo(reservationService.findByUser(mapped), ReservationDto.class);
     }
 
+    @Override
     public List<ReservationDto> findByTrip(TripDto trip) {
         Trip mapped = mappingService.mapTo(trip, Trip.class);
         return mappingService.mapTo(reservationService.findByTrip(mapped), ReservationDto.class);
+    }
+
+    @Override
+    public BigDecimal getTotalPrice(Long id) {
+        return reservationService.getTotalPrice(id);
     }
 }

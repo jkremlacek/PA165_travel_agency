@@ -6,11 +6,11 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.service.exception.PersistenceException;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.validation.ValidationException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -34,6 +34,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    @Override
     public void delete(Reservation reservation) {
         try {
             reservationDao.delete(reservation);
@@ -44,16 +45,18 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    @Override
     public Reservation findById(Long id) {
         try {
             return reservationDao.findById(id);
-        } catch (NullPointerException | ValidationException ex) {
+        } catch (NullPointerException ex) {
             throw ex;
         } catch (Exception ex) {
             throw new PersistenceException(ex.getMessage());
         }
     }
 
+    @Override
     public List<Reservation> findAll() {
         try {
             return reservationDao.findAll();
@@ -65,6 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
+    @Override
     public List<Reservation> findByUser(User user) {
         try {
             return reservationDao.findByUser(user);
@@ -75,6 +79,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    @Override
     public List<Reservation> findByTrip(Trip trip) {
         try {
             return reservationDao.findByTrip(trip);
@@ -85,6 +90,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    @Override
     public Reservation addExcursion(Long reservationId, Excursion excursion) {
         try {
             Reservation toUpdate = reservationDao.findById(reservationId);
@@ -97,4 +103,21 @@ public class ReservationServiceImpl implements ReservationService {
             throw new PersistenceException(ex.getMessage());
         }
     }
+
+    @Override
+    public BigDecimal getTotalPrice(Long reservationId) {
+        try {
+            Reservation reservation = reservationDao.findById(reservationId);
+            BigDecimal total = reservation.getTrip().getPrice();
+            for (Excursion excursion : reservation.getExcursionSet()) {
+                total = total.add(excursion.getPrice());
+            }
+            return total;
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
+    }
+
 }
