@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.travelagency.service;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.*;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
@@ -69,10 +67,24 @@ public class MappingServiceTest {
         t1.setDestination("Egypt");
         t1.setCapacity(100);
         t1.setPrice(BigDecimal.valueOf(10000));
+
+        cal.set(2017, 8, 20, 10, 0, 0);
+        Date excursionDate = cal.getTime();
+        cal.set(0, 0, 0, 5, 0, 0);
+        Date excursionDuration = cal.getTime();
+
+        e1 = new Excursion();
+        e1.setName("Egypt- pyramidy");
+        e1.setDate(excursionDate);
+        e1.setDuration(excursionDuration);
+        e1.setDestination("Kahira");
+        e1.setPrice(BigDecimal.valueOf(800));
+        e1.setTrip(t1);
     }
 
+
     @Test
-    public void testMappingUsers() {
+    public void testMappingUserstoDto() {
         List<User> userSet = Arrays.asList(c1,c2);
         List<UserDto> usrDtos = mappingService.mapTo(userSet,UserDto.class);
         assertThat(usrDtos)
@@ -82,10 +94,14 @@ public class MappingServiceTest {
         assertThat(usrDtos.get(0).getName())
                 .as("Should contain name")
                 .isIn(Arrays.asList(c1.getName(),c2.getName()));
+
+        assertThat(usrDtos.get(1).getName())
+                .as("Should contain name")
+                .isIn(Arrays.asList(c1.getName(),c2.getName()));
     }
 
     @Test
-    public void testMappingTrip() {
+    public void testMappingTripToDto() {
         TripDto trip = mappingService.mapTo(t1, TripDto.class);
 
         //TODO: wait for TripDto implementation
@@ -93,4 +109,52 @@ public class MappingServiceTest {
                 .as("Should not be null")
                 .isNotNull();
     }
+
+    @Test
+    public void testMappingExcursionToDto() {
+        ExcursionDto excursionDto = mappingService.mapTo(e1, ExcursionDto.class);
+
+        //TODO: wait for TripDto implementation
+        assertThat(excursionDto)
+                .as("Should not be null")
+                .isNotNull();
+
+        assertThat(excursionDto.getDestination())
+                .as("Should contain destination")
+                .isEqualTo(e1.getDestination());
+
+        //TODO: if not compilable, comment and wait until TripDto is implemented
+        assertThat(excursionDto.getTrip().getName())
+                .as("Trip should me mapped properly to TripDto")
+                .isEqualTo(t1.getName());
+    }
+
+    @Test
+    public void testMappingExcursionFromCreateDto() {
+        ExcursionCreateDto excursionDto = new ExcursionCreateDto();
+        excursionDto.setName("Exkurzia");
+        excursionDto.setDate(e1.getDate());
+        excursionDto.setPrice(e1.getPrice());
+        excursionDto.setDuration(e1.getDuration());
+        excursionDto.setDestination(e1.getDestination());
+        excursionDto.setDescription(e1.getDescription());
+
+        Excursion ex = mappingService.mapTo(excursionDto, Excursion.class);
+
+        //TODO: wait for TripDto implementation
+        assertThat(ex)
+                .as("Should not be null")
+                .isNotNull();
+
+        assertThat(ex.getName())
+                .as("Names should match")
+                .isEqualTo("Exkurzia");
+
+        assertThat(ex.getDate())
+                .as("Dates should match")
+                .isEqualTo(e1.getDate());
+    }
+
+
+
 }
