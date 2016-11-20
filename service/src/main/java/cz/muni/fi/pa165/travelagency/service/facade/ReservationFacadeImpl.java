@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created on 13.11.2016.
@@ -41,16 +40,16 @@ public class ReservationFacadeImpl implements ReservationFacade{
         return mappingService.mapTo(reservationService.findById(id), ReservationDto.class);
     }
 
-    public Set<ReservationDto> findAll() {
+    public List<ReservationDto> findAll() {
         return mappingService.mapTo(reservationService.findAll(), ReservationDto.class);
     }
 
-    public Set<ReservationDto> findByUser(UserDto user) {
+    public List<ReservationDto> findByUser(UserDto user) {
         User mapped = mappingService.mapTo(user, User.class);
         return mappingService.mapTo(reservationService.findByUser(mapped), ReservationDto.class);
     }
 
-    public Set<ReservationDto> findByTrip(TripDto trip) {
+    public List<ReservationDto> findByTrip(TripDto trip) {
         Trip mapped = mappingService.mapTo(trip, Trip.class);
         return mappingService.mapTo(reservationService.findByTrip(mapped), ReservationDto.class);
     }
