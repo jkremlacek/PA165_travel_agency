@@ -36,7 +36,7 @@ public class ReservationDto {
     }
 
     public Set<ExcursionDto> getExcursionSet() {
-        return Collections.unmodifiableSet(excursionSet);
+        return excursionSet;
     }
 
     public void addExcursion(ExcursionDto excursionDto) {
