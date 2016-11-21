@@ -7,7 +7,6 @@ import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
-import cz.muni.fi.pa165.travelagency.service.ExcursionService;
 import cz.muni.fi.pa165.travelagency.service.MappingService;
 import cz.muni.fi.pa165.travelagency.service.ReservationService;
 import cz.muni.fi.pa165.travelagency.service.TripService;
@@ -21,6 +20,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -30,15 +30,14 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.testng.annotations.BeforeMethod;
+
 
 /**
  * Tests for facade layer of reservation entity
  * @author Katerina Caletkova
  */
 @ContextConfiguration(classes = ServiceConfig.class)
-public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringContextTests{
+public class ReservationFacadeTest {
  
     @Mock
     private ReservationService reservationService;
@@ -78,7 +77,7 @@ public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringCont
         MockitoAnnotations.initMocks(this);
     }
 
-    @BeforeMethod
+    @Before
     public void init() {
         Calendar calendar = Calendar.getInstance();
         // create user1
@@ -164,12 +163,12 @@ public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringCont
        reservationDto2.setUser(userDto2);
     }
    
-    @BeforeMethod
+    @Before
     public void initMock() {
         
         when(userService.findById(1l)).thenReturn(user1);
         when(userService.findById(2l)).thenReturn(user2);
-        when(tripService.findById(1l).thenReturn(trip));
+        when(tripService.findById(1l)).thenReturn(trip);
         when(reservationService.findById(0l)).thenReturn(null);
         when(reservationService.findById(1l)).thenReturn(reservation1);
         when(reservationService.findById(2l)).thenReturn(reservation2);
@@ -200,7 +199,7 @@ public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringCont
         reservationsDto.add(reservationDto1);
         reservationsDto.add(reservationDto2);
         when(reservationService.findAll()).thenReturn(reservations);
-        when(mappingService.mapTo(ReservationDto.class,reservations)).thenReturn(reservationsDto);
+        when(mappingService.mapTo(reservations,ReservationDto.class)).thenReturn(reservationsDto);
         assertEquals(reservationFacade.findAll().size(),2);
         assertEquals(reservationFacade.findAll(),reservationsDto);
     }
@@ -211,7 +210,7 @@ public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringCont
         List<ReservationDto> reservationsDto = new ArrayList<>();
         reservationsDto.add(reservationDto1);
         when(reservationService.findByUser(user1)).thenReturn(reservations);
-        when(mappingService.mapTo(ReservationDto.class,reservations)).thenReturn(reservationsDto);
+        when(mappingService.mapTo(reservations, ReservationDto.class)).thenReturn(reservationsDto);
         assertEquals(reservationFacade.findByUser(userDto1).size(),1);
         assertEquals(reservationFacade.findByUser(userDto1),reservationsDto);
     }
@@ -222,7 +221,7 @@ public class ReservationFacadeTest extends AbstractTransactionalTestNGSpringCont
         List<ReservationDto> reservationsDto = new ArrayList<>();
         reservationsDto.add(reservationDto1);
         when(reservationService.findByTrip(trip)).thenReturn(reservations);
-        when(mappingService.mapTo(ReservationDto.class,reservations)).thenReturn(reservationsDto);
+        when(mappingService.mapTo(reservations,ReservationDto.class)).thenReturn(reservationsDto);
         assertEquals(reservationFacade.findByTrip(tripDto).size(),1);
         assertEquals(reservationFacade.findByTrip(tripDto),reservationsDto);
         

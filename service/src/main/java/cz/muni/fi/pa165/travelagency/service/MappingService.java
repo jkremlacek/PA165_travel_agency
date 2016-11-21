@@ -10,8 +10,6 @@ import java.util.List;
  */
 public interface MappingService {
     <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);
-    
-    <T> List<T> mapTo(Class<T> mapToClass,Collection<?> objects);
 
     <T> T mapTo(Object u, Class<T> mapToClass);
 }

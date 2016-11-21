@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -22,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
-import org.testng.annotations.BeforeMethod;
 
 /**
  * Tests for service layer of reservation entity
@@ -56,7 +56,7 @@ public class ReservationServiceTest {
         MockitoAnnotations.initMocks(this);
     }
     
-    @BeforeMethod
+    @Before
     public void initReservations() {
         Calendar calendar = Calendar.getInstance();
         // create user1
@@ -144,23 +144,23 @@ public class ReservationServiceTest {
         verify(reservationDao).create(reservation1);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testCreateNull() {
         reservationService.create(null);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testCreateExisting() {
         reservationService.create(reservation1);
         reservationService.create(reservation1);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testCreateWithoutTrip() {
         reservationService.create(reservation2);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testCreateWithoutUser() {
         reservationService.create(reservation3);
     }
@@ -172,12 +172,12 @@ public class ReservationServiceTest {
         verify(reservationDao).delete(reservation1);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testDeleteNull() {
         reservationService.delete(null);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testDeleteNonExisting() {
         reservationService.delete(reservation1);
     }
@@ -188,7 +188,7 @@ public class ReservationServiceTest {
         assertDeepEquals(reservationService.findById(reservation1.getId()), reservation1);
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testFindByIdNull() {
         reservationService.findById(null);
     }
@@ -218,7 +218,7 @@ public class ReservationServiceTest {
         assertDeepEquals(reservation1, reservationService.findByUser(user).get(0));
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testFindByUserNull() {
         reservationService.findByUser(null);
     }
@@ -236,7 +236,7 @@ public class ReservationServiceTest {
         assertDeepEquals(reservation1, reservationService.findByTrip(trip).get(0));
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testFindByTripNull() {
         reservationService.findByTrip(null);
     }
@@ -251,7 +251,7 @@ public class ReservationServiceTest {
         // TODO
     }
     
-    @Test(expectedExceptions = Exception.class)
+    @Test(expected = Exception.class)
     public void testAddExcursionNull() {
         reservationService.create(reservation1);
         reservationService.addExcursion(reservation1.getId(), null);
@@ -259,6 +259,22 @@ public class ReservationServiceTest {
     
     @Test
     public void testAddExcursionNonExisting() {
+        // TODO
+    }
+    
+    
+    @Test
+    public void testGetTotalPriceOk() {
+        // TODO
+    }
+    
+    @Test(expected = Exception.class)
+    public void testGetTotalPriceNull() {
+        // TODO
+    }
+    
+    @Test
+    public void testGetTotalPriceNonExisting() {
         // TODO
     }
     

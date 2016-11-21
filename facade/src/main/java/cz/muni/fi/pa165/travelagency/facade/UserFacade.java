@@ -5,7 +5,7 @@ import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserAuthenticateDto;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Facade interface for User entity
@@ -42,49 +42,49 @@ public interface UserFacade {
      * Find all users
      * @return all users
      */
-    Set<UserDto> findAll();
+    List<UserDto> findAll();
     
     /**
      * Find users by name
      * @param name user name
      * @return users with given name
      */
-    Set<UserDto> findByName(String name);
+    List<UserDto> findByName(String name);
     
     /**
      * Find users by birth date
      * @param date user birth date
      * @return users with given birth date
      */
-    Set<UserDto> findByBirthDate(Date date);
+    List<UserDto> findByBirthDate(Date date);
     
     /**
      * Find users by personal number
      * @param personalNumber user personal number
      * @return users with given personal number
      */
-    Set<UserDto> findByPersonalNumber(Integer personalNumber);
+    List<UserDto> findByPersonalNumber(Integer personalNumber);
     
     /**
      * Find users by mail
      * @param mail user mail
      * @return users with given mail
      */
-    Set<UserDto> findByMail(String mail);
+    List<UserDto> findByMail(String mail);
     
     /**
      * Find users by phone number
      * @param phoneNumber user phone number
      * @return users with given phone number
      */
-    Set<UserDto> findByPhoneNumber(Integer phoneNumber);
+    List<UserDto> findByPhoneNumber(Integer phoneNumber);
     
     /**
      * Find uses by reservation
      * @param reservation user's reservation
      * @return users which made given reservation
      */
-    Set<UserDto> findByReservation(ReservationDto reservation);
+    List<UserDto> findByReservation(ReservationDto reservation);
     
     /**
      * Find out if user is admin

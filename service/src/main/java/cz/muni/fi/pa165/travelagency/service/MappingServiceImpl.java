@@ -31,14 +31,6 @@ public class MappingServiceImpl implements MappingService {
         return mappedCollection;
     }
     
-    public <T> List<T> mapTo(Class<T> mapToClass,Collection<?> objects) {
-        List<T> mappedCollection = new ArrayList<>();
-        for (Object object : objects) {
-            if (object == null) continue;
-            mappedCollection.add(this.mapTo(object, mapToClass));
-        }
-        return mappedCollection;
-    }
 
     @Override
     public <T> T mapTo(Object u, Class<T> mapToClass) {

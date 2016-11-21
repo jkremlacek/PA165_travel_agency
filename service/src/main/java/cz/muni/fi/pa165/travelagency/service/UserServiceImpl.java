@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserAdmin(User user) {
-        return user.isAdmin();
+        return user.getIsAdmin();
     }
 
     @Override

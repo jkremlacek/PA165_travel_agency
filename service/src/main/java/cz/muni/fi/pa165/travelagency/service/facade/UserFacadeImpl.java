@@ -10,7 +10,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.service.UserService;
 import cz.muni.fi.pa165.travelagency.service.MappingService;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,37 +56,37 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public Set<UserDto> findAll() {
+    public List<UserDto> findAll() {
         return mappingService.mapTo(userService.findAll(), UserDto.class);
     }
 
     @Override
-    public Set<UserDto> findByName(String name) {
+    public List<UserDto> findByName(String name) {
         return mappingService.mapTo(userService.findByName(name), UserDto.class);
     }
 
     @Override
-    public Set<UserDto> findByBirthDate(Date date) {
+    public List<UserDto> findByBirthDate(Date date) {
         return mappingService.mapTo(userService.findByBirthDate(date), UserDto.class);
     }
 
     @Override
-    public Set<UserDto> findByPersonalNumber(Integer personalNumber) {
+    public List<UserDto> findByPersonalNumber(Integer personalNumber) {
         return mappingService.mapTo(userService.findByPersonalNumber(personalNumber), UserDto.class);
     }
 
     @Override
-    public Set<UserDto> findByMail(String mail) {
+    public List<UserDto> findByMail(String mail) {
         return mappingService.mapTo(userService.findByMail(mail), UserDto.class);
     }
 
     @Override
-    public Set<UserDto> findByPhoneNumber(Integer phoneNumber) {
+    public List<UserDto> findByPhoneNumber(Integer phoneNumber) {
         return mappingService.mapTo(userService.findByPhoneNumber(phoneNumber), UserDto.class);
     }
 
     @Override
-    public Set<UserDto> findByReservation(ReservationDto reservation) {
+    public List<UserDto> findByReservation(ReservationDto reservation) {
         Reservation mapped = mappingService.mapTo(reservation, Reservation.class);
         return mappingService.mapTo(userService.findByReservation(mapped), UserDto.class);
     }
