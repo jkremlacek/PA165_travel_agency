@@ -15,7 +15,7 @@ public class UserDto extends UserCreateDto{
     private Set<ReservationDto> reservations = new HashSet<>();
 
     public Set<ReservationDto> getReservations() {
-        return Collections.unmodifiableSet(reservations);
+        return reservations;
     }
 
     public void setReservations(Set<ReservationDto> reservations) {
