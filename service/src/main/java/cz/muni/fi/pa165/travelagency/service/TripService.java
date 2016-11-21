@@ -5,30 +5,100 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service; TODO
 
 /**
  *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
-@Service // TODO don't know it is necessary
+//@Service  TODO don't know it is necessary
 public interface TripService {
     
-    void createTrip(Trip trip);
-    void updateTrip(Trip trip);
-    void deleteTrip(Trip trip);
+    /**
+     * Store a new trip
+     * @param trip trip to be stored
+     */
+    void create(Trip trip);
     
-    Trip getById(Long id);
-    List<Trip> getAll();
+    /**
+     * Update an existing trip
+     * @param trip trip to be updated
+     */
+    void update(Trip trip);
     
+    /**
+     * Delete an existing trip
+     * @param trip trip to be deleted
+     */
+    void delete(Trip trip);
+    
+    /**
+     * Find a trip with given id
+     * @param id id of trip
+     * @return a trip with given id
+     */
+    Trip findById(Long id);
+    
+    /**
+     * Find all trips
+     * @return all trips as List
+     */
+    List<Trip> findAll();
+    
+    /**
+     * Find trips with given name
+     * @param name name of trip to find
+     * @return trips with given name as List
+     */
     List<Trip> findByName(String name);
+    
+    /**
+     * Find trips in given time interval
+     * @param from start date of interval
+     * @param to end date of interval
+     * @return trips in given time interval as List
+     */
     List<Trip> findByDate(Date from, Date to);
+    
+    /**
+     * Find trips with given destination
+     * @param destination destination of trip to find
+     * @return trips with given destination
+     */
     List<Trip> findByDestination(String destination);
+    
+    /**
+     * Find trips in given price interval
+     * @param minPrice is amount of money from
+     * @param maxPrice is amount of money to
+     * @return trips in given price interval as List
+     */
     List<Trip> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
+    
+    /**
+     * Find trips with available capacity equal or greater than given argument
+     * @param capacity is number of desired capacity
+     * @return trips with available capacity as List
+     */
     List<Trip> findByCapacity(Integer capacity);
+    
+    /**
+     * Find trips with option of given excursion
+     * @param excursion
+     * @return trips with given excursion as List
+     */
     List<Trip> findByExcursion(Excursion excursion);
     
+    /**
+     * Find trips with at least one free place
+     * @return trips with free capacity
+     */
     List<Trip> findWithFreeCapacity();
+    
+    /**
+     * Find trips which will start in next 31 days
+     * @return trip in next 31 days as List
+     */
     List<Trip> findTripsNextMonth();
     
     
