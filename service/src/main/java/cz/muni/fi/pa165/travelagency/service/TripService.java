@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.travelagency.service;
 
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -80,7 +81,7 @@ public interface TripService {
      * @param capacity is number of desired capacity
      * @return trips with available capacity as List
      */
-    List<Trip> findByCapacity(Integer capacity);
+    List<Trip> findByAvailableCapacity(Integer capacity);
     
     /**
      * Find trips with option of given excursion
@@ -100,6 +101,13 @@ public interface TripService {
      * @return trip in next 31 days as List
      */
     List<Trip> findTripsNextMonth();
+    
+    /**
+     * Find people with reservation a given trip
+     * @param trip trip to find people
+     * @return people with the booked given trip as List of User
+     */
+    List<User> findTripParticipants(Trip trip);
     
     
 }

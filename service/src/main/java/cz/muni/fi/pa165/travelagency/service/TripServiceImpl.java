@@ -4,9 +4,12 @@ package cz.muni.fi.pa165.travelagency.service;
 import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;
 import cz.muni.fi.pa165.travelagency.persistence.dao.TripDao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.service.exception.PersistenceException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -121,9 +124,9 @@ public class TripServiceImpl implements TripService {
             throw new PersistenceException(ex.getMessage());
         }
     }
-
+    
     @Override
-    public List<Trip> findByCapacity(Integer capacity) {
+    public List<Trip> findByAvailableCapacity(Integer capacity) {
         try {
             List<Trip> trips = tripDao.findByCapacity(capacity);
             for (Trip trip : trips) {
@@ -152,7 +155,7 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> findWithFreeCapacity() {
-        return findByCapacity(1);
+        return findByAvailableCapacity(1);
     }
 
     @Override
@@ -162,6 +165,22 @@ public class TripServiceImpl implements TripService {
         cal.add(Calendar.DATE, 31);
         Date to = cal.getTime();
         return findByDate(from, to);
+    }
+
+    @Override
+    public List<User> findTripParticipants(Trip trip) {
+        try {
+            List<Reservation> reservations = reservationDao.findByTrip(trip);
+            List<User> users = new ArrayList<>();
+            for (Reservation reservation : reservations) {
+                users.add(reservation.getUser());
+            }
+            return users;
+            } catch (NullPointerException ex) {
+                throw ex;
+            } catch (Exception ex)  {
+                throw new PersistenceException(ex.getMessage());
+            }
     }
 
 }
