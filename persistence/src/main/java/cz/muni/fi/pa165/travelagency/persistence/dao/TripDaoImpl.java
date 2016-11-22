@@ -78,7 +78,7 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
-    public List<Trip> findByCapacity(Integer capacity) {
+    public List<Trip> findByTotalCapacity(Integer capacity) {
         if (capacity == null) {
             throw new NullPointerException("Argument capacity cannot be null.");
         }
