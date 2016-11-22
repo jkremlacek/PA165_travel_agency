@@ -79,19 +79,19 @@ public class TripServiceTest {
 
     @Test
     public void testCreate() throws Exception {
-        tripService.createTrip(t1);
+        tripService.create(t1);
         verify(tripDao).create(t1);
     }
 
     @Test
     public void testGetById() throws Exception {
-        tripService.getById(t1.getId());
+        tripService.findById(t1.getId());
         verify(tripDao).findById(t1.getId());
     }
 
     @Test
     public void testGetAll() throws Exception {
-        tripService.getAll();
+        tripService.findAll();
         verify(tripDao).findAll();
     }
 
@@ -147,15 +147,15 @@ public class TripServiceTest {
         doThrow(new NullPointerException()).when(tripDao).findByCapacity(null);
         doThrow(new NullPointerException()).when(tripDao).findByExcursion(null);
 
-        assertThatThrownBy(() -> tripService.createTrip(null))
+        assertThatThrownBy(() -> tripService.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
-        assertThatThrownBy(() -> tripService.deleteTrip(null))
+        assertThatThrownBy(() -> tripService.delete(null))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
-        assertThatThrownBy(() -> tripService.getById(null))
+        assertThatThrownBy(() -> tripService.findById(null))
                 .as("findByCustomer(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
@@ -208,11 +208,11 @@ public class TripServiceTest {
         doThrow(new EntityNotFoundException()).when(tripDao).findByCapacity(any());
         doThrow(new EntityNotFoundException()).when(tripDao).findByExcursion(any());
 
-        assertThatThrownBy(() -> tripService.createTrip(any()))
+        assertThatThrownBy(() -> tripService.create(any()))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(DataAccessException.class);
 
-        assertThatThrownBy(() -> tripService.deleteTrip(any()))
+        assertThatThrownBy(() -> tripService.delete(any()))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(DataAccessException.class);
 
