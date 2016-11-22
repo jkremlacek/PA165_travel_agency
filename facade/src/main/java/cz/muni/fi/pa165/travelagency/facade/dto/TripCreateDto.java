@@ -2,36 +2,49 @@ package cz.muni.fi.pa165.travelagency.facade.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * DTO for entity Trip
- * 
+ *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
-public class TripDto {
+public class TripCreateDto {
     
-    private Long id;
+    @NotBlank
     private String name;
+   
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateFrom;
+   
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateTo;
+   
+    @NotBlank
     private String destination;
+   
     private String description;
+   
+    @Min(1)
+    @NotNull
     private Integer capacity;
+   
+    @Min(0)
+    @NotNull
     private BigDecimal price;
+   
     private Set<ExcursionDto> excursions = new HashSet<>();
+    
     private Set<ReservationDto> reservations = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -130,10 +143,10 @@ public class TripDto {
         if (obj == null) {
             return false;
         }        
-        if(!(obj instanceof TripDto)) {
+        if(!(obj instanceof TripCreateDto)) {
             return false;
         }
-        final TripDto other = (TripDto) obj;
+        final TripCreateDto other = (TripCreateDto) obj;
         if (!Objects.equals(this.name, other.getName())) {
             return false;
         }
@@ -152,7 +165,6 @@ public class TripDto {
     @Override
     public String toString() {
         return  "TripDto{" + 
-                "id=" + id + 
                 ", name=" + name + 
                 ", dateFrom=" + dateFrom + 
                 ", dateTo=" + dateTo + 
@@ -166,5 +178,5 @@ public class TripDto {
     }
     
     
-    
+
 }
