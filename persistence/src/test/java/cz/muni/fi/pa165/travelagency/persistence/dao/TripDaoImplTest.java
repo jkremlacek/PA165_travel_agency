@@ -223,7 +223,7 @@ public class TripDaoImplTest {
     @Test
     public void testFindByCapacity() throws Exception {
         tripDao.create(trip1);        
-        assertThat(tripDao.findByCapacity(trip1.getCapacity()))
+        assertThat(tripDao.findByTotalCapacity(trip1.getCapacity()))
         .usingFieldByFieldElementComparator().containsOnly(trip1);
     }
     
@@ -266,7 +266,7 @@ public class TripDaoImplTest {
          assertThatThrownBy(() -> tripDao.findByPrice(null, null))                
             .isInstanceOf(NullPointerException.class);
                   
-         assertThatThrownBy(() -> tripDao.findByCapacity(null))                
+         assertThatThrownBy(() -> tripDao.findByTotalCapacity(null))                
             .isInstanceOf(NullPointerException.class);
          
          assertThatThrownBy(() -> tripDao.findByExcursion(null))                

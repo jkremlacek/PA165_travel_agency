@@ -11,24 +11,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import javax.inject.Inject;
+import javax.validation.ValidationException;
+import org.hibernate.service.spi.ServiceException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Tests for service layer of reservation entity
  * @author Katerina Caletkova
  */
-
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ServiceConfig.class)
 public class ReservationServiceTest {
     
@@ -40,6 +45,9 @@ public class ReservationServiceTest {
     
     @Mock
     private UserService userService;
+    
+    @Mock
+    private ExcursionService excursionService;
     
     @Inject
     @InjectMocks
@@ -55,8 +63,8 @@ public class ReservationServiceTest {
     private User user1;
     private Excursion excursion1; 
     
-    @BeforeClass
-    public void setup() {
+    @Before
+    public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
     
@@ -142,8 +150,8 @@ public class ReservationServiceTest {
         
         reservation5 = new Reservation();
         reservation5.setId(5l);
-        reservation5.setTrip(trip2);
-        reservation5.setUser(user1);
+        reservation5.setTrip(trip1);
+        reservation5.setUser(user2);
         reservation5.addExcursion(excursion1);
     }
    
@@ -154,24 +162,28 @@ public class ReservationServiceTest {
         verify(reservationDao).create(reservation1);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testCreateNull() {
+        doThrow(new NullPointerException()).when(reservationDao).create(null);
         reservationService.create(null);
     }
     
     @Test(expected = Exception.class)
     public void testCreateExisting() {
         reservationService.create(reservation1);
+        doThrow(new Exception()).when(reservationDao).create(reservation1);
         reservationService.create(reservation1);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithoutTrip() {
+        doThrow(new ValidationException()).when(reservationDao).create(reservation2);
         reservationService.create(reservation2);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void testCreateWithoutUser() {
+        doThrow(new ValidationException()).when(reservationDao).create(reservation3);
         reservationService.create(reservation3);
     }
     
@@ -182,14 +194,17 @@ public class ReservationServiceTest {
         verify(reservationDao).delete(reservation1);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testDeleteNull() {
+        doThrow(new NullPointerException()).when(reservationDao).delete(null);
         reservationService.delete(null);
     }
     
     @Test(expected = Exception.class)
     public void testDeleteNonExisting() {
-        reservationService.delete(reservation1);
+        Reservation reservation = new Reservation();
+        doThrow(new Exception()).when(reservationDao).delete(reservation);
+        reservationService.delete(reservation);
     }
    
     @Test
@@ -198,8 +213,9 @@ public class ReservationServiceTest {
         assertDeepEquals(reservationService.findById(reservation1.getId()), reservation1);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testFindByIdNull() {
+        doThrow(new NullPointerException()).when(reservationDao).findById(null);
         reservationService.findById(null);
     }
     
@@ -226,8 +242,9 @@ public class ReservationServiceTest {
         assertDeepEquals(reservation1, reservationService.findByUser(user).get(0));
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testFindByUserNull() {
+        doThrow(new NullPointerException()).when(reservationDao).findByUser(null);
         reservationService.findByUser(null);
     }
     
@@ -246,8 +263,9 @@ public class ReservationServiceTest {
         assertDeepEquals(reservation1, reservationService.findByTrip(trip).get(0));
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testFindByTripNull() {
+        doThrow(new NullPointerException()).when(reservationDao).findByTrip(null);
         reservationService.findByTrip(null);
     }
     
@@ -261,37 +279,46 @@ public class ReservationServiceTest {
     @Test
     public void testAddExcursionOk() {
         Reservation reservationPom = new Reservation();
-        reservationPom.setId(1l);
+        reservationPom.setId(2l);
         reservationPom.setTrip(trip1);
         reservationPom.setUser(user1);
-        reservationPom.addExcursion(excursion1);
+        
+        Reservation reservationPom2 = new Reservation();
+        reservationPom2.setId(2l);
+        reservationPom2.setTrip(trip1);
+        reservationPom2.setUser(user1);
+        reservationPom2.addExcursion(excursion1);
+        excursionService.create(excursion1);
+        reservationService.create(reservation1);
         when(reservationDao.findById(1l)).thenReturn(reservationPom);
+        when(reservationDao.findById(2l)).thenReturn(reservationPom2);
         assertEquals(reservation1.getExcursionSet(),reservationService.addExcursion(reservation1.getId(), excursion1).getExcursionSet());
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testAddExcursionNull() {
         reservationService.create(reservation1);
+        doThrow(new NullPointerException()).when(reservationDao).update(null);
         reservationService.addExcursion(reservation1.getId(), null);
     }
     
     @Test
     public void testAddExcursionNonExisting() {
        Excursion excursion = new Excursion();
-       when(reservationDao.findById(1l)).thenReturn(reservation1);
-       assertEquals(reservationService.addExcursion(reservation1.getId(), excursion).getExcursionSet().size(),0);      
+       when(reservationDao.findById(5l)).thenReturn(reservation5);
+       assertEquals(reservationService.addExcursion(reservation5.getId(), excursion).getExcursionSet().size(),0);      
     }
     
     @Test
     public void testGetTotalPriceOk() {
-        when(reservationDao.findById(1l)).thenReturn(reservation1);
+        when(reservationDao.findById(1l)).thenReturn(reservation1);      
         assertEquals(reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5000));
-
+        
         when(reservationDao.findById(5l)).thenReturn(reservation5);
-        assertEquals(reservationService.getTotalPrice(reservation5.getId()),BigDecimal.valueOf(8080));
+        assertEquals(reservationService.getTotalPrice(reservation5.getId()),BigDecimal.valueOf(5080));
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = NullPointerException.class)
     public void testGetTotalPriceNull() {
         reservationService.getTotalPrice(null);
     }

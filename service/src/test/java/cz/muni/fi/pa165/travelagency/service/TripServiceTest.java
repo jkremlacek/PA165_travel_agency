@@ -14,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.testng.annotations.BeforeMethod;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -122,7 +121,7 @@ public class TripServiceTest {
     @Test
     public void testFindByCapacity() throws Exception {
         tripService.findByCapacity(t1.getCapacity());
-        verify(tripDao).findByCapacity(t1.getCapacity());
+        verify(tripDao).findByTotalCapacity(t1.getCapacity());
     }
 
     @Test
@@ -144,7 +143,7 @@ public class TripServiceTest {
         doThrow(new NullPointerException()).when(tripDao).findByDestination(null);
         doThrow(new NullPointerException()).when(tripDao).findByPrice(any(), isNull(BigDecimal.class));
         doThrow(new NullPointerException()).when(tripDao).findByPrice(isNull(BigDecimal.class), any());
-        doThrow(new NullPointerException()).when(tripDao).findByCapacity(null);
+        doThrow(new NullPointerException()).when(tripDao).findByTotalCapacity(null);
         doThrow(new NullPointerException()).when(tripDao).findByExcursion(null);
 
         assertThatThrownBy(() -> tripService.create(null))
@@ -205,7 +204,7 @@ public class TripServiceTest {
         doThrow(new EntityNotFoundException()).when(tripDao).findByDate(any(), any());
         doThrow(new EntityNotFoundException()).when(tripDao).findByDestination(any());
         doThrow(new EntityNotFoundException()).when(tripDao).findByPrice(any(), any());
-        doThrow(new EntityNotFoundException()).when(tripDao).findByCapacity(any());
+        doThrow(new EntityNotFoundException()).when(tripDao).findByTotalCapacity(any());
         doThrow(new EntityNotFoundException()).when(tripDao).findByExcursion(any());
 
         assertThatThrownBy(() -> tripService.create(any()))
