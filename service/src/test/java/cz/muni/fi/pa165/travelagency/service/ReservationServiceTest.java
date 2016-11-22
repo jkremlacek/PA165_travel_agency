@@ -49,7 +49,11 @@ public class ReservationServiceTest {
     private Reservation reservation2;
     private Reservation reservation3;
     private Reservation reservation4;
+    private Reservation reservation5;
     
+    private Trip trip1;
+    private User user1;
+    private Excursion excursion1; 
     
     @BeforeClass
     public void setup() {
@@ -60,7 +64,7 @@ public class ReservationServiceTest {
     public void initReservations() {
         Calendar calendar = Calendar.getInstance();
         // create user1
-        User user1 = new User(1l);
+        user1 = new User(1l);
         calendar.set(1991,1,1);
         user1.setBirthDate(calendar.getTime());
         calendar.clear();
@@ -82,7 +86,7 @@ public class ReservationServiceTest {
         user2.setPersonalNumber(111111111);
         user2.setPhoneNumber(777777776);
         
-        Trip trip1 = new Trip(1l);
+        trip1 = new Trip(1l);
         trip1.setCapacity(20);
         calendar.set(2017,1,20);
         trip1.setDateFrom(calendar.getTime());
@@ -106,17 +110,17 @@ public class ReservationServiceTest {
         trip2.setName("Dovolena ve Francii");
         trip2.setPrice(BigDecimal.valueOf(8000));
        
-        Excursion excursion = new Excursion(1l);
+        excursion1 = new Excursion(1l);
         calendar.set(2017,1,21);
-        excursion.setDate(calendar.getTime());
+        excursion1.setDate(calendar.getTime());
         calendar.clear();
-        excursion.setDestination("Rim");
+        excursion1.setDestination("Rim");
         calendar.set(0, 0, 0, 5, 0, 0);
-        excursion.setDuration(calendar.getTime());
+        excursion1.setDuration(calendar.getTime());
         calendar.clear();
-        excursion.setName("Vylet do Rima");
-        excursion.setPrice(BigDecimal.valueOf(80));
-        excursion.setTrip(trip1);
+        excursion1.setName("Vylet do Rima");
+        excursion1.setPrice(BigDecimal.valueOf(80));
+        excursion1.setTrip(trip1);
         
         reservation1 = new Reservation();
         reservation1.setId(1l);
@@ -135,6 +139,12 @@ public class ReservationServiceTest {
         reservation4.setId(4l);
         reservation4.setTrip(trip2);
         reservation4.setUser(user2);
+        
+        reservation5 = new Reservation();
+        reservation5.setId(5l);
+        reservation5.setTrip(trip2);
+        reservation5.setUser(user1);
+        reservation5.addExcursion(excursion1);
     }
    
     @Test
@@ -198,7 +208,6 @@ public class ReservationServiceTest {
         assertNull(reservationService.findById(0l));
     }
     
-    
     @Test
     public void testFindAllOk() {
         when(reservationDao.findAll()).thenReturn(new ArrayList<>());
@@ -208,7 +217,6 @@ public class ReservationServiceTest {
         when(reservationDao.findAll()).thenReturn(Arrays.asList(reservation1, reservation4));
         assertEquals(reservationService.findAll().size(),2);        
     } 
-    
     
     @Test
     public void testFindByUserOk() {
@@ -225,7 +233,9 @@ public class ReservationServiceTest {
     
     @Test
     public void testFindByUserNonExisting() {
-        // TODO
+        User user = new User();
+        when(reservationDao.findByUser(user)).thenReturn(new ArrayList<>());
+        assertEquals(reservationService.findByUser(user).size(), 0);
     }
     
     @Test
@@ -243,12 +253,20 @@ public class ReservationServiceTest {
     
     @Test
     public void testFindByTripNonExisting() {
-        // TODO
+        Trip trip = new Trip();
+        when(reservationDao.findByTrip(trip)).thenReturn(new ArrayList<>());
+        assertEquals(reservationService.findByTrip(trip).size(), 0);
     }
     
     @Test
     public void testAddExcursionOk() {
-        // TODO
+        Reservation reservationPom = new Reservation();
+        reservationPom.setId(1l);
+        reservationPom.setTrip(trip1);
+        reservationPom.setUser(user1);
+        reservationPom.addExcursion(excursion1);
+        when(reservationDao.findById(1l)).thenReturn(reservationPom);
+        assertEquals(reservation1.getExcursionSet(),reservationService.addExcursion(reservation1.getId(), excursion1).getExcursionSet());
     }
     
     @Test(expected = Exception.class)
@@ -259,23 +277,29 @@ public class ReservationServiceTest {
     
     @Test
     public void testAddExcursionNonExisting() {
-        // TODO
+       Excursion excursion = new Excursion();
+       when(reservationDao.findById(1l)).thenReturn(reservation1);
+       assertEquals(reservationService.addExcursion(reservation1.getId(), excursion).getExcursionSet().size(),0);      
     }
-    
     
     @Test
     public void testGetTotalPriceOk() {
-        // TODO
+        when(reservationDao.findById(1l)).thenReturn(reservation1);
+        assertEquals(reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5000));
+
+        when(reservationDao.findById(5l)).thenReturn(reservation5);
+        assertEquals(reservationService.getTotalPrice(reservation5.getId()),BigDecimal.valueOf(8080));
     }
     
     @Test(expected = Exception.class)
     public void testGetTotalPriceNull() {
-        // TODO
+        reservationService.getTotalPrice(null);
     }
     
-    @Test
+    @Test(expected = Exception.class)
     public void testGetTotalPriceNonExisting() {
-        // TODO
+        when(reservationDao.findById(0l)).thenReturn(null);
+        reservationService.getTotalPrice(0l);
     }
     
     private void assertDeepEquals(Reservation res1,Reservation res2) {
