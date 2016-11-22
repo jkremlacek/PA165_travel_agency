@@ -11,7 +11,7 @@ import cz.muni.fi.pa165.travelagency.service.ExcursionService;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -35,31 +35,31 @@ public class ExcursionFacadeImpl implements ExcursionFacade {
 		return mappingService.mapTo(excursionService.findById(id), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findAll() {
+	public List<ExcursionDto> findAll() {
 		return mappingService.mapTo(excursionService.findAll(), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findByName(String name) {
+	public List<ExcursionDto> findByName(String name) {
         return mappingService.mapTo(excursionService.findByName(name), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findByPrice(BigDecimal minPrice, BigDecimal maxPrice) {
+	public List<ExcursionDto> findByPrice(BigDecimal minPrice, BigDecimal maxPrice) {
 		return mappingService.mapTo(excursionService.findByPrice(minPrice, maxPrice), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findByDate(Date dateFrom, Date dateTo) {
+	public List<ExcursionDto> findByDate(Date dateFrom, Date dateTo) {
 		 return mappingService.mapTo(excursionService.findByDate(dateFrom, dateTo), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findByDestination(String destination) {
+	public List<ExcursionDto> findByDestination(String destination) {
 		return mappingService.mapTo(excursionService.findByDestination(destination), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findByDuration(Date dateFrom, Date dateTo) {
+	public List<ExcursionDto> findByDuration(Date dateFrom, Date dateTo) {
 		return mappingService.mapTo(excursionService.findByDuration(dateFrom, dateTo), ExcursionDto.class);
 	}
 
-	public Set<ExcursionDto> findByTrip(TripDto trip) {
+	public List<ExcursionDto> findByTrip(TripDto trip) {
 		Trip mapped = mappingService.mapTo(trip, Trip.class);
         return mappingService.mapTo(excursionService.findByTrip(mapped), ExcursionDto.class);
 	}

@@ -8,8 +8,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import java.util.Set;
-
 /**
  *
  * @author Jakub Kremláček
@@ -20,17 +18,17 @@ public interface ExcursionFacade {
 
     ExcursionDto findById(Long id);
 
-    Set<ExcursionDto> findAll();
+    List<ExcursionDto> findAll();
 	
-    Set<ExcursionDto> findByName(String name);
+    List<ExcursionDto> findByName(String name);
     
-    Set<ExcursionDto> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
+    List<ExcursionDto> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
     
-    Set<ExcursionDto> findByDate(Date dateFrom, Date dateTo); 
+    List<ExcursionDto> findByDate(Date dateFrom, Date dateTo); 
     
-    Set<ExcursionDto> findByDestination(String destination);
+    List<ExcursionDto> findByDestination(String destination);
     
-    Set<ExcursionDto> findByDuration(Date dateFrom, Date dateTo);
+    List<ExcursionDto> findByDuration(Date dateFrom, Date dateTo);
     
-    Set<ExcursionDto> findByTrip(TripDto trip);
+    List<ExcursionDto> findByTrip(TripDto trip);
 }
