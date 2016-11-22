@@ -139,11 +139,11 @@ public class TripServiceTest {
         doThrow(new NullPointerException()).when(tripDao).delete(null);
         doThrow(new NullPointerException()).when(tripDao).findById(null);
         doThrow(new NullPointerException()).when(tripDao).findByName(null);
-        doThrow(new NullPointerException()).when(tripDao).findByDate(null, null);
-        doThrow(new NullPointerException()).when(tripDao).findByDate(null, null);
+        doThrow(new NullPointerException()).when(tripDao).findByDate(isNull(Date.class), any());
+        doThrow(new NullPointerException()).when(tripDao).findByDate(any(), isNull(Date.class));
         doThrow(new NullPointerException()).when(tripDao).findByDestination(null);
-        doThrow(new NullPointerException()).when(tripDao).findByPrice(null, null);
-        doThrow(new NullPointerException()).when(tripDao).findByPrice(null, null);
+        doThrow(new NullPointerException()).when(tripDao).findByPrice(any(), isNull(BigDecimal.class));
+        doThrow(new NullPointerException()).when(tripDao).findByPrice(isNull(BigDecimal.class), any());
         doThrow(new NullPointerException()).when(tripDao).findByCapacity(null);
         doThrow(new NullPointerException()).when(tripDao).findByExcursion(null);
 
