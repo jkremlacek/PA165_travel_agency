@@ -120,7 +120,7 @@ public class TripServiceTest {
 
     @Test
     public void testFindByCapacity() throws Exception {
-        tripService.findByCapacity(t1.getCapacity());
+        tripService.findByAvailableCapacity(t1.getCapacity());
         verify(tripDao).findByTotalCapacity(t1.getCapacity());
     }
 
@@ -182,7 +182,7 @@ public class TripServiceTest {
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
-        assertThatThrownBy(() -> tripService.findByCapacity(null))
+        assertThatThrownBy(() -> tripService.findByAvailableCapacity(null))
                 .as("findByCustomer(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
@@ -231,7 +231,7 @@ public class TripServiceTest {
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(DataAccessException.class);
 
-        assertThatThrownBy(() -> tripService.findByCapacity(any()))
+        assertThatThrownBy(() -> tripService.findByAvailableCapacity(any()))
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(DataAccessException.class);
 
