@@ -58,7 +58,7 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param capacity free capacity of trip
      * @return trips with enough capacity as List
      */
-    public List<Trip> findByCapacity(Integer capacity);
+    public List<Trip> findByTotalCapacity(Integer capacity);
 	
 	
     /**

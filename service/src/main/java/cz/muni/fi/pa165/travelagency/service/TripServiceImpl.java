@@ -128,7 +128,7 @@ public class TripServiceImpl implements TripService {
     @Override
     public List<Trip> findByAvailableCapacity(Integer capacity) {
         try {
-            List<Trip> trips = tripDao.findByCapacity(capacity);
+            List<Trip> trips = tripDao.findByTotalCapacity(capacity);
             for (Trip trip : trips) {
                 if (trip.getCapacity() - reservationDao.findByTrip(trip).size() <= 0) {
                     trips.remove(trip);

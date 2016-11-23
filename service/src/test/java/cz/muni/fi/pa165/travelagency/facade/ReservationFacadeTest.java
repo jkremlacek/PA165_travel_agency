@@ -72,7 +72,7 @@ public class ReservationFacadeTest {
     private TripDto tripDto;
 
 
-    @BeforeClass
+    @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }
@@ -146,6 +146,7 @@ public class ReservationFacadeTest {
        
        // create reservation1
        reservation1 = new Reservation();
+       reservation1.setId(1l);
        reservation1.setTrip(trip);
        reservation1.setUser(user1);
        
@@ -155,6 +156,7 @@ public class ReservationFacadeTest {
        
        // create reservation2
        reservation2 = new Reservation();
+       reservation1.setId(2l);
        reservation2.setTrip(trip);
        reservation2.setUser(user2);
        
@@ -166,12 +168,12 @@ public class ReservationFacadeTest {
     @Before
     public void initMock() {
         
-        when(userService.findById(1l)).thenReturn(user1);
-        when(userService.findById(2l)).thenReturn(user2);
-        when(tripService.findById(1l)).thenReturn(trip);
-        when(reservationService.findById(0l)).thenReturn(null);
-        when(reservationService.findById(1l)).thenReturn(reservation1);
-        when(reservationService.findById(2l)).thenReturn(reservation2);
+        //when(userService.findById(1l)).thenReturn(user1);
+        //when(userService.findById(2l)).thenReturn(user2);
+        //when(tripService.findById(1l)).thenReturn(trip);
+        //when(reservationService.findById(0l)).thenReturn(null);
+        //when(reservationService.findById(1l)).thenReturn(reservation1);
+        //when(reservationService.findById(2l)).thenReturn(reservation2);
         
         
     }        
@@ -187,6 +189,7 @@ public class ReservationFacadeTest {
     
     @Test
     public void testFindById() {
+        when(reservationService.findById(1l)).thenReturn(reservation1);
         when(mappingService.mapTo(reservation1,ReservationDto.class)).thenReturn(reservationDto1);
         assertEquals(reservationFacade.findById(1l).getId(), reservationDto1.getId());
         assertEquals(reservationFacade.findById(1l), reservationDto1);
@@ -209,6 +212,7 @@ public class ReservationFacadeTest {
         List<Reservation> reservations = Arrays.asList(reservation1);
         List<ReservationDto> reservationsDto = new ArrayList<>();
         reservationsDto.add(reservationDto1);
+        when(reservationService.findById(1l)).thenReturn(reservation1);
         when(reservationService.findByUser(user1)).thenReturn(reservations);
         when(mappingService.mapTo(reservations, ReservationDto.class)).thenReturn(reservationsDto);
         assertEquals(reservationFacade.findByUser(userDto1).size(),1);
@@ -220,6 +224,7 @@ public class ReservationFacadeTest {
         List<Reservation> reservations = Arrays.asList(reservation1);
         List<ReservationDto> reservationsDto = new ArrayList<>();
         reservationsDto.add(reservationDto1);
+        when(reservationService.findById(1l)).thenReturn(reservation1);
         when(reservationService.findByTrip(trip)).thenReturn(reservations);
         when(mappingService.mapTo(reservations,ReservationDto.class)).thenReturn(reservationsDto);
         assertEquals(reservationFacade.findByTrip(tripDto).size(),1);
