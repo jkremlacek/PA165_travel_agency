@@ -183,4 +183,15 @@ public class TripServiceImpl implements TripService {
             }
     }
 
+    @Override
+    public boolean hasTripAvailableCapacity(Trip trip) {
+        try {
+            return trip.getCapacity() > reservationDao.findByTrip(trip).size();
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
+    }
+
 }

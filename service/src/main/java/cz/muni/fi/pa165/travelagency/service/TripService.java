@@ -6,13 +6,11 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-//import org.springframework.stereotype.Service; TODO
 
 /**
  *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
-//@Service  TODO don't know it is necessary
 public interface TripService {
     
     /**
@@ -108,6 +106,13 @@ public interface TripService {
      * @return people with the booked given trip as List of User
      */
     List<User> findTripParticipants(Trip trip);
+    
+    /**
+     * Find out if given trip has available capacity at least for one reservation
+     * @param trip trip for query if has available capacity
+     * @return true when one or more places are available, false otherwise
+     */
+    boolean hasTripAvailableCapacity(Trip trip);
     
     
 }
