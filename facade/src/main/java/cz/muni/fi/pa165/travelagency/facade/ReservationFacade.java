@@ -22,6 +22,12 @@ public interface ReservationFacade {
     void create(ReservationCreateDto reservation);
 
     /**
+     * Updates existing reservation
+     * @param reservationDto DTO for reservation
+     */
+    void update(ReservationDto reservationDto);
+
+    /**
      * Finds a reservation with given ID
      * @param id ID of reservation
      * @return Reservation DTO

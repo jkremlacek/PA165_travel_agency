@@ -22,6 +22,12 @@ public interface ReservationService {
     void create(Reservation reservation);
 
     /**
+     * Updates existing reservation
+     * @param reservation reservation to be updated
+     */
+    void update(Reservation reservation);
+
+    /**
      * Deletes a reservation
      * @param reservation reservation to be deleted
      */

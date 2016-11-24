@@ -24,9 +24,21 @@ public class ReservationServiceImpl implements ReservationService {
     @Inject
     private ReservationDao reservationDao;
 
+    @Override
     public void create(Reservation reservation) {
         try {
             reservationDao.create(reservation);
+        } catch (NullPointerException | ValidationException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void update(Reservation reservation) {
+        try {
+            reservationDao.update(reservation);
         } catch (NullPointerException | ValidationException ex) {
             throw ex;
         } catch (Exception ex) {

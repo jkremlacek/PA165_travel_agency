@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class ReservationFacadeImpl implements ReservationFacade{
+public class ReservationFacadeImpl implements ReservationFacade {
 
     @Inject
     MappingService mappingService;
@@ -34,8 +34,12 @@ public class ReservationFacadeImpl implements ReservationFacade{
 
     @Override
     public void create(ReservationCreateDto reservation) {
-        Reservation mapped = mappingService.mapTo(reservation, Reservation.class);
-        reservationService.create(mapped);
+        reservationService.create(mappingService.mapTo(reservation, Reservation.class));
+    }
+
+    @Override
+    public void update(ReservationDto reservationDto) {
+        reservationService.update(mappingService.mapTo(reservationDto, Reservation.class));
     }
 
     @Override
