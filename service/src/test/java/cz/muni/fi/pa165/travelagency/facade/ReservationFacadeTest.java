@@ -1,9 +1,11 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
+import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
@@ -43,44 +45,26 @@ public class ReservationFacadeTest {
     private ReservationService reservationService;
     
     @Mock
-    private TripService tripService;
-    
-    @Mock
-    private UserService userService;
-    
-    @Mock
     private  MappingService mappingService;
     
     @InjectMocks
     private final ReservationFacade reservationFacade = new ReservationFacadeImpl();
    
-    @Captor
-    ArgumentCaptor<Reservation> argumentCaptor;
-     
     private Reservation reservation1;
+    private ReservationCreateDto reservationCreateDto1;
     private ReservationDto reservationDto1;
-
-    private Reservation reservation2;
-    private ReservationDto reservationDto2;
-
+    
     private User user1;
     private UserDto userDto1;
-    private User user2;
-    private UserDto userDto2;
-
-    private Trip trip;
-    private TripDto tripDto;
-
+    
+    private Trip trip1;
+    private TripDto tripDto1;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Before
-    public void init() {
+    
         Calendar calendar = Calendar.getInstance();
-        // create user1
         user1 = new User(1l);
         calendar.set(1991,1,1);
         user1.setBirthDate(calendar.getTime());
@@ -101,135 +85,86 @@ public class ReservationFacadeTest {
         userDto1.setPersonalNumber(user1.getPersonalNumber());
         userDto1.setPhoneNumber(user1.getPhoneNumber());
         
-        // create user2
-        user2 = new User(2l);
-        calendar.set(1990,5,5);
-        user2.setBirthDate(calendar.getTime());
+        trip1 = new Trip(1l);
+        trip1.setCapacity(20);
+        calendar.set(2017,1,20);
+        trip1.setDateFrom(calendar.getTime());
         calendar.clear();
-        user2.setIsAdmin(Boolean.FALSE);
-        user2.setMail("m@mail.com");
-        user2.setName("Jana");
-        user2.setPasswordHash("mojeheslo");
-        user2.setPersonalNumber(111111111l);
-        user2.setPhoneNumber(777777776);
-       
-        userDto2 = new UserDto();
-        userDto2.setBirthDate(user2.getBirthDate());
-        userDto2.setIsAdmin(user2.getIsAdmin());
-        userDto2.setMail(user2.getMail());
-        userDto2.setName(user2.getName());
-        userDto2.setPasswordHash(user2.getPasswordHash());
-        userDto2.setPersonalNumber(user2.getPersonalNumber());
-        userDto2.setPhoneNumber(user2.getPhoneNumber());
-                               
-       // create trip
-       trip = new Trip(1l);
-       trip.setCapacity(20);
-       calendar.set(2017,1,20);
-       trip.setDateFrom(calendar.getTime());
-       calendar.clear();
-       calendar.set(2017,1,28);
-       trip.setDateTo(calendar.getTime());
-       calendar.clear();
-       trip.setDestination("Italie");
-       trip.setName("Dovolena u more");
-       trip.setPrice(BigDecimal.valueOf(5000));
-       
-       tripDto = new TripDto();
-       tripDto.setCapacity(trip.getCapacity());
-       tripDto.setDateFrom(trip.getDateFrom());
-       tripDto.setDateTo(trip.getDateTo());
-       tripDto.setDestination(trip.getDestination());
-       tripDto.setName(trip.getName());
-       tripDto.setPrice(trip.getPrice());
-       
-       
-       // create reservation1
-       reservation1 = new Reservation();
-       reservation1.setId(1l);
-       reservation1.setTrip(trip);
-       reservation1.setUser(user1);
-       
-       reservationDto1 = new ReservationDto();
-       reservationDto1.setTrip(tripDto);
-       reservationDto1.setUser(userDto1);
-       
-       // create reservation2
-       reservation2 = new Reservation();
-       reservation1.setId(2l);
-       reservation2.setTrip(trip);
-       reservation2.setUser(user2);
-       
-       reservationDto2 = new ReservationDto();
-       reservationDto2.setTrip(tripDto);
-       reservationDto2.setUser(userDto2);
-    }
-   
-    @Before
-    public void initMock() {
-        
-        //when(userService.findById(1l)).thenReturn(user1);
-        //when(userService.findById(2l)).thenReturn(user2);
-        //when(tripService.findById(1l)).thenReturn(trip);
-        //when(reservationService.findById(0l)).thenReturn(null);
-        //when(reservationService.findById(1l)).thenReturn(reservation1);
-        //when(reservationService.findById(2l)).thenReturn(reservation2);
-        
-        
-    }        
-    @Test
-    public void testCreate() {
-       ReservationCreateDto reservationCreateDto = new ReservationCreateDto();
-       reservationCreateDto.setTrip(tripDto);
-       reservationCreateDto.setUser(userDto1);
-       
-       reservationFacade.create(reservationCreateDto);
-       verify(reservationService).create(argumentCaptor.capture());
-    }
-    
-    @Test
-    public void testFindById() {
-        when(reservationService.findById(1l)).thenReturn(reservation1);
-        when(mappingService.mapTo(reservation1,ReservationDto.class)).thenReturn(reservationDto1);
-        assertEquals(reservationFacade.findById(1l).getId(), reservationDto1.getId());
-        assertEquals(reservationFacade.findById(1l), reservationDto1);
-    }
-    
-    @Test
-    public void testFindAll() {
-        List<Reservation> reservations = Arrays.asList(reservation1,reservation2);
-        List<ReservationDto> reservationsDto = new ArrayList<>();
-        reservationsDto.add(reservationDto1);
-        reservationsDto.add(reservationDto2);
-        when(reservationService.findAll()).thenReturn(reservations);
-        when(mappingService.mapTo(reservations,ReservationDto.class)).thenReturn(reservationsDto);
-        assertEquals(reservationFacade.findAll().size(),2);
-        assertEquals(reservationFacade.findAll(),reservationsDto);
-    }
-    
-    @Test
-    public void testFindByUser() {   
-        List<Reservation> reservations = Arrays.asList(reservation1);
-        List<ReservationDto> reservationsDto = new ArrayList<>();
-        reservationsDto.add(reservationDto1);
-        when(reservationService.findById(1l)).thenReturn(reservation1);
-        when(reservationService.findByUser(user1)).thenReturn(reservations);
-        when(mappingService.mapTo(reservations, ReservationDto.class)).thenReturn(reservationsDto);
-        assertEquals(reservationFacade.findByUser(userDto1).size(),1);
-        assertEquals(reservationFacade.findByUser(userDto1),reservationsDto);
+        calendar.set(2017,1,28);
+        trip1.setDateTo(calendar.getTime());
+        calendar.clear();
+        trip1.setDestination("Italie");
+        trip1.setName("Dovolena u more");
+        trip1.setPrice(BigDecimal.valueOf(5000));
+
+        tripDto1 = new TripDto();
+        tripDto1.setCapacity(trip1.getCapacity());
+        tripDto1.setDateFrom(trip1.getDateFrom());
+        tripDto1.setDateTo(trip1.getDateTo());
+        tripDto1.setDestination(trip1.getDestination());
+        tripDto1.setName(trip1.getName());
+        tripDto1.setPrice(trip1.getPrice());
+
+        reservation1 = new Reservation();
+        reservation1.setId(1l);
+        reservation1.setTrip(trip1);
+        reservation1.setUser(user1);
+
+        reservationCreateDto1 = new ReservationCreateDto();
+        reservationCreateDto1.setTrip(tripDto1);
+        reservationCreateDto1.setUser(userDto1);
+
+        reservationDto1 = new ReservationDto();
+        reservationDto1.setId(1l);
+        reservationDto1.setTrip(tripDto1);
+        reservationDto1.setUser(userDto1);
+
+        when(mappingService.mapTo(reservationCreateDto1, Reservation.class)).thenReturn(reservation1);
+        when(mappingService.mapTo(reservationDto1, Reservation.class)).thenReturn(reservation1);
+        when(mappingService.mapTo(tripDto1, Trip.class)).thenReturn(trip1);
+        when(mappingService.mapTo(userDto1, User.class)).thenReturn(user1);
     }
      
     @Test
-    public void testFindByTrip() {
-        List<Reservation> reservations = Arrays.asList(reservation1);
-        List<ReservationDto> reservationsDto = new ArrayList<>();
-        reservationsDto.add(reservationDto1);
-        when(reservationService.findById(1l)).thenReturn(reservation1);
-        when(reservationService.findByTrip(trip)).thenReturn(reservations);
-        when(mappingService.mapTo(reservations,ReservationDto.class)).thenReturn(reservationsDto);
-        assertEquals(reservationFacade.findByTrip(tripDto).size(),1);
-        assertEquals(reservationFacade.findByTrip(tripDto),reservationsDto);
-        
+    public void testCreate() throws Exception {
+       reservationFacade.create(reservationCreateDto1);
+       verify(reservationService).create(reservation1);
+    }
+    
+    @Test
+    public void testUpdate() throws Exception {
+        reservationFacade.update(reservationDto1);
+        verify(reservationService).update(reservation1);
+    }
+    @Test
+    public void testFindById() throws Exception {
+        reservationFacade.findById(1l);
+        verify(reservationService).findById(1l);
+    
+    }
+    
+    @Test
+    public void testFindAll() throws Exception {
+        reservationFacade.findAll();
+        verify(reservationService).findAll();
+    }
+    
+    @Test
+    public void testFindByUser() throws Exception {   
+        reservationFacade.findByUser(userDto1);
+        verify(reservationService).findByUser(user1);
+    }
+     
+    @Test
+    public void testFindByTrip() throws Exception {
+        reservationFacade.findByTrip(tripDto1);
+        verify(reservationService).findByTrip(trip1);
+    }
+    
+    @Test
+    public void testGetTotalPrice() throws Exception {
+        reservationFacade.getTotalPrice(reservationDto1.getId());
+        verify(reservationService).getTotalPrice(reservation1.getId());
     }
                            
 }
