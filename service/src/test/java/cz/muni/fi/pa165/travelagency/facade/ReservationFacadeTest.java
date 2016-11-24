@@ -1,38 +1,26 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
-import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.service.MappingService;
 import cz.muni.fi.pa165.travelagency.service.ReservationService;
-import cz.muni.fi.pa165.travelagency.service.TripService;
-import cz.muni.fi.pa165.travelagency.service.UserService;
 import static org.mockito.Mockito.verify;
 import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
 import cz.muni.fi.pa165.travelagency.service.facade.ReservationFacadeImpl;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
-
 
 /**
  * Tests for facade layer of reservation entity
