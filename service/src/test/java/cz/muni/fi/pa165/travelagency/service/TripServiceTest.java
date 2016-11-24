@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
+import org.apache.commons.lang3.NotImplementedException;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,13 +72,14 @@ public class TripServiceTest {
         t1.setCapacity(100);
         t1.setPrice(BigDecimal.valueOf(10000));
 
-        t1 = new Trip();
-        t1.setName("Dovolenka v Cernobyle");
-        t1.setDateFrom(dFrom);
-        t1.setDateTo(dTo);
-        t1.setDestination("Ukrajina");
-        t1.setCapacity(1);
-        t1.setPrice(BigDecimal.valueOf(10000));
+        t2 = new Trip();
+        t2.setName("Dovolenka v Cernobyle");
+        t2.setDateFrom(dFrom);
+        t2.setDateTo(dTo);
+        t2.setDestination("Ukrajina");
+        t2.setCapacity(1);
+        t2.setPrice(BigDecimal.valueOf(10000));
+
 
         cal.set(2017, 8, 20, 10, 0, 0);
         Date excursionDate = cal.getTime();
@@ -91,7 +93,7 @@ public class TripServiceTest {
         e1.setDestination("Kahira");
         e1.setPrice(BigDecimal.valueOf(800));
 
-        t1.addExcursion(e1);
+        t2.addExcursion(e1);
         r = new Reservation(u, new HashSet<>(), t1);
 
     }
@@ -145,9 +147,18 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testFindByCapacity() throws Exception {
-        tripService.findByAvailableCapacity(t1.getCapacity());
-        verify(tripDao).findByTotalCapacity(t1.getCapacity());
+    public void testFindByAvailableCapacity() throws Exception {
+        Integer i = 100;
+        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t1,t2)));
+        when(reservationDao.findByTrip(t1)).thenReturn(new LinkedList<>());
+        when(reservationDao.findByTrip(t2)).thenReturn(new LinkedList<>(Arrays.asList(r)));
+
+        assertThat(tripService.findByAvailableCapacity(i))
+                .as("Only 1 item should be returned")
+                .hasSize(1)
+                .contains(t1);
+
+        verify(tripDao).findByTotalCapacity(i);
     }
 
     @Test
@@ -158,12 +169,23 @@ public class TripServiceTest {
 
     @Test
     public void testFindWithFreeCapacity() throws Exception {
-        //TODO
+        Integer i = 1;
+        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t1,t2)));
+        when(reservationDao.findByTrip(t1)).thenReturn(new LinkedList<>());
+        when(reservationDao.findByTrip(t2)).thenReturn(new LinkedList<>(Arrays.asList(r)));
+
+        assertThat(tripService.findByAvailableCapacity(i))
+                .as("Only 1 item should be returned")
+                .hasSize(1)
+                .contains(t1);
+
+        verify(tripDao).findByTotalCapacity(i);
+
     }
 
     @Test
     public void testFindTripsNextMonth() throws Exception {
-        //TODO
+        //TODO:
     }
 
     @Test
@@ -173,6 +195,23 @@ public class TripServiceTest {
                 .as("found participant should be u")
                 .hasSize(1)
                 .contains(u);
+    }
+
+    @Test
+    public void testHasTripAvailableCapacity() {
+        when(reservationDao.findByTrip(t1)).thenReturn(new LinkedList<>());
+        when(reservationDao.findByTrip(t2)).thenReturn(new LinkedList<>(Arrays.asList(r)));
+
+        assertThat(tripService.hasTripAvailableCapacity(t1))
+                .as("This trip has free slots")
+                .isTrue();
+
+        assertThat(tripService.hasTripAvailableCapacity(t2))
+                .as("This trip has no free slots")
+                .isFalse();
+
+        verify(reservationDao).findByTrip(t1);
+        verify(reservationDao).findByTrip(t2);
     }
 
 
