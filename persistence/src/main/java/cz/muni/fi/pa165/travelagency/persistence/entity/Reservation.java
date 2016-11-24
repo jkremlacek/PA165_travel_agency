@@ -22,56 +22,56 @@ import javax.persistence.OneToMany;
 @Entity
 public class Reservation {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@ManyToOne
-	private User user;
-	
-	@OneToMany
-	private Set<Excursion> excursionSet = new HashSet<>();
-	
-	@ManyToOne
-	private Trip trip;
-	
-	public Reservation () {}
-	
-	public Reservation (User user, Set<Excursion> excursionSet, Trip trip) {
-		this.user = user;
-		this.excursionSet = excursionSet;
-		this.trip = trip;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public User getUser() {
-		return user;
-	}
+    private Long id;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @ManyToOne
+    private User user;
 
-	public Set<Excursion> getExcursionSet() {
-		return Collections.unmodifiableSet(excursionSet);
-	}
+    @OneToMany
+    private Set<Excursion> excursionSet = new HashSet<>();
 
-	public void addExcursion(Excursion excursion) {
-		excursionSet.add(excursion);
-	}
+    @ManyToOne
+    private Trip trip;
 
-	public Trip getTrip() {
-		return trip;
-	}
+    public Reservation () {}
 
-	public void setTrip(Trip trip) {
-		this.trip = trip;
-	}
-	
-	@Override
+    public Reservation (User user, Set<Excursion> excursionSet, Trip trip) {
+        this.user = user;
+        this.excursionSet = excursionSet;
+        this.trip = trip;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Excursion> getExcursionSet() {
+        return Collections.unmodifiableSet(excursionSet);
+    }
+
+    public void addExcursion(Excursion excursion) {
+        excursionSet.add(excursion);
+    }
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = 59 * hash + Objects.hashCode(this.user) * 43 + Objects.hashCode(this.trip);

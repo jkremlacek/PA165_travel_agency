@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Temporal;
@@ -35,63 +33,63 @@ public class ExcursionCreateDto {
 
     private String description;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public Date getDuration() {
-		return duration;
-	}
+    public Date getDuration() {
+        return duration;
+    }
 
-	public void setDuration(Date duration) {
-		this.duration = duration;
-	}
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
 
-	public String getDestination() {
-		return destination;
-	}
+    public String getDestination() {
+        return destination;
+    }
 
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	public TripDto getTrip() {
-		return trip;
-	}
+    public TripDto getTrip() {
+        return trip;
+    }
 
-	public void setTrip(TripDto trip) {
-		this.trip = trip;
-	}
+    public void setTrip(TripDto trip) {
+        this.trip = trip;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	@Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || !(o instanceof ExcursionCreateDto)) return false;
@@ -105,7 +103,7 @@ public class ExcursionCreateDto {
 
     }
 	
-	@Override
+    @Override
     public int hashCode() {
         int result = getName().hashCode();
         result = 31 * result + getDate().hashCode();
@@ -114,16 +112,16 @@ public class ExcursionCreateDto {
         return result;
     }
 	
-	@Override
+    @Override
     public String toString() {
-        return "ExcursionCreateDto{" +
+        return  "ExcursionCreateDto{" +
                 ", name=" + name +
                 ", date=" + date +
                 ", duration=" + duration +
-				", destination=" + destination +
-				", price=" + price +
-				", trip=" + trip +
-				", description=" + description +
+                ", destination=" + destination +
+                ", price=" + price +
+                ", trip=" + trip +
+                ", description=" + description +
                 '}';
     }
 }
