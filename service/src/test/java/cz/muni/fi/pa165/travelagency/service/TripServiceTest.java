@@ -1,8 +1,11 @@
 package cz.muni.fi.pa165.travelagency.service;
 
+import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;
 import cz.muni.fi.pa165.travelagency.persistence.dao.TripDao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
+import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
 import org.hibernate.service.spi.ServiceException;
 import org.junit.Before;
@@ -18,9 +21,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
@@ -37,10 +40,15 @@ public class TripServiceTest {
     @Mock
     private TripDao tripDao;
 
+    @Mock
+    private ReservationDao reservationDao;
+
     @InjectMocks
     private TripService tripService = new TripServiceImpl();
-    
-    private Trip t1;
+
+    private User u;
+    private Reservation r;
+    private Trip t1, t2;
     private Excursion e1;
 
     @Before
@@ -53,12 +61,22 @@ public class TripServiceTest {
         cal.set(2017, 8, 25);
         Date dTo = cal.getTime();
 
+        u = new User("Igor",dFrom,1234,"no@mail.com",123);
+
         t1 = new Trip();
         t1.setName("Dovolenka v Egypte");
         t1.setDateFrom(dFrom);
         t1.setDateTo(dTo);
         t1.setDestination("Egypt");
         t1.setCapacity(100);
+        t1.setPrice(BigDecimal.valueOf(10000));
+
+        t1 = new Trip();
+        t1.setName("Dovolenka v Cernobyle");
+        t1.setDateFrom(dFrom);
+        t1.setDateTo(dTo);
+        t1.setDestination("Ukrajina");
+        t1.setCapacity(1);
         t1.setPrice(BigDecimal.valueOf(10000));
 
         cal.set(2017, 8, 20, 10, 0, 0);
@@ -74,6 +92,8 @@ public class TripServiceTest {
         e1.setPrice(BigDecimal.valueOf(800));
 
         t1.addExcursion(e1);
+        r = new Reservation(u, new HashSet<>(), t1);
+
     }
 
     @Test
@@ -83,13 +103,19 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testGetById() throws Exception {
+    public void testDelete() throws Exception {
+        tripService.delete(t1);
+        verify(tripDao).delete(t1);
+    }
+
+    @Test
+    public void testFindById() throws Exception {
         tripService.findById(t1.getId());
         verify(tripDao).findById(t1.getId());
     }
 
     @Test
-    public void testGetAll() throws Exception {
+    public void testFindAll() throws Exception {
         tripService.findAll();
         verify(tripDao).findAll();
     }
@@ -125,9 +151,28 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testFindByExcurxion() throws Exception {
+    public void testFindByExcursion() throws Exception {
         tripService.findByExcursion(e1);
         verify(tripDao).findByExcursion(e1);
+    }
+
+    @Test
+    public void testFindWithFreeCapacity() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void testFindTripsNextMonth() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void testFindTripParticipants() throws Exception {
+        when(reservationDao.findByTrip(t1)).thenReturn(Arrays.asList(r));
+        assertThat(tripService.findTripParticipants(t1))
+                .as("found participant should be u")
+                .hasSize(1)
+                .contains(u);
     }
 
 
@@ -155,39 +200,39 @@ public class TripServiceTest {
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findById(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByName(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByName(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByDate(null, t1.getDateFrom()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDate(null, any()) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByDate(t1.getDateFrom(), null))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDate(any(), null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByDestination(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByDestination(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByPrice(null, t1.getPrice()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByPrice(null, any()) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByPrice(t1.getPrice(), null))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByPrice(any(), null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByAvailableCapacity(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByAvailableCapacity(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.findByExcursion(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByExcursion(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
     }
 
