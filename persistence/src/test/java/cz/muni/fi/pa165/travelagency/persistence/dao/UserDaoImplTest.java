@@ -31,18 +31,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = InMemorySpring.class)
 @Transactional
 public class UserDaoImplTest {
-	@Inject
+	
+    @Inject
     private UserDao userDaoImpl;
 	
-	@PersistenceContext
+    @PersistenceContext
     private EntityManager em;
 	
-	private User c1, c2;
-	private Reservation r1, r2;	
+    private User c1, c2;
+    private Reservation r1, r2;	
 	
-	@Before
+    @Before
     public void setup() {
-		Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
 		
         calendar.set(1991,4,20);
 		
@@ -73,9 +74,9 @@ public class UserDaoImplTest {
 	r2 = new Reservation();
         r2.setUser(c2);
 	c2.addReservation(r2);
-	}
+    }
 	
-	@Test
+    @Test
     @Transactional
     public void create() throws Exception {
         userDaoImpl.create(c1);
@@ -89,7 +90,7 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void update() throws Exception {
         em.persist(c1);
@@ -103,11 +104,11 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getName());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void delete() throws Exception {
         em.persist(c1);
-		em.persist(r1);
+        em.persist(r1);
 
         userDaoImpl.delete(c1);
 
@@ -116,11 +117,11 @@ public class UserDaoImplTest {
                 .isNull();
     }
 	
-	@Test
+    @Test
     @Transactional
     public void findById() throws Exception {
-		em.persist(c1);
-		em.persist(r1);
+        em.persist(c1);
+        em.persist(r1);
 		
         assertThat(userDaoImpl.findById(c1.getId()+1))
                 .as("No user should be found")
@@ -137,7 +138,7 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void findAll() throws Exception {
         List<User> all = userDaoImpl.findAll();
@@ -159,7 +160,7 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     public void nullParameters(){
         assertThatThrownBy(() -> userDaoImpl.create(null))
                 .as("create(null) should throw NullPointerException")
@@ -185,14 +186,14 @@ public class UserDaoImplTest {
 
     }
 	
-	@Test
+    @Test
     @Transactional
     public void testFindByName() throws Exception {
         em.persist(c1);
-		em.persist(c2);
+        em.persist(c2);
 		
-		em.persist(r1);
-		em.persist(r2);
+        em.persist(r1);
+        em.persist(r2);
 
         List<User> found = userDaoImpl.findByName(c1.getName());
 
@@ -205,14 +206,14 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void testFindByBirthDate() throws Exception {
         em.persist(c1);
-		em.persist(c2);
-		
-		em.persist(r1);
-		em.persist(r2);
+        em.persist(c2);
+
+        em.persist(r1);
+        em.persist(r2);
 
         List<User> found = userDaoImpl.findByBirthDate(c1.getBirthDate());
 
@@ -225,14 +226,14 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void testFindByPersonalNumber() throws Exception {
         em.persist(c1);
-		em.persist(c2);
-		
-		em.persist(r1);
-		em.persist(r2);
+        em.persist(c2);
+
+        em.persist(r1);
+        em.persist(r2);
 
         List<User> found = userDaoImpl.findByPersonalNumber(c1.getPersonalNumber());
 
@@ -245,14 +246,14 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void testFindByMail() throws Exception {
         em.persist(c1);
-		em.persist(c2);
-		
-		em.persist(r1);
-		em.persist(r2);
+        em.persist(c2);
+
+        em.persist(r1);
+        em.persist(r2);
 
         List<User> found = userDaoImpl.findByMail(c1.getMail());
 
@@ -265,14 +266,14 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void testFindByPhoneNumber() throws Exception {
         em.persist(c1);
-		em.persist(c2);
+        em.persist(c2);
 
-		em.persist(r1);
-		em.persist(r2);
+        em.persist(r1);
+        em.persist(r2);
 		
         List<User> found = userDaoImpl.findByPhoneNumber(c1.getPhoneNumber());
 
@@ -285,14 +286,14 @@ public class UserDaoImplTest {
                 .isEqualTo(c1.getId());
     }
 	
-	@Test
+    @Test
     @Transactional
     public void testFindByReservation() throws Exception {
         em.persist(c1);
-		em.persist(c2);
-		
-		em.persist(r1);
-		em.persist(r2);
+        em.persist(c2);
+
+        em.persist(r1);
+        em.persist(r2);
 
         List<User> found = userDaoImpl.findByReservation(r1);
 

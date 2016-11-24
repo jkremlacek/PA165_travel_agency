@@ -13,7 +13,7 @@ import java.util.List;
  * @author Jakub Kremláček
  */
 public interface TripDao extends GenericDao<Trip, Long>{
-	/**
+    /**
      * 
      * Method for find all trips with specific name
      * 
@@ -22,17 +22,17 @@ public interface TripDao extends GenericDao<Trip, Long>{
      */
     public List<Trip> findByName(String name);
 	
-	/**
+    /**
      * 
      * Method for find all trips within specified date range
      * 
      * @param from start of required date range 
-	 * @param to end of required date range
+     * @param to end of required date range
      * @return trips within range as List
      */
     public List<Trip> findByDate(Date from, Date to);
 	
-	/**
+    /**
      * 
      * Method for find all trips in specific destination
      * 
@@ -41,17 +41,17 @@ public interface TripDao extends GenericDao<Trip, Long>{
      */
     public List<Trip> findByDestination(String destination);
 	
-	/**
+    /**
      * 
      * Method for find all trips in specific price range
      * 
      * @param minPrice minimal price of trip
-	 * @param maxPrice maximal price of trip
+     * @param maxPrice maximal price of trip
      * @return trips within price range as List
      */
     public List<Trip> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
 	
-	/**
+    /**
      * 
      * Method for find all trips with enough capacity
      * 

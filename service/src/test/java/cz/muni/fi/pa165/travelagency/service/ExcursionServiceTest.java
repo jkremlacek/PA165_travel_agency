@@ -32,112 +32,112 @@ import org.springframework.dao.DataAccessException;
 @ContextConfiguration(classes = ServiceConfig.class)
 public class ExcursionServiceTest {
 	
-	@Mock
-	private ExcursionDao excursionDao;
-	
-	@InjectMocks
-	private ExcursionService excursionService = new ExcursionServiceImpl();
-	
-	private Trip t;
-	private Excursion e;
-	
-	@Before
-	public void setup() throws ServiceException {
-		MockitoAnnotations.initMocks(this);
-		
-		Calendar cal = Calendar.getInstance();
-		cal.set(2016, 12, 24);
-		Date dateFrom = cal.getTime();
-		cal.set(2017,1, 1);
-		Date dateTo = cal.getTime();
-		
-		t = new Trip();
-		t.setName("Christmas Trip");
-		t.setDateFrom(dateFrom);
-		t.setDateTo(dateTo);
-		t.setDestination("Austria");
-		t.setCapacity(50);
-		t.setPrice(BigDecimal.valueOf(2000));
-		
-		cal.set(2016, 12, 25);
-		Date excursionDate = cal.getTime();
-		cal.set(0, 0, 0, 10, 0);
-		Date excursionDuration = cal.getTime();
-		
-		e = new Excursion();
-		e.setName("Skiing at Dachstein");
-		e.setDate(excursionDate);
-		e.setDuration(excursionDuration);
-		e.setDestination("Dachstein");
-		e.setPrice(BigDecimal.valueOf(100));
-		
-		t.addExcursion(e);
-	}
-	
-	@Test
-	public void testCreate() throws Exception {
-		excursionService.create(e);
-		verify(excursionDao).create(e);
-	}
-	
-	@Test
-	public void testDelete() throws Exception {
-		excursionService.create(e);
-		excursionService.delete(e);
-		verify(excursionDao).delete(e);
-	}
-	
-	@Test
-	public void testGetById() throws Exception {
-		excursionService.findById(e.getId());
-		verify(excursionDao).findById(e.getId());
-	}
-	
-	@Test
-	public void testGetAll() throws Exception {
-		excursionService.findAll();
-		verify(excursionDao).findAll();
-	}
-	
-	@Test
-	public void testFindByName() throws Exception {
-		excursionService.findByName(e.getName());
-		verify(excursionDao).findByName(e.getName());
-	}
-	
-	@Test
-	public void testFindByPrice() throws Exception {
-		excursionService.findByPrice(e.getPrice(), e.getPrice());
-		verify(excursionDao).findByPrice(e.getPrice(), e.getPrice());
-	}
-	
-	@Test
-	public void testFindByDate() throws Exception {
-		excursionService.findByDate(e.getDate(), e.getDate());
-		verify(excursionDao).findByDate(e.getDate(), e.getDate());
-	}
-	
-	@Test
-	public void testFindByDestination() throws Exception {
-		excursionService.findByDestination(e.getDestination());
-		verify(excursionDao).findByDestination(e.getDestination());
-	}
-	
-	@Test
-	public void testFindByDuration() throws Exception {
-		excursionService.findByDuration(e.getDuration(), e.getDuration());
-		verify(excursionDao).findByDuration(e.getDuration(), e.getDuration());
-	}
-	
-	@Test
-	public void testFindByTrip() throws Exception {
-		excursionService.findByTrip(e.getTrip());
-		verify(excursionDao).findByTrip(e.getTrip());
-	}
-	
-	@Test
-	public void testNullArguments() {
-		doThrow(new NullPointerException()).when(excursionDao).create(null);
+    @Mock
+    private ExcursionDao excursionDao;
+
+    @InjectMocks
+    private ExcursionService excursionService = new ExcursionServiceImpl();
+
+    private Trip t;
+    private Excursion e;
+
+    @Before
+    public void setup() throws ServiceException {
+        MockitoAnnotations.initMocks(this);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(2016, 12, 24);
+        Date dateFrom = cal.getTime();
+        cal.set(2017,1, 1);
+        Date dateTo = cal.getTime();
+
+        t = new Trip();
+        t.setName("Christmas Trip");
+        t.setDateFrom(dateFrom);
+        t.setDateTo(dateTo);
+        t.setDestination("Austria");
+        t.setCapacity(50);
+        t.setPrice(BigDecimal.valueOf(2000));
+
+        cal.set(2016, 12, 25);
+        Date excursionDate = cal.getTime();
+        cal.set(0, 0, 0, 10, 0);
+        Date excursionDuration = cal.getTime();
+
+        e = new Excursion();
+        e.setName("Skiing at Dachstein");
+        e.setDate(excursionDate);
+        e.setDuration(excursionDuration);
+        e.setDestination("Dachstein");
+        e.setPrice(BigDecimal.valueOf(100));
+
+        t.addExcursion(e);
+    }
+
+    @Test
+    public void testCreate() throws Exception {
+        excursionService.create(e);
+        verify(excursionDao).create(e);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        excursionService.create(e);
+        excursionService.delete(e);
+        verify(excursionDao).delete(e);
+    }
+
+    @Test
+    public void testGetById() throws Exception {
+        excursionService.findById(e.getId());
+        verify(excursionDao).findById(e.getId());
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+        excursionService.findAll();
+        verify(excursionDao).findAll();
+    }
+
+    @Test
+    public void testFindByName() throws Exception {
+        excursionService.findByName(e.getName());
+        verify(excursionDao).findByName(e.getName());
+    }
+
+    @Test
+    public void testFindByPrice() throws Exception {
+        excursionService.findByPrice(e.getPrice(), e.getPrice());
+        verify(excursionDao).findByPrice(e.getPrice(), e.getPrice());
+    }
+
+    @Test
+    public void testFindByDate() throws Exception {
+        excursionService.findByDate(e.getDate(), e.getDate());
+        verify(excursionDao).findByDate(e.getDate(), e.getDate());
+    }
+
+    @Test
+    public void testFindByDestination() throws Exception {
+        excursionService.findByDestination(e.getDestination());
+        verify(excursionDao).findByDestination(e.getDestination());
+    }
+
+    @Test
+    public void testFindByDuration() throws Exception {
+        excursionService.findByDuration(e.getDuration(), e.getDuration());
+        verify(excursionDao).findByDuration(e.getDuration(), e.getDuration());
+    }
+
+    @Test
+    public void testFindByTrip() throws Exception {
+        excursionService.findByTrip(e.getTrip());
+        verify(excursionDao).findByTrip(e.getTrip());
+    }
+
+    @Test
+    public void testNullArguments() {
+        doThrow(new NullPointerException()).when(excursionDao).create(null);
         doThrow(new NullPointerException()).when(excursionDao).update(null);
         doThrow(new NullPointerException()).when(excursionDao).delete(null);
         doThrow(new NullPointerException()).when(excursionDao).findById(null);
@@ -150,8 +150,8 @@ public class ExcursionServiceTest {
         doThrow(new NullPointerException()).when(excursionDao).findByDuration(isNull(Date.class), any());
         doThrow(new NullPointerException()).when(excursionDao).findByDuration(any(), isNull(Date.class));
         doThrow(new NullPointerException()).when(excursionDao).findByTrip(null);
-		
-		assertThatThrownBy(() -> excursionService.create(null))
+
+        assertThatThrownBy(() -> excursionService.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
@@ -198,9 +198,9 @@ public class ExcursionServiceTest {
         assertThatThrownBy(() -> excursionService.findByTrip(null))
                 .as("findByCustomer(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-	}
-	
-	@Test
+    }
+
+    @Test
     public void testDataAccessError() {
         doThrow(new EntityExistsException()).when(excursionDao).create(any());
         doThrow(new EntityNotFoundException()).when(excursionDao).update(any());

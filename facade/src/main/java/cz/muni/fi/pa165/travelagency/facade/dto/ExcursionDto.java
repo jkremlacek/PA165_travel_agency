@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -27,71 +25,71 @@ public class ExcursionDto {
 
     private String description;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public Date getDuration() {
-		return duration;
-	}
+    public Date getDuration() {
+        return duration;
+    }
 
-	public void setDuration(Date duration) {
-		this.duration = duration;
-	}
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
 
-	public String getDestination() {
-		return destination;
-	}
+    public String getDestination() {
+        return destination;
+    }
 
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public TripDto getTrip() {
-		return trip;
-	}
+    public TripDto getTrip() {
+        return trip;
+    }
 
-	public void setTrip(TripDto trip) {
-		this.trip = trip;
-	}
-	
-	@Override
+    public void setTrip(TripDto trip) {
+        this.trip = trip;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || !(o instanceof ExcursionDto)) return false;
@@ -114,17 +112,17 @@ public class ExcursionDto {
         return result;
     }
 	
-	@Override
+    @Override
     public String toString() {
-        return "ExcursionDto{" +
+        return  "ExcursionDto{" +
                 "id=" + id +
                 ", name=" + name +
                 ", date=" + date +
                 ", duration=" + duration +
-				", destination=" + destination +
-				", price=" + price +
-				", trip=" + trip +
-				", description=" + description +
+                ", destination=" + destination +
+                ", price=" + price +
+                ", trip=" + trip +
+                ", description=" + description +
                 '}';
     }
 }

@@ -96,8 +96,8 @@ public interface UserService {
     /**
      * Find out is user is successfully authenticated or not
      * @param user which should be authenticated
-     * @param passwordHash to be use for authentication
-     * @return true if user eas successfully authenticated, false if wasn't
+     * @param password to be use for authentication
+     * @return true if user was successfully authenticated, false if wasn't
      */
-    boolean userAuthenticate(User user, String passwordHash);
+    boolean userAuthenticate(User user, String password);
 }

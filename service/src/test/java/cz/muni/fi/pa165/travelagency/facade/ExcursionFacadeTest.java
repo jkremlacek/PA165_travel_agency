@@ -29,46 +29,46 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(classes = ServiceConfig.class)
 public class ExcursionFacadeTest {
 	
-	@Mock
-	ExcursionService excursionService;
-	
-	@Mock
+    @Mock
+    ExcursionService excursionService;
+
+    @Mock
     MappingService mappingService;
 	
-	@InjectMocks
-	ExcursionFacade excursionFacade = new ExcursionFacadeImpl();
+    @InjectMocks
+    ExcursionFacade excursionFacade = new ExcursionFacadeImpl();
 	
-	private Trip t;
+    private Trip t;
     private TripDto tripDto;
 
     private Excursion e;
     private ExcursionDto excursionDto;
-	private ExcursionCreateDto excursionCreateDto;
+    private ExcursionCreateDto excursionCreateDto;
 	
-	@Before
+    @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+    MockitoAnnotations.initMocks(this);
 
-		Long tripId = 12L;
-		Calendar cal = Calendar.getInstance();
-		cal.set(2016, 12, 24);
-		Date dateFrom = cal.getTime();
-		cal.set(2017,1, 1);
-		Date dateTo = cal.getTime();
-		String tripDestination = "Austria";
-		String tripName = "Christmas Trip";
-		BigDecimal tripPrice = BigDecimal.valueOf(2000);
-		Integer tripCapacity = 50;
-		
-		t = new Trip(tripId);
-		t.setName(tripName);
-		t.setDateFrom(dateFrom);
-		t.setDateTo(dateTo);
-		t.setDestination(tripDestination);
-		t.setCapacity(tripCapacity);
-		t.setPrice(tripPrice);
-		
-		tripDto = new TripDto();
+        Long tripId = 12L;
+        Calendar cal = Calendar.getInstance();
+        cal.set(2016, 12, 24);
+        Date dateFrom = cal.getTime();
+        cal.set(2017,1, 1);
+        Date dateTo = cal.getTime();
+        String tripDestination = "Austria";
+        String tripName = "Christmas Trip";
+        BigDecimal tripPrice = BigDecimal.valueOf(2000);
+        Integer tripCapacity = 50;
+
+        t = new Trip(tripId);
+        t.setName(tripName);
+        t.setDateFrom(dateFrom);
+        t.setDateTo(dateTo);
+        t.setDestination(tripDestination);
+        t.setCapacity(tripCapacity);
+        t.setPrice(tripPrice);
+
+        tripDto = new TripDto();
         tripDto.setId(tripId);
         tripDto.setCapacity(tripCapacity);
         tripDto.setDateFrom(dateFrom);
@@ -77,32 +77,32 @@ public class ExcursionFacadeTest {
         tripDto.setName(tripName);
         tripDto.setPrice(tripPrice);
 		
-		when(mappingService.mapTo(tripDto, Trip.class)).thenReturn(t);
-		
-		cal.set(2016, 12, 25);
-		Date excursionDate = cal.getTime();
-		cal.set(0, 0, 0, 10, 0);
-		Date excursionDuration = cal.getTime();
-		
-		String excursionName = "Skiing at Dachstein";
-		String excursionDestination = "Dachstein";
-		BigDecimal excursionPrice = BigDecimal.valueOf(100);
-		
-		e = new Excursion();
-		e.setName(excursionName);
-		e.setDate(excursionDate);
-		e.setDuration(excursionDuration);
-		e.setDestination(excursionDestination);
-		e.setPrice(excursionPrice);
-		
-		excursionCreateDto = new ExcursionCreateDto();
+        when(mappingService.mapTo(tripDto, Trip.class)).thenReturn(t);
+
+        cal.set(2016, 12, 25);
+        Date excursionDate = cal.getTime();
+        cal.set(0, 0, 0, 10, 0);
+        Date excursionDuration = cal.getTime();
+
+        String excursionName = "Skiing at Dachstein";
+        String excursionDestination = "Dachstein";
+        BigDecimal excursionPrice = BigDecimal.valueOf(100);
+
+        e = new Excursion();
+        e.setName(excursionName);
+        e.setDate(excursionDate);
+        e.setDuration(excursionDuration);
+        e.setDestination(excursionDestination);
+        e.setPrice(excursionPrice);
+
+        excursionCreateDto = new ExcursionCreateDto();
         excursionCreateDto.setName(excursionName);
         excursionCreateDto.setDate(dateFrom);
         excursionCreateDto.setDuration(excursionDuration);
         excursionCreateDto.setDestination(excursionName);
         excursionCreateDto.setPrice(excursionPrice);
 		
-		excursionDto = new ExcursionDto();
+        excursionDto = new ExcursionDto();
         excursionDto.setName(excursionName);
         excursionDto.setDate(dateFrom);
         excursionDto.setDuration(excursionDate);
@@ -110,10 +110,10 @@ public class ExcursionFacadeTest {
         excursionDto.setPrice(excursionPrice);
 
         when(mappingService.mapTo(excursionDto, Excursion.class)).thenReturn(e);
-		when(mappingService.mapTo(excursionCreateDto, Excursion.class)).thenReturn(e);
-	}
+        when(mappingService.mapTo(excursionCreateDto, Excursion.class)).thenReturn(e);
+    }
 	
-	@Test
+    @Test
     public void testCreate() throws Exception {
         excursionFacade.create(excursionCreateDto);
         verify(excursionService).create(e);

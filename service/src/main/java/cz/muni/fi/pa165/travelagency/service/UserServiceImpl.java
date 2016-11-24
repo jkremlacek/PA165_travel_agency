@@ -85,8 +85,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean userAuthenticate(User user, String passwordHash) {
-        return validatePassword(passwordHash, user.getPasswordHash());
+    public boolean userAuthenticate(User user, String password) {
+        return validatePassword(password, user.getPasswordHash());
     }
     
         private static String createHash(String password) {
