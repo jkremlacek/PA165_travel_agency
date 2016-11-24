@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByPersonalNumber(Integer personalNumber) {
+    public List<User> findByPersonalNumber(Long personalNumber) {
         if (personalNumber == null)
             throw new NullPointerException("PersonalNumber can not be null.");
         return em.createQuery("SELECT c FROM User c WHERE c.personalNumber = :personalNumber ",User.class)

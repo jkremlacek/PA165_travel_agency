@@ -21,13 +21,13 @@ public class UserCreateDto {
     private String passwordHash;
     
     @NotNull
-    private boolean isAdmin;
+    private Boolean isAdmin;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
     @Column(nullable = false, unique = true)
-    private Integer personalNumber;
+    private Long personalNumber;
     
     @Email
     @Column(length = 50, nullable = true)
@@ -86,11 +86,11 @@ public class UserCreateDto {
         this.birthDate = birthDate;
     }
 
-    public Integer getPersonalNumber() {
+    public Long getPersonalNumber() {
         return personalNumber;
     }
 
-    public void setPersonalNumber(Integer personalNumber) {
+    public void setPersonalNumber(Long personalNumber) {
         this.personalNumber = personalNumber;
     }
 
@@ -119,11 +119,11 @@ public class UserCreateDto {
         this.passwordHash = passwordHash;
     }
     
-    public boolean isAdmin() {
+    public Boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
+    public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 }

@@ -38,7 +38,7 @@ public interface UserService {
      * @param personalNumber to find
      * @return list of users with given personal number
      */
-    List<User> findByPersonalNumber(Integer personalNumber);
+    List<User> findByPersonalNumber(Long personalNumber);
     
     /**
      * Find all users with given mail.
@@ -91,7 +91,7 @@ public interface UserService {
      * @param user user for which should be find out if is admin
      * @return true if user is admin and false is user isn't admin
      */
-    boolean isUserAdmin(User user);
+    Boolean isUserAdmin(User user);
     
     /**
      * Find out is user is successfully authenticated or not

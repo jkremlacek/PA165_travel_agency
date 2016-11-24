@@ -48,23 +48,23 @@ public class UserDaoImplTest {
 		
         c1 = new User();
         c1.setName("Bob");
-        c1.setPersonalNumber(12345);
+        c1.setPersonalNumber(12345l);
         c1.setBirthDate(calendar.getTime());
 	c1.setPhoneNumber(123456789);
 	c1.setMail("bob@bobspage.com");
         c1.setPasswordHash("password");
-        c1.setIsAdmin(false);
+        c1.setIsAdmin(Boolean.FALSE);
 
         calendar.set(1992,6,2);
 				
         c2 = new User();
         c2.setName("Eva");
-        c2.setPersonalNumber(54321);
+        c2.setPersonalNumber(54321l);
 	c2.setBirthDate(calendar.getTime());
 	c2.setPhoneNumber(987654321);
 	c2.setMail("eva@evaspage.com");
         c2.setPasswordHash("password");
-        c2.setIsAdmin(false);
+        c2.setIsAdmin(Boolean.FALSE);
 	
 	r1 = new Reservation();
         r1.setUser(c1);

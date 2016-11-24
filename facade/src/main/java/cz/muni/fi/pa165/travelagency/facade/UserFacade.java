@@ -63,7 +63,7 @@ public interface UserFacade {
      * @param personalNumber user personal number
      * @return users with given personal number
      */
-    List<UserDto> findByPersonalNumber(Integer personalNumber);
+    List<UserDto> findByPersonalNumber(Long personalNumber);
     
     /**
      * Find users by mail
@@ -91,7 +91,7 @@ public interface UserFacade {
      * @param user user
      * @return true if user is admin, false if user isn't admin
      */
-    boolean isUserAdmin(UserDto user);
+    Boolean isUserAdmin(UserDto user);
     
     /**
      * Find out if user was successfully authenticated

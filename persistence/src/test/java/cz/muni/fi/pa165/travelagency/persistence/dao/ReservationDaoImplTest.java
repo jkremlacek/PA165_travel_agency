@@ -50,15 +50,15 @@ public class ReservationDaoImplTest {
     public void setup() {
         c1 = new User();
         c1.setName("Martin");
-        c1.setPersonalNumber(12345);
+        c1.setPersonalNumber(12345l);
         c1.setPasswordHash("password");
-        c1.setIsAdmin(false);
+        c1.setIsAdmin(Boolean.FALSE);
 
         c2 = new User();
         c2.setName("Pepa");
-        c2.setPersonalNumber(54321);
+        c2.setPersonalNumber(54321l);
         c2.setPasswordHash("password");
-        c2.setIsAdmin(false);
+        c2.setIsAdmin(Boolean.FALSE);
 
         Calendar cal = Calendar.getInstance();
         cal.set(2017, 8, 15);

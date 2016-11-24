@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByPersonalNumber(Integer personalNumber) {
+    public List<User> findByPersonalNumber(Long personalNumber) {
         return userDao.findByPersonalNumber(personalNumber);
     }
 
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserAdmin(User user) {
+    public Boolean isUserAdmin(User user) {
         return user.getIsAdmin();
     }
 

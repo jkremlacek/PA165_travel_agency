@@ -72,10 +72,10 @@ public class UserServiceTest {
         
         johnBedarUser = new User();
         johnBedarUser.setName("John Bedar");
-        johnBedarUser.setPersonalNumber(92072147);
+        johnBedarUser.setPersonalNumber(92072147l);
         cal.set(1992, 7, 21);
         johnBedarUser.setBirthDate(cal.getTime());
-        johnBedarUser.setIsAdmin(false);
+        johnBedarUser.setIsAdmin(Boolean.FALSE);
         johnBedarUser.setPasswordHash("mypass");
         johnBedarUser.setMail("john.bedar@comp.nz");
         johnBedarUser.setPhoneNumber(Integer.valueOf("698425741"));
@@ -178,8 +178,8 @@ public class UserServiceTest {
     
     @Test
     public void testFindByPersonalNumber() {
-        userService.findByPersonalNumber(92072147);
-        verify(userDao).findByPersonalNumber(92072147);
+        userService.findByPersonalNumber(92072147l);
+        verify(userDao).findByPersonalNumber(92072147l);
     }
 
     @Test

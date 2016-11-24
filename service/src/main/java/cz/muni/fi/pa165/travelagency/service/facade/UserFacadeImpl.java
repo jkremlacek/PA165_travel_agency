@@ -71,7 +71,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public List<UserDto> findByPersonalNumber(Integer personalNumber) {
+    public List<UserDto> findByPersonalNumber(Long personalNumber) {
         return mappingService.mapTo(userService.findByPersonalNumber(personalNumber), UserDto.class);
     }
 
@@ -102,7 +102,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public boolean isUserAdmin(UserDto user) {
+    public Boolean isUserAdmin(UserDto user) {
         return userService.isUserAdmin(mappingService.mapTo(user, User.class));
     }
 

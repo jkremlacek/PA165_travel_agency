@@ -44,7 +44,7 @@ public class User {
     private Date birthDate;
     
     @Column(nullable = false, unique = true)
-    private Integer personalNumber;
+    private Long personalNumber;
     
     @Email
     @Column(length = 50, nullable = true)
@@ -96,7 +96,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, Date birthDate, Integer personalNumber, String mail, Integer phoneNumber) {
+    public User(String name, Date birthDate, Long personalNumber, String mail, Integer phoneNumber) {
         this.name = name;
         this.birthDate = birthDate;
         this.personalNumber = personalNumber;
@@ -121,11 +121,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public Integer getPersonalNumber() {
+    public Long getPersonalNumber() {
         return personalNumber;
     }
 
-    public void setPersonalNumber(Integer personalNumber) {
+    public void setPersonalNumber(Long personalNumber) {
         this.personalNumber = personalNumber;
     }
 

@@ -35,7 +35,7 @@ public interface UserDao extends GenericDao<User, Long> {
      * @param personalNumber to find
      * @return list of users with given personal number
      */
-    List<User> findByPersonalNumber(Integer personalNumber);
+    List<User> findByPersonalNumber(Long personalNumber);
 
     /**
      * Method to find all Users with given mail

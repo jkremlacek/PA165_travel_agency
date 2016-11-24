@@ -76,22 +76,22 @@ public class ReservationServiceTest {
         calendar.set(1991,1,1);
         user1.setBirthDate(calendar.getTime());
         calendar.clear();
-        user1.setIsAdmin(false);
+        user1.setIsAdmin(Boolean.FALSE);
         user1.setMail("mail@mail.com");
         user1.setName("Jan");
         user1.setPasswordHash("heslo");
-        user1.setPersonalNumber(123456789);
+        user1.setPersonalNumber(123456789l);
         user1.setPhoneNumber(777777777);
         
         User user2 = new User(2l);
         calendar.set(1990,5,5);
         user2.setBirthDate(calendar.getTime());
         calendar.clear();
-        user2.setIsAdmin(false);
+        user2.setIsAdmin(Boolean.FALSE);
         user2.setMail("m@mail.com");
         user2.setName("Jana");
         user2.setPasswordHash("mojeheslo");
-        user2.setPersonalNumber(111111111);
+        user2.setPersonalNumber(111111111l);
         user2.setPhoneNumber(777777776);
         
         trip1 = new Trip(1l);
