@@ -8,10 +8,10 @@ import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ValidationException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Matchers.any;
@@ -96,12 +95,54 @@ public class UserServiceTest {
         verify(userDao).create(johnBedarUser);
     }
 
+    @Test(expected = Exception.class)
+    public void testCreateExisting() {
+        userService.createRegisteredUser(johnBedarUser, "password");
+        doThrow(new Exception()).when(userDao).create(johnBedarUser);
+        userService.createRegisteredUser(johnBedarUser, "password");
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testCreateWithoutName() {
+        johnBedarUser.setName(null);
+        doThrow(new ValidationException()).when(userDao).create(johnBedarUser);
+        userService.createRegisteredUser(johnBedarUser, "johnBedarUser");
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testCreateWithoutPersonalNumber() {
+        johnBedarUser.setPersonalNumber(null);
+        doThrow(new ValidationException()).when(userDao).create(johnBedarUser);
+        userService.createRegisteredUser(johnBedarUser, "johnBedarUser");
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testCreateWithoutIsAdmin() {
+        johnBedarUser.setIsAdmin(null);
+        doThrow(new ValidationException()).when(userDao).create(johnBedarUser);
+        userService.createRegisteredUser(johnBedarUser, "johnBedarUser");
+    }
+    
     @Test
     public void testUpdate() {
         userService.createRegisteredUser(johnBedarUser, "password");
         johnBedarUser.setPhoneNumber(Integer.valueOf("516456168"));
         userService.update(johnBedarUser);
         verify(userDao).update(johnBedarUser);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testUpdateNonExisting() {
+        User user = new User();
+        doThrow(new Exception()).when(userDao).update(user);
+        userService.update(user);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testDeleteNonExisting() {
+        User user = new User();
+        doThrow(new Exception()).when(userDao).delete(user);
+        userService.delete(user);
     }
     
     @Test
@@ -113,10 +154,10 @@ public class UserServiceTest {
     
     @Test
     public void testFindById() {
-        /*johnBedarUser.setId(Long.valueOf("13"));
+        johnBedarUser.setId(Long.valueOf("13"));
         when(userDao.findById(johnBedarUser.getId())).thenReturn(johnBedarUser);
         assertThat(userService.findById(johnBedarUser.getId()))
-                .isEqualToComparingFieldByField(johnBedarUser);*/
+                .isEqualToComparingFieldByField(johnBedarUser);
         userService.findById(Long.valueOf("13"));
         verify(userDao).findById(Long.valueOf("13"));
                 
@@ -169,12 +210,30 @@ public class UserServiceTest {
     public void testIsUserAdmin() {
         assertThat(userService.isUserAdmin(johnBedarUser)).isFalse();
     }
+    
+    @Test
+    public void testUserAuthenticate() {
+        userService.createRegisteredUser(johnBedarUser, "password");
+        assertThat(johnBedarUser).isNotNull();
+        assertThat(johnBedarUser.getPasswordHash()).isNotNull();
+        
+        boolean authenticated = userService.userAuthenticate(johnBedarUser, "badPassword");
+        assertThat(authenticated).isFalse();
+        
+        authenticated = userService.userAuthenticate(johnBedarUser, "password");
+        assertThat(authenticated).isTrue();
+    }
+    
+    @Test(expected = DataAccessException.class)
+    public void testDataAccessErrorCreateUser() {
+        doThrow(new EntityExistsException()).when(userDao).create(any());
+        userService.createRegisteredUser(johnBedarUser, "password");
+    }
 
     @Test
     public void testDataAccessError() {
-    //    doThrow(new EntityExistsException()).when(userDao).create(any());
         doThrow(new EntityNotFoundException()).when(userDao).update(any());
-      /*  doThrow(new EntityNotFoundException()).when(userDao).delete(any());
+        doThrow(new EntityNotFoundException()).when(userDao).delete(any());
         doThrow(new EntityNotFoundException()).when(userDao).findById(any());
         doThrow(new EntityNotFoundException()).when(userDao).findByName(any());
         doThrow(new EntityNotFoundException()).when(userDao).findByBirthDate(any());
@@ -183,14 +242,10 @@ public class UserServiceTest {
         doThrow(new EntityNotFoundException()).when(userDao).findByPhoneNumber(any());
         doThrow(new EntityNotFoundException()).when(userDao).findByReservation(any());
 
-        assertThatThrownBy(() -> userService.createRegisteredUser(any(), any()))
-                .as("createRegisteredUser() should throw DataAccessException")
-                .isInstanceOf(DataAccessException.class);*/
-      
         assertThatThrownBy(() -> userService.update(any()))
                 .as("update() should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
-/*
+
         assertThatThrownBy(() -> userService.delete(any()))
                 .as("delete() should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
@@ -217,7 +272,7 @@ public class UserServiceTest {
 
         assertThatThrownBy(() -> userService.findByReservation(any()))
                 .as("findByReservation() should throw DataAccessException")
-                .isInstanceOf(DataAccessException.class);*/
+                .isInstanceOf(DataAccessException.class);
     }
     
     @Test
@@ -233,10 +288,14 @@ public class UserServiceTest {
         doThrow(new NullPointerException()).when(userDao).findByPhoneNumber(null);
         doThrow(new NullPointerException()).when(userDao).findByReservation(null);
 
-        assertThatThrownBy(() -> userService.createRegisteredUser(null, null))
-                .as("createRegisteredUser(null, null) should throw NullPointerException")
+        assertThatThrownBy(() -> userService.createRegisteredUser(null, "password"))
+                .as("createRegisteredUser(null, 'password') should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
+        assertThatThrownBy(() -> userService.createRegisteredUser(johnBedarUser, null))
+                .as("createRegisteredUser(user, null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);        
+        
         assertThatThrownBy(() -> userService.delete(null))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
@@ -265,8 +324,16 @@ public class UserServiceTest {
                 .as("findByPhoneNumber(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
-        assertThatThrownBy(() -> userService.findByReservation( null))
+        assertThatThrownBy(() -> userService.findByReservation(null))
                 .as("findByReservation(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        
+        assertThatThrownBy(() -> userService.userAuthenticate(null, "password"))
+                .as("userAuthenticate(null, \"password\") should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        
+        assertThatThrownBy(() -> userService.userAuthenticate(johnBedarUser, null))
+                .as("userAuthenticate(user, null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
     }
     

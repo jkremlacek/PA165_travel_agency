@@ -35,7 +35,7 @@ public class User {
     private String passwordHash;
     
     @NotNull
-    private boolean isAdmin;
+    private Boolean isAdmin;
     
     @NotBlank
     private String name;
@@ -177,11 +177,11 @@ public class User {
         this.passwordHash = passwordHash;
     }
     
-    public boolean getIsAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
+    public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
     
