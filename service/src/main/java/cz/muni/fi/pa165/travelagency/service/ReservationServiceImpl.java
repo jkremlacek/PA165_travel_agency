@@ -121,8 +121,10 @@ public class ReservationServiceImpl implements ReservationService {
         try {
             Reservation reservation = reservationDao.findById(reservationId);
             BigDecimal total = reservation.getTrip().getPrice();
-            for (Excursion excursion : reservation.getExcursionSet()) {
-                total = total.add(excursion.getPrice());
+            if(reservation.getExcursionSet() != null) {
+                for (Excursion excursion : reservation.getExcursionSet()) {
+                    total = total.add(excursion.getPrice());
+                }
             }
             return total;
         } catch (NullPointerException ex) {
