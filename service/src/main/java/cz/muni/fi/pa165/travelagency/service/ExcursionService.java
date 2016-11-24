@@ -13,6 +13,8 @@ import java.util.List;
 public interface ExcursionService {
 	
 	void create(Excursion excursion);
+	
+	void update(Excursion excursion);
 
     void delete(Excursion excursion);
 
