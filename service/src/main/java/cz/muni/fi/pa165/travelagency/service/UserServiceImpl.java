@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.travelagency.service;
 import cz.muni.fi.pa165.travelagency.persistence.dao.UserDao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
+import cz.muni.fi.pa165.travelagency.service.exception.PersistenceException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Date;
@@ -24,69 +25,147 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userDao.findById(id);
+        try {
+            return userDao.findById(id);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public List<User> findByName(String name) {
-        return userDao.findByName(name);
+        try {
+            return userDao.findByName(name);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public List<User> findByPersonalNumber(Long personalNumber) {
-        return userDao.findByPersonalNumber(personalNumber);
+        try {
+            return userDao.findByPersonalNumber(personalNumber);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public List<User> findByMail(String mail) {
-        return userDao.findByMail(mail);
+        try {
+            return userDao.findByMail(mail);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public List<User> findByPhoneNumber(Integer phoneNumber) {
-        return userDao.findByPhoneNumber(phoneNumber);
+        try {
+            return userDao.findByPhoneNumber(phoneNumber);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public List<User> findByReservation(Reservation reservation) {
-        return userDao.findByReservation(reservation);
+        try {
+            return userDao.findByReservation(reservation);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public List<User> findAll() {
-        return userDao.findAll();
+        try {
+            return userDao.findAll();
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public void delete(User user) {
-        userDao.delete(user);
+        try {
+            userDao.delete(user);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
     
     @Override
     public void createRegisteredUser(User user, String password) {
-         user.setPasswordHash(createHash(password));
-         userDao.create(user);
+        try {
+            user.setPasswordHash(createHash(password));
+            userDao.create(user);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
         
     }
 
     @Override
     public List<User> findByBirthDate(Date date) {
-        return userDao.findByBirthDate(date);
+        try {
+            return userDao.findByBirthDate(date);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public void update(User user) {
-        userDao.update(user);
+        try {
+            userDao.update(user);
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public Boolean isUserAdmin(User user) {
-        return user.getIsAdmin();
+        try {
+            return user.getIsAdmin();
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
 
     @Override
     public boolean userAuthenticate(User user, String password) {
-        return validatePassword(password, user.getPasswordHash());
+        try {
+            return validatePassword(password, user.getPasswordHash());
+        } catch (NullPointerException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PersistenceException(ex.getMessage());
+        }
     }
     
         private static String createHash(String password) {
