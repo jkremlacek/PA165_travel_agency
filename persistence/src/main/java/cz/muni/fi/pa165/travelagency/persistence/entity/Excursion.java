@@ -5,6 +5,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created on 19.10.2016.
@@ -38,6 +40,9 @@ public class Excursion {
 
     @ManyToOne
     private Trip trip;
+
+    @ManyToMany
+    private Set<Reservation> reservations = new HashSet<>();
 
     private String description;
 
@@ -122,6 +127,14 @@ public class Excursion {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override
