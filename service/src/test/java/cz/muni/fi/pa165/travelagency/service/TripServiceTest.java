@@ -404,7 +404,7 @@ public class TripServiceTest {
                 .as("findByPrice(any(), any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
-        assertThatThrownBy(() -> tripService.findByAvailableCapacity(any()))
+        assertThatThrownBy(() -> tripService.findByAvailableCapacity(5))
                 .as("findByAvailableCapacity(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
