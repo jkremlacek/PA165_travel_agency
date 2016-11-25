@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import javax.persistence.EntityExistsException;
+import javax.validation.ValidationException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.hibernate.service.spi.ServiceException;
 import static org.junit.Assert.assertEquals;
@@ -291,7 +292,7 @@ public class ReservationServiceTest {
         reservationService.addExcursion(reservation1.getId(), null);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void testAddBadExcursion() {   
         reservation1.setTrip(trip2);
         reservation1.setUser(user1);
