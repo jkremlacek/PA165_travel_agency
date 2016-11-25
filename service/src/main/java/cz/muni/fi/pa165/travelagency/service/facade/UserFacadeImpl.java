@@ -42,9 +42,7 @@ public class UserFacadeImpl implements UserFacade {
             throw new IllegalArgumentException("Password is empty");
         }
         User mapped = mappingService.mapTo(user, User.class);
-	userService.createRegisteredUser(mapped, user.getPasswordHash());
-	userService.createRegisteredUser(mappingService.mapTo(user, User.class), user.getPasswordHash());
-        
+	userService.createRegisteredUser(mapped, user.getPasswordHash());	        
     }
 
     @Override
