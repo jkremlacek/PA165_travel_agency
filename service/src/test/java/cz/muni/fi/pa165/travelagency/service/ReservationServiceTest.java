@@ -277,8 +277,12 @@ public class ReservationServiceTest {
         reservation1.setUser(user1);
         reservationService.create(reservation1);   
         when(reservationDao.findById(1l)).thenReturn(reservation1);
-        assertEquals("Excursion1 should be in reservation",reservationService.addExcursion(reservation1.getId(), excursion1).getExcursionSet(),reservation1.getExcursionSet());
-        assertEquals("Two excursions should be in reservation",reservationService.addExcursion(reservation1.getId(), excursion2).getExcursionSet().size(),2);        
+        assertEquals("Excursion1 should be in reservation",reservationService
+                .addExcursion(reservation1.getId(), excursion1)
+                .getExcursionSet(),reservation1.getExcursionSet());
+        assertEquals("Two excursions should be in reservation",reservationService
+                .addExcursion(reservation1.getId(), excursion2)
+                .getExcursionSet().size(),2);        
     }
     
     @Test(expected = NullPointerException.class)
@@ -302,11 +306,14 @@ public class ReservationServiceTest {
         reservation1.setUser(user1);
         reservationService.create(reservation1);
         when(reservationDao.findById(1l)).thenReturn(reservation1);              
-        assertEquals("Total price when reservation contains only trip without excursion",reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5000));
+        assertEquals("Total price when reservation contains only trip without excursion",
+                reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5000));
         reservationService.addExcursion(reservation1.getId(), excursion1);
-        assertEquals("Total price when reservation contains trip with 1 excursion",reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5080));
+        assertEquals("Total price when reservation contains trip with 1 excursion",
+                reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5080));
         reservationService.addExcursion(reservation1.getId(), excursion2);
-        assertEquals("Total price when reservation contains trip with 2 excursions",reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5180));        
+        assertEquals("Total price when reservation contains trip with 2 excursions",
+                reservationService.getTotalPrice(reservation1.getId()),BigDecimal.valueOf(5180));        
     }
     
     @Test(expected = NullPointerException.class)

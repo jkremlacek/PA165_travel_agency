@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserDaoImplTest {
 	
     @Inject
-    private UserDao userDaoImpl;
+    private UserDao userDao;
 	
     @PersistenceContext
     private EntityManager em;
@@ -79,7 +78,7 @@ public class UserDaoImplTest {
     @Test
     @Transactional
     public void create() throws Exception {
-        userDaoImpl.create(c1);
+        userDao.create(c1);
 
         assertThat(c1.getId())
                 .as("Persisted user should have id assigned")
@@ -97,7 +96,7 @@ public class UserDaoImplTest {
 		
         c1.setName("Bobek");
 
-        userDaoImpl.update(c1);
+        userDao.update(c1);
 
         assertThat(em.find(User.class, c1.getId()).getName())
                 .as("Updated user should have new name")
@@ -110,7 +109,7 @@ public class UserDaoImplTest {
         em.persist(c1);
         em.persist(r1);
 
-        userDaoImpl.delete(c1);
+        userDao.delete(c1);
 
         assertThat(em.find(User.class,c1.getId()))
                 .as("Deleted user should not be accessible by entity manager")
@@ -123,11 +122,11 @@ public class UserDaoImplTest {
         em.persist(c1);
         em.persist(r1);
 		
-        assertThat(userDaoImpl.findById(c1.getId()+1))
+        assertThat(userDao.findById(c1.getId()+1))
                 .as("No user should be found")
                 .isNull();
 
-        User found = userDaoImpl.findById(c1.getId());
+        User found = userDao.findById(c1.getId());
 
         assertThat(found)
                 .as("Found User should be accessible by findById")
@@ -141,7 +140,7 @@ public class UserDaoImplTest {
     @Test
     @Transactional
     public void findAll() throws Exception {
-        List<User> all = userDaoImpl.findAll();
+        List<User> all = userDao.findAll();
         assertThat(all.size())
                 .as("No user should be found")
                 .isEqualTo(0);
@@ -149,7 +148,7 @@ public class UserDaoImplTest {
         em.persist(c1);
         em.persist(r1);
 		
-        all = userDaoImpl.findAll();
+        all = userDao.findAll();
 
         assertThat(all.size())
                 .as("Exactly 1 object should be found by dao")
@@ -162,25 +161,25 @@ public class UserDaoImplTest {
 	
     @Test
     public void nullParameters(){
-        assertThatThrownBy(() -> userDaoImpl.create(null))
+        assertThatThrownBy(() -> userDao.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> userDaoImpl.update(null))
+        assertThatThrownBy(() -> userDao.update(null))
                 .as("update(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> userDaoImpl.delete(null))
+        assertThatThrownBy(() -> userDao.delete(null))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> userDaoImpl.findByReservation(null))
+        assertThatThrownBy(() -> userDao.findByReservation(null))
                 .as("findByReservation(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> userDaoImpl.findByName(null))
+        assertThatThrownBy(() -> userDao.findByName(null))
                 .as("findByName(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-		assertThatThrownBy(() -> userDaoImpl.findByMail(null))
+		assertThatThrownBy(() -> userDao.findByMail(null))
                 .as("findByMail(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> userDaoImpl.findById(null))
+        assertThatThrownBy(() -> userDao.findById(null))
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
@@ -195,7 +194,7 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 
-        List<User> found = userDaoImpl.findByName(c1.getName());
+        List<User> found = userDao.findByName(c1.getName());
 
         assertThat(found)
                 .as("Found list of users should have exactly 1 item")
@@ -215,7 +214,7 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 
-        List<User> found = userDaoImpl.findByBirthDate(c1.getBirthDate());
+        List<User> found = userDao.findByBirthDate(c1.getBirthDate());
 
         assertThat(found)
                 .as("Found list of users should have exactly 1 item")
@@ -235,7 +234,7 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 
-        List<User> found = userDaoImpl.findByPersonalNumber(c1.getPersonalNumber());
+        List<User> found = userDao.findByPersonalNumber(c1.getPersonalNumber());
 
         assertThat(found)
                 .as("Found list of users should have exactly 1 item")
@@ -255,7 +254,7 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 
-        List<User> found = userDaoImpl.findByMail(c1.getMail());
+        List<User> found = userDao.findByMail(c1.getMail());
 
         assertThat(found)
                 .as("Found list of users should have exactly 1 item")
@@ -275,7 +274,7 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 		
-        List<User> found = userDaoImpl.findByPhoneNumber(c1.getPhoneNumber());
+        List<User> found = userDao.findByPhoneNumber(c1.getPhoneNumber());
 
         assertThat(found)
                 .as("Found list of users should have exactly 1 item")
@@ -295,7 +294,7 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 
-        List<User> found = userDaoImpl.findByReservation(r1);
+        List<User> found = userDao.findByReservation(r1);
 
         assertThat(found)
                 .as("Found list of users should have exactly 1 item")

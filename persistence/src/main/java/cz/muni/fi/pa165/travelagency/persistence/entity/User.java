@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -40,6 +41,7 @@ public class User {
     @NotBlank
     private String name;
     
+    @Past     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
@@ -63,9 +65,9 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.name);
-        hash = 47 * hash + Objects.hashCode(this.personalNumber);
-        hash = 47 * hash + Objects.hashCode(this.mail);
+        hash = 47 * hash + Objects.hashCode(this.getName());
+        hash = 47 * hash + Objects.hashCode(this.getPersonalNumber());
+        hash = 47 * hash + Objects.hashCode(this.getMail());
         return hash;
     }
 
@@ -81,13 +83,13 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.name, other.getName())) {
+        if (!Objects.equals(this.getName(), other.getName())) {
             return false;
         }
-        if (!Objects.equals(this.mail, other.getMail())) {
+        if (!Objects.equals(this.getMail(), other.getMail())) {
             return false;
         }
-        if (!Objects.equals(this.personalNumber, other.getPersonalNumber())) {
+        if (!Objects.equals(this.getPersonalNumber(), other.getPersonalNumber())) {
             return false;
         }
         return true;

@@ -20,7 +20,7 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param name of trips to be looked up
      * @return trips with given name as List
      */
-    public List<Trip> findByName(String name);
+    List<Trip> findByName(String name);
 	
     /**
      * 
@@ -30,7 +30,7 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param to end of required date range
      * @return trips within range as List
      */
-    public List<Trip> findByDate(Date from, Date to);
+    List<Trip> findByDate(Date from, Date to);
 	
     /**
      * 
@@ -39,7 +39,7 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param destination of trips to be looked up
      * @return trips in destination as List
      */
-    public List<Trip> findByDestination(String destination);
+    List<Trip> findByDestination(String destination);
 	
     /**
      * 
@@ -49,7 +49,7 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param maxPrice maximal price of trip
      * @return trips within price range as List
      */
-    public List<Trip> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
+    List<Trip> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
 	
     /**
      * 
@@ -58,7 +58,7 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param capacity free capacity of trip
      * @return trips with enough capacity as List
      */
-    public List<Trip> findByTotalCapacity(Integer capacity);
+    List<Trip> findByTotalCapacity(Integer capacity);
 	
 	
     /**
@@ -68,6 +68,6 @@ public interface TripDao extends GenericDao<Trip, Long>{
      * @param excursion to find
      * @return trips with excursion as List
      */
-    public List<Trip> findByExcursion(Excursion excursion);
+    List<Trip> findByExcursion(Excursion excursion);
     
 }

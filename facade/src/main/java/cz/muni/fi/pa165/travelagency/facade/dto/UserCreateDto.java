@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -23,6 +24,7 @@ public class UserCreateDto {
     @NotNull
     private Boolean isAdmin;
     
+    @Past    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     

@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ReservationDaoImplTest {
 
     @Inject
-    private ReservationDao reservationDaoImpl;
+    private ReservationDao reservationDao;
 
     @PersistenceContext
     private EntityManager em;
@@ -97,7 +97,7 @@ public class ReservationDaoImplTest {
     @Test
     @Transactional
     public void testCreate() throws Exception {
-        reservationDaoImpl.create(r1);
+        reservationDao.create(r1);
 
         assertThat(r1.getId())
                 .as("Persisted reservation should have id assigned")
@@ -116,7 +116,7 @@ public class ReservationDaoImplTest {
         em.persist(e1);
         r1.setUser(c2);
 
-        reservationDaoImpl.update(r1);
+        reservationDao.update(r1);
 
         assertThat(em.find(Reservation.class, r1.getId()).getUser().getId())
                 .as("Updated reservation should have new user")
@@ -126,15 +126,15 @@ public class ReservationDaoImplTest {
     @Test
     @Transactional
     public void testDelete() throws Exception {
-        reservationDaoImpl.delete(r1);
+        
 
-        assertThatThrownBy(() -> em.find(Reservation.class, r1.getId()))
+        assertThatThrownBy(() -> reservationDao.delete(r1))
                 .as("Deleted reservation should not be accessible by entity manager")
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(NullPointerException.class);
 
         em.persist(r1);
 
-        reservationDaoImpl.delete(r1);
+        reservationDao.delete(r1);
 
         assertThat(em.find(Reservation.class, r1.getId()))
                 .as("Deleted reservation should not be accessible by entity manager")
@@ -146,7 +146,7 @@ public class ReservationDaoImplTest {
     public void testFindById() throws Exception {
         em.persist(r1);
 
-        Reservation found = reservationDaoImpl.findById(r1.getId());
+        Reservation found = reservationDao.findById(r1.getId());
 
         assertThat(found)
                 .as("Found Reservation should be accessible by findById")
@@ -160,7 +160,7 @@ public class ReservationDaoImplTest {
     @Test
     @Transactional
     public void testFindAll() throws Exception {
-        List<Reservation> all = reservationDaoImpl.findAll();
+        List<Reservation> all = reservationDao.findAll();
         assertThat(all.size())
                 .as("No reservation should be found")
                 .isEqualTo(0);
@@ -169,7 +169,7 @@ public class ReservationDaoImplTest {
         em.persist(t1);
         em.persist(e1);
         em.persist(r1);
-        all = reservationDaoImpl.findAll();
+        all = reservationDao.findAll();
 
         assertThat(all.size())
                 .as("Exactly 1 object should be found by dao")
@@ -188,7 +188,7 @@ public class ReservationDaoImplTest {
         em.persist(e1);
         em.persist(r1);
 
-        List<Reservation> found = reservationDaoImpl.findByUser(c1);
+        List<Reservation> found = reservationDao.findByUser(c1);
 
         assertThat(found)
                 .as("Found list of reservations should have exactly 1 item")
@@ -207,7 +207,7 @@ public class ReservationDaoImplTest {
         em.persist(e1);
         em.persist(r1);
 
-        List<Reservation> found = reservationDaoImpl.findByTrip(t1);
+        List<Reservation> found = reservationDao.findByTrip(t1);
 
         assertThat(found)
                 .as("Found list of reservations should have exactly 1 item")
@@ -221,7 +221,7 @@ public class ReservationDaoImplTest {
     @Test
     public void testCreateWithNullUser() {
         r1.setUser(null);
-        assertThatThrownBy(() -> reservationDaoImpl.create(r1))
+        assertThatThrownBy(() -> reservationDao.create(r1))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(ValidationException.class);
     }
@@ -229,29 +229,29 @@ public class ReservationDaoImplTest {
     @Test
     public void testCreateWithNullTrip() {
         r1.setTrip(null);
-        assertThatThrownBy(() -> reservationDaoImpl.create(r1))
+        assertThatThrownBy(() -> reservationDao.create(r1))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(ValidationException.class);
     }
 
     @Test
     public void testNullArguments() {
-        assertThatThrownBy(() -> reservationDaoImpl.create(null))
+        assertThatThrownBy(() -> reservationDao.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> reservationDaoImpl.update(null))
+        assertThatThrownBy(() -> reservationDao.update(null))
                 .as("update(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> reservationDaoImpl.delete(null))
+        assertThatThrownBy(() -> reservationDao.delete(null))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> reservationDaoImpl.findByUser(null))
+        assertThatThrownBy(() -> reservationDao.findByUser(null))
                 .as("findByUser(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> reservationDaoImpl.findByTrip(null))
+        assertThatThrownBy(() -> reservationDao.findByTrip(null))
                 .as("findByTrip(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> reservationDaoImpl.findById(null))
+        assertThatThrownBy(() -> reservationDao.findById(null))
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
     }
@@ -263,7 +263,7 @@ public class ReservationDaoImplTest {
         em.persist(e1);
         r1.setUser(c2);
 
-        reservationDaoImpl.update(r1);
+        reservationDao.update(r1);
 
         assertThatThrownBy(() -> em.find(Reservation.class, r1.getId()))
                 .as("Reservation should not be persisted by update without previous create")

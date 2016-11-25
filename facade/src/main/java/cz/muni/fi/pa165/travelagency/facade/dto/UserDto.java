@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.travelagency.facade.dto;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
 /**
  * DTO for user entity
  * @author Kateřina Caletková

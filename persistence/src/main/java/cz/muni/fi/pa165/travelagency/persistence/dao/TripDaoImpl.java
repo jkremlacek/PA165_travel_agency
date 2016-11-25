@@ -139,7 +139,7 @@ public class TripDaoImpl implements TripDao {
         if (entity.getId() == null) {
             throw new ValidationException("Trip id is null.");
         }
-        em.remove(entity);
+        em.remove(findById(entity.getId()));
     }
 
     @Override

@@ -128,10 +128,10 @@ public class TripCreateDto {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.name);
-        hash = 23 * hash + Objects.hashCode(this.dateFrom);
-        hash = 23 * hash + Objects.hashCode(this.dateTo);
-        hash = 23 * hash + Objects.hashCode(this.destination);
+        hash = 23 * hash + Objects.hashCode(this.getName());
+        hash = 23 * hash + Objects.hashCode(this.getDateFrom());
+        hash = 23 * hash + Objects.hashCode(this.getDateTo());
+        hash = 23 * hash + Objects.hashCode(this.getDestination());
         return hash;
     }
 
@@ -147,16 +147,16 @@ public class TripCreateDto {
             return false;
         }
         final TripCreateDto other = (TripCreateDto) obj;
-        if (!Objects.equals(this.name, other.getName())) {
+        if (!Objects.equals(this.getName(), other.getName())) {
             return false;
         }
-        if (!Objects.equals(this.destination, other.getDestination())) {
+        if (!Objects.equals(this.getDestination(), other.getDestination())) {
             return false;
         }
-        if (!Objects.equals(this.dateFrom, other.getDateFrom())) {
+        if (!Objects.equals(this.getDateFrom(), other.getDateFrom())) {
             return false;
         }
-        if (!Objects.equals(this.dateTo, other.getDateTo())) {
+        if (!Objects.equals(this.getDateTo(), other.getDateTo())) {
             return false;
         }
         return true;

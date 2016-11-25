@@ -15,7 +15,6 @@ import cz.muni.fi.pa165.travelagency.service.facade.UserFacadeImpl;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

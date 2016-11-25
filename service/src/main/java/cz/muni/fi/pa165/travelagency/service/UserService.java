@@ -72,19 +72,19 @@ public interface UserService {
      * @param user to be created and registrated
      * @param password to be hashed and set with user
      */
-    public void createRegisteredUser(User user, String password);
+    void createRegisteredUser(User user, String password);
     
      /**
      * Update an entity.
      * @param user to update
      */
-    public void update(User user);
+    void update(User user);
     
     /**
      * Delete user.
      * @param user to delete
      */
-    public void delete(User user);
+    void delete(User user);
     
     /**
      * Find out if user is admin

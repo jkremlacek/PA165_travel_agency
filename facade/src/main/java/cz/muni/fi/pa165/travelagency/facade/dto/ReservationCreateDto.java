@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 

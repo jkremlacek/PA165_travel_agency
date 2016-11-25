@@ -20,7 +20,7 @@ public interface ReservationDao extends GenericDao<Reservation, Long>{
      * @param user reservation of this user will be find
      * @return reservations of user as List
      */
-    public List<Reservation> findByUser(User user);
+    List<Reservation> findByUser(User user);
     
     /**
      * 
@@ -29,5 +29,5 @@ public interface ReservationDao extends GenericDao<Reservation, Long>{
      * @param trip reservation of this trip will be find
      * @return reservations of trip as List
      */
-    public List<Reservation> findByTrip(Trip trip);
+    List<Reservation> findByTrip(Trip trip);
 }

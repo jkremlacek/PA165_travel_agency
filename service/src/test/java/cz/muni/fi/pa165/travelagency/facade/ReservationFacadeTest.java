@@ -107,8 +107,10 @@ public class ReservationFacadeTest {
         reservationDto1.setTrip(tripDto1);
         reservationDto1.setUser(userDto1);
 
-        when(mappingService.mapTo(reservationCreateDto1, Reservation.class)).thenReturn(reservation1);
-        when(mappingService.mapTo(reservationDto1, Reservation.class)).thenReturn(reservation1);
+        when(mappingService.mapTo(reservationCreateDto1, Reservation.class))
+                .thenReturn(reservation1);
+        when(mappingService.mapTo(reservationDto1, Reservation.class))
+                .thenReturn(reservation1);
         when(mappingService.mapTo(tripDto1, Trip.class)).thenReturn(trip1);
         when(mappingService.mapTo(userDto1, User.class)).thenReturn(user1);
     }

@@ -17,7 +17,7 @@ public interface GenericDao<E, K> {
      * 
      * @param entity object to create
      */
-    public void create(E entity);
+    void create(E entity);
     
     /**
      * 
@@ -25,14 +25,14 @@ public interface GenericDao<E, K> {
      * 
      * @param entity object to update
      */
-    public void update(E entity);
+    void update(E entity);
     
     /**
      * Delete an entity.
      * 
      * @param entity object to delete
      */
-    public void delete(E entity);
+    void delete(E entity);
     
     /**
      * 
@@ -41,7 +41,7 @@ public interface GenericDao<E, K> {
      * @param id number
      * @return an entity with entered id or null when entity doesn't exist
      */
-    public E findById(K id);
+    E findById(K id);
     
     /**
      * 
@@ -49,6 +49,6 @@ public interface GenericDao<E, K> {
      * 
      * @return entity objects as List
      */
-    public List<E> findAll();
+    List<E> findAll();
     
 }

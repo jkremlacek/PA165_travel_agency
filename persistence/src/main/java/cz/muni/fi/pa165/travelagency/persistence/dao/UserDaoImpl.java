@@ -74,6 +74,16 @@ public class UserDaoImpl implements UserDao {
     public void create(User user) {
          if (user == null)
             throw new NullPointerException("User can not be null.");
+         if (user.getName() == null)
+             throw new NullPointerException("User's name can not be null.");
+         if (user.getName().isEmpty())
+             throw new NullPointerException("User's name can not be empty.");
+         if (user.getPasswordHash() == null)
+             throw new NullPointerException("User's password can not be null.");
+         if (user.getIsAdmin() == null)
+             throw new NullPointerException("User's role (is admin) can not be null.");
+         if (user.getPersonalNumber() == null)
+             throw new NullPointerException("User's personal number can not be null.");      
         em.persist(user);
     }
 
@@ -81,6 +91,16 @@ public class UserDaoImpl implements UserDao {
     public void update(User user) {
         if (user == null)
             throw new NullPointerException("User can not be null.");
+         if (user.getName() == null)
+             throw new NullPointerException("User's name can not be null.");
+         if (user.getName().isEmpty())
+             throw new NullPointerException("User's name can not be empty.");
+         if (user.getPasswordHash() == null)
+             throw new NullPointerException("User's password can not be null.");
+         if (user.getIsAdmin() == null)
+             throw new NullPointerException("User's role (is admin) can not be null.");
+         if (user.getPersonalNumber() == null)
+             throw new NullPointerException("User's personal number can not be null.");     
         em.merge(user);
     }
 
@@ -88,7 +108,7 @@ public class UserDaoImpl implements UserDao {
     public void delete(User user) {
         if (user == null)
             throw new NullPointerException("User can not be null.");
-        em.remove(user);
+        em.remove(findById(user.getId()));
     }
 
     @Override

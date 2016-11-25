@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Email;
 
 /**
  *

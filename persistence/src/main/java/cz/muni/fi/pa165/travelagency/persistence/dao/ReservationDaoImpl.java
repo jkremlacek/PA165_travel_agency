@@ -47,7 +47,7 @@ public class ReservationDaoImpl implements ReservationDao {
     public void delete(Reservation reservation) {
         if (reservation == null)
             throw new NullPointerException("Reservation can not be null");
-        em.remove(reservation);
+        em.remove(findById(reservation.getId()));
     }
 
     @Override

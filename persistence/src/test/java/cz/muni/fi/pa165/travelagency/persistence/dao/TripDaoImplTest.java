@@ -52,28 +52,31 @@ public class TripDaoImplTest {
         Date dateTo1 = calendar.getTime();
         calendar.clear() ;
         
-        trip1 = new Trip("Podzim ve Francii",dateFrom1, dateTo1, "Francie", 20, BigDecimal.valueOf(5000));           
+        trip1 = new Trip("Podzim ve Francii",dateFrom1, dateTo1, "Francie", 20, 
+                BigDecimal.valueOf(5000));           
         calendar.set(0,0,0,5,0,0);
         Date excursionDuration = calendar.getTime();
         calendar.clear() ;
-        excursion1 = new Excursion("Vylet do Parize",dateFrom1, excursionDuration, "Pariz",BigDecimal.valueOf(500));
+        excursion1 = new Excursion("Vylet do Parize",dateFrom1, excursionDuration, 
+                "Pariz",BigDecimal.valueOf(500));
         calendar.set(2017,5,12);
         Date dateFrom2 = calendar.getTime();
         calendar.clear() ;
         calendar.set(2017,5,26);
         Date dateTo2 = calendar.getTime();
         calendar.clear() ;
-        trip2 = new Trip("Odpocinek na Malte",dateFrom2, dateTo2, "Malta", 55, BigDecimal.valueOf(12000)); 
+        trip2 = new Trip("Odpocinek na Malte",dateFrom2, dateTo2, "Malta", 55, 
+                BigDecimal.valueOf(12000)); 
     }
     
     @Test
     public void testCreate() throws Exception {        
-        assertTrue(tripDao.findAll().isEmpty());
+        assertTrue("There shouldn't be any created trips",tripDao.findAll().isEmpty());
         tripDao.create(trip1);        
-        assertNotNull(trip1.getId());
-        assertEquals(tripDao.findAll().size(), 1);
+        assertNotNull("There should be some created trips",trip1.getId());
+        assertEquals("There should be one created trip",tripDao.findAll().size(), 1);
         tripDao.create(trip2);
-        assertEquals(tripDao.findAll().size(), 2);
+        assertEquals("There should be two created trips",tripDao.findAll().size(), 2);
     }
     
     @Test(expected = ValidationException.class)
@@ -127,21 +130,21 @@ public class TripDaoImplTest {
     @Test
     public void testUpdate() throws Exception {
         tripDao.create(trip1);
-        assertEquals(trip1.getDestination(), "Francie");
+        assertEquals("Destination should be Francie",trip1.getDestination(), "Francie");
         trip1.setDestination("Italie");
         tripDao.update(trip1);
-         assertEquals(trip1.getDestination(), "Italie");
+         assertEquals("Destination should be Italie",trip1.getDestination(), "Italie");
     }
 
     @Test
     public void testDelete() throws Exception {
         tripDao.create(trip1);   
         tripDao.create(trip2);      
-        assertEquals(tripDao.findAll().size(), 2);
+        assertEquals("There should be two created trips",tripDao.findAll().size(), 2);
         tripDao.delete(trip1);       
-        assertEquals(tripDao.findAll().size(), 1);
+        assertEquals("There should be only one created trip",tripDao.findAll().size(), 1);
         tripDao.delete(trip2);   
-        assertTrue(tripDao.findAll().isEmpty());
+        assertTrue("There shouldn't be any created trips",tripDao.findAll().isEmpty());
     }
 
     @Test
@@ -153,11 +156,11 @@ public class TripDaoImplTest {
 
     @Test
     public void testFindAll() throws Exception {
-       assertTrue(tripDao.findAll().isEmpty());
+       assertTrue("There should be any created trips",tripDao.findAll().isEmpty());
        tripDao.create(trip1);      
-       assertEquals(tripDao.findAll().size(), 1);
+       assertEquals("There should be one created trip",tripDao.findAll().size(), 1);
        tripDao.create(trip2);
-       assertEquals(tripDao.findAll().size(), 2);
+       assertEquals("There should be two created trips",tripDao.findAll().size(), 2);
     }
     
     @Test
@@ -174,9 +177,11 @@ public class TripDaoImplTest {
     
     @Test
     public void testFindByDate() throws Exception {
-        assertThat(tripDao.findByDate(trip1.getDateFrom(), trip1.getDateTo())).isEmpty();
+        assertThat(tripDao.findByDate(trip1.getDateFrom(), trip1.getDateTo()))
+                .as("There shouldn't be any trip").isEmpty();
         tripDao.create(trip1);                   
         assertThat(tripDao.findByDate(trip1.getDateFrom(), trip1.getDateTo()))
+            .as("There should be one trip")
             .usingFieldByFieldElementComparator().containsOnly(trip1);
     }
     
@@ -195,9 +200,12 @@ public class TripDaoImplTest {
     @Test
     public void testFindByPrice() throws Exception {
         tripDao.create(trip1);        
-        assertThat(tripDao.findByPrice(trip1.getPrice().subtract(BigDecimal.valueOf(10)),trip1.getPrice().add(BigDecimal.valueOf(10))))
+        assertThat(tripDao.findByPrice(trip1.getPrice()
+            .subtract(BigDecimal.valueOf(10)),trip1.getPrice().add(BigDecimal.valueOf(10))))
+            .as("This modified price should contains trip1")
             .usingFieldByFieldElementComparator().containsOnly(trip1);    
         assertThat(tripDao.findByPrice(trip1.getPrice(),trip1.getPrice()))
+            .as("This unmodified price should contains trip1")
             .usingFieldByFieldElementComparator().containsOnly(trip1);
 
     }
@@ -224,52 +232,69 @@ public class TripDaoImplTest {
     public void testFindByCapacity() throws Exception {
         tripDao.create(trip1);        
         assertThat(tripDao.findByTotalCapacity(trip1.getCapacity()))
-        .usingFieldByFieldElementComparator().containsOnly(trip1);
+            .usingFieldByFieldElementComparator().containsOnly(trip1);
     }
     
     @Test
     public void testFindByExcursion() throws Exception {  
         em.persist(excursion1);   
         tripDao.create(trip2);  
-        assertThat(tripDao.findByExcursion(excursion1)).isEmpty();
-        assertThat(tripDao.findByExcursion(excursion1)).hasSize(0);
+        assertThat(tripDao.findByExcursion(excursion1))
+                .as("There shouldn't be find any trips").isEmpty();        
         
         excursion1.setTrip(trip2);
         trip2.addExcursion(excursion1);  
         em.merge(excursion1);     
         tripDao.update(trip2);       
-        assertThat(tripDao.findByExcursion(excursion1)).hasSize(1);  
         assertThat(tripDao.findByExcursion(excursion1))
+            .as("There should be find one trip").hasSize(1);  
+        assertThat(tripDao.findByExcursion(excursion1))
+            .as("There should be find two trips")
             .usingFieldByFieldElementComparator().containsOnly(trip2);        
     } 
+    @Test
+    public void testFindByNegativeCapacaty() {
+        assertThatThrownBy(() -> tripDao.findByTotalCapacity(-5))
+            .as("findByTotalCapacity(-5) should throw IllegalArgumentException")
+            .isInstanceOf(IllegalArgumentException.class);
+    }
     
     @Test
     public void nullAttributes() {
-        assertThatThrownBy(() -> tripDao.create(null))                
+        assertThatThrownBy(() -> tripDao.create(null))    
+            .as("create(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
         
-        assertThatThrownBy(() -> tripDao.update(null))                
+        assertThatThrownBy(() -> tripDao.update(null))    
+            .as("update(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
         
-        assertThatThrownBy(() -> tripDao.delete(null))                
+        assertThatThrownBy(() -> tripDao.delete(null))  
+            .as("delete(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
         
-        assertThatThrownBy(() -> tripDao.findByName(null))                
+        assertThatThrownBy(() -> tripDao.findByName(null))  
+            .as("findByName(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
         
-         assertThatThrownBy(() -> tripDao.findByDate(null, null))                
+         assertThatThrownBy(() -> tripDao.findByDate(null, null))   
+            .as("findByDate(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
          
-         assertThatThrownBy(() -> tripDao.findByDestination(null))                
+         assertThatThrownBy(() -> tripDao.findByDestination(null))   
+            .as("findByDestination(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class); 
          
-         assertThatThrownBy(() -> tripDao.findByPrice(null, null))                
+         assertThatThrownBy(() -> tripDao.findByPrice(null, null))  
+            .as("findByPrice(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
                   
-         assertThatThrownBy(() -> tripDao.findByTotalCapacity(null))                
+         assertThatThrownBy(() -> tripDao.findByTotalCapacity(null))
+            .as("findByTotalCapacity(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);
          
-         assertThatThrownBy(() -> tripDao.findByExcursion(null))                
+         assertThatThrownBy(() -> tripDao.findByExcursion(null))    
+            .as("findByExcursion(null) should throw NullPointerException")
             .isInstanceOf(NullPointerException.class);         
     }
     

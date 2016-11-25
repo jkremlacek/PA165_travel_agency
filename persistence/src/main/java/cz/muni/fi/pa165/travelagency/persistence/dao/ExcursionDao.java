@@ -17,7 +17,7 @@ public interface ExcursionDao extends GenericDao<Excursion, Long> {
      * @param name to find
      * @return list of excursion with this name
      */
-    public List<Excursion> findByName(String name);
+    List<Excursion> findByName(String name);
     
     /**
      * Method find all Excursions with price value between minPrice and maxPrice
@@ -25,7 +25,7 @@ public interface ExcursionDao extends GenericDao<Excursion, Long> {
      * @param maxPrice maximum value of price to find
      * @return list of excursion with price value between minPrice and maxPrice
      */
-    public List<Excursion> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
+    List<Excursion> findByPrice(BigDecimal minPrice, BigDecimal maxPrice);
     
     /**
      * Method find all Excursions with date value between dateFrom and dateTo
@@ -33,14 +33,14 @@ public interface ExcursionDao extends GenericDao<Excursion, Long> {
      * @param dateTo maximum value of date to find
      * @return list of excursion with date value between dateFrom and dateTo
      */
-    public List<Excursion> findByDate(Date dateFrom, Date dateTo); 
+    List<Excursion> findByDate(Date dateFrom, Date dateTo); 
     
     /**
      * Method find all Excursions with this destination
      * @param destination to find
      * @return list of excursion with this destination
      */
-    public List<Excursion> findByDestination(String destination);
+    List<Excursion> findByDestination(String destination);
     
     /**
      * Method find all Excursions with duration value between dateFrom and dateTo
@@ -48,12 +48,12 @@ public interface ExcursionDao extends GenericDao<Excursion, Long> {
      * @param dateTo maximum value of date to find
      * @return list of excursion with duration value between dateFrom and dateTo
      */
-    public List<Excursion> findByDuration(Date dateFrom, Date dateTo);
+    List<Excursion> findByDuration(Date dateFrom, Date dateTo);
     
     /**
      * Method find all Excursions with this trip
      * @param trip to find
      * @return list of excursion with this trip
      */
-    public List<Excursion> findByTrip(Trip trip);
+    List<Excursion> findByTrip(Trip trip);
 }

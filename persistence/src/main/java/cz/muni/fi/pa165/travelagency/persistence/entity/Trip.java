@@ -61,7 +61,8 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(String name, Date dateFrom, Date dateTo, String destination, Integer capacity, BigDecimal price) {
+    public Trip(String name, Date dateFrom, Date dateTo, String destination, 
+                Integer capacity, BigDecimal price) {
         this.name = name;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
@@ -230,7 +231,11 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "Trip{" + "id=" + getId() + ", name=" + getName() + ", dateFrom=" + getDateFrom() + ", dateTo=" + getDateTo() + ", destination=" + getDestination() + ", description=" + getDescription() + ", capacity=" + getCapacity() + ", price=" + getPrice() + ", excursions=" + getExcursions() + ", reservations=" + getReservations() + '}';
+        return "Trip{" + "id=" + getId() + ", name=" + getName() + ", dateFrom=" 
+                + getDateFrom() + ", dateTo=" + getDateTo() + ", destination=" 
+                + getDestination() + ", description=" + getDescription() + ", capacity=" 
+                + getCapacity() + ", price=" + getPrice() + ", excursions=" 
+                + getExcursions() + ", reservations=" + getReservations() + '}';
     }
 
     @Override

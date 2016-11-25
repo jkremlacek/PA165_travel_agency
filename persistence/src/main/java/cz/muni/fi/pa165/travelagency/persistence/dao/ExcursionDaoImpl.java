@@ -60,7 +60,8 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public List<Excursion> findByDestination(String destination) {
-		if (destination == null) throw new NullPointerException("Parameter destination cannot be null.");
+		if (destination == null) 
+                    throw new NullPointerException("Parameter destination cannot be null.");
 		
 		return em.createQuery(
                     "SELECT e FROM Excursion e WHERE e.destination = :destination ",Excursion.class)
@@ -72,7 +73,8 @@ public class ExcursionDaoImpl implements ExcursionDao {
             if (dateFrom == null) throw new NullPointerException("Parameter dateFrom cannot be null.");
             if (dateTo == null) throw new NullPointerException("Parameter dateTo cannot be null.");
 		
-            if (dateTo.getTime() < dateFrom.getTime()) throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
+            if (dateTo.getTime() < dateFrom.getTime()) 
+                throw new IllegalArgumentException("Argument DateTo must be after DateFrom.");
 		
             return em.createQuery(
                 "SELECT e FROM Excursion e WHERE e.duration >= :dateFrom AND e.duration <= :dateTo"
@@ -105,7 +107,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	@Override
 	public void delete(Excursion entity) {
             if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
-            em.remove(entity);
+            em.remove(findById(entity.getId()));
 	}
 
 	@Override
