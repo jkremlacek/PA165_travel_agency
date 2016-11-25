@@ -104,6 +104,12 @@ public class TripServiceTest {
     }
 
     @Test
+    public void testUpdate() {
+        tripService.update(t1);
+        verify(tripDao).update(t1);
+    }
+
+    @Test
     public void testDelete() throws Exception {
         tripService.delete(t1);
         verify(tripDao).delete(t1);
