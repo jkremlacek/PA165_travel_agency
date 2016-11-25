@@ -61,7 +61,7 @@ public class TripServiceTest {
         cal.set(2017, 8, 25);
         Date dTo = cal.getTime();
 
-        u = new User("Igor",dFrom,1234l,"no@mail.com",123);
+        u = new User("Igor", dFrom, 1234l, "no@mail.com", 123);
 
         t1 = new Trip();
         t1.setName("Dovolenka v Egypte");
@@ -142,13 +142,13 @@ public class TripServiceTest {
     @Test
     public void testFindByPrice() throws Exception {
         tripService.findByPrice(t1.getPrice(), t1.getPrice());
-        verify(tripDao).findByPrice(t1.getPrice(),t1.getPrice());
+        verify(tripDao).findByPrice(t1.getPrice(), t1.getPrice());
     }
 
     @Test
     public void testFindByAvailableCapacity() throws Exception {
         Integer i = 100;
-        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t1,t2)));
+        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t1, t2)));
         when(reservationDao.findByTrip(t1)).thenReturn(new LinkedList<>());
         when(reservationDao.findByTrip(t2)).thenReturn(new LinkedList<>(Arrays.asList(r)));
 
@@ -169,7 +169,7 @@ public class TripServiceTest {
     @Test
     public void testFindWithFreeCapacity() throws Exception {
         Integer i = 1;
-        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t1,t2)));
+        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t1, t2)));
         when(reservationDao.findByTrip(t1)).thenReturn(new LinkedList<>());
         when(reservationDao.findByTrip(t2)).thenReturn(new LinkedList<>(Arrays.asList(r)));
 
@@ -183,8 +183,26 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testFindTripsNextMonth() throws Exception {
-        //TODO:
+    public void testFindTripsInNextDays() throws Exception {
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.HOUR, 0);
+
+        Date dateFrom = cal.getTime();
+        cal.add(Calendar.DATE, 5);
+        Date dateTo = cal.getTime();
+
+        tripService.findTripsInNextDays(5);
+        verify(tripDao).findByDate(dateFrom, dateTo);
+
+        cal.add(Calendar.DATE, 5);
+        dateTo = cal.getTime();
+
+        tripService.findTripsInNextDays(10);
+        verify(tripDao).findByDate(dateFrom, dateTo);
     }
 
     @Test
@@ -322,7 +340,6 @@ public class TripServiceTest {
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(DataAccessException.class);
     }
-    
-    
-    
+
+
 }

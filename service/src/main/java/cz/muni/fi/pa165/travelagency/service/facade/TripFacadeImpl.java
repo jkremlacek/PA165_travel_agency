@@ -93,8 +93,8 @@ public class TripFacadeImpl implements TripFacade {
     }
 
     @Override
-    public List<TripDto> findTripsNextMonth() {
-        return mappingService.mapTo(tripService.findTripsNextMonth(), TripDto.class);
+    public List<TripDto> findTripsInNextDays(int count) {
+        return mappingService.mapTo(tripService.findTripsInNextDays(count), TripDto.class);
     }
 
     @Override

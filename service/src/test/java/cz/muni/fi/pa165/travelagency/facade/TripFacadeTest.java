@@ -187,9 +187,9 @@ public class TripFacadeTest {
     }
 
     @Test
-    public void testFindTripsNextMonth() throws Exception {
-        tripFacade.findTripsNextMonth();
-        verify(tripService).findTripsNextMonth();
+    public void testFindTripsInNextDays() throws Exception {
+        tripFacade.findTripsInNextDays(5);
+        verify(tripService).findTripsInNextDays(5);
     }
 
     @Test

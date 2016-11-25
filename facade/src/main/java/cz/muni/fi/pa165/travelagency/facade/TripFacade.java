@@ -97,9 +97,10 @@ public interface TripFacade {
     
     /**
      * Find trips which will start in next 31 days
+     * @param count number of days
      * @return trip DTOs in next 31 days as List
      */
-    List<TripDto> findTripsNextMonth();
+    List<TripDto> findTripsInNextDays(int count);
     
     /**
      * Find people with reservation a given trip
