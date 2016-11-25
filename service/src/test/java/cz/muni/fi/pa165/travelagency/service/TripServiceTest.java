@@ -137,6 +137,12 @@ public class TripServiceTest {
     public void testFindByDate() throws Exception {
         tripService.findByDate(t1.getDateFrom(), t1.getDateTo());
         verify(tripDao).findByDate(t1.getDateFrom(), t1.getDateTo());
+
+        doThrow(new IllegalArgumentException()).when(tripDao).findByDate(t1.getDateTo(),t1.getDateFrom());
+
+        assertThatThrownBy(() -> tripService.findByDate(t1.getDateTo(),t1.getDateFrom()))
+                .as("dateTo is before dateFrom -> exception should be thrown and should not be masked by DataAccessException")
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -167,6 +173,13 @@ public class TripServiceTest {
     }
 
     @Test
+    public void testFindByAvailableCapacityInvalid() throws Exception {
+        assertThatThrownBy(() -> tripService.findByAvailableCapacity(-5))
+                .as("findByAvailableCapacity should throw exception on negative value")
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     public void testFindByExcursion() throws Exception {
         tripService.findByExcursion(e1);
         verify(tripDao).findByExcursion(e1);
@@ -185,7 +198,24 @@ public class TripServiceTest {
                 .contains(t1);
 
         verify(tripDao).findByTotalCapacity(i);
+    }
 
+    @Test
+    public void testFindWithFreeCapacityEmpty() throws Exception {
+        Integer i = 1;
+        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>());
+
+        assertThat(tripService.findByAvailableCapacity(i))
+                .as("Empty list should be returned (no trips with total capacity exist)")
+                .isEmpty();
+        verify(tripDao).findByTotalCapacity(i);
+
+        when(tripDao.findByTotalCapacity(i)).thenReturn(new LinkedList<>(Arrays.asList(t2)));
+        when(reservationDao.findByTrip(t2)).thenReturn(new LinkedList<>(Arrays.asList(r)));
+
+        assertThat(tripService.findByAvailableCapacity(i))
+                .as("Empty list should be returned (trip exists but is fully booked)")
+                .isEmpty();
     }
 
     @Test
@@ -212,12 +242,24 @@ public class TripServiceTest {
     }
 
     @Test
+    public void testFindTripsInNextDaysInvalid() throws Exception {
+        assertThatThrownBy(() -> tripService.findTripsInNextDays(-5))
+                .as("findTripsInNextDays should throw exception on negative value")
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     public void testFindTripParticipants() throws Exception {
         when(reservationDao.findByTrip(t1)).thenReturn(Arrays.asList(r));
         assertThat(tripService.findTripParticipants(t1))
                 .as("found participant should be u")
                 .hasSize(1)
                 .contains(u);
+
+        when(reservationDao.findByTrip(t1)).thenReturn(new ArrayList<>());
+        assertThat(tripService.findTripParticipants(t1))
+                .as("No participants should be found")
+                .isEmpty();
     }
 
     @Test
@@ -237,7 +279,6 @@ public class TripServiceTest {
         verify(reservationDao).findByTrip(t2);
     }
 
-
     @Test
     public void testNullArguments() {
         doThrow(new NullPointerException()).when(tripDao).create(null);
@@ -252,6 +293,7 @@ public class TripServiceTest {
         doThrow(new NullPointerException()).when(tripDao).findByPrice(isNull(BigDecimal.class), any());
         doThrow(new NullPointerException()).when(tripDao).findByTotalCapacity(null);
         doThrow(new NullPointerException()).when(tripDao).findByExcursion(null);
+        doThrow(new NullPointerException()).when(reservationDao).findByTrip(null);
 
         assertThatThrownBy(() -> tripService.create(null))
                 .as("create(null) should throw NullPointerException")
@@ -299,6 +341,14 @@ public class TripServiceTest {
 
         assertThatThrownBy(() -> tripService.findByExcursion(null))
                 .as("findByExcursion(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+
+        assertThatThrownBy(() -> tripService.findTripParticipants(null))
+                .as("findTripParticipants(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+
+        assertThatThrownBy(() -> tripService.hasTripAvailableCapacity(null))
+                .as("hasTripAvailableCapacity(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
     }
 
