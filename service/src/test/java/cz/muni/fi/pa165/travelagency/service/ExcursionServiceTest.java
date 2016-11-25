@@ -79,6 +79,12 @@ public class ExcursionServiceTest {
         excursionService.create(e);
         verify(excursionDao).create(e);
     }
+    
+    @Test
+    public void testUpdate() throws Exception {
+        excursionService.update(e);
+        verify(excursionDao).update(e);
+    }
 
     @Test
     public void testDelete() throws Exception {

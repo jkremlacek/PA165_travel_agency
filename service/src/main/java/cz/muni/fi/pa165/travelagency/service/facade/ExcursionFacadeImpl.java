@@ -37,6 +37,12 @@ public class ExcursionFacadeImpl implements ExcursionFacade {
         Excursion mapped = mappingService.mapTo(excursion, Excursion.class);
         excursionService.update(mapped);
     }
+    
+    @Override
+    public void delete(ExcursionDto excursion) {
+        Excursion mapped = mappingService.mapTo(excursion, Excursion.class);
+        excursionService.delete(mapped);
+    }
 	
     @Override
     public ExcursionDto findById(Long id) {

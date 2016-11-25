@@ -124,6 +124,12 @@ public class ExcursionFacadeTest {
         excursionFacade.update(excursionDto);
         verify(excursionService).update(e);
     }
+    
+    @Test
+    public void testDelete() throws Exception {
+        excursionFacade.delete(excursionDto);
+        verify(excursionService).delete(e);
+    }
 
     @Test
     public void testFindById() throws Exception {
@@ -148,6 +154,12 @@ public class ExcursionFacadeTest {
         excursionFacade.findByDate(e.getDate(),e.getDate());
         verify(excursionService).findByDate(e.getDate(),e.getDate());
     }
+    
+    @Test
+    public void testFindByDuration() throws Exception {
+        excursionFacade.findByDuration(e.getDuration(), e.getDuration());
+        verify(excursionService).findByDate(e.getDuration(), e.getDuration());
+    }
 
     @Test
     public void testFindByDestination() throws Exception {
@@ -159,5 +171,11 @@ public class ExcursionFacadeTest {
     public void testFindByPrice() throws Exception {
         excursionFacade.findByPrice(e.getPrice(),e.getPrice());
         verify(excursionService).findByPrice(e.getPrice(),e.getPrice());
+    }
+    
+    @Test
+    public void testFindByTrip() throws Exception {
+        excursionFacade.findByTrip(excursionDto.getTrip());
+        verify(excursionService).findByTrip(e.getTrip());
     }
 }

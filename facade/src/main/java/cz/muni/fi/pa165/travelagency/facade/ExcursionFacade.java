@@ -25,6 +25,12 @@ public interface ExcursionFacade {
      * @param excursion DTO for excursion
      */
     void update(ExcursionDto excursion);
+    
+    /**
+     * Removes existing excursion
+     * @param excursion DTO for excursion
+     */
+    void delete(ExcursionDto excursion);
 
     /**
      * Finds a excursion with given ID
