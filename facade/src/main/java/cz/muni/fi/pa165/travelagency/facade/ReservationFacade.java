@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,10 +1,10 @@
 package cz.muni.fi.pa165.travelagency.service;
 
-import java.util.ArrayList;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
