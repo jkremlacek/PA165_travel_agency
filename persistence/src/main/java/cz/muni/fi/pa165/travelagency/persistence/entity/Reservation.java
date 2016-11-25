@@ -46,6 +46,10 @@ public class Reservation {
     public Long getId() {
         return id;
     }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
@@ -74,7 +78,7 @@ public class Reservation {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.user) * 43 + Objects.hashCode(this.trip);
+        hash = 59 * hash + Objects.hashCode(this.getUser()) * 43 + Objects.hashCode(this.getTrip());
         return hash;
     }
 
@@ -90,13 +94,11 @@ public class Reservation {
             return false;
         }
         final Reservation other = (Reservation) obj;
-        if (!Objects.equals(this.user, other.user) || !Objects.equals(this.trip, other.trip)) {
+        if (!Objects.equals(this.getUser(), other.getUser()) || !Objects.equals(this.getTrip(), other.getTrip())) {
             return false;
         }
         return true;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    
 }

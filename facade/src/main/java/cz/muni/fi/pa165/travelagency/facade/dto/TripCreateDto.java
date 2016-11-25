@@ -164,7 +164,7 @@ public class TripCreateDto {
 
     @Override
     public String toString() {
-        return  "TripDto{" + 
+        return  "TripCreateDto{" + 
                 ", name=" + name + 
                 ", dateFrom=" + dateFrom + 
                 ", dateTo=" + dateTo + 

@@ -41,10 +41,8 @@ public class UserCreateDto {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.getName());
-        hash = 47 * hash + Objects.hashCode(this.getPersonalNumber());
-        hash = 47 * hash + Objects.hashCode(this.getMail());
+        int hash = 7;        
+        hash = 47 * hash + Objects.hashCode(this.getPersonalNumber());       
         return hash;
     }
 
@@ -59,13 +57,8 @@ public class UserCreateDto {
         if (!(obj instanceof UserCreateDto)) {
             return false;
         }
-        final UserCreateDto other = (UserCreateDto) obj;
-        if (!Objects.equals(this.getName(), other.getName())) {
-            return false;
-        }
-        if (!Objects.equals(this.getMail(), other.getMail())) {
-            return false;
-        }
+        final UserCreateDto other = (UserCreateDto) obj;        
+        
         if (!Objects.equals(this.getPersonalNumber(), other.getPersonalNumber())) {
             return false;
         }
@@ -121,7 +114,7 @@ public class UserCreateDto {
         this.passwordHash = passwordHash;
     }
     
-    public Boolean isAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 

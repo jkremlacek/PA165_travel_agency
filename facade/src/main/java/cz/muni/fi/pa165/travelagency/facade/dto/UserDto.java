@@ -16,11 +16,7 @@ public class UserDto extends UserCreateDto{
     public Set<ReservationDto> getReservations() {
         return reservations;
     }
-
-    public void setReservations(Set<ReservationDto> reservations) {
-        this.reservations = reservations;
-    }
-    
+   
     public void addReservation(ReservationDto reservation) {
         this.reservations.add(reservation);
     }

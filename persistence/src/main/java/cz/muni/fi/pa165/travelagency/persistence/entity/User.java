@@ -58,16 +58,14 @@ public class User {
     @OneToMany
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
-    public User(long id) {
+    public User(Long id) {
         this.id = id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.getName());
-        hash = 47 * hash + Objects.hashCode(this.getPersonalNumber());
-        hash = 47 * hash + Objects.hashCode(this.getMail());
+        int hash = 7;        
+        hash = 47 * hash + Objects.hashCode(this.getPersonalNumber());        
         return hash;
     }
 
@@ -83,12 +81,7 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.getName(), other.getName())) {
-            return false;
-        }
-        if (!Objects.equals(this.getMail(), other.getMail())) {
-            return false;
-        }
+       
         if (!Objects.equals(this.getPersonalNumber(), other.getPersonalNumber())) {
             return false;
         }
@@ -151,11 +144,7 @@ public class User {
         return Collections.unmodifiableSet(reservations);
     }
 
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-    
-    public void addReservation(Reservation reservation) {
+   public void addReservation(Reservation reservation) {
         this.reservations.add(reservation);
     }
     
