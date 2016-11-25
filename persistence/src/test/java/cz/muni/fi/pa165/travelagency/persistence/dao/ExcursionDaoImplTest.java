@@ -140,45 +140,36 @@ public class ExcursionDaoImplTest {
         excursionDao.create(bigHillExcursion);
         excursionDao.create(aquaParkExcursion);
         assertThat(excursionDao.findByName("Aqua park"))
-                                .contains(aquaParkExcursion);
+                    .as("it should be able to find by name")
+                    .contains(aquaParkExcursion);
         assertThat(excursionDao.findByName("Aqua park").size(),is(1));
         assertThat(excursionDao.findByName("NonExist Name")).isEmpty();
-    }
-    
-    @Test(expected = NullPointerException.class)
-    public void testFindByNullName() {
-        excursionDao.findByName(null);
     }
 
     /**
      * Test of findByPrice where the price from is greater than price to.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testFindByPriceWithNegativeDifference() {
-        excursionDao.findByPrice(new BigDecimal("200.00"), new BigDecimal("199.99"));
-    }
-    
-    @Test(expected = NullPointerException.class)
-    public void testFindByNullFromPrice() {
-        excursionDao.findByPrice(null, BigDecimal.TEN);
-    }
-    
-    @Test(expected = NullPointerException.class)
-    public void testFindByNullToPrice() {
-        excursionDao.findByPrice(BigDecimal.ONE, null);
+        assertThatThrownBy(() -> excursionDao.findByPrice(new BigDecimal("200.00"), new BigDecimal("199.99")))
+                .as("cannot find excursions with start price greater than end price")
+                .isInstanceOf(IllegalArgumentException.class);
     }
     
     @Test
     public void testFindByPrice() {
         assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500")))
-                                                .isEmpty();
+                .as("There shouldn't be any excursions!")
+                .isEmpty();
         excursionDao.create(aquaParkExcursion);
         excursionDao.create(artGalleryExcursion);
         excursionDao.create(bigHillExcursion);
         assertThat(excursionDao.findByPrice(new BigDecimal("200"), new BigDecimal("500")))
+                .as("There should be only two excursions!")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(aquaParkExcursion, artGalleryExcursion);
         assertThat(excursionDao.findByPrice(new BigDecimal("200.01"), new BigDecimal("500")))
+                .as("There should be only one excursion")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(aquaParkExcursion);
     }
@@ -195,7 +186,9 @@ public class ExcursionDaoImplTest {
         Date dateFrom = cal.getTime();
         cal.set(2017, 10, 22);
         Date dateTo = cal.getTime();
-        assertThat(excursionDao.findByDate(dateFrom, dateTo)).isEmpty();
+        assertThat(excursionDao.findByDate(dateFrom, dateTo))
+                .as("There should be no excursion found by findByDate")
+                .isEmpty();
         cal.set(2017, 10, 21);
         Date dateOfExcursion = cal.getTime();
         aquaParkExcursion.setDate(dateOfExcursion);
@@ -205,6 +198,7 @@ public class ExcursionDaoImplTest {
         artGalleryExcursion.setDate(dateOfExcursion);
         excursionDao.create(artGalleryExcursion);
         assertThat(excursionDao.findByDate(dateFrom, dateTo))
+                .as("It should be one excursion found by findByDate")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(aquaParkExcursion);
                 
@@ -226,9 +220,12 @@ public class ExcursionDaoImplTest {
     @Test
     public void testFindByDestination() {
         
-        assertThat(excursionDao.findByDestination("Pasohlavky")).isEmpty();
+        assertThat(excursionDao.findByDestination("Pasohlavky"))
+                .as("There should be no excursion found by findByDestination")
+                .isEmpty();
         excursionDao.create(aquaParkExcursion);
         assertThat(excursionDao.findByDestination("Pasohlavky"))
+                .as("There should be one excursion found by findByDestination")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(aquaParkExcursion);
         
@@ -244,7 +241,9 @@ public class ExcursionDaoImplTest {
         Date durFrom = cal.getTime();
         cal.set(0, 0, 0, 8, 0, 0);
         Date durTo = cal.getTime();
-        assertThat(excursionDao.findByDuration(durFrom, durTo)).isEmpty();
+        assertThat(excursionDao.findByDuration(durFrom, durTo))
+                .as("There should be one excursion found by findByDuration")
+                .isEmpty();
         cal.set(0, 0, 0, 5, 0, 1);
         Date durOfExcursion = cal.getTime();
         aquaParkExcursion.setDuration(durOfExcursion);
@@ -254,6 +253,7 @@ public class ExcursionDaoImplTest {
         artGalleryExcursion.setDuration(durOfExcursion);
         excursionDao.create(artGalleryExcursion);
         assertThat(excursionDao.findByDuration(durFrom, durTo))
+                .as("There should be one excursion found by findByDuration")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(aquaParkExcursion);
         
@@ -275,9 +275,12 @@ public class ExcursionDaoImplTest {
      */
     @Test
     public void testFindByTrip() {
-        assertThat(excursionDao.findByTrip(waterTrip)).isEmpty();
+        assertThat(excursionDao.findByTrip(waterTrip))
+                .as("There should be no excursion found by findByTrip")
+                .isEmpty();
         excursionDao.create(aquaParkExcursion);
         assertThat(excursionDao.findByTrip(waterTrip))
+                .as("There should be one excursion found by findByTrip")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(aquaParkExcursion);
         
@@ -289,13 +292,19 @@ public class ExcursionDaoImplTest {
     @Test
     @Transactional
     public void testCreate() {
-        assertThat(excursionDao.findAll()).isEmpty();
+        assertThat(excursionDao.findAll())
+                .as("There should be no excursion")
+                .isEmpty();
         excursionDao.create(bigHillExcursion);
-        assertThat(bigHillExcursion.getId()).isNotNull();
+        assertThat(bigHillExcursion.getId())
+                .as("Persisted excursion should have assigned id")
+                .isNotNull();
         assertThat(em.find(Excursion.class, bigHillExcursion.getId()))
+                .as("Persisted excursion should be accessible by entity manager")
                 .isEqualToComparingFieldByField(bigHillExcursion);
-        assertThat(excursionDao.findAll().size(),is(1));
-        
+        assertThat(excursionDao.findAll())
+                .as("We should persisted just only one excursion")
+                .containsOnly(bigHillExcursion);
     }
     
     @Test(expected = ValidationException.class)
@@ -346,11 +355,54 @@ public class ExcursionDaoImplTest {
         excursionDao.update(aquaParkExcursion);
         
         assertThat(em.find(Excursion.class, aquaParkExcursion.getId()))
+                .as("Updated excursion should have new name")
                 .isEqualToComparingFieldByField(aquaParkExcursion);
         assertThat(em.find(Excursion.class, bigHillExcursion.getId()))
+                .as("Update shouldn't have an effect to others entities!")
                 .isEqualToComparingFieldByField(bigHillExcursion);
     }
-
+    
+    @Test(expected = ValidationException.class)
+    public void testUpdateWithNullName() {
+        excursionDao.create(bigHillExcursion);
+        bigHillExcursion.setName(null);
+        excursionDao.update(bigHillExcursion);
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testUpdateWithNullTrip() {
+        excursionDao.create(bigHillExcursion);
+        bigHillExcursion.setTrip(null);
+        excursionDao.update(bigHillExcursion);
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testUpdateWithNullDate() {
+        excursionDao.create(bigHillExcursion);
+        bigHillExcursion.setDate(null);
+        excursionDao.update(bigHillExcursion);
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testUpdateWithNullDuration() {
+        excursionDao.create(bigHillExcursion);
+        bigHillExcursion.setDuration(null);
+        excursionDao.update(bigHillExcursion);
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void testUpdateWithNullDestination() {
+        excursionDao.create(bigHillExcursion);
+        bigHillExcursion.setDestination(null);
+        excursionDao.update(bigHillExcursion);
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void testUpdateWithNullId() {
+        bigHillExcursion.setId(null);
+        excursionDao.create(bigHillExcursion);
+    }
+    
     /**
      * Test of delete method, of class ExcursionDaoImpl.
      */
@@ -364,10 +416,10 @@ public class ExcursionDaoImplTest {
         
         excursionDao.delete(bigHillExcursion);
         
-        assertThat(excursionDao.findAll().size(),is(2));
         assertThat(excursionDao.findAll())
-                .usingFieldByFieldElementComparator()
-                .containsOnly(aquaParkExcursion,artGalleryExcursion);
+            .as("Delete should delete only given excursion and has no effect to other entities")
+            .usingFieldByFieldElementComparator()
+            .containsOnly(aquaParkExcursion,artGalleryExcursion);
         
     }
 
@@ -380,6 +432,7 @@ public class ExcursionDaoImplTest {
         excursionDao.create(aquaParkExcursion);
         excursionDao.create(artGalleryExcursion);
         assertThat(excursionDao.findById(artGalleryExcursion.getId()))
+                .as("It should be able to found an existing entity")
                 .isEqualToComparingFieldByField(artGalleryExcursion);
         
     }
@@ -395,8 +448,52 @@ public class ExcursionDaoImplTest {
         excursionDao.create(artGalleryExcursion);
         
         assertThat(excursionDao.findAll())
+                .as("There should be two excursions")
                 .usingFieldByFieldElementComparator()
                 .containsOnly(bigHillExcursion, artGalleryExcursion);
+    }
+        
+    @Test
+    public void testNullArguments() {
+        assertThatThrownBy(() -> excursionDao.create(null))
+                .as("create(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.update(null))
+                .as("update(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.delete(null))
+                .as("delete(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findById(null))
+                .as("findById(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByName(null))
+                .as("findByName(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByPrice(null, BigDecimal.TEN))
+                .as("findByPrice(null, bigDecimal) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByPrice(BigDecimal.TEN, null))
+                .as("findByPrice(bigDecimal, null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByDate(null, calNow.getTime()))
+                .as("findByDate(null, date) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByDate(calNow.getTime(), null))
+                .as("findByDate(date, null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByDestination(null))
+                .as("findByDestination(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByDuration(null, calNow.getTime()))
+                .as("findByDuration(null, date) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByDuration(calNow.getTime(), null))
+                .as("findByDuration(date, null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> excursionDao.findByTrip(null))
+                .as("findByTrip(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
     }
     
 }
