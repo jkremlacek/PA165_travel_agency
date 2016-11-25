@@ -128,6 +128,10 @@ public class TripServiceImpl implements TripService {
     
     @Override
     public List<Trip> findByAvailableCapacity(Integer capacity) {
+        if (capacity < 1) {
+            throw new IllegalArgumentException(
+                    "Cannot find trip with available capacity smaller than 1");
+        }
         try {
             List<Trip> trips = tripDao.findByTotalCapacity(capacity);
             Iterator<Trip> it = trips.iterator();
@@ -163,6 +167,10 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> findTripsInNextDays(int countOfDays) {
+        if (countOfDays < 1) {
+            throw new IllegalArgumentException("Argument cannot be smaller than 1 --"
+                    + "you cannot find trips in past");
+        }
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR, 0);
         cal.set(Calendar.MINUTE, 0);
@@ -192,6 +200,9 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public boolean hasTripAvailableCapacity(Trip trip) {
+        if (trip == null) {
+            throw new NullPointerException("trip is null");
+        }
         try {
             return trip.getCapacity() > reservationDao.findByTrip(trip).size();
         } catch (NullPointerException ex) {

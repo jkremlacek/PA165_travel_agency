@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.ValidationException;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -93,8 +92,13 @@ public class UserServiceTest {
     @Test
     public void testCreateRegisteredUser() {
         userService.createRegisteredUser(johnBedarUser, "mypassword");
-        assertNotNull(johnBedarUser);
+        assertThat(johnBedarUser)
+                .as("user shouldn't be null after create user")
+                .isNotNull();
         verify(userDao).create(johnBedarUser);
+        assertThat(johnBedarUser.getPasswordHash())
+                .as("password hash sholdn't be null after create user")
+                .isNotNull();
     }
 
     @Test(expected = Exception.class)
@@ -159,6 +163,7 @@ public class UserServiceTest {
         johnBedarUser.setId(Long.valueOf("13"));
         when(userDao.findById(johnBedarUser.getId())).thenReturn(johnBedarUser);
         assertThat(userService.findById(johnBedarUser.getId()))
+                .as("It could be possible to find user by existing id")
                 .isEqualToComparingFieldByField(johnBedarUser);
         userService.findById(Long.valueOf("13"));
         verify(userDao, times(2)).findById(Long.valueOf("13"));
@@ -210,20 +215,30 @@ public class UserServiceTest {
     
     @Test
     public void testIsUserAdmin() {
-        assertThat(userService.isUserAdmin(johnBedarUser)).isFalse();
+        assertThat(userService.isUserAdmin(johnBedarUser))
+                .as("User without admin rights shouldn't has admin sign")
+                .isFalse();
     }
     
     @Test
     public void testUserAuthenticate() {
         userService.createRegisteredUser(johnBedarUser, "password");
-        assertThat(johnBedarUser).isNotNull();
-        assertThat(johnBedarUser.getPasswordHash()).isNotNull();
+        assertThat(johnBedarUser)
+                .as("user shouldn't be null")
+                .isNotNull();
+        assertThat(johnBedarUser.getPasswordHash())
+                .as("user password hash shouldn't be null")
+                .isNotNull();
         
         boolean authenticated = userService.userAuthenticate(johnBedarUser, "badPassword");
-        assertThat(authenticated).isFalse();
+        assertThat(authenticated)
+                .as("user cannot authenticate by incorret password!")
+                .isFalse();
         
         authenticated = userService.userAuthenticate(johnBedarUser, "password");
-        assertThat(authenticated).isTrue();
+        assertThat(authenticated)
+                .as("user should authenticate by correct password!")
+                .isTrue();
     }
     
     @Test(expected = DataAccessException.class)
@@ -346,6 +361,11 @@ public class UserServiceTest {
         assertThatThrownBy(() -> userService.userAuthenticate(johnBedarUser, null))
                 .as("userAuthenticate(user, null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
+        
+        assertThatThrownBy(() -> userService.isUserAdmin(null))
+                .as("isUserAdmin(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        
     }
     
 }
