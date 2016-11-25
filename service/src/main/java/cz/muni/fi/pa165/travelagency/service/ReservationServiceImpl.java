@@ -106,6 +106,9 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation addExcursion(Long reservationId, Excursion excursion) {
         try {
             Reservation toUpdate = reservationDao.findById(reservationId);
+            if(!toUpdate.getTrip().getExcursions().contains(excursion)) {
+                throw new ValidationException("Excursion is not compatible with given Trip");
+            }
             toUpdate.addExcursion(excursion);
             reservationDao.update(toUpdate);
             return reservationDao.findById(reservationId);
