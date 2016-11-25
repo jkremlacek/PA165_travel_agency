@@ -55,7 +55,7 @@ public class Excursion {
         this.price = price;
     }
 
-    public Excursion(long id) {
+    public Excursion(Long id) {
         this.id = id;
     }
 

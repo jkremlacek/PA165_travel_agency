@@ -115,7 +115,7 @@ public class TripDto {
     @Override
     public int hashCode() {
         int hash = 7;
-         hash = 23 * hash + Objects.hashCode(this.getName());
+        hash = 23 * hash + Objects.hashCode(this.getName());
         hash = 23 * hash + Objects.hashCode(this.getDateFrom());
         hash = 23 * hash + Objects.hashCode(this.getDateTo());
         hash = 23 * hash + Objects.hashCode(this.getDestination());

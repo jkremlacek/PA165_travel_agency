@@ -71,7 +71,7 @@ public class Trip {
         this.price = price;
     }
 
-    public Trip(long id) {
+    public Trip(Long id) {
         this.id = id;
     }
     
