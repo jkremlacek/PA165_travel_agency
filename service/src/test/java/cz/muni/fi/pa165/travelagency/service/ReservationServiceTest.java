@@ -287,9 +287,19 @@ public class ReservationServiceTest {
     }
     
     @Test(expected = NullPointerException.class)
-    public void testAddExcursionNull() {
+    public void testAddExcursionNullExcursion() {
         reservationService.create(reservation1);
         reservationService.addExcursion(reservation1.getId(), null);
+    }
+    @Test(expected = NullPointerException.class)
+    public void testAddExcursionNullReservation() {        
+        reservationService.create(reservation1);
+        reservationService.addExcursion(null, excursion1);
+    }
+    @Test(expected = NullPointerException.class)
+    public void testAddExcursionNull() {
+        reservationService.create(reservation1);
+        reservationService.addExcursion(null, null);
     }
     
     @Test(expected = ValidationException.class)
