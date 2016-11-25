@@ -102,7 +102,6 @@ public class MappingServiceTest {
     public void testMappingTripToDto() {
         TripDto trip = mappingService.mapTo(t1, TripDto.class);
 
-        //TODO: wait for TripDto implementation
         assertThat(trip)
                 .as("Should not be null")
                 .isNotNull();
@@ -112,7 +111,6 @@ public class MappingServiceTest {
     public void testMappingExcursionToDto() {
         ExcursionDto excursionDto = mappingService.mapTo(e1, ExcursionDto.class);
 
-        //TODO: wait for TripDto implementation
         assertThat(excursionDto)
                 .as("Should not be null")
                 .isNotNull();
@@ -121,7 +119,6 @@ public class MappingServiceTest {
                 .as("Should contain destination")
                 .isEqualTo(e1.getDestination());
 
-        //TODO: if not compilable, comment and wait until TripDto is implemented
         assertThat(excursionDto.getTrip().getName())
                 .as("Trip should me mapped properly to TripDto")
                 .isEqualTo(t1.getName());
@@ -139,7 +136,6 @@ public class MappingServiceTest {
 
         Excursion ex = mappingService.mapTo(excursionDto, Excursion.class);
 
-        //TODO: wait for TripDto implementation
         assertThat(ex)
                 .as("Should not be null")
                 .isNotNull();
