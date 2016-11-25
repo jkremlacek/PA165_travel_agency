@@ -251,6 +251,10 @@ public class UserServiceTest {
         assertThatThrownBy(() -> userService.delete(any()))
                 .as("delete() should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
+        
+        assertThatThrownBy(() -> userService.findById(any()))
+                .as("findById() should throw DataAccessException")
+                .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> userService.findByName(any()))
                 .as("findByName() should throw DataAccessException")
@@ -293,10 +297,15 @@ public class UserServiceTest {
         assertThatThrownBy(() -> userService.createRegisteredUser(null, "password"))
                 .as("createRegisteredUser(null, 'password') should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
+        
 
         assertThatThrownBy(() -> userService.createRegisteredUser(johnBedarUser, null))
                 .as("createRegisteredUser(user, null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);        
+        
+        assertThatThrownBy(() -> userService.update(null))
+                .as("update(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
         
         assertThatThrownBy(() -> userService.delete(null))
                 .as("delete(null) should throw NullPointerException")
