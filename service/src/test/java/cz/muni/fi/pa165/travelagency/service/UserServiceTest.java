@@ -27,6 +27,8 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
+
 import org.springframework.dao.DataAccessException;
 
 /**
@@ -159,7 +161,7 @@ public class UserServiceTest {
         assertThat(userService.findById(johnBedarUser.getId()))
                 .isEqualToComparingFieldByField(johnBedarUser);
         userService.findById(Long.valueOf("13"));
-        verify(userDao).findById(Long.valueOf("13"));
+        verify(userDao, times(2)).findById(Long.valueOf("13"));
                 
     }
 
