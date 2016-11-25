@@ -154,49 +154,54 @@ public class ExcursionServiceTest {
         assertThatThrownBy(() -> excursionService.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
+        
+        assertThatThrownBy(() -> excursionService.update(null))
+                .as("update(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+
 
         assertThatThrownBy(() -> excursionService.delete(null))
                 .as("delete(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findById(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByName(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByName(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByDate(null, e.getDate()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDate(null,any()) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByDate(e.getDate(), null))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDate(any(),null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByDestination(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByDestination(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByPrice(null, e.getPrice()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByPrice(null, any()) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByPrice(e.getPrice(), null))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByPrice(any(), null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByDuration(null, e.getDuration()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDuration(null,any()) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByDuration(e.getDuration(), null))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDuration(any(),null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> excursionService.findByTrip(null))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByTrip(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
     }
 
@@ -214,35 +219,43 @@ public class ExcursionServiceTest {
         doThrow(new EntityNotFoundException()).when(excursionDao).findByTrip(any());
 
         assertThatThrownBy(() -> excursionService.create(any()))
-                .as("create(null) should throw DataAccessException")
+                .as("create(any()) should throw DataAccessException")
+                .isInstanceOf(DataAccessException.class);
+        
+        assertThatThrownBy(() -> excursionService.update(any()))
+                .as("update(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.delete(any()))
-                .as("delete(null) should throw DataAccessException")
+                .as("delete(any()) should throw DataAccessException")
+                .isInstanceOf(DataAccessException.class);
+        
+        assertThatThrownBy(() -> excursionService.findById(any()))
+                .as("findById(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByName(any()))
-                .as("findByName(null) should throw DataAccessException")
+                .as("findByName(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByDate(any(), any()))
-                .as("findByDate(null) should throw DataAccessException")
+                .as("findByDate(any(),any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByDestination(any()))
-                .as("findByDestination(null) should throw DataAccessException")
+                .as("findByDestination(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByPrice(any(), any()))
-                .as("findByPrice(null) should throw DataAccessException")
+                .as("findByPrice(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByDuration(any(), any()))
-                .as("findByDuration(null) should throw DataAccessException")
+                .as("findByDuration(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByTrip(any()))
-                .as("findByTrip(null) should throw DataAccessException")
+                .as("findByTrip(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
     }
 	
