@@ -8,7 +8,7 @@
     <modules>
         <module>persistence</module>
         <module>service</module>
-        <module>facade</module>
+        <module>api</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

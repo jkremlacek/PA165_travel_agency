@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>facade</artifactId>
+    <artifactId>api</artifactId>
     <dependencies>
         <dependency>
             <groupId>cz.muni.fi.pa165.travelagency</groupId>
@@ -21,4 +21,5 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <name>api</name>
 </project>
