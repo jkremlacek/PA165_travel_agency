@@ -95,10 +95,11 @@ public interface TripService {
     List<Trip> findWithFreeCapacity();
     
     /**
-     * Find trips which will start in next 31 days
-     * @return trip in next 31 days as List
+     * Find trips which will start maximum in given days
+     * @param countOfDays
+     * @return trips in given next days as List
      */
-    List<Trip> findTripsNextMonth();
+    List<Trip> findTripsInNextDays(int countOfDays);
     
     /**
      * Find people with reservation a given trip

@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.ValidationException;
@@ -129,9 +130,11 @@ public class TripServiceImpl implements TripService {
     public List<Trip> findByAvailableCapacity(Integer capacity) {
         try {
             List<Trip> trips = tripDao.findByTotalCapacity(capacity);
-            for (Trip trip : trips) {
+            Iterator<Trip> it = trips.iterator();
+            while (it.hasNext()) {
+                Trip trip = it.next();
                 if (trip.getCapacity() - reservationDao.findByTrip(trip).size() <= 0) {
-                    trips.remove(trip);
+                    it.remove();
                 }
             }
             return trips;
@@ -159,10 +162,14 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<Trip> findTripsNextMonth() {
+    public List<Trip> findTripsInNextDays(int countOfDays) {
         Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
         Date from = cal.getTime();
-        cal.add(Calendar.DATE, 31);
+        cal.add(Calendar.DATE, countOfDays);
         Date to = cal.getTime();
         return findByDate(from, to);
     }
