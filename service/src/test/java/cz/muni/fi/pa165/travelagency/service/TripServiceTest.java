@@ -309,35 +309,35 @@ public class TripServiceTest {
         doThrow(new EntityNotFoundException()).when(tripDao).findByExcursion(any());
 
         assertThatThrownBy(() -> tripService.create(any()))
-                .as("create(null) should throw NullPointerException")
+                .as("create(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.delete(any()))
-                .as("delete(null) should throw NullPointerException")
+                .as("delete(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByName(any()))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByName(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByDate(any(), any()))
-                .as("findByCustomer(null) should throw NullPointerException")
+                .as("findByDate(any(), any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByDestination(any()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByDestination(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByPrice(any(), any()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByPrice(any(), any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByAvailableCapacity(any()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByAvailableCapacity(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByExcursion(any()))
-                .as("findById(null) should throw NullPointerException")
+                .as("findByExcursion(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
     }
 
