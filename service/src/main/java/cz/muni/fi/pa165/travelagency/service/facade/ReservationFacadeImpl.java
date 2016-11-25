@@ -1,10 +1,8 @@
 package cz.muni.fi.pa165.travelagency.service.facade;
 
 import cz.muni.fi.pa165.travelagency.facade.ReservationFacade;
-import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.*;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
@@ -43,6 +41,11 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     @Override
+    public void delete(ReservationDto reservationDto) {
+        reservationService.delete(mappingService.mapTo(reservationDto, Reservation.class));
+    }
+
+    @Override
     public ReservationDto findById(Long id) {
         return mappingService.mapTo(reservationService.findById(id), ReservationDto.class);
     }
@@ -67,5 +70,11 @@ public class ReservationFacadeImpl implements ReservationFacade {
     @Override
     public BigDecimal getTotalPrice(Long id) {
         return reservationService.getTotalPrice(id);
+    }
+
+    @Override
+    public ReservationDto addExcursion(Long reservationId, ExcursionDto excursionDto) {
+        Excursion excursion = mappingService.mapTo(excursionDto,Excursion.class);
+        return mappingService.mapTo(reservationService.addExcursion(reservationId,excursion), ReservationDto.class);
     }
 }

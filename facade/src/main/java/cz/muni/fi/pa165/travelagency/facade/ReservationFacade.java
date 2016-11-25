@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
-import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
-import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,6 +23,12 @@ public interface ReservationFacade {
      * @param reservationDto DTO for reservation
      */
     void update(ReservationDto reservationDto);
+
+    /**
+     * Deletes an existing reservation
+     * @param reservationDto reservation to delete
+     */
+    void delete(ReservationDto reservationDto);
 
     /**
      * Finds a reservation with given ID
@@ -60,4 +63,12 @@ public interface ReservationFacade {
      * @return total price of reservation
      */
     BigDecimal getTotalPrice(Long id);
+
+    /**
+     * Adds an excursion to an existing reservation
+     * @param reservationId ID of an existing reservation
+     * @param excursionDto excursion to be added
+     * @return reservationDto with updated attributes
+     */
+    ReservationDto addExcursion(Long reservationId, ExcursionDto excursionDto);
 }
