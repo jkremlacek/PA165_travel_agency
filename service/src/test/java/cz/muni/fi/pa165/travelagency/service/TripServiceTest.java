@@ -250,6 +250,10 @@ public class TripServiceTest {
         assertThatThrownBy(() -> tripService.create(null))
                 .as("create(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
+        
+        assertThatThrownBy(() -> tripService.update(null))
+                .as("update(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
 
         assertThatThrownBy(() -> tripService.delete(null))
                 .as("delete(null) should throw NullPointerException")
@@ -311,9 +315,21 @@ public class TripServiceTest {
         assertThatThrownBy(() -> tripService.create(any()))
                 .as("create(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
-
+        
+        assertThatThrownBy(() -> tripService.update(any()))
+                .as("update(any()) should throw DataAccessException")
+                .isInstanceOf(DataAccessException.class);
+        
         assertThatThrownBy(() -> tripService.delete(any()))
                 .as("delete(any()) should throw DataAccessException")
+                .isInstanceOf(DataAccessException.class);
+
+        assertThatThrownBy(() -> tripService.findById(any()))
+                .as("findById(any()) should throw DataAccessException")
+                .isInstanceOf(DataAccessException.class);
+        
+        assertThatThrownBy(() -> tripService.create(any()))
+                .as("create(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> tripService.findByName(any()))
