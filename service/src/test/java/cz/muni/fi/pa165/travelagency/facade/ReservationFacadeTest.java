@@ -1,9 +1,11 @@
 package cz.muni.fi.pa165.travelagency.facade;
 
+import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import cz.muni.fi.pa165.travelagency.persistence.entity.User;
@@ -47,6 +49,9 @@ public class ReservationFacadeTest {
     
     private Trip trip1;
     private TripDto tripDto1;
+    
+    private Excursion excursion1;
+    private ExcursionDto excursionDto1;
 
     @Before
     public void setup() {
@@ -107,12 +112,35 @@ public class ReservationFacadeTest {
         reservationDto1.setTrip(tripDto1);
         reservationDto1.setUser(userDto1);
 
+        excursion1 = new Excursion(1l);
+        calendar.set(2017,1,21);
+        excursion1.setDate(calendar.getTime());
+        calendar.clear();
+        excursion1.setDestination("Rim");
+        calendar.set(0, 0, 0, 5, 0, 0);
+        excursion1.setDuration(calendar.getTime());
+        calendar.clear();
+        excursion1.setName("Vylet do Rima");
+        excursion1.setPrice(BigDecimal.valueOf(80));
+        excursion1.setTrip(trip1);
+        trip1.addExcursion(excursion1);
+        
+        excursionDto1  = new ExcursionDto();
+        excursionDto1.setDate(excursion1.getDate());
+        excursionDto1.setDestination(excursion1.getDestination());
+        excursionDto1.setDuration(excursion1.getDuration());
+        excursionDto1.setName(excursion1.getName());
+        excursionDto1.setPrice(excursion1.getPrice());
+        excursionDto1.setTrip(tripDto1);       
+        
+        
         when(mappingService.mapTo(reservationCreateDto1, Reservation.class))
                 .thenReturn(reservation1);
         when(mappingService.mapTo(reservationDto1, Reservation.class))
                 .thenReturn(reservation1);
         when(mappingService.mapTo(tripDto1, Trip.class)).thenReturn(trip1);
         when(mappingService.mapTo(userDto1, User.class)).thenReturn(user1);
+        when(mappingService.mapTo(excursionDto1, Excursion.class)).thenReturn(excursion1);
     }
      
     @Test
@@ -126,6 +154,13 @@ public class ReservationFacadeTest {
         reservationFacade.update(reservationDto1);
         verify(reservationService).update(reservation1);
     }
+    
+    @Test
+    public void testDelete() throws Exception {
+        reservationFacade.delete(reservationDto1);
+        verify(reservationService).delete(reservation1);
+    }
+    
     @Test
     public void testFindById() throws Exception {
         reservationFacade.findById(1l);
@@ -149,6 +184,12 @@ public class ReservationFacadeTest {
     public void testFindByTrip() throws Exception {
         reservationFacade.findByTrip(tripDto1);
         verify(reservationService).findByTrip(trip1);
+    }
+    
+    @Test
+    public void testAddExcursion() throws Exception {
+        reservationFacade.addExcursion(reservationDto1.getId(),excursionDto1);
+        verify(reservationService).addExcursion(reservation1.getId(), excursion1);
     }
     
     @Test
