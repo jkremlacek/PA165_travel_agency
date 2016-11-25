@@ -101,6 +101,13 @@ public class ExcursionDaoImpl implements ExcursionDao {
 	@Override
 	public void update(Excursion entity) {
             if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
+			
+	        if (entity.getDate() == null) throw new ValidationException("Date cannot be null.");
+	        if (entity.getName()== null) throw new ValidationException("Name cannot be null.");
+	        if (entity.getTrip()== null) throw new ValidationException("Trip cannot be null.");
+	        if (entity.getDuration()== null) throw new ValidationException("Duration cannot be null.");
+	        if (entity.getDestination()== null) throw new ValidationException("Destination cannot be null.");
+	        if (entity.getId() == null) throw new NullPointerException("Id cannot be null.");
             em.merge(entity);
 	}
 
@@ -112,6 +119,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
 
 	@Override
 	public Excursion findById(Long id) {
+		    if (id == null) throw new NullPointerException("Parameter id cannot be null.");
             return em.find(Excursion.class, id);
 	}
 

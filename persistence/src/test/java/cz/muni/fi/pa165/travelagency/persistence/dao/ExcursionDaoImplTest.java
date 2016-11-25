@@ -399,8 +399,9 @@ public class ExcursionDaoImplTest {
     
     @Test(expected = NullPointerException.class)
     public void testUpdateWithNullId() {
-        bigHillExcursion.setId(null);
         excursionDao.create(bigHillExcursion);
+        bigHillExcursion.setId(null);
+        excursionDao.update(bigHillExcursion);
     }
     
     /**

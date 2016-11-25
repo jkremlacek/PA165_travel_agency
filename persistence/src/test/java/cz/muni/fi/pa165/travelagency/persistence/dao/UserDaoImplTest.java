@@ -182,7 +182,15 @@ public class UserDaoImplTest {
         assertThatThrownBy(() -> userDao.findById(null))
                 .as("findById(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
-
+        assertThatThrownBy(() -> userDao.findByBirthDate(null))
+                .as("findByBirthDate(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> userDao.findByPersonalNumber(null))
+                .as("findByPersonalNumber(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
+        assertThatThrownBy(() -> userDao.findByPhoneNumber(null))
+                .as("findByPhoneNumber(null) should throw NullPointerException")
+                .isInstanceOf(NullPointerException.class);
     }
 	
     @Test
