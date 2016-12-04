@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public class ExcursionDaoImpl implements ExcursionDao {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 	
     @Override
     public List<Excursion> findByName(String name) {

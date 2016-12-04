@@ -9,11 +9,13 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.ValidationException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jakub Kremláček
  */
+@Service
 public class ExcursionServiceImpl implements ExcursionService{
 
     @Inject

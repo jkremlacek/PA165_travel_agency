@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.travelagency.facade.dto;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -43,31 +44,30 @@ public class ReservationCreateDto {
         this.excursionSet.add(excursion);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ReservationCreateDto that = (ReservationCreateDto) o;
-
-        if (!getUser().equals(that.getUser())) return false;
-        return getTrip().equals(that.getTrip());
-
-    }
-
-    @Override
+      @Override
     public int hashCode() {
-        int result = getUser().hashCode();
-        result = 31 * result + getTrip().hashCode();
-        return result;
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.getUser()) * 43 + Objects.hashCode(this.getTrip());
+        return hash;
     }
 
     @Override
-    public String toString() {
-        return "ReservationCreateDto{" +
-                "user=" + user +
-                ", trip=" + trip +
-                ", excursionSet=" + excursionSet +
-                '}';
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof ReservationCreateDto)) {
+            return false;
+        }
+        final ReservationCreateDto other = (ReservationCreateDto) obj;
+        if (!Objects.equals(this.getUser(), other.getUser()) || !Objects.equals(this.getTrip(), other.getTrip())) {
+            return false;
+        }
+        return true;
     }
+
+   
 }

@@ -230,15 +230,6 @@ public class Trip {
     }
 
     @Override
-    public String toString() {
-        return "Trip{" + "id=" + getId() + ", name=" + getName() + ", dateFrom=" 
-                + getDateFrom() + ", dateTo=" + getDateTo() + ", destination=" 
-                + getDestination() + ", description=" + getDescription() + ", capacity=" 
-                + getCapacity() + ", price=" + getPrice() + ", excursions=" 
-                + getExcursions() + ", reservations=" + getReservations() + '}';
-    }
-
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 23 * hash + Objects.hashCode(this.getName());

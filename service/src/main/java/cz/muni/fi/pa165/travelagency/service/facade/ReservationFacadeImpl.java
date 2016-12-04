@@ -25,10 +25,10 @@ import java.util.List;
 public class ReservationFacadeImpl implements ReservationFacade {
 
     @Inject
-    MappingService mappingService;
+    private MappingService mappingService;
 
     @Inject
-    ReservationService reservationService;
+    private ReservationService reservationService;
 
     @Override
     public void create(ReservationCreateDto reservation) {

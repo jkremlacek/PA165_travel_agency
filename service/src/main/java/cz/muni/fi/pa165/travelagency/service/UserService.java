@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  * Service layer interface for user
  * @author Kateřina Caletková
  */
-@Service
 public interface UserService {
      
     /**

@@ -32,13 +32,13 @@ import org.springframework.test.context.ContextConfiguration;
 public class UserFacadeTest {
     
     @Mock
-    UserService userService;
+    private UserService userService;
 
     @Mock
-    MappingService mappingService;
+    private MappingService mappingService;
     
     @InjectMocks
-    UserFacade userFacade = new UserFacadeImpl();
+    private UserFacade userFacade = new UserFacadeImpl();
     
     private User user;
     private UserCreateDto userCreateDto;

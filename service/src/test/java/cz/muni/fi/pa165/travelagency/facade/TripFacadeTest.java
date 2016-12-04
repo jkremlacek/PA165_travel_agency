@@ -32,13 +32,13 @@ import static org.mockito.Mockito.when;
 public class TripFacadeTest {
 
     @Mock
-    TripService tripService;
+    private TripService tripService;
 
     @Mock
-    MappingService mappingService;
+    private MappingService mappingService;
 
     @InjectMocks
-    TripFacade tripFacade = new TripFacadeImpl();
+    private TripFacade tripFacade = new TripFacadeImpl();
 
     private Trip trip;
     private TripCreateDto tripCreateDto;

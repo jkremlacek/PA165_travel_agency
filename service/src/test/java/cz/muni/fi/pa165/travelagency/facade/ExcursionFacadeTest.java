@@ -30,13 +30,13 @@ import org.springframework.test.context.ContextConfiguration;
 public class ExcursionFacadeTest {
 	
     @Mock
-    ExcursionService excursionService;
+    private ExcursionService excursionService;
 
     @Mock
-    MappingService mappingService;
+    private MappingService mappingService;
 	
     @InjectMocks
-    ExcursionFacade excursionFacade = new ExcursionFacadeImpl();
+    private ExcursionFacade excursionFacade = new ExcursionFacadeImpl();
 	
     private Trip t;
     private TripDto tripDto;

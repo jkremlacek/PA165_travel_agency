@@ -149,21 +149,6 @@ public class TripDto {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return  "TripDto{" + 
-                "id=" + id + 
-                ", name=" + name + 
-                ", dateFrom=" + dateFrom + 
-                ", dateTo=" + dateTo + 
-                ", destination=" + destination + 
-                ", description=" + description + 
-                ", capacity=" + capacity + 
-                ", price=" + price + 
-                ", excursions=" + excursions + 
-                ", reservations=" + reservations + 
-                '}';
-    }
     
     
     

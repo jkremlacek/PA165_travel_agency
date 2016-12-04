@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
     
     @Override
     public List<User> findByName(String name) {

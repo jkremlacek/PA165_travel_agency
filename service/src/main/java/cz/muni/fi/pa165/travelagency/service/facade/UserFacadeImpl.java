@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserFacadeImpl implements UserFacade {
     
     @Inject
-    MappingService mappingService;
+    private MappingService mappingService;
     
     @Inject
     private UserService userService;

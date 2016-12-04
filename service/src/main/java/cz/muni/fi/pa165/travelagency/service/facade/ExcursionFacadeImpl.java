@@ -13,18 +13,22 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jakub Kremláček
  */
+@Service
+@Transactional
 public class ExcursionFacadeImpl implements ExcursionFacade {
 	
     @Inject
-    MappingService mappingService;
+    private MappingService mappingService;
 	
     @Inject
-    ExcursionService excursionService;
+    private ExcursionService excursionService;
 	
     @Override
     public void create(ExcursionCreateDto excursion) {

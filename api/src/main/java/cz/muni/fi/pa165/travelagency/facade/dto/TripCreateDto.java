@@ -162,21 +162,7 @@ public class TripCreateDto {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return  "TripCreateDto{" + 
-                ", name=" + name + 
-                ", dateFrom=" + dateFrom + 
-                ", dateTo=" + dateTo + 
-                ", destination=" + destination + 
-                ", description=" + description + 
-                ", capacity=" + capacity + 
-                ", price=" + price + 
-                ", excursions=" + excursions + 
-                ", reservations=" + reservations + 
-                '}';
-    }
-    
+  
     
 
 }

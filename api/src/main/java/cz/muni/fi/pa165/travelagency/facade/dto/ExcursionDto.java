@@ -112,17 +112,5 @@ public class ExcursionDto {
         return result;
     }
 	
-    @Override
-    public String toString() {
-        return  "ExcursionDto{" +
-                "id=" + id +
-                ", name=" + name +
-                ", date=" + date +
-                ", duration=" + duration +
-                ", destination=" + destination +
-                ", price=" + price +
-                ", trip=" + trip +
-                ", description=" + description +
-                '}';
-    }
+  
 }

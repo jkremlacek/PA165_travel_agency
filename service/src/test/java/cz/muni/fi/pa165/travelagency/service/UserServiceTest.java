@@ -43,7 +43,7 @@ public class UserServiceTest {
     
     @Inject
     @InjectMocks
-    UserService userService;
+    private UserService userService;
     
     private Calendar calNow;
     

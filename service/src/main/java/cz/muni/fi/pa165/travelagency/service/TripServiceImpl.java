@@ -16,11 +16,13 @@ import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.ValidationException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
+@Service
 public class TripServiceImpl implements TripService {
     
     @Inject

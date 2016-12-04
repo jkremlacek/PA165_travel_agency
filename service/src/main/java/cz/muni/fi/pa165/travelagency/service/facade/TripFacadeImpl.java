@@ -13,11 +13,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
+@Service
+@Transactional
 public class TripFacadeImpl implements TripFacade {
     
     @Inject
