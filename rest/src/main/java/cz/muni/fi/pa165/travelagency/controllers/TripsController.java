@@ -1,9 +1,7 @@
 package cz.muni.fi.pa165.travelagency.controllers;
 
+import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.rest.ApiUris;
-import cz.muni.fi.pa165.travelagency.dto.TripCreateDTO;
-import cz.muni.fi.pa165.travelagency.dto.TripDTO;
-import cz.muni.fi.pa165.travelagency.dto.TripUpdateDTO;
 import cz.muni.fi.pa165.travelagency.exceptions.AlreadyExistingException;
 import cz.muni.fi.pa165.travelagency.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.travelagency.exceptions.NotFoundException;
@@ -11,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
+import cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto;
 import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,15 +30,15 @@ public class TripsController {
     
     /**
      * Get trips
-     * @param userId id of user, not necessarily required
-     * @return list of trios
+     * @param destination destination of trip, not necessarily required
+     * @return list of trips
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDTO> getTrips(@RequestParam(value = "userId", required = false) Long userId) {
-        if (userId == null) {
-            return tripFacade.getAllTrips();
+    public final List<TripDto> getTrips(@RequestParam(value = "destination", required = false) String destination) {
+        if (destination == null) {
+            return tripFacade.findAll();
         }
-        return tripFacade.getTripsByUser(userId);                
+        return tripFacade.findByDestination(destination);
     }
     
     /**
@@ -49,12 +48,12 @@ public class TripsController {
      * @throws Exception if id is null
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final TripDTO findById(@PathVariable("id") Long id) throws Exception {
-        TripDTO tripDTO = tripFacade.getTripById(id);
-        if (tripDTO == null) {
+    public final TripDto findById(@PathVariable("id") Long id) throws Exception {
+        TripDto tripDto = tripFacade.findById(id);
+        if (tripDto == null) {
             throw new NullPointerException();
         }
-        return tripDTO;
+        return tripDto;
     }
     
     /**
@@ -65,7 +64,7 @@ public class TripsController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void deleteTrip(@PathVariable("id") Long id) throws Exception {   
         try {
-            tripFacade.deleteTrip(id);      
+            tripFacade.delete(tripFacade.findById(id));
         }
         catch (Exception ex) {
             throw new NotFoundException(ex);
@@ -74,15 +73,15 @@ public class TripsController {
     
     /**
      * Create a trip
-     * @param tripCreateDTO trip which should be created
+     * @param tripCreateDto trip which should be created
      * @throws Exception ig trip already exist
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void createTrip(@RequestBody TripCreateDTO tripCreateDTO) throws Exception {
+    public final void createTrip(@RequestBody TripCreateDto tripCreateDto) throws Exception {
 
         try {
-            tripFacade.createTrip(tripCreateDTO);
+            tripFacade.create(tripCreateDto);
         } catch (Exception ex) {
             throw new AlreadyExistingException(ex);
         }
@@ -90,14 +89,14 @@ public class TripsController {
     
     /**
      * Update trip
-     * @param tripUpdateDTO which will be update
-     * @throws Exception if tripUpdateDTO contains invalid parameter
+     * @param tripDto which will be update
+     * @throws Exception if tripUpdateDto contains invalid parameter
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void updateTrip(@RequestBody TripUpdateDTO tripUpdateDTO) throws Exception {
+    public final void updateTrip(@RequestBody TripDto tripDto) throws Exception {
         try {
-            tripFacade.updateTrip(tripUpdateDTO);            
+            tripFacade.update(tripDto);            
         } catch (Exception ex) {
             throw new InvalidParameterException(ex);
         }
