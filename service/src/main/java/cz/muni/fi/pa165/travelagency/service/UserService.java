@@ -70,8 +70,9 @@ public interface UserService {
      * Create and registrate user
      * @param user to be created and registrated
      * @param password to be hashed and set with user
+     * @return if of created user
      */
-    void createRegisteredUser(User user, String password);
+    Long createRegisteredUser(User user, String password);
     
      /**
      * Update an entity.

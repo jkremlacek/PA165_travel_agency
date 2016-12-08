@@ -31,7 +31,7 @@ public class UserFacadeImpl implements UserFacade {
     private UserService userService;
 
     @Override
-    public void create(UserCreateDto user) {    
+    public Long create(UserCreateDto user) {    
         if (user == null) {
             throw new IllegalArgumentException("User is null");
         }
@@ -42,7 +42,7 @@ public class UserFacadeImpl implements UserFacade {
             throw new IllegalArgumentException("Password is empty");
         }
         User mapped = mappingService.mapTo(user, User.class);
-	userService.createRegisteredUser(mapped, user.getPasswordHash());	        
+	return userService.createRegisteredUser(mapped, user.getPasswordHash());	        
     }
 
     @Override

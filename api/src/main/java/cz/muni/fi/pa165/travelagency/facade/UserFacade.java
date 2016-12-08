@@ -16,8 +16,9 @@ public interface UserFacade {
     /**
      * Create a new user
      * @param user to be created
+     * @return id of created user
      */
-    void create(UserCreateDto user);
+    Long create(UserCreateDto user);
     
     /**
      * Update user

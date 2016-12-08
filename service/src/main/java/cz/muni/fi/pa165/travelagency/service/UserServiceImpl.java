@@ -114,10 +114,10 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public void createRegisteredUser(User user, String password) {
+    public Long createRegisteredUser(User user, String password) {
         try {
             user.setPasswordHash(createHash(password));
-            userDao.create(user);
+            return userDao.create(user);
         } catch (NullPointerException| ValidationException ex) {
             throw ex;
         } catch (Exception ex) {

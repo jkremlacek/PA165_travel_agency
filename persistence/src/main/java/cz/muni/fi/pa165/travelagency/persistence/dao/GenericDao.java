@@ -13,11 +13,11 @@ import java.util.List;
 public interface GenericDao<E, K> {
     
     /**
-     * Persist an entity.
-     * 
-     * @param entity object to create
+     * Create an entity
+     * @param entity
+     * @return id of created entity
      */
-    void create(E entity);
+    Long create(E entity);
     
     /**
      * 
