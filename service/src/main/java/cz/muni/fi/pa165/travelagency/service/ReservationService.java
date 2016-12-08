@@ -18,8 +18,9 @@ public interface ReservationService {
     /**
      * Stores new reservation
      * @param reservation reservation to be stored
+     * @return id of created reservation
      */
-    void create(Reservation reservation);
+    Long create(Reservation reservation);
 
     /**
      * Updates existing reservation

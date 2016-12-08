@@ -31,8 +31,8 @@ public class ReservationFacadeImpl implements ReservationFacade {
     private ReservationService reservationService;
 
     @Override
-    public void create(ReservationCreateDto reservation) {
-        reservationService.create(mappingService.mapTo(reservation, Reservation.class));
+    public Long create(ReservationCreateDto reservation) {
+        return reservationService.create(mappingService.mapTo(reservation, Reservation.class));
     }
 
     @Override

@@ -32,9 +32,10 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public void create(Reservation reservation) {
+    public Long create(Reservation reservation) {
         validateAttributes(reservation);
         em.persist(reservation);
+        return reservation.getId();
     }
 
     @Override

@@ -25,9 +25,9 @@ public class ReservationServiceImpl implements ReservationService {
     private ReservationDao reservationDao;
 
     @Override
-    public void create(Reservation reservation) {
+    public Long create(Reservation reservation) {
         try {
-            reservationDao.create(reservation);
+            return reservationDao.create(reservation);
         } catch (NullPointerException | ValidationException ex) {
             throw ex;
         } catch (Exception ex) {
