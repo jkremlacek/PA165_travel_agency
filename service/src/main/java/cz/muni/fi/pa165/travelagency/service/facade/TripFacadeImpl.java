@@ -31,9 +31,9 @@ public class TripFacadeImpl implements TripFacade {
     private TripService tripService;
 
     @Override
-    public void create(TripCreateDto trip) {
+    public Long create(TripCreateDto trip) {
         Trip mapped = mappingService.mapTo(trip, Trip.class);
-        tripService.create(mapped);
+        return tripService.create(mapped);
     }
 
     @Override

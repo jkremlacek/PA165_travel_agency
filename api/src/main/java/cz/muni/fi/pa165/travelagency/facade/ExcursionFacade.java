@@ -17,6 +17,7 @@ public interface ExcursionFacade {
     /**
      * Creates a new excursion
      * @param excursion DTO for excursion
+     * @return new excursion
      */
     Long create(ExcursionCreateDto excursion);
 	

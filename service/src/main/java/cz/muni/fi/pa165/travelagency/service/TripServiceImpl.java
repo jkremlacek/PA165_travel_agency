@@ -32,9 +32,9 @@ public class TripServiceImpl implements TripService {
     private ReservationDao reservationDao;
 
     @Override
-    public void create(Trip trip) {
+    public Long create(Trip trip) {
         try {
-            tripDao.create(trip);
+            return tripDao.create(trip);
         } catch (NullPointerException | ValidationException | IllegalArgumentException ex) {
             throw ex;
         } catch (Exception ex) {

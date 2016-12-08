@@ -15,6 +15,7 @@ public interface ExcursionService {
 	/**
      * Store a new excursion
      * @param excursion excursion to be stored
+     * @return new excursion
      */
     Long create(Excursion excursion);
     

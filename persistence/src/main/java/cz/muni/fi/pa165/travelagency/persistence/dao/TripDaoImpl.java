@@ -116,12 +116,14 @@ public class TripDaoImpl implements TripDao {
     }
 
     @Override
-    public void create(Trip entity) {
+    public Long create(Trip entity) {
         validate(entity);
         if (entity.getId() != null) {
             throw new ValidationException("Id should be null.");
         }
         em.persist(entity);
+        em.flush();
+        return entity.getId();
     }
 
     @Override

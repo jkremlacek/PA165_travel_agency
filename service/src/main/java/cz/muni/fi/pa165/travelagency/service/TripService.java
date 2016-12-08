@@ -16,8 +16,9 @@ public interface TripService {
     /**
      * Store a new trip
      * @param trip trip to be stored
+     * @return new trip
      */
-    void create(Trip trip);
+    Long create(Trip trip);
     
     /**
      * Update an existing trip

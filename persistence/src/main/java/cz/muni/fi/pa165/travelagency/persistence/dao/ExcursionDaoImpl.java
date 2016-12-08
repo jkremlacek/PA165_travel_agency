@@ -99,6 +99,7 @@ public class ExcursionDaoImpl implements ExcursionDao {
         if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
         if (entity.getTrip() == null) throw new ValidationException("Trip must be set!");
         em.persist(entity);
+        em.flush();
         return entity.getId();
     }
 

@@ -17,8 +17,9 @@ public interface TripFacade {
     /**
      * Store a new trip
      * @param trip trip DTO to be stored
+     * @return new trip
      */
-    void create(TripCreateDto trip);
+    Long create(TripCreateDto trip);
     
     /**
      * Update an existing trip
