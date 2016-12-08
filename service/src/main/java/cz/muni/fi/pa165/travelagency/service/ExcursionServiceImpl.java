@@ -22,9 +22,9 @@ public class ExcursionServiceImpl implements ExcursionService{
     private ExcursionDao excursionDao;
 	
     @Override
-    public void create(Excursion excursion) {
+    public Long create(Excursion excursion) {
         try {
-                excursionDao.create(excursion);
+                return excursionDao.create(excursion);
             } catch (NullPointerException | ValidationException | IllegalArgumentException ex) {
                 throw ex;
             } catch (Exception ex) {

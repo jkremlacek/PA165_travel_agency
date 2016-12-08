@@ -16,7 +16,7 @@ public interface ExcursionService {
      * Store a new excursion
      * @param excursion excursion to be stored
      */
-    void create(Excursion excursion);
+    Long create(Excursion excursion);
     
 	/**
      * Update an existing excursion

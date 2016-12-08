@@ -31,9 +31,9 @@ public class ExcursionFacadeImpl implements ExcursionFacade {
     private ExcursionService excursionService;
 	
     @Override
-    public void create(ExcursionCreateDto excursion) {
+    public Long create(ExcursionCreateDto excursion) {
         Excursion mapped = mappingService.mapTo(excursion, Excursion.class);
-        excursionService.create(mapped);
+        return excursionService.create(mapped);
     }
 	
     @Override

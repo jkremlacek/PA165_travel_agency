@@ -18,7 +18,7 @@ public interface ExcursionFacade {
      * Creates a new excursion
      * @param excursion DTO for excursion
      */
-    void create(ExcursionCreateDto excursion);
+    Long create(ExcursionCreateDto excursion);
 	
     /**
      * Updates existing excursion
