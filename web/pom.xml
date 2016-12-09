@@ -41,10 +41,10 @@
             <artifactId>api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-core</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -56,6 +56,17 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+        </dependency>
+
+
+        <!--Bean injections:-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
 
 
@@ -74,6 +85,11 @@
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>cz.muni.fi.pa165.travelagency</groupId>
+            <artifactId>service</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
 
