@@ -1,9 +1,12 @@
 package cz.muni.fi.pa165.travelagency.web.config;
 
 
+import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -11,12 +14,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import javax.validation.Validator;
+
 /**
  * Created on 06.12.2016.
  *
  * @author Martin Salata
  */
 @Configuration
+//TODO: after creating DataConfiguration (it should import ServiceConfig), this should only import DataConfiguration
+@Import(ServiceConfig.class)
 @ComponentScan(basePackages = "cz.muni.fi.pa165.travelagency")
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
@@ -26,7 +33,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
     }
 
@@ -41,6 +47,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
-
 
 }
