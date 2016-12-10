@@ -1,12 +1,12 @@
 package cz.muni.fi.pa165.travelagency.web.config;
 
 
-import cz.muni.fi.pa165.travelagency.service.config.ServiceConfig;
+
+import cz.muni.fi.pa165.travelagency.sampledata.TravelAgencyWithSampleDataConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -22,8 +22,8 @@ import javax.validation.Validator;
  * @author Martin Salata
  */
 @Configuration
-//TODO: after creating DataConfiguration (it should import ServiceConfig), this should only import DataConfiguration
-@Import(ServiceConfig.class)
+
+@Import(TravelAgencyWithSampleDataConfiguration.class)
 @ComponentScan(basePackages = "cz.muni.fi.pa165.travelagency")
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
