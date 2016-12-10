@@ -19,6 +19,7 @@
         <module>api</module>
         <module>rest</module>
         <module>web</module>
+        <module>sampledata</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
