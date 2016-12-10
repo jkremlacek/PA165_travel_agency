@@ -1,16 +1,20 @@
 package cz.muni.fi.pa165.travelagency.web.controller;
 
 import cz.muni.fi.pa165.travelagency.facade.ExcursionFacade;
+import cz.muni.fi.pa165.travelagency.facade.TripFacade;
+import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,34 +23,113 @@ import java.util.List;
  * @author Martin Salata
  */
 @Controller
-@RequestMapping(value = "/excursions")
+@RequestMapping(value = "/excursion")
 public class ExcursionController {
+
     // TODO: uncomment when DataConfig is provided
-//    @Inject
-//    private ExcursionFacade excursionFacade;
+    @Inject
+    private ExcursionFacade excursionFacade;
+
+    @Inject
+    private TripFacade tripFacade;
+
+
+    private String DEFAULT_REDIRECT = "redirect:/excursion/list";
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model) {
-
-        //TODO: this is only until I resolve issues with @Inject and until some DataCOnfiguration is provided
-        ExcursionDto excursionDto = new ExcursionDto();
-        excursionDto.setName("first name");
-        excursionDto.setDescription("first description");
-        excursionDto.setDestination("first destination");
-        excursionDto.setDate(Calendar.getInstance().getTime());
-        excursionDto.setDuration(Calendar.getInstance().getTime());
-        ExcursionDto excursionDto2 = new ExcursionDto();
-        excursionDto2.setName("second name");
-        excursionDto2.setDescription("second description");
-        excursionDto2.setDestination("second destination");
-        excursionDto2.setDate(Calendar.getInstance().getTime());
-        excursionDto2.setDuration(Calendar.getInstance().getTime());
-
-
-        List<ExcursionDto> excursions = new ArrayList<>(Arrays.asList(excursionDto, excursionDto2));
-        //TODO: List<ExcursionDto> excursions = excursionFacade.findAll();
+    public String listAll(Model model) {
+        List<ExcursionDto> excursions = excursionFacade.findAll();
         model.addAttribute("excursions", excursions);
+        model.addAttribute("filter", "none");
 
         return "excursion/list";
     }
+
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        ExcursionDto excursionDto = excursionFacade.findById(id);
+
+        if (excursionDto == null) {
+            redirectAttributes.addFlashAttribute("error", "Excursion with id" + id + " doesn't exist");
+            return DEFAULT_REDIRECT;
+        }
+
+        model.addAttribute("excursion", excursionDto);
+
+        return "excursion/detail";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+
+        ExcursionDto excursionDto = excursionFacade.findById(id);
+        if (excursionDto == null) {
+            redirectAttributes.addFlashAttribute("error", "Excursion " + id + " does not exist");
+            return DEFAULT_REDIRECT;
+        }
+
+        try {
+            excursionFacade.delete(excursionFacade.findById(id));
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute("error", "Excursion " + id + " could not be deleted");
+            return DEFAULT_REDIRECT;
+        }
+        redirectAttributes.addFlashAttribute("success", "Excursion " + id + " has been successfully deleted");
+
+        return DEFAULT_REDIRECT;
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        ExcursionDto excursionDto = excursionFacade.findById(id);
+        if (excursionDto == null) {
+            redirectAttributes.addFlashAttribute("error", "Excursion " + id + " does not exist");
+            return "redirect:/excursion/create";
+        }
+
+        model.addAttribute("excursionToUpdate", excursionDto);
+        return "redirect:/excursion/update";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newExcursion(Model model) {
+
+        model.addAttribute("newExcursion", new ExcursionCreateDto());
+        model.addAttribute("trips", tripFacade.findAll());
+        return "excursion/create";
+
+
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(@ModelAttribute("newExcursion") ExcursionCreateDto excursionCreateDto,
+                         Model model, RedirectAttributes redirectAttributes) {
+
+        //TODO: check binding errors
+
+        Long id;
+        try {
+            id = excursionFacade.create(excursionCreateDto);
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/excursion/create";
+        }
+
+        redirectAttributes.addFlashAttribute("success", "Excursion " + excursionCreateDto.getName()
+                + " (id=" + id + ")successfully created");
+
+        return "redirect:/excursion/detail/" + id;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+        SimpleDateFormat stf = new SimpleDateFormat("hh:mm");
+        stf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(stf, true));
+
+    }
+
 }
