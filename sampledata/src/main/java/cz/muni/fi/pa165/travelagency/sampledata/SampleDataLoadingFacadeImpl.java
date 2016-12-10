@@ -117,7 +117,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private User user(String password, String name, Date birthDate, Long personalNumber, String mail, Integer phoneNumber) {
         User u = new User(name, birthDate, personalNumber, mail, phoneNumber);
         
-        if (password.equals("admin")) u.setIsAdmin(Boolean.TRUE); 
+        u.setIsAdmin(password.equals("admin"));
         
         userService.createRegisteredUser(u, password);
         

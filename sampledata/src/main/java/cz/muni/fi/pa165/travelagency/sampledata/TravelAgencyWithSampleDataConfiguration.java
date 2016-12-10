@@ -5,6 +5,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.io.IOException;
+
 /**
  *
  * @author Jakub Kremláček
@@ -13,5 +17,12 @@ import org.springframework.context.annotation.Import;
 @Import(ServiceConfig.class)
 @ComponentScan(basePackageClasses = {SampleDataLoadingFacadeImpl.class})
 public class TravelAgencyWithSampleDataConfiguration {
-    
+
+    @Inject
+    private SampleDataLoadingFacade sampleDataLoadingFacade;
+
+    @PostConstruct
+    public void dataLoading() throws IOException {
+        sampleDataLoadingFacade.loadData();
+    }
 }
