@@ -97,8 +97,7 @@ public interface UserFacade {
     /**
      * Find out if user was successfully authenticated
      * @param user user
-     * @return true if user was successfully authenticated, false if user wasn't 
-     * successfully authenticated
+     * @return authenticated user if correct  login information were entered
      */
-    boolean userAuthenticate (UserAuthenticateDto user);
+    UserDto userAuthenticate (UserAuthenticateDto user);
 }

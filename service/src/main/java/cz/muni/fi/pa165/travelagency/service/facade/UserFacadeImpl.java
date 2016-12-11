@@ -106,9 +106,15 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public boolean userAuthenticate(UserAuthenticateDto user) {
-        User userEntity = userService.findById(user.getId());
-        return userService.userAuthenticate(userEntity, user.getPassword());
+    public UserDto userAuthenticate(UserAuthenticateDto user) {
+        User userAuth = userService.findById(user.getId());
+        if (userAuth == null) {
+            return null;
+        }
+        if (userService.userAuthenticate(userAuth, user.getPassword())) {
+            return mappingService.mapTo(userAuth, UserDto.class);
+        }
+        return null;
     }
     
 }
