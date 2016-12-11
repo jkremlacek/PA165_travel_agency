@@ -74,13 +74,13 @@ public interface ExcursionService {
      */
     List<Excursion> findByDestination(String destination);
     
-	/**
-     * Find excursions in given duration time interval
-     * @param dateFrom start date of interval
-     * @param dateTo end date of interval
-     * @return excursions in given time interval as List
-     */
-    List<Excursion> findByDuration(Date dateFrom, Date dateTo);
+//	/**
+//     * Find excursions in given duration time interval
+//     * @param dateFrom start date of interval
+//     * @param dateTo end date of interval
+//     * @return excursions in given time interval as List
+//     */
+//    List<Excursion> findByDuration(Date dateFrom, Date dateTo);
     
 	/**
      * Finds all excursions with given trip

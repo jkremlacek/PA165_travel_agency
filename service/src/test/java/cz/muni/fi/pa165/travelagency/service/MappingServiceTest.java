@@ -69,7 +69,7 @@ public class MappingServiceTest {
         cal.set(2017, 8, 20, 10, 0, 0);
         Date excursionDate = cal.getTime();
         cal.set(0, 0, 0, 5, 0, 0);
-        Date excursionDuration = cal.getTime();
+        Integer excursionDuration = 6;
 
         e1 = new Excursion();
         e1.setName("Egypt- pyramidy");

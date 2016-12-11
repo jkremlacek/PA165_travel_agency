@@ -120,16 +120,16 @@ public class ExcursionServiceImpl implements ExcursionService{
             }
     }
 
-    @Override
-    public List<Excursion> findByDuration(Date dateFrom, Date dateTo) {
-        try {
-                return excursionDao.findByDuration(dateFrom, dateTo);
-            } catch (NullPointerException | ValidationException | IllegalArgumentException ex) {
-                throw ex;
-            } catch (Exception ex) {
-                throw new PersistenceException(ex.getMessage());
-            }
-    }
+//    @Override
+//    public List<Excursion> findByDuration(Date dateFrom, Date dateTo) {
+//        try {
+//                return excursionDao.findByDuration(dateFrom, dateTo);
+//            } catch (NullPointerException | ValidationException | IllegalArgumentException ex) {
+//                throw ex;
+//            } catch (Exception ex) {
+//                throw new PersistenceException(ex.getMessage());
+//            }
+//    }
 
     @Override
     public List<Excursion> findByTrip(Trip trip) {

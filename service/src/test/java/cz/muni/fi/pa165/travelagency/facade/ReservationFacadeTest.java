@@ -118,7 +118,7 @@ public class ReservationFacadeTest {
         calendar.clear();
         excursion1.setDestination("Rim");
         calendar.set(0, 0, 0, 5, 0, 0);
-        excursion1.setDuration(calendar.getTime());
+        excursion1.setDuration(9);
         calendar.clear();
         excursion1.setName("Vylet do Rima");
         excursion1.setPrice(BigDecimal.valueOf(80));

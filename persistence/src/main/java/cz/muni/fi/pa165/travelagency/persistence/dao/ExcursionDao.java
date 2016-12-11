@@ -42,13 +42,13 @@ public interface ExcursionDao extends GenericDao<Excursion, Long> {
      */
     List<Excursion> findByDestination(String destination);
     
-    /**
-     * Method find all Excursions with duration value between dateFrom and dateTo
-     * @param dateFrom minimum value of date to find
-     * @param dateTo maximum value of date to find
-     * @return list of excursion with duration value between dateFrom and dateTo
-     */
-    List<Excursion> findByDuration(Date dateFrom, Date dateTo);
+//    /**
+//     * Method find all Excursions with duration value between dateFrom and dateTo
+//     * @param dateFrom minimum value of date to find
+//     * @param dateTo maximum value of date to find
+//     * @return list of excursion with duration value between dateFrom and dateTo
+//     */
+//    List<Excursion> findByDuration(Date dateFrom, Date dateTo);
     
     /**
      * Method find all Excursions with this trip

@@ -55,7 +55,7 @@ public class TripDaoImplTest {
         trip1 = new Trip("Podzim ve Francii",dateFrom1, dateTo1, "Francie", 20, 
                 BigDecimal.valueOf(5000));           
         calendar.set(0,0,0,5,0,0);
-        Date excursionDuration = calendar.getTime();
+        Integer excursionDuration = 2;
         calendar.clear() ;
         excursion1 = new Excursion("Vylet do Parize",dateFrom1, excursionDuration, 
                 "Pariz",BigDecimal.valueOf(500));

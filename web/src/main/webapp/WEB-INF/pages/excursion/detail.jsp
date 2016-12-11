@@ -32,7 +32,7 @@
     </tr>
     <tr>
         <td>Duration</td>
-        <td><fmt:formatDate value="${excursion.duration}" pattern="HH:mm" /></td>
+        <td><c:out value="${excursion.duration}"/></td>
         <%--<td><c:out value="${excursion.duration}"/></td>--%>
     </tr>
     <tr>

@@ -105,7 +105,7 @@ public class ReservationServiceTest {
         calendar.clear();
         excursion1.setDestination("Rim");
         calendar.set(0, 0, 0, 5, 0, 0);
-        excursion1.setDuration(calendar.getTime());
+        excursion1.setDuration(7);
         calendar.clear();
         excursion1.setName("Vylet do Rima");
         excursion1.setPrice(BigDecimal.valueOf(80));
@@ -118,7 +118,7 @@ public class ReservationServiceTest {
         calendar.clear();
         excursion2.setDestination("Milano");
         calendar.set(0, 0, 0, 4, 0, 0);
-        excursion2.setDuration(calendar.getTime());
+        excursion2.setDuration(4);
         calendar.clear();
         excursion2.setName("Vylet do Milana");
         excursion2.setPrice(BigDecimal.valueOf(100));

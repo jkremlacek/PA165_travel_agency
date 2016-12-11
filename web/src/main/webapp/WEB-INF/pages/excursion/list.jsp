@@ -19,7 +19,7 @@
         <c:out value="${excursion.description}" /><br>
         <c:out value="${excursion.destination}" /><br>
         <fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm" /><br>
-        <fmt:formatDate value="${excursion.duration}" pattern="HH:mm" /><br>
+        <c:out value="${excursion.duration}" /><br>
         <br><br>
     </c:forEach>
 </body>

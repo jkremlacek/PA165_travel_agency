@@ -29,8 +29,7 @@ public class Excursion {
     private Date date;
 
     @NotNull
-    @Temporal(TemporalType.TIME)
-    private Date duration;
+    private Integer duration;
 
     @NotNull
     private String destination;
@@ -52,7 +51,7 @@ public class Excursion {
     public Excursion() {
     }
 
-    public Excursion(String name, Date date, Date duration, String destination, BigDecimal price) {
+    public Excursion(String name, Date date, Integer duration, String destination, BigDecimal price) {
         this.name = name;
         this.date = date;
         this.duration = duration;
@@ -89,11 +88,11 @@ public class Excursion {
         this.date = date;
     }
 
-    public Date getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Date duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 

@@ -63,7 +63,7 @@ public class TripFacadeTest {
         Date dateTo = calendar.getTime();
         calendar.clear();
         calendar.set(0, 0, 0, 5, 0, 0);
-        Date excurDur = calendar.getTime();
+        Integer excurDur = 10;
         String excurname = "Elektraren";
 
         BigDecimal price = BigDecimal.valueOf(500);

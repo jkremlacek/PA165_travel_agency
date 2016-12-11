@@ -15,7 +15,7 @@ public class ExcursionDto {
 
     private Date date;
 
-    private Date duration;
+    private Integer duration;
 
     private String destination;
 
@@ -49,11 +49,11 @@ public class ExcursionDto {
         this.date = date;
     }
 
-    public Date getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Date duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 

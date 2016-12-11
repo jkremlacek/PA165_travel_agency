@@ -20,8 +20,7 @@ public class ExcursionCreateDto {
     private Date date;
 
     @NotNull
-    @Temporal(TemporalType.TIME)
-    private Date duration;
+    private Integer duration;
 
     @NotNull
     private String destination;
@@ -49,11 +48,11 @@ public class ExcursionCreateDto {
         this.date = date;
     }
 
-    public Date getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Date duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
