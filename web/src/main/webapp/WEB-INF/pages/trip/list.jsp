@@ -17,6 +17,7 @@
         <c:out value="${trip.dateTo}" /><br>
         <c:out value="${trip.capacity}" /><br>
         <c:out value="${trip.price}" /><br>
+        <a href="/trip/detail/${trip.id}">detail</a>
         <br><br>
     </c:forEach>
 </body>
