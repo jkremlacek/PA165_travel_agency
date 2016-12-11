@@ -33,7 +33,7 @@
             <td>
                 <%--TODO: resolve "syntactically not correct" issue--%>
                 <form:label path="trip"/>
-                <form:select path="trip" class="selectpicker" data-live-search="true" data-container="body">
+                <form:select path="trip">
                     <form:options items="${trips}" itemValue="id" itemLabel="name"/>
                     <%--<c:forEach items="${trips}"  var="t">--%>
                         <%--<form:option type="text" value="${t.getId().toString()}">${t.name} ${t.destination}</form:option>--%>
