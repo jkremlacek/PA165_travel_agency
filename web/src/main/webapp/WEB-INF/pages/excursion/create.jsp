@@ -31,13 +31,11 @@
         <tr>
             <td>Trip</td>
             <td>
-                <%--TODO: resolve "syntactically not correct" issue--%>
-                <form:label path="trip"/>
                 <form:select path="trip">
-                    <form:options items="${trips}" itemValue="id" itemLabel="name"/>
-                    <%--<c:forEach items="${trips}"  var="t">--%>
-                        <%--<form:option type="text" value="${t.getId().toString()}">${t.name} ${t.destination}</form:option>--%>
-                    <%--</c:forEach>--%>
+                    <c:forEach items="${trips}" var="t">
+                        <form:option type="text" selected="selected"
+                                     value="${t.getId().toString()}">${t.name} ${t.destination}</form:option>
+                    </c:forEach>
                 </form:select>
             </td>
         </tr>
@@ -48,6 +46,8 @@
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
                 <form:input path="date" class="date" type="text"
                             value=""/>
+                <br>
+                Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>

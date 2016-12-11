@@ -8,6 +8,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -79,16 +80,38 @@ public class ExcursionController {
         return DEFAULT_REDIRECT;
     }
 
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable Long id, Model model) {
+        ExcursionDto toUpdate = excursionFacade.findById(id);
+
+        model.addAttribute("toUpdate", toUpdate);
+        model.addAttribute("trips", tripFacade.findAll());
+
+
+        return "excursion/edit";
+
+    }
+
+
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-        ExcursionDto excursionDto = excursionFacade.findById(id);
+    public String update(@PathVariable Long id, @ModelAttribute("toUpdate") ExcursionDto excursionDto, Model model, RedirectAttributes redirectAttributes) {
+
         if (excursionDto == null) {
             redirectAttributes.addFlashAttribute("error", "Excursion " + id + " does not exist");
             return "redirect:/excursion/create";
         }
 
-        model.addAttribute("excursionToUpdate", excursionDto);
-        return "redirect:/excursion/update";
+        try {
+            excursionFacade.update(excursionDto);
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/excursion/list";
+        }
+
+
+        redirectAttributes.addFlashAttribute("success", "Excursion with " + id
+                + " successfuly updated.");
+        return "redirect:/excursion/detail/" + id;
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -102,7 +125,7 @@ public class ExcursionController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute("newExcursion") ExcursionCreateDto excursionCreateDto,
+    public String create(@ModelAttribute("newExcursion") ExcursionCreateDto excursionCreateDto, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes) {
 
         //TODO: check binding errors
@@ -123,12 +146,12 @@ public class ExcursionController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
         sdf.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-        SimpleDateFormat stf = new SimpleDateFormat("hh:mm");
-        stf.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(stf, true));
+//        SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+//        stf.setLenient(true);
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(stf, true));
 
     }
 

@@ -3,10 +3,13 @@ package cz.muni.fi.pa165.travelagency.web.config;
 
 
 import cz.muni.fi.pa165.travelagency.sampledata.TravelAgencyWithSampleDataConfiguration;
+import cz.muni.fi.pa165.travelagency.web.converter.IdToTripConverter;
+import cz.muni.fi.pa165.travelagency.web.converter.StringToDateConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -46,6 +49,17 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    protected IdToTripConverter idToTripConverter() {
+        return new IdToTripConverter();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(idToTripConverter());
+        super.addFormatters(registry);
     }
 
 }
