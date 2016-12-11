@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: martin
@@ -17,8 +18,8 @@
         <c:out value="${excursion.name}" /><br>
         <c:out value="${excursion.description}" /><br>
         <c:out value="${excursion.destination}" /><br>
-        <c:out value="${excursion.date}" /><br>
-        <c:out value="${excursion.duration}" /><br>
+        <fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm" /><br>
+        <fmt:formatDate value="${excursion.duration}" pattern="HH:mm" /><br>
         <br><br>
     </c:forEach>
 </body>
