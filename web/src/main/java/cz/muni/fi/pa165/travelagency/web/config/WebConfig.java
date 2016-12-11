@@ -1,23 +1,18 @@
 package cz.muni.fi.pa165.travelagency.web.config;
 
 
-
 import cz.muni.fi.pa165.travelagency.sampledata.TravelAgencyWithSampleDataConfiguration;
 import cz.muni.fi.pa165.travelagency.web.converter.IdToTripConverter;
-import cz.muni.fi.pa165.travelagency.web.converter.StringToDateConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import javax.validation.Validator;
 
 /**
  * Created on 06.12.2016.
