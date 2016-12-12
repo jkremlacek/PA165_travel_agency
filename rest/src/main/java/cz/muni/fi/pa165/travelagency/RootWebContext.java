@@ -16,7 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import cz.muni.fi.pa165.travelagency.controllers.TripsController;
+import cz.muni.fi.pa165.travelagency.controllers.RestTripsController;
+import cz.muni.fi.pa165.travelagency.sampledata.TravelAgencyWithSampleDataConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
@@ -27,11 +28,11 @@ import org.springframework.context.annotation.Import;
 
 @EnableWebMvc
 @Configuration
-//Import({ServiceConfiguration.class, SampleDataConfiguration.class})
-@ComponentScan(basePackageClasses = TripsController.class)
+@Import(TravelAgencyWithSampleDataConfiguration.class)
+@ComponentScan(basePackageClasses = RestTripsController.class)
 public class RootWebContext extends WebMvcConfigurerAdapter {
     
-     @Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AllowOriginInterceptor()); 
     }

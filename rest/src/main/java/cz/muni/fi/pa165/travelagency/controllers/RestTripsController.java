@@ -5,11 +5,11 @@ import cz.muni.fi.pa165.travelagency.rest.ApiUris;
 import cz.muni.fi.pa165.travelagency.exceptions.AlreadyExistingException;
 import cz.muni.fi.pa165.travelagency.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.travelagency.exceptions.NotFoundException;
+import cz.muni.fi.pa165.travelagency.facade.ExcursionFacade;
 import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
-import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.math.BigDecimal;
@@ -27,11 +27,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping(ApiUris.TRIPS)
-public class TripsController {
+public class RestTripsController {
     
     @Inject
     private TripFacade tripFacade;
     
+    @Inject
+    private ExcursionFacade excursionFacade;
     /**
      * Get trips
      * @return list of trips
@@ -51,7 +53,7 @@ public class TripsController {
     public final TripDto findById(@PathVariable("id") Long id) throws Exception {
         TripDto tripDto = tripFacade.findById(id);
         if (tripDto == null) {
-            throw new NullPointerException();
+            throw new NotFoundException();
         }
         return tripDto;
     }
@@ -64,7 +66,7 @@ public class TripsController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void delete(@PathVariable("id") Long id) throws Exception {   
         try {
-            tripFacade.delete(tripFacade.findById(id));
+            tripFacade.delete(tripFacade.findById(id));            
         }
         catch (Exception ex) {
             throw new NotFoundException(ex);
@@ -108,7 +110,7 @@ public class TripsController {
      * @param capacity value of available capacity 
      * @return Trips with available capacity
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/capacity", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByAvailableCapacity(@RequestParam(value = "capacity", required = true) Integer capacity) {
         if (capacity == null) {
             return null;
@@ -122,25 +124,27 @@ public class TripsController {
      * @param to the latest date of starting trip
      * @return trips with date in choosen interval
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findByDate(@RequestParam(value = "from", required = true) Date from,@RequestParam(value = "to", required = true) Date to) {
+    @RequestMapping(value = "/date",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<TripDto> findByDate(@RequestParam(value = "from", required = false) Date from,
+                                            @RequestParam(value = "to", required = false) Date to) {
         if (from == null || to == null) {
             return null;
         }
-        return tripFacade.findByDate(from,to);
+        
+        return tripFacade.findByDate(from,to);        
     }    
     
     /**
-     *Find trips with choosen excursion
-     * @param excursion excursion which is avalaible from returning trips
+     * Find trips with choosen excursion
+     * @param excursionId excursionId which is avalaible from returning trips
      * @return trips with choosen excursion
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findByExcursion(@RequestParam(value = "excursion", required = true) ExcursionDto excursion) {
-        if (excursion == null) {
+    @RequestMapping(value = "/excursion",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<TripDto> findByExcursion(@RequestParam(value = "excursionId", required = true) Long excursionId) {
+        if (excursionId == null) {
             return null;
         }
-        return tripFacade.findByExcursion(excursion);
+        return tripFacade.findByExcursion(excursionFacade.findById(excursionId));
     }
       
     /**
@@ -148,7 +152,7 @@ public class TripsController {
      * @param name name of trip
      * @return trips with given name
      */ 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/name",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByName(@RequestParam(value = "name", required = true) String name) {
         if (name == null) {
             return null;
@@ -162,8 +166,9 @@ public class TripsController {
      * @param max max value of price for trip
      * @return trips with price in choosen interval
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findByPrice(@RequestParam(value = "min", required = true) BigDecimal min, @RequestParam(value = "max", required = true) BigDecimal max) {
+    @RequestMapping(value = "/price",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<TripDto> findByPrice(@RequestParam(value = "min", required = false) BigDecimal min,
+                                            @RequestParam(value = "max", required = false) BigDecimal max) {
         if (min == null || max == null) {
             return null;
         }
@@ -172,15 +177,13 @@ public class TripsController {
      
     /**
      * Find trip's participants for given trip
-     * @param tripDto trip for which we want to know its participants
+     * @param tripId tripId for which we want to know its participants
      * @return trip's participants for given trip
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<UserDto> findTripParticipants(@RequestParam(value = "tripDto", required = true) TripDto tripDto) {
-        if (tripDto == null) {
-            return null;
-        }
-        return tripFacade.findTripParticipants(tripDto);
+    @RequestMapping(value = "/trip",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<UserDto> findTripParticipants(@RequestParam(value = "tripId", required = true) Long tripId) {
+        
+        return tripFacade.findTripParticipants(tripFacade.findById(tripId));
     }
    
     /**
@@ -188,7 +191,7 @@ public class TripsController {
      * @param number number of days
      * @return trips in next n days
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/nextDays",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findTripsInNextDays(@RequestParam(value = "number", required = true) Integer number) {
         if (number == null) {
             return null;
@@ -200,7 +203,7 @@ public class TripsController {
      * Find trips with free capacity
      * @return trips with free capacity
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/free",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findWithFreeCapacity() {
         
         return tripFacade.findWithFreeCapacity();
@@ -211,7 +214,7 @@ public class TripsController {
      * @param destination of trip
      * @return trips with given destination
      */
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/destination",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByDestination(@RequestParam(value = "destination", required = true) String destination) {
         if (destination == null) {
             return null;

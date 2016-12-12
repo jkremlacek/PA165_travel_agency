@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,7 +53,7 @@ public class Trip {
    @NotNull
    private BigDecimal price;
    
-   @OneToMany(mappedBy="trip")
+   @OneToMany(mappedBy="trip",cascade = CascadeType.ALL)
    private Set<Excursion> excursions = new HashSet<Excursion>();
    
    @OneToMany(mappedBy="trip")
