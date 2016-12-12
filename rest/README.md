@@ -20,11 +20,11 @@ Delete trip
 ```
 curl -i -X DELETE http://localhost:8080/pa165/rest/trips/2
 ```
-Create user
+Create trip
 ```
 curl -X POST -i -H "Content-Type: application/json" --data '{"name":"Nice Austria","dateFrom":"2017-02-02 21:57","dateTo":"2017-02-09 21:57","destination":"Austria, Alps","description":null,"capacity":50,"price":6399.00,"excursions":[],"reservations":[]}' http://localhost:8080/pa165/rest/trips/create
 ```
-Update user
+Update trip
 ```
 curl -X PUT -i -H "Content-Type: application/json" --data '{"id":1,"name":"Nice Austria","dateFrom":"2017-02-02 21:57","dateTo":"2017-02-09 21:57","destination":"Austria, Alps","description":null,"capacity":50,"price":6399.00,"excursions":[],"reservations":[]}' http://localhost:8080/pa165/rest/trips/update
 ```

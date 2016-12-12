@@ -125,8 +125,8 @@ public class RestTripsController {
      * @return trips with date in choosen interval
      */
     @RequestMapping(value = "/date",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findByDate(@RequestParam(value = "from", required = false) Date from,
-                                            @RequestParam(value = "to", required = false) Date to) {
+    public final List<TripDto> findByDate(@RequestParam(value = "from", required = true) Date from,
+                                            @RequestParam(value = "to", required = true) Date to) {
         if (from == null || to == null) {
             return null;
         }
@@ -167,8 +167,8 @@ public class RestTripsController {
      * @return trips with price in choosen interval
      */
     @RequestMapping(value = "/price",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findByPrice(@RequestParam(value = "min", required = false) BigDecimal min,
-                                            @RequestParam(value = "max", required = false) BigDecimal max) {
+    public final List<TripDto> findByPrice(@RequestParam(value = "min", required = true) BigDecimal min,
+                                            @RequestParam(value = "max", required = true) BigDecimal max) {
         if (min == null || max == null) {
             return null;
         }
