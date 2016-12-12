@@ -1,20 +1,18 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--
-  User: katerina caletkova
---%>
-<html>
-    <head>
-        <title>Users</title>
-    </head>
-    <h2>Users</h2>
-    <table class="table">
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<my:pagetemplate title="Users">
+<jsp:attribute name="body">
+<table class="table">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>E-mail</th>
+            <th>id</th>
+            <th>name</th>
+            <th>e-mail</th>
         </tr>
         </thead>
         <tbody>
@@ -30,5 +28,6 @@
         </c:forEach>
         </tbody>
     </table>
-</html>
+</jsp:attribute>
+</my:pagetemplate>
 
