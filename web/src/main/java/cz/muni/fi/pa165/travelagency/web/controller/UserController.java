@@ -43,7 +43,6 @@ public class UserController {
     //userFacade.update(ud); NE
     //userFacade.userAuthenticate(uad); NE
     
-    //userFacade.findAll(); ANO
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model){   
         List<UserDto> users = userFacade.findAll();
@@ -52,7 +51,6 @@ public class UserController {
         return "/user/list";
     }
     
-    //userFacade.findById(Long.MIN_VALUE); ANO
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         UserDto userDto = userFacade.findById(id);
@@ -75,6 +73,17 @@ public class UserController {
     //userFacade.findByPersonalNumber(Long.MIN_VALUE); ANO 
     //userFacade.findByPhoneNumber(Integer.BYTES); ANO 
     //userFacade.findByReservation(rd); ANO
-    //userFacade.isUserAdmin(ud); ANO
     
+    @RequestMapping(value = {"/settings/{id}"}, method = RequestMethod.GET)
+    public String settingsAdmin(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+       
+        UserDto updatingUser = userFacade.findById(id);
+        if (userFacade.isUserAdmin(updatingUser)) {
+             updatingUser.setIsAdmin(Boolean.FALSE);
+        } else {
+            updatingUser.setIsAdmin(Boolean.TRUE);
+        }
+        userFacade.update(updatingUser);       
+        return "/user/list";
+    }
 }
