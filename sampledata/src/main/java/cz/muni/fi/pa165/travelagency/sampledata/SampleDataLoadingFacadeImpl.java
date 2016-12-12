@@ -13,7 +13,6 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +50,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         User admin = user("admin@pa165.com", "password", "Admin Strong", date(1988, Calendar.JANUARY, 1), 8801014444L, 123456789);
         User customerSheep = user("sheep@pa165.com", "password", "Ben Sheep", date(1971, Calendar.JUNE, 20), 7106203333L, 987654321);
         User customerJane = user("jane@pa165.com", "password", "Jane Cute", date(1990, Calendar.NOVEMBER, 16), 9066163333L, 732015789);
+        User customerPablo = user("pablo@pa165.com", "password", "Pablo Smart", date(1995, Calendar.MAY, 25), 9505253456L, 605015789);
         
         log.info("Loaded users.");
         
@@ -64,6 +64,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Excursion dachsteinExcursion = excursion("Dachstein tour", daysAfterNow(22), 7, "Austria, Dachstein", BigDecimal.valueOf(900), austriaTrip);
         Excursion viennaExcursion = excursion("Vienna", daysAfterNow(16), 3, "Austria, Vienna", BigDecimal.valueOf(1200), austriaTrip);
         Excursion bigbenExcursion = excursion("Big Ben", daysAfterNow(15), 9, "UK, London, Big Ben", BigDecimal.valueOf(800), londonTrip);
+        Excursion londonEye = excursion("London eye", daysAfterNow(17), 5, "UK, London", BigDecimal.valueOf(1000), londonTrip);
+        Excursion towerBridge = excursion("Tower Bridge", daysAfterNow(16), 2, "UK, London", BigDecimal.valueOf(100), londonTrip);
         Excursion eiffelExcursion = excursion("Eiffel tower", daysAfterNowWithHour(60, 10), 10, "France, Paris, Eiffel tower", BigDecimal.valueOf(400), parisTrip);
         Excursion notreDameExcursion = excursion("Notre Dame", daysAfterNowWithHour(60, 7), 15, "France, Paris, Notre Dame", BigDecimal.valueOf(300), parisTrip);
         Excursion franceMuseumExcursion = excursion("National Museum of France", daysAfterNowWithHour(60, 14), 2, "France, Paris, National Museum of France", BigDecimal.valueOf(300), parisTrip);
@@ -74,10 +76,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         customer1ExcursionSet.add(eiffelExcursion);
         customer1ExcursionSet.add(notreDameExcursion);
         
+        HashSet<Excursion> customer2ExcursionSet = new HashSet<>();
+        customer2ExcursionSet.add(bigbenExcursion);
+        customer2ExcursionSet.add(londonEye);
+        customer2ExcursionSet.add(towerBridge);
+        
         log.info("Prepared excursion sets.");
         
         reservation(customerSheep, new HashSet<>(), usaTrip);
         reservation(customerJane, customer1ExcursionSet, parisTrip);
+        reservation(customerPablo, customer2ExcursionSet, londonTrip);
         
         log.info("Loaded reservations.");
     }

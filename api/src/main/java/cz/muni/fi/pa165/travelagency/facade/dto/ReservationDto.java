@@ -34,6 +34,10 @@ public class ReservationDto {
     public void setUser(UserDto user) {
         this.user = user;
     }
+    
+    public void setExcursionSet(Set<ExcursionDto> excursions) {
+        this.excursionSet = excursions;
+    }
 
     public Set<ExcursionDto> getExcursionSet() {
         return excursionSet;

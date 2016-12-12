@@ -39,6 +39,10 @@ public class ReservationCreateDto {
     public Set<ExcursionDto> getExcursionSet() {
         return excursionSet;
     }
+    
+    public void setExcursionSet(Set<ExcursionDto> excursions) {
+        this.excursionSet = excursions;
+    }
 
     public void addExcursion(ExcursionDto excursion) {
         this.excursionSet.add(excursion);

@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<my:pagetemplate title="Welcome to our travel agency">
+<my:pagetemplate>
 <jsp:attribute name="body">
     Welcome to our Travel Agency
 </jsp:attribute>

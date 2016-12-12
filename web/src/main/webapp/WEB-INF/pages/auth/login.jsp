@@ -15,5 +15,9 @@
             <input type="submit"/>
     </div>
 </form:form>
+<h4>admin: admin@pa165.com, "password" <br/>
+    users: sheep@pa165.com, "password" <br/>
+        jane@pa165.com, "password" <br/>
+        pablo@pa165.com, "password"</h4>
     </jsp:attribute>
 </my:pagetemplate>
