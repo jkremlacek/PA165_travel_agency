@@ -32,7 +32,6 @@ public class User {
     private Long id;
     
     @NotNull
-    @Column(nullable = false)
     private String passwordHash;
     
     @NotNull
@@ -49,7 +48,8 @@ public class User {
     private Long personalNumber;
     
     @Email
-    @Column(length = 50, nullable = true)
+    @NotNull
+    @Column(unique = true)
     private String mail;
     
     @Column(nullable = true)

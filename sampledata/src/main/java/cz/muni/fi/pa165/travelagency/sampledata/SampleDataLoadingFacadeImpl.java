@@ -48,8 +48,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @SuppressWarnings("unused")
     public void loadData() {
         
-        User admin = user("admin", "admin", date(1988, Calendar.JANUARY, 1), 8801014444L, "owner@pa165.com" , 123456789);
-        User customer1 = user("sheep71", "Ben Sheep", date(1971, Calendar.JUNE, 20), 7106203333L, "sheep@sheep.com", 987654321);
+        User admin = user("admin@pa165.com", "password", "Admin Strong", date(1988, Calendar.JANUARY, 1), 8801014444L, 123456789);
+        User customerSheep = user("sheep@pa165.com", "password", "Ben Sheep", date(1971, Calendar.JUNE, 20), 7106203333L, 987654321);
+        User customerJane = user("jane@pa165.com", "password", "Jane Cute", date(1990, Calendar.NOVEMBER, 16), 9066163333L, 732015789);
         
         log.info("Loaded users.");
         
@@ -75,8 +76,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         log.info("Prepared excursion sets.");
         
-        reservation(customer1, new HashSet<>(), usaTrip);
-        reservation(customer1, customer1ExcursionSet, parisTrip);
+        reservation(customerSheep, new HashSet<>(), usaTrip);
+        reservation(customerJane, customer1ExcursionSet, parisTrip);
         
         log.info("Loaded reservations.");
     }
@@ -114,7 +115,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return t;
     }
     
-    private User user(String password, String name, Date birthDate, Long personalNumber, String mail, Integer phoneNumber) {
+    private User user(String mail, String password, String name, Date birthDate, Long personalNumber, Integer phoneNumber) {
         User u = new User(name, birthDate, personalNumber, mail, phoneNumber);
         
         u.setIsAdmin(password.equals("admin"));

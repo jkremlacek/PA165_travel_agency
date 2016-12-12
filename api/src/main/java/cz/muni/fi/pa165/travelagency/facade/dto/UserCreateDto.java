@@ -15,27 +15,28 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class UserCreateDto {
        
-    @NotBlank 
+    //@NotBlank 
     private String name;
     
-    @NotNull
+    //@NotNull
     private String passwordHash;
     
-    @NotNull
+    //@NotNull
     private Boolean isAdmin;
     
-    @Past    
-    @Temporal(javax.persistence.TemporalType.DATE)
+    //@Past    
+    //@Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
-    @Column(nullable = false, unique = true)
+    //@Column(nullable = false, unique = true)
     private Long personalNumber;
     
-    @Email
-    @Column(length = 50, nullable = true)
+    //@Email
+    //@NotBlank
+    //@Column(unique = true)
     private String mail;
     
-    @Column(nullable = true)
+    //@Column(nullable = true)
     private Integer phoneNumber;
     
 

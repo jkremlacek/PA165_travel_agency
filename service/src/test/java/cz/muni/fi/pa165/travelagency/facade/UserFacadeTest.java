@@ -217,7 +217,7 @@ public class UserFacadeTest {
     @Test
     public void testUserAuthenticate() {
         UserAuthenticateDto userAuth = new UserAuthenticateDto();
-        userAuth.setId(13L);
+        userAuth.setMail("krakonos@mail");
         userAuth.setPassword("password");
         when(userService.findById(user.getId())).thenReturn(user);
         userFacade.userAuthenticate(userAuth);

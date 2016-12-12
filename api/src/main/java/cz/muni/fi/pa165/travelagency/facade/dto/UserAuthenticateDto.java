@@ -8,18 +8,18 @@ import javax.validation.constraints.NotNull;
  */
 public class UserAuthenticateDto {
     
-    @NotNull    
-    private Long id;
+    //@NotNull    
+    private String mail;
 
-    @NotNull
+    //@NotNull
     private String password;
 
-    public Long getId() {
-        return id;
+    public String getMail() {
+        return mail;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMail(String mail) {
+        this.mail = mail;
     }    
       
 

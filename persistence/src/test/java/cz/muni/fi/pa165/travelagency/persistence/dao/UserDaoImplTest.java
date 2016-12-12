@@ -262,15 +262,12 @@ public class UserDaoImplTest {
         em.persist(r1);
         em.persist(r2);
 
-        List<User> found = userDao.findByMail(c1.getMail());
+        User found = userDao.findByMail(c1.getMail());
 
         assertThat(found)
-                .as("Found list of users should have exactly 1 item")
-                .hasSize(1);
-
-        assertThat(found.get(0).getId())
-                .as("The only found user should be the one with Bobs mail")
-                .isEqualTo(c1.getId());
+                .as("findByMail should find user with given mail")
+                .isEqualToComparingFieldByField(c1);
+                
     }
 	
     @Test

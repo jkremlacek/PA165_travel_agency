@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByMail(String mail) {
+    public User findByMail(String mail) {
         try {
             return userDao.findByMail(mail);
         } catch (NullPointerException ex) {

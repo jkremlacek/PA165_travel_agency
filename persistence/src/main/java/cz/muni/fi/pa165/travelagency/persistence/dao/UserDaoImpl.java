@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -46,11 +47,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByMail(String mail) {
+    public User findByMail(String mail) {
         if (mail == null)
             throw new NullPointerException("Mail can not be null.");
+        try {
         return em.createQuery("SELECT c FROM User c WHERE c.mail = :mail ",User.class)
-            .setParameter("mail", mail).getResultList();
+            .setParameter("mail", mail).getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     @Override

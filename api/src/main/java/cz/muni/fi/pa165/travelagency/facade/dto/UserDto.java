@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  */
 public class UserDto extends UserCreateDto{
     
-    @NotNull    
+    //@NotNull    
     private Long id;
     
     private Set<ReservationDto> reservations = new HashSet<>();

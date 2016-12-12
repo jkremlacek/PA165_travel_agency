@@ -39,26 +39,22 @@ public class AuthController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String authenticate(
-            @RequestParam Long id,
+            @RequestParam String mail,
             @RequestParam String password,
             Model model,
             RedirectAttributes redirectAttributes,
             HttpServletRequest req,
             HttpServletResponse res) {
-        if (id==null) {
-            redirectAttributes.addFlashAttribute(
-                    "alert_info", "Empty id");
-            return "redirect:/auth/login";
-        }
+
         UserAuthenticateDto userAuthDto = new UserAuthenticateDto();
-        userAuthDto.setId(id);
+        userAuthDto.setMail(mail);
         userAuthDto.setPassword(password);
         
         UserDto userDto = userFacade.userAuthenticate(userAuthDto);
         
         if (userDto == null) {
             redirectAttributes.addFlashAttribute(
-                    "alert_info", "Wrong id or password of user");
+                    "alert_danger", "Wrong mail or password of user");
             return "redirect:/auth/login";
         }
         userDto.setIsAdmin(userFacade.isUserAdmin(userDto));
@@ -75,7 +71,7 @@ public class AuthController {
         HttpSession session = req.getSession(true);
         session.removeAttribute("authUser");
         redirectAttributes.addFlashAttribute("alert_info", "You have been successfully logged out.");
-        return "/auth/login";
+        return "redirect:/auth/login";
     }
 
 }

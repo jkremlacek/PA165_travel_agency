@@ -67,11 +67,11 @@ public interface UserFacade {
     List<UserDto> findByPersonalNumber(Long personalNumber);
     
     /**
-     * Find users by mail
+     * Find user by mail
      * @param mail user mail
-     * @return users with given mail
+     * @return user with given mail
      */
-    List<UserDto> findByMail(String mail);
+    UserDto findByMail(String mail);
     
     /**
      * Find users by phone number

@@ -75,7 +75,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public List<UserDto> findByMail(String mail) {
+    public UserDto findByMail(String mail) {
         return mappingService.mapTo(userService.findByMail(mail), UserDto.class);
     }
 
@@ -107,7 +107,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserDto userAuthenticate(UserAuthenticateDto user) {
-        User userAuth = userService.findById(user.getId());
+        User userAuth = userService.findByMail(user.getMail());
         if (userAuth == null) {
             return null;
         }

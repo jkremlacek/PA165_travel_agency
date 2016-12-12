@@ -10,7 +10,7 @@
 <jsp:attribute name="body">
 <form:form method="post" action="${pageContext.request.contextPath}/auth/login/">
     <div class="jumbotron">
-            Id: <input type="text" name="id"/><br/>
+            E-mail: <input type="email" name="mail"/><br/>
             Password: <input type="password" name="password"/><br/>
             <input type="submit"/>
     </div>

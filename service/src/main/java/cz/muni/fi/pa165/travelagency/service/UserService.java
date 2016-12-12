@@ -40,11 +40,11 @@ public interface UserService {
     List<User> findByPersonalNumber(Long personalNumber);
     
     /**
-     * Find all users with given mail.
-     * @param mail ot find
-     * @return list of users with given mail
+     * Find user with given mail.
+     * @param mail to find
+     * @return user with given mail
      */
-    List<User> findByMail(String mail);
+    User findByMail(String mail);
     
     /**
      * Find all users with given phone number.

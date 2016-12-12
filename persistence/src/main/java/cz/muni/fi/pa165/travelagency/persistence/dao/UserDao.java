@@ -38,12 +38,12 @@ public interface UserDao extends GenericDao<User, Long> {
     List<User> findByPersonalNumber(Long personalNumber);
 
     /**
-     * Method to find all Users with given mail
+     * Method to find User with given mail
      *
-     * @param mail ot find
-     * @return list of users with given mail
+     * @param mail to find
+     * @return User with given mail
      */
-    List<User> findByMail(String mail);
+    User findByMail(String mail);
 
     /**
      * Method to find all Users with given phone number
