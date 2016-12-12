@@ -20,44 +20,39 @@
 </head>
 <body>
 <!-- navigation bar -->
-<nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="${pageContext.request.contextPath}/">Travel Agency</a>
-                <!-- TODO add isAdmin test-->
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/trip/list">Trips</a>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/excursion/list">Excursions</a>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/user/list">Users</a>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/reservation/list">Reservations</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/trip/list">Trips</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/excursion/list">Excursions</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/user/list">Users</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/reservation/list">Reservations</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            
+        <div>
+            <c:if test="${empty authUser}">
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/auth/login">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
+                </ul>
+            </c:if>
+            <c:if test="${not empty authUser}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="${pageContext.request.contextPath}/user/detail/${authUser.id}">
+                        <span class="glyphicon glyphicon-user"></span> ${authUser.name}</a>
+                    </li>
+                    <li><a href="${pageContext.request.contextPath}/auth/logout">
+                        <span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    </li>
+                </ul>
+            </c:if>
         </div>
     </div>
 </nav>
 
 <div class="container">
 
-    <!-- page title -->
-    
-        <div class="page-header row">
-            <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10">
-                <c:if test="${not empty title}">
-                    <h1><c:out value="${title}"/></h1>
-                </c:if>
-            </div>
-            <!-- authenticated user info -->
-
-        </div>
-
-    
-   
     <!-- alerts -->
     <c:if test="${not empty alert_danger}">
         <div class="alert alert-danger fade in" role="alert">

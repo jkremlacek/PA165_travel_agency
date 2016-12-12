@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Josef Pavelec, jospavelec@gmail.com
  */
-@WebFilter(urlPatterns = {"/excursion/*", "/trip/*", "/user/*"})
+@WebFilter(urlPatterns = {"/excursion/*", "/trip/*", "/user/*", "/reservation/*"})
 public class ProtectFilter implements Filter {
 
     @Override
@@ -26,6 +26,7 @@ public class ProtectFilter implements Filter {
 
         Object auth = request.getSession().getAttribute("authUser");
         if (auth != null) {
+            request.setAttribute("authUser", request.getSession().getAttribute("authUser"));
             chain.doFilter(request, response);
             return;
         }
