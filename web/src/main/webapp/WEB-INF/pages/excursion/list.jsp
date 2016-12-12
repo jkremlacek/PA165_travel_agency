@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
@@ -5,22 +7,46 @@
   User: martin
   Date: 07.12.2016
   Time: 17:33
-  To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Excursions</title>
-</head>
-<body>
-<h1>Excursion super nice page</h1>
-    <c:forEach items="${excursions}" var="excursion">
-        <c:out value="${excursion.name}" /><br>
-        <c:out value="${excursion.description}" /><br>
-        <c:out value="${excursion.destination}" /><br>
-        <fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm" /><br>
-        <c:out value="${excursion.duration}" /><br>
-        <br><br>
-    </c:forEach>
-</body>
-</html>
+<my:pagetemplate title="Excursions">
+    <jsp:attribute name="body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${excursions}" var="excursion">
+                <tr>
+                    <td><c:out value="${excursion.name}"/></td>
+                    <td><c:out value="${excursion.description}"/></td>
+                    <td><c:out value="${excursion.destination}"/></td>
+                    <td><fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm"/></td>
+                    <td><c:out value="${excursion.duration}"/></td>
+                    <td>
+                        <form method="get" action="${pageContext.request.contextPath}/excursion/detail/${excursion.id}">
+                            <button type="submit" class="btn btn-primary">Detail</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="get" action="${pageContext.request.contextPath}/excursion/edit/${excursion.id}">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </c:forEach>
+
+            </tbody>
+        </table>
+</jsp:attribute>
+</my:pagetemplate>
