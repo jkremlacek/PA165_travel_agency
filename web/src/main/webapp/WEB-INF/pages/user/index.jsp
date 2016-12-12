@@ -42,9 +42,7 @@
                     <tr>
                         <td><h4>Is user admin:</h4></td>
                         <td><h4>No</h4></td>
-                        <td>
-                            <a href="DOTO pridat cestu na detail reservaci" class="btn btn-primary">Reservations</a>
-                        </td>
+                        
                     </tr>
                 </c:if>
 
