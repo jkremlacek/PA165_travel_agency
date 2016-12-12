@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Katerina Caletkova
  */
 @Controller
-@RequestMapping(value = {"/user"})
+@RequestMapping(value = "/user")
 public class UserController {
     
     @Inject
@@ -45,28 +45,29 @@ public class UserController {
     
     //userFacade.findAll(); ANO
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String listUsers(Model model){   
+    public String list(Model model){   
         List<UserDto> users = userFacade.findAll();
         model.addAttribute("users", users);
         model.addAttribute("filter", "none");
-        return "user/list";
+        return "/user/list";
     }
     
     //userFacade.findById(Long.MIN_VALUE); ANO
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public String userDetail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         UserDto userDto = userFacade.findById(id);
         if (userDto == null) {
             redirectAttributes.addFlashAttribute("error", "User with id" + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
         model.addAttribute("user", userDto);       
-        /*List<ReservationDto> reservations = reservationFacade.findByUser(user);
+        List<ReservationDto> reservations = reservationFacade.findByUser(userDto);
         if(reservations == null){
             reservations = new ArrayList<>();
-        }
-        model.addAttribute("reservations", reservations);*/        
-        return "user/detail";
+        }         
+        model.addAttribute("reservations", reservations);       
+        return "/user/detail";
+        
     }
     //userFacade.findByMail(string); ANO
     //userFacade.findByBirthDate(date); ANO
