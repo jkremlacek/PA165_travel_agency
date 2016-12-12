@@ -111,6 +111,6 @@ public class ExcursionDto {
         result = 31 * result + getDestination().hashCode();
         return result;
     }
-	
-  
+
+     
 }
