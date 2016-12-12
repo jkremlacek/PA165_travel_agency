@@ -32,7 +32,7 @@ public class AuthController {
             HttpServletResponse res) {
         HttpSession session = req.getSession(true);
         if (session.getAttribute("authUser") != null) {
-            return "redirect:/travel";
+            return "redirect:/";
         }
         return "auth/login";
     }
@@ -61,12 +61,11 @@ public class AuthController {
                     "alert_info", "Wrong id or password of user");
             return "redirect:/auth/login";
         }
-        HttpSession session = req.getSession(true);
         userDto.setIsAdmin(userFacade.isUserAdmin(userDto));
-        session.setAttribute("authUser", userDto);
-        redirectAttributes.addFlashAttribute("alert_info", "You have been logged in.");
-        return "redirect:/travel";
-        //return "redirect:/excursion/list";
+        req.getSession().setAttribute("authUser", userDto);
+        redirectAttributes.addFlashAttribute("alert_info",
+                "User with name " + userDto.getName() +" has been logged in.");
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -76,7 +75,7 @@ public class AuthController {
         HttpSession session = req.getSession(true);
         session.removeAttribute("authUser");
         redirectAttributes.addFlashAttribute("alert_info", "You have been successfully logged out.");
-        return "redirect:/auth/login";
+        return "/auth/login";
     }
 
 }
