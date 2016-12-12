@@ -27,7 +27,6 @@ import java.util.List;
 @RequestMapping(value = "/excursion")
 public class ExcursionController {
 
-    // TODO: uncomment when DataConfig is provided
     @Inject
     private ExcursionFacade excursionFacade;
 
@@ -143,6 +142,7 @@ public class ExcursionController {
 
         return "redirect:/excursion/detail/" + id;
     }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
