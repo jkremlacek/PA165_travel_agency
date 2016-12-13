@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import cz.muni.fi.pa165.travelagency.service.exception.PersistenceException;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import org.springframework.http.MediaType;
@@ -102,10 +107,10 @@ public class RestTripsController {
 
         try {
             return tripFacade.create(tripCreateDto);
-        } catch (NullPointerException | IllegalArgumentException | ConstraintViolationException ex) {
+        } catch (NullPointerException | IllegalArgumentException ex) {
             throw new InvalidParameterException(ex);
-        /*} catch (Exception ex) {
-            throw new AlreadyExistingException(ex);*/
+        } catch (PersistenceException ex) {
+            throw new AlreadyExistingException(ex);
         }
     }
     
@@ -143,12 +148,17 @@ public class RestTripsController {
      * @param from the earliest date of starting trip
      * @param to the latest date of starting trip
      * @return trips with date in choosen interval
+     * @throws java.text.ParseException
      */
     @RequestMapping(value = "/date",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findByDate(@RequestParam(value = "from", required = true) Date from,
-                                            @RequestParam(value = "to", required = true) Date to) {
-        try {                                    
-            return tripFacade.findByDate(from,to);     
+    public final List<TripDto> findByDate(@RequestParam(value = "from", required = true) String from,
+                                            @RequestParam(value = "to", required = true) String to) throws ParseException {
+        
+        try {                   
+            DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
+            Date dateFrom = format.parse(from);
+            Date dateTo = format.parse(to);
+            return tripFacade.findByDate(dateFrom,dateTo);     
         } catch (NullPointerException | IllegalArgumentException ex) {
             throw new NotFoundException(ex);
         } 

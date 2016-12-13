@@ -7,8 +7,11 @@ import cz.muni.fi.pa165.travelagency.facade.UserFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,15 +47,32 @@ public class UserController {
     //userFacade.userAuthenticate(uad); NE
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model){   
-        List<UserDto> users = userFacade.findAll();
-        model.addAttribute("users", users);
-        model.addAttribute("filter", "none");
-        return "/user/list";
+    public String list(Model model, HttpServletRequest req,
+            HttpServletResponse res){   
+        UserDto loggedUser = (UserDto) req.getSession().getAttribute("authUser");
+        
+        if (loggedUser.getIsAdmin()) {
+            List<UserDto> users = userFacade.findAll();
+            model.addAttribute("users", users);
+            model.addAttribute("filter", "none");
+            return "/user/list";
+        } else {
+            List<UserDto> users = Arrays.asList(userFacade.findById(loggedUser.getId()));            
+            model.addAttribute("users", users);
+            model.addAttribute("filter", "none");
+            return "/user/list";
+        }
+        
     }
     
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes, HttpServletRequest req) {
+        UserDto loggedUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!loggedUser.getIsAdmin() && !loggedUser.getId().equals(id)) {
+                redirectAttributes.addFlashAttribute("error", "Only admin can see other user's detail");
+                return DEFAULT_REDIRECT;
+        }
+       
         UserDto userDto = userFacade.findById(id);
         if (userDto == null) {
             redirectAttributes.addFlashAttribute("error", "User with id" + id + " doesn't exist");
@@ -66,6 +86,7 @@ public class UserController {
         model.addAttribute("reservations", reservations);       
         return "/user/detail";
         
+        
     }
     //userFacade.findByMail(string); ANO
     //userFacade.findByBirthDate(date); ANO
@@ -75,7 +96,8 @@ public class UserController {
     //userFacade.findByReservation(rd); ANO
     
     @RequestMapping(value = {"/settings/{id}"}, method = RequestMethod.GET)
-    public String settingsAdmin(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String settingsAdmin(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes,HttpServletRequest req,
+            HttpServletResponse res) {
        
         UserDto updatingUser = userFacade.findById(id);
         if (userFacade.isUserAdmin(updatingUser)) {

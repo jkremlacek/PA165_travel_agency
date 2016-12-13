@@ -12,8 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,6 +25,9 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Katerina Caletkova
  */
 @Entity
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "destination", "dateFrom","dateTo"})
+)
 public class Trip {
    
    @Id
