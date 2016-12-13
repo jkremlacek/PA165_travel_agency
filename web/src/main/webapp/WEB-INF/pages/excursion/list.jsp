@@ -33,19 +33,30 @@
                             <button type="submit" class="btn btn-primary">Detail</button>
                         </form>
                     </td>
-                    <td>
-                        <form method="get" action="${pageContext.request.contextPath}/excursion/edit/${excursion.id}">
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
-                            <button type="submit" class="btn btn-primary">Delete</button>
-                        </form>
-                    </td>
+                    <c:if test="${authUser.getIsAdmin()}">
+                        <td>
+                            <form method="get" action="${pageContext.request.contextPath}/excursion/edit/${excursion.id}">
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </td>
+                    </c:if>
+
                 </tr>
                 </c:forEach>
-
+                <tr>
+                    <c:if test="${authUser.getIsAdmin()}">
+                        <td>
+                            <form method="get" action="${pageContext.request.contextPath}/excursion/new">
+                                <button type="submit" class="btn btn-primary">New excursion</button>
+                            </form>
+                        </td>
+                    </c:if>
+                </tr>
             </tbody>
         </table>
 </jsp:attribute>
