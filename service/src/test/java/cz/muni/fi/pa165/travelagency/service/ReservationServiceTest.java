@@ -61,8 +61,8 @@ public class ReservationServiceTest {
         user1.setMail("mail@mail.com");
         user1.setName("Jan");
         user1.setPasswordHash("heslo");
-        user1.setPersonalNumber(123456789l);
-        user1.setPhoneNumber(777777777);
+        user1.setPersonalNumber("7702145678");
+        user1.setPhoneNumber("+4207524354");
         
         User user2 = new User(2l);
         calendar.set(1990,5,5);
@@ -72,8 +72,8 @@ public class ReservationServiceTest {
         user2.setMail("m@mail.com");
         user2.setName("Jana");
         user2.setPasswordHash("mojeheslo");
-        user2.setPersonalNumber(111111111l);
-        user2.setPhoneNumber(777777776);
+        user2.setPersonalNumber("7502145638");
+        user2.setPhoneNumber("00751420578962");
         
         trip1 = new Trip(1l);
         trip1.setCapacity(20);

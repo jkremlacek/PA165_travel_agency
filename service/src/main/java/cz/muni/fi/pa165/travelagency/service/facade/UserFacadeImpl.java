@@ -70,7 +70,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public List<UserDto> findByPersonalNumber(Long personalNumber) {
+    public List<UserDto> findByPersonalNumber(String personalNumber) {
         return mappingService.mapTo(userService.findByPersonalNumber(personalNumber), UserDto.class);
     }
 
@@ -80,7 +80,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public List<UserDto> findByPhoneNumber(Integer phoneNumber) {
+    public List<UserDto> findByPhoneNumber(String phoneNumber) {
         return mappingService.mapTo(userService.findByPhoneNumber(phoneNumber), UserDto.class);
     }
 

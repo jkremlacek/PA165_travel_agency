@@ -48,9 +48,9 @@ public class UserDaoImplTest {
 		
         c1 = new User();
         c1.setName("Bob");
-        c1.setPersonalNumber(12345l);
+        c1.setPersonalNumber("8704212121");
         c1.setBirthDate(calendar.getTime());
-	c1.setPhoneNumber(123456789);
+	c1.setPhoneNumber("+420769425842");
 	c1.setMail("bob@bobspage.com");
         c1.setPasswordHash("password");
         c1.setIsAdmin(Boolean.FALSE);
@@ -59,9 +59,9 @@ public class UserDaoImplTest {
 				
         c2 = new User();
         c2.setName("Eva");
-        c2.setPersonalNumber(54321l);
+        c2.setPersonalNumber("8705212121");
 	c2.setBirthDate(calendar.getTime());
-	c2.setPhoneNumber(987654321);
+	c2.setPhoneNumber("+420739456258");
 	c2.setMail("eva@evaspage.com");
         c2.setPasswordHash("password");
         c2.setIsAdmin(Boolean.FALSE);

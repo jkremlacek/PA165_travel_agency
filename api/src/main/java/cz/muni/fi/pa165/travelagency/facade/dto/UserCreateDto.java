@@ -2,12 +2,6 @@ package cz.muni.fi.pa165.travelagency.facade.dto;
 
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * DTO for create user entity
@@ -15,29 +9,19 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class UserCreateDto {
        
-    //@NotBlank 
     private String name;
     
-    //@NotNull
     private String passwordHash;
     
-    //@NotNull
     private Boolean isAdmin;
     
-    //@Past    
-    //@Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
     
-    //@Column(nullable = false, unique = true)
-    private Long personalNumber;
+    private String personalNumber;
     
-    //@Email
-    //@NotBlank
-    //@Column(unique = true)
     private String mail;
     
-    //@Column(nullable = true)
-    private Integer phoneNumber;
+    private String phoneNumber;
     
 
     @Override
@@ -82,11 +66,11 @@ public class UserCreateDto {
         this.birthDate = birthDate;
     }
 
-    public Long getPersonalNumber() {
+    public String getPersonalNumber() {
         return personalNumber;
     }
 
-    public void setPersonalNumber(Long personalNumber) {
+    public void setPersonalNumber(String personalNumber) {
         this.personalNumber = personalNumber;
     }
 
@@ -98,11 +82,11 @@ public class UserCreateDto {
         this.mail = mail;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByPersonalNumber(Long personalNumber) {
+    public List<User> findByPersonalNumber(String personalNumber) {
         try {
             return userDao.findByPersonalNumber(personalNumber);
         } catch (NullPointerException ex) {
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByPhoneNumber(Integer phoneNumber) {
+    public List<User> findByPhoneNumber(String phoneNumber) {
         try {
             return userDao.findByPhoneNumber(phoneNumber);
         } catch (NullPointerException ex) {

@@ -28,7 +28,7 @@
                     <td><h4>Excursions</h4></td>
                     <td><h4>
                         <c:forEach items="${reservation.excursionSet}" var="excursion">
-                            <a href="${pageContext.request.contextPath}/excursion/detail/${excursion.trip.id}">
+                            <a href="${pageContext.request.contextPath}/excursion/detail/${excursion.id}">
                                 <c:out value="${excursion.name}"/></a><br/>
                         </c:forEach>
                     </h4></td>

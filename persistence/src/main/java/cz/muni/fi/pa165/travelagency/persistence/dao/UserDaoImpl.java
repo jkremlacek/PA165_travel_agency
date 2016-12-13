@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByPersonalNumber(Long personalNumber) {
+    public List<User> findByPersonalNumber(String personalNumber) {
         if (personalNumber == null)
             throw new NullPointerException("PersonalNumber can not be null.");
         return em.createQuery("SELECT c FROM User c WHERE c.personalNumber = :personalNumber ",User.class)
@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByPhoneNumber(Integer phoneNumber) {
+    public List<User> findByPhoneNumber(String phoneNumber) {
         if (phoneNumber == null)
             throw new NullPointerException("PhoneNumber can not be null.");
         return em.createQuery("SELECT c FROM User c WHERE c.phoneNumber = :phoneNumber ",User.class)

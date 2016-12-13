@@ -66,8 +66,8 @@ public class ReservationFacadeTest {
         user1.setMail("mail@mail.com");
         user1.setName("Jan");
         user1.setPasswordHash("heslo");
-        user1.setPersonalNumber(123456789l);
-        user1.setPhoneNumber(777777777);
+        user1.setPersonalNumber("8512204585");
+        user1.setPhoneNumber("+421777777777");
        
         userDto1 = new UserDto();
         userDto1.setBirthDate(user1.getBirthDate());

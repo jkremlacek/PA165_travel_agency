@@ -35,7 +35,7 @@ public interface UserDao extends GenericDao<User, Long> {
      * @param personalNumber to find
      * @return list of users with given personal number
      */
-    List<User> findByPersonalNumber(Long personalNumber);
+    List<User> findByPersonalNumber(String personalNumber);
 
     /**
      * Method to find User with given mail
@@ -51,7 +51,7 @@ public interface UserDao extends GenericDao<User, Long> {
      * @param phoneNumber to find
      * @return list of users with given phone number
      */
-    List<User> findByPhoneNumber(Integer phoneNumber);
+    List<User> findByPhoneNumber(String phoneNumber);
 
     /**
      * Method to find all Users with given reservations

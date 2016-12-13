@@ -45,7 +45,7 @@ public class User {
     private Date birthDate;
     
     @Column(nullable = false, unique = true)
-    private Long personalNumber;
+    private String personalNumber;
     
     @Email
     @NotNull
@@ -53,9 +53,9 @@ public class User {
     private String mail;
     
     @Column(nullable = true)
-    private Integer phoneNumber;
+    private String phoneNumber;
     
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
     public User(Long id) {
@@ -91,7 +91,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, Date birthDate, Long personalNumber, String mail, Integer phoneNumber) {
+    public User(String name, Date birthDate, String personalNumber, String mail, String phoneNumber) {
         this.name = name;
         this.birthDate = birthDate;
         this.personalNumber = personalNumber;
@@ -116,11 +116,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public Long getPersonalNumber() {
+    public String getPersonalNumber() {
         return personalNumber;
     }
 
-    public void setPersonalNumber(Long personalNumber) {
+    public void setPersonalNumber(String personalNumber) {
         this.personalNumber = personalNumber;
     }
 
@@ -132,11 +132,11 @@ public class User {
         this.mail = mail;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

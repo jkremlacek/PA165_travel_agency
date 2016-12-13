@@ -61,7 +61,7 @@ public class TripServiceTest {
         cal.set(2017, 8, 25);
         Date dTo = cal.getTime();
 
-        u = new User("Igor", dFrom, 1234l, "no@mail.com", 123);
+        u = new User("Igor", dFrom, "7503145678", "no@mail.com", "+420753148962");
 
         t1 = new Trip();
         t1.setName("Dovolenka v Egypte");

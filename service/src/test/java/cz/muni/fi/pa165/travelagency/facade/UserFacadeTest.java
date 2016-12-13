@@ -62,9 +62,9 @@ public class UserFacadeTest {
         Calendar cal = (Calendar) calNow.clone();
         cal.add(Calendar.YEAR, -20);
         Date birthDate = cal.getTime();
-        Long personalNumber = Long.valueOf("951245");
+        String personalNumber = "9512253645";
         String mail = "john.bedar@comp.nz";
-        Integer phoneNumber = Integer.valueOf("605125748");
+        String phoneNumber = "605125748";
         Boolean isAdmin = Boolean.FALSE;
         String passwordHash = "password";
         
@@ -192,14 +192,14 @@ public class UserFacadeTest {
     
     @Test
     public void testFindByPersonalNumber() {
-        userFacade.findByPersonalNumber(13L);
-        verify(userService).findByPersonalNumber(13L);
+        userFacade.findByPersonalNumber("13");
+        verify(userService).findByPersonalNumber("13");
     }
     
     @Test
     public void testFindByPhoneNumber() {
-        userFacade.findByPhoneNumber(Integer.valueOf("545789245"));
-        verify(userService).findByPhoneNumber(Integer.valueOf("545789245"));
+        userFacade.findByPhoneNumber("545789245");
+        verify(userService).findByPhoneNumber("545789245");
     }
     
     @Test

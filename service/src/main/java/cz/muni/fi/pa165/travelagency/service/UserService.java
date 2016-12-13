@@ -3,7 +3,6 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.User;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Reservation;
 import java.util.Date;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  * Service layer interface for user
@@ -37,7 +36,7 @@ public interface UserService {
      * @param personalNumber to find
      * @return list of users with given personal number
      */
-    List<User> findByPersonalNumber(Long personalNumber);
+    List<User> findByPersonalNumber(String personalNumber);
     
     /**
      * Find user with given mail.
@@ -51,7 +50,7 @@ public interface UserService {
      * @param phoneNumber to find
      * @return list of users with given phone number
      */
-    List<User> findByPhoneNumber(Integer phoneNumber);
+    List<User> findByPhoneNumber(String phoneNumber);
 
      /**
      * Find all users with given reservation.

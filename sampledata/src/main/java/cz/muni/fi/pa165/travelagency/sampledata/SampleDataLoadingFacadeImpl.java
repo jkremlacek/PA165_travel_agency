@@ -47,10 +47,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @SuppressWarnings("unused")
     public void loadData() {
         
-        User admin = user("admin@pa165.com", "password", "Admin Strong", date(1988, Calendar.JANUARY, 1), 8801014444L, 123456789, true);
-        User customerSheep = user("sheep@pa165.com", "password", "Ben Sheep", date(1971, Calendar.JUNE, 20), 7106203333L, 987654321, false);
-        User customerJane = user("jane@pa165.com", "password", "Jane Cute", date(1990, Calendar.NOVEMBER, 16), 9066163333L, 732015789, false);
-        User customerPablo = user("pablo@pa165.com", "password", "Pablo Smart", date(1995, Calendar.MAY, 25), 9505253456L, 605015789, false);
+        User admin = user("admin@pa165.com", "password", "Admin Strong", date(1988, Calendar.JANUARY, 1), "8801014444", "123456789", true);
+        User customerSheep = user("sheep@pa165.com", "password", "Ben Sheep", date(1971, Calendar.JUNE, 20), "7106203333", "987654321", false);
+        User customerJane = user("jane@pa165.com", "password", "Jane Cute", date(1990, Calendar.NOVEMBER, 16), "9066163333", "732015789", false);
+        User customerPablo = user("pablo@pa165.com", "password", "Pablo Smart", date(1995, Calendar.MAY, 25), "9505253456", "605015789", false);
         
         log.info("Loaded users.");
         
@@ -83,11 +83,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         log.info("Prepared excursion sets.");
         
-        reservation(customerSheep, new HashSet<>(), usaTrip);
-        reservation(customerJane, customer1ExcursionSet, parisTrip);
-        reservation(customerPablo, customer2ExcursionSet, londonTrip);
+        Reservation sheepUsa = reservation(customerSheep, new HashSet<>(), usaTrip);
+        Reservation janeParis = reservation(customerJane, customer1ExcursionSet, parisTrip);
+        Reservation pabloTrip = reservation(customerPablo, customer2ExcursionSet, londonTrip);
         
         log.info("Loaded reservations.");
+            
     }
     
     private Excursion excursion(String name, Date date, Integer duration, String destination, BigDecimal price, Trip trip) {
@@ -123,7 +124,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return t;
     }
     
-    private User user(String mail, String password, String name, Date birthDate, Long personalNumber, Integer phoneNumber, Boolean isAdmin) {
+    private User user(String mail, String password, String name, Date birthDate, String personalNumber, String phoneNumber, Boolean isAdmin) {
         User u = new User(name, birthDate, personalNumber, mail, phoneNumber);
         u.setIsAdmin(isAdmin);
         userService.createRegisteredUser(u, password);

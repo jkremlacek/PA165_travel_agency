@@ -42,13 +42,13 @@ public class MappingServiceTest {
     public void setup() {
         c1 = new User();
         c1.setName("Martin");
-        c1.setPersonalNumber(12345l);
+        c1.setPersonalNumber("7502145678");
         c1.setPasswordHash("password");
         c1.setIsAdmin(Boolean.FALSE);
 
         c2 = new User();
         c2.setName("Pepa");
-        c2.setPersonalNumber(54321l);
+        c2.setPersonalNumber("8502145678");
         c2.setPasswordHash("password");
         c2.setIsAdmin(Boolean.FALSE);
 

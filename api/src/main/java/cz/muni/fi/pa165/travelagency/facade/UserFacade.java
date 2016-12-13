@@ -64,7 +64,7 @@ public interface UserFacade {
      * @param personalNumber user personal number
      * @return users with given personal number
      */
-    List<UserDto> findByPersonalNumber(Long personalNumber);
+    List<UserDto> findByPersonalNumber(String personalNumber);
     
     /**
      * Find user by mail
@@ -78,7 +78,7 @@ public interface UserFacade {
      * @param phoneNumber user phone number
      * @return users with given phone number
      */
-    List<UserDto> findByPhoneNumber(Integer phoneNumber);
+    List<UserDto> findByPhoneNumber(String phoneNumber);
     
     /**
      * Find uses by reservation
