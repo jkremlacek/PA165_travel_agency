@@ -26,7 +26,7 @@ curl -X POST -i -H "Content-Type: application/json" --data '{"name":"Nice Austri
 ```
 Update trip
 ```
-curl -X PUT -i -H "Content-Type: application/json" --data '{"id":1,"name":"Nice Austria","dateFrom":"2017-02-02 21:57","dateTo":"2017-02-09 21:57","destination":"Austria, Alps","description":null,"capacity":50,"price":6399.00,"excursions":[],"reservations":[]}' http://localhost:8080/pa165/rest/trips/update
+curl -X PUT -i -H "Content-Type: application/json" --data '{"id":4,"name":"Endurance through USA","dateFrom":"2017-12-20 15:09","dateTo":"2018-01-20 15:09","destination":"USA","description":null,"capacity":100,"price":149999.00,"excursions":[],"reservations":[]}' http://localhost:8080/pa165/rest/trips/update
 ```
 List trips with free capacity
 ```
@@ -50,7 +50,7 @@ curl -i -X GET http://localhost:8080/pa165/rest/trips/name?name=Gorgeous%20Londo
 ```
 Find trips by excursion
 ```
-curl -i -X GET http://localhost:8080/pa165/rest/trips/excursion?excursionId=1
+curl -i -X GET http://localhost:8080/pa165/rest/trips/excursion?excursionId=3
 ```
 
 Find by capacity
@@ -58,13 +58,13 @@ Find by capacity
 curl -i -X GET http://localhost:8080/pa165/rest/trips/capacity?capacity=150
 ```
 
-Find by price ???
+Find by price
 ```
-curl -i -X GET http://localhost:8080/pa165/rest/trips/price?min=100&max=90000
+curl -i -X GET 'http://localhost:8080/pa165/rest/trips/price?min=100&max=90000'
 ```
-Find by date ???
+Find by date
 ```
-curl -i -X GET http://localhost:8080/pa165/rest/trips/date?from=2016-02-02%2000:00&to=2018-02-02%2000:00
+curl -i -X GET 'http://localhost:8080/pa165/rest/trips/date?from=2016-02-02&to=2018-02-02'
 ```
 
 

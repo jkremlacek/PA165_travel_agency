@@ -15,6 +15,9 @@ import java.util.Set;
  * @author Martin Salata
  */
 @Entity
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "date", "duration","destination"})
+)
 public class Excursion {
 
     @Id
