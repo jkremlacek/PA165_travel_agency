@@ -119,7 +119,6 @@ public class TripController {
     public String newTrip(Model model) {
 
         model.addAttribute("newTrip", new TripCreateDto());
-        model.addAttribute("trips", tripFacade.findAll());
         return "trip/create";
 
 

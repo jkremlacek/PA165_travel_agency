@@ -54,10 +54,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         log.info("Loaded users.");
         
-        Trip austriaTrip = trip("Beautiful Austria", daysAfterNow(21), daysAfterNow(28), "Austria, Alps", 50, BigDecimal.valueOf(6399));
-        Trip londonTrip = trip("Gorgeous London", daysAfterNow(14), daysAfterNow(18), "UK, London", 200, BigDecimal.valueOf(14099));
-        Trip parisTrip = trip("Day in Paris", daysAfterNow(60), daysAfterNow(61), "France, Paris", 132, BigDecimal.valueOf(2399));
-        Trip usaTrip = trip("Endurance through USA", daysAfterNow(7), daysAfterNow(38), "USA", 181, BigDecimal.valueOf(149999));
+        Trip austriaTrip = trip("Beautiful Austria", daysAfterNow(21), daysAfterNow(28), "Austria, Alps", "Enjoy marvellous hotel in the Alps.", 50, BigDecimal.valueOf(6399));
+        Trip londonTrip = trip("Gorgeous London", daysAfterNow(14), daysAfterNow(18), "UK, London", "Visit the capital city of the UK.", 200, BigDecimal.valueOf(14099));
+        Trip parisTrip = trip("Day in Paris", daysAfterNow(60), daysAfterNow(61), "France, Paris", "Visit the most romantic city of Europe for one day.", 132, BigDecimal.valueOf(2399));
+        Trip usaTrip = trip("Endurance through USA", daysAfterNow(7), daysAfterNow(38), "USA", "Tour through many states of the USA.", 181, BigDecimal.valueOf(149999));
         
         log.info("Loaded trips.");
 
@@ -116,8 +116,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return r;
     }
     
-    private Trip trip(String name, Date dateFrom, Date dateTo, String destination, Integer capacity, BigDecimal price) {
-        Trip t = new Trip(name, dateFrom, dateTo, destination, capacity, price);
+    private Trip trip(String name, Date dateFrom, Date dateTo, String destination, String description, Integer capacity, BigDecimal price) {
+        Trip t = new Trip(name, dateFrom, dateTo, destination, description, capacity, price);
         
         tripService.create(t);
         

@@ -25,7 +25,7 @@
         <tr>
             <td>Date From</td>
             <td>
-                <form:label path="dateFron"/>
+                <form:label path="dateFrom"/>
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
                 <form:input path="dateFrom" class="date" type="text"
                             value=""/>

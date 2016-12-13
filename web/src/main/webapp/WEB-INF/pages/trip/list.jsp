@@ -3,12 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: martin
-  Date: 07.12.2016
-  Time: 17:33
+  User: jakub_kremlacek
 --%>
-<my:pagetemplate title="Excursions">
+<my:pagetemplate title="Trips">
     <jsp:attribute name="body">
         <table>
             <thead>
@@ -21,26 +18,27 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${excursions}" var="excursion">
+                <c:forEach items="${trips}" var="trip">
                 <tr>
-                    <td><c:out value="${excursion.name}"/></td>
-                    <td><c:out value="${excursion.description}"/></td>
-                    <td><c:out value="${excursion.destination}"/></td>
-                    <td><fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm"/></td>
-                    <td><c:out value="${excursion.duration}"/></td>
+                    <td><c:out value="${trip.name}"/></td>
+                    <td><c:out value="${trip.description}"/></td>
+                    <td><c:out value="${trip.destination}"/></td>
+                    <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy, HH:mm"/></td>
+                    <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy, HH:mm"/></td>
+                    <td><c:out value="${trip.price}"/></td>
                     <td>
-                        <form method="get" action="${pageContext.request.contextPath}/excursion/detail/${excursion.id}">
+                        <form method="get" action="${pageContext.request.contextPath}/trip/detail/${trip.id}">
                             <button type="submit" class="btn btn-primary">Detail</button>
                         </form>
                     </td>
                     <c:if test="${authUser.getIsAdmin()}">
                         <td>
-                            <form method="get" action="${pageContext.request.contextPath}/excursion/edit/${excursion.id}">
+                            <form method="get" action="${pageContext.request.contextPath}/trip/edit/${trip.id}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </form>
                         </td>
                         <td>
-                            <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
+                            <form method="post" action="${pageContext.request.contextPath}/trip/delete/${trip.id}">
                                 <button type="submit" class="btn btn-primary">Delete</button>
                             </form>
                         </td>
@@ -51,8 +49,8 @@
                 <tr>
                     <c:if test="${authUser.getIsAdmin()}">
                         <td>
-                            <form method="get" action="${pageContext.request.contextPath}/excursion/new">
-                                <button type="submit" class="btn btn-primary">New excursion</button>
+                            <form method="get" action="${pageContext.request.contextPath}/trip/new">
+                                <button type="submit" class="btn btn-primary">New trip</button>
                             </form>
                         </td>
                     </c:if>
