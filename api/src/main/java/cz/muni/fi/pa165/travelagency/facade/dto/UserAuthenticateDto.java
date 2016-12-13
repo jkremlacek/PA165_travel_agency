@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -8,10 +7,8 @@ import javax.validation.constraints.NotNull;
  */
 public class UserAuthenticateDto {
     
-    //@NotNull    
     private String mail;
 
-    //@NotNull
     private String password;
 
     public String getMail() {
