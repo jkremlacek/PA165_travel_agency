@@ -39,6 +39,20 @@
         <td>Price</td>
         <td><c:out value="${excursion.price}"/> CZK</td>
     </tr>
+    <c:if test="${authUser.getIsAdmin()}">
+        <tr>
+        <td>
+            <form method="get" action="${pageContext.request.contextPath}/excursion/edit/${excursion.id}">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+        </td>
+        </tr>
+    </c:if>
 </table>
 </body>
 </html>
