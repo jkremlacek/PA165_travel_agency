@@ -9,7 +9,7 @@
 <my:pagetemplate title="Edit a trip">
 <jsp:attribute name="body">
 <form:form method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
-    <table>
+    <table class="table">
         <tr>
             <td>Name</td>
             <td><form:input path="name" type="text" size="30" value="${toUpdate.name}"/></td>

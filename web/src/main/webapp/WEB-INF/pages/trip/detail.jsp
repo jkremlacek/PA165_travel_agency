@@ -2,13 +2,15 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   User: jakub_kremlacek
 --%>
 
 <my:pagetemplate title="Trip detail">
 <jsp:attribute name="body">
-<table>
+    <table class="table">
     <tr>
         <td>Name</td>
         <td><c:out value="${trip.name}"/></td>

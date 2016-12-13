@@ -13,7 +13,7 @@
 <my:pagetemplate title="Create an excursion">
 <jsp:attribute name="body">
 <form:form method="post" action="${pageContext.request.contextPath}/excursion/create" modelAttribute="newExcursion">
-    <table>
+    <table class="table">
         <tr>
             <td>Name</td>
             <td><form:input path="name" type="text" size="30"/></td>

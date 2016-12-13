@@ -13,7 +13,7 @@
 <my:pagetemplate title="Excursion detail">
 <jsp:attribute name="body">
 
-<table>
+<table class="table">
     <tr>
         <td>Name</td>
         <td><c:out value="${excursion.name}"/></td>

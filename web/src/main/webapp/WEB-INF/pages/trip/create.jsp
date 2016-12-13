@@ -9,7 +9,7 @@
 <my:pagetemplate title="Create a trip">
 <jsp:attribute name="body">
 <form:form method="post" action="${pageContext.request.contextPath}/trip/create" modelAttribute="newTrip">
-    <table>
+    <table class="table">
         <tr>
             <td>Name</td>
             <td><form:input path="name" type="text" size="30"/></td>
