@@ -57,6 +57,7 @@ public class TripController {
         }
 
         model.addAttribute("trip", tripDto);
+        model.addAttribute("availableCapacity", tripDto.getCapacity() - tripDto.getReservations().size());
 
         return "trip/detail";
     }

@@ -24,6 +24,14 @@
         <td><c:out value="${trip.description}"/></td>
     </tr>
     <tr>
+        <td>Total Capacity</td>
+        <td><c:out value="${trip.capacity}"/></td>
+    </tr>
+    <tr>
+        <td>Available Capacity</td>
+        <td><c:out value="${availableCapacity}"/></td>
+    </tr>
+    <tr>
         <td>Date From</td>
         <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy HH:mm" /></td>
     </tr>
