@@ -6,12 +6,20 @@
 package cz.muni.fi.pa165.travelagency.web.controller;
 
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
-import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,10 +42,8 @@ public class TripController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {        
         List<TripDto> trips = tripFacade.findAll();
-        //TODO: List<ExcursionDto> excursions = excursionFacade.findAll();
         model.addAttribute("trips", trips);
         model.addAttribute("filter", "none");
-
         return "trip/list";
     }
     
@@ -53,5 +59,101 @@ public class TripController {
         model.addAttribute("trip", tripDto);
 
         return "trip/detail";
+    }
+    
+     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+
+        TripDto tripDto = tripFacade.findById(id);
+        if (tripDto == null) {
+            redirectAttributes.addFlashAttribute("error", "Trip " + id + " does not exist");
+            return DEFAULT_REDIRECT;
+        }
+
+        try {
+            tripFacade.delete(tripFacade.findById(id));
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute("error", "Trip " + id + " could not be deleted");
+            return DEFAULT_REDIRECT;
+        }
+        redirectAttributes.addFlashAttribute("success", "Trip " + id + " has been successfully deleted");
+
+        return DEFAULT_REDIRECT;
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable Long id, Model model) {
+        TripDto toUpdate = tripFacade.findById(id);
+
+        model.addAttribute("toUpdate", toUpdate);
+        model.addAttribute("trips", tripFacade.findAll());
+
+
+        return "trip/edit";
+
+    }
+
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable Long id, @ModelAttribute("toUpdate") TripDto tripDto, Model model, RedirectAttributes redirectAttributes) {
+
+        if (tripDto == null) {
+            redirectAttributes.addFlashAttribute("error", "Trip " + id + " does not exist");
+            return "redirect:/trip/create";
+        }
+
+        try {
+            tripFacade.update(tripDto);
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/trip/list";
+        }
+
+
+        redirectAttributes.addFlashAttribute("success", "Trip with " + id
+                + " successfuly updated.");
+        return "redirect:/trip/detail/" + id;
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String newTrip(Model model) {
+
+        model.addAttribute("newTrip", new TripCreateDto());
+        model.addAttribute("trips", tripFacade.findAll());
+        return "trip/create";
+
+
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(@ModelAttribute("newTrip") TripCreateDto tripCreateDto, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes) {
+
+        //TODO: check binding errors
+
+        Long id;
+        try {
+            id = tripFacade.create(tripCreateDto);
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/trip/new";
+        }
+
+        redirectAttributes.addFlashAttribute("success", "Trip " + tripCreateDto.getName()
+                + " (id=" + id + ")successfully created");
+
+        return "redirect:/trip/detail/" + id;
+    }
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+//        SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
+//        stf.setLenient(true);
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(stf, true));
+
     }
 }
