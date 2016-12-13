@@ -4,8 +4,10 @@ import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.rest.ApiUris;
 import cz.muni.fi.pa165.travelagency.exceptions.AlreadyExistingException;
 import cz.muni.fi.pa165.travelagency.exceptions.InvalidParameterException;
+import cz.muni.fi.pa165.travelagency.exceptions.NotAllowToDeleteException;
 import cz.muni.fi.pa165.travelagency.exceptions.NotFoundException;
 import cz.muni.fi.pa165.travelagency.facade.ExcursionFacade;
+import cz.muni.fi.pa165.travelagency.facade.ReservationFacade;
 import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,8 @@ import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,13 +38,20 @@ public class RestTripsController {
     
     @Inject
     private ExcursionFacade excursionFacade;
+    
+    @Inject
+    private ReservationFacade reservationFacade;
     /**
      * Get trips
      * @return list of trips
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<TripDto> findAll() {        
-        return tripFacade.findAll();        
+    public final List<TripDto> findAll() { 
+        try {
+            return tripFacade.findAll();   
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);        
+        }  
     }
     
     /**
@@ -51,11 +62,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final TripDto findById(@PathVariable("id") Long id) throws Exception {
-        TripDto tripDto = tripFacade.findById(id);
-        if (tripDto == null) {
-            throw new NotFoundException();
-        }
-        return tripDto;
+       try {
+            return tripFacade.findById(id);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);        
+        }               
     }
     
     /**
@@ -65,12 +76,18 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final void delete(@PathVariable("id") Long id) throws Exception {   
-        try {
-            tripFacade.delete(tripFacade.findById(id));            
+        try {            
+            if (reservationFacade.findByTrip(tripFacade.findById(id)).isEmpty()) {
+                tripFacade.delete(tripFacade.findById(id));   
+            } else {
+                throw new NotAllowToDeleteException("Trip with id " + id + "hase raservations");
+            }
         }
-        catch (Exception ex) {
+        catch (NullPointerException | IllegalArgumentException ex) {
             throw new NotFoundException(ex);
+        
         }
+            
     }
     
     /**
@@ -85,8 +102,10 @@ public class RestTripsController {
 
         try {
             return tripFacade.create(tripCreateDto);
-        } catch (Exception ex) {
-            throw new AlreadyExistingException(ex);
+        } catch (NullPointerException | IllegalArgumentException | ConstraintViolationException ex) {
+            throw new InvalidParameterException(ex);
+        /*} catch (Exception ex) {
+            throw new AlreadyExistingException(ex);*/
         }
     }
     
@@ -100,8 +119,8 @@ public class RestTripsController {
     public final void update(@RequestBody TripDto tripDto) throws Exception {
         try {
             tripFacade.update(tripDto);            
-        } catch (Exception ex) {
-            throw new InvalidParameterException(ex);
+        } catch (NullPointerException | IllegalArgumentException | ValidationException ex) {
+            throw new NotFoundException(ex);
         }        
     }
     
@@ -112,10 +131,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/capacity", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByAvailableCapacity(@RequestParam(value = "capacity", required = true) Integer capacity) {
-        if (capacity == null) {
-            return null;
-        }
-        return tripFacade.findByAvailableCapacity(capacity);
+        try {
+            return tripFacade.findByAvailableCapacity(capacity);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }      
  
     /**
@@ -127,11 +147,11 @@ public class RestTripsController {
     @RequestMapping(value = "/date",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByDate(@RequestParam(value = "from", required = true) Date from,
                                             @RequestParam(value = "to", required = true) Date to) {
-        if (from == null || to == null) {
-            return null;
-        }
-        
-        return tripFacade.findByDate(from,to);        
+        try {                                    
+            return tripFacade.findByDate(from,to);     
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }    
     
     /**
@@ -141,10 +161,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/excursion",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByExcursion(@RequestParam(value = "excursionId", required = true) Long excursionId) {
-        if (excursionId == null) {
-            return null;
-        }
-        return tripFacade.findByExcursion(excursionFacade.findById(excursionId));
+        try {
+            return tripFacade.findByExcursion(excursionFacade.findById(excursionId));
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
       
     /**
@@ -154,10 +175,11 @@ public class RestTripsController {
      */ 
     @RequestMapping(value = "/name",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByName(@RequestParam(value = "name", required = true) String name) {
-        if (name == null) {
-            return null;
-        }
-        return tripFacade.findByName(name);
+        try {
+            return tripFacade.findByName(name);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
     
     /**
@@ -169,10 +191,11 @@ public class RestTripsController {
     @RequestMapping(value = "/price",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByPrice(@RequestParam(value = "min", required = true) BigDecimal min,
                                             @RequestParam(value = "max", required = true) BigDecimal max) {
-        if (min == null || max == null) {
-            return null;
-        }
-        return tripFacade.findByPrice(min,max);
+        try {
+            return tripFacade.findByPrice(min,max);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
      
     /**
@@ -182,8 +205,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/trip",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<UserDto> findTripParticipants(@RequestParam(value = "tripId", required = true) Long tripId) {
-        
-        return tripFacade.findTripParticipants(tripFacade.findById(tripId));
+        try {
+            return tripFacade.findTripParticipants(tripFacade.findById(tripId));
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
    
     /**
@@ -193,10 +219,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/nextDays",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findTripsInNextDays(@RequestParam(value = "number", required = true) Integer number) {
-        if (number == null) {
-            return null;
-        }
-        return tripFacade.findTripsInNextDays(number);
+        try {
+            return tripFacade.findTripsInNextDays(number);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
     
     /**
@@ -205,8 +232,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/free",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findWithFreeCapacity() {
-        
-        return tripFacade.findWithFreeCapacity();
+        try {
+            return tripFacade.findWithFreeCapacity();
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
 
     /**
@@ -216,10 +246,11 @@ public class RestTripsController {
      */
     @RequestMapping(value = "/destination",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<TripDto> findByDestination(@RequestParam(value = "destination", required = true) String destination) {
-        if (destination == null) {
-            return null;
-        }
-        return tripFacade.findByDestination(destination);
+        try {
+            return tripFacade.findByDestination(destination);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            throw new NotFoundException(ex);
+        } 
     }
     
     

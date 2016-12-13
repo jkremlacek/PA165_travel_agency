@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Exception which is used by rest services.
  * @author Katerina Caletkova
  */
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "This resource has invalid parameter")
-public class InvalidParameterException extends RuntimeException {
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "Not allow to delete trip with reservations")
+public class NotAllowToDeleteException extends RuntimeException {
     
-    public InvalidParameterException(Throwable cause) {
+    public NotAllowToDeleteException(Throwable cause) {
         super(cause);
+    }
+    public NotAllowToDeleteException(String msg) {
+        super(msg);
     }
   
     

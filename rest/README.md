@@ -3,7 +3,7 @@
 ## How to start:
 In central project directory:
 * Run ``mvn clean install``
-* Run ``cd web``
+* Run ``cd rest``
 * Run ``mvn`` 
 
 * Rest is available at localhost:8080/pa165/rest
@@ -18,7 +18,7 @@ curl -i -X GET http://localhost:8080/pa165/rest/trips/1
 ```
 Delete trip
 ```
-curl -i -X DELETE http://localhost:8080/pa165/rest/trips/2
+curl -i -X DELETE http://localhost:8080/pa165/rest/trips/1
 ```
 Create trip
 ```
@@ -66,5 +66,6 @@ Find by date ???
 ```
 curl -i -X GET http://localhost:8080/pa165/rest/trips/date?from=2016-02-02%2000:00&to=2018-02-02%2000:00
 ```
+
 
 
