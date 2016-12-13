@@ -134,7 +134,7 @@ public class ExcursionController {
             id = excursionFacade.create(excursionCreateDto);
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "redirect:/excursion/create";
+            return "redirect:/excursion/new";
         }
 
         redirectAttributes.addFlashAttribute("success", "Excursion " + excursionCreateDto.getName()
