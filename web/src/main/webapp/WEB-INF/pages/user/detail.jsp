@@ -15,6 +15,10 @@
                     <td><h4><c:out value="${user.id}"/></h4></td>
                 </tr>
                 <tr>
+                    <td><h4>Name: </h4></td>
+                    <td><h4><c:out value="${user.name}"/></h4></td>
+                </tr>
+                <tr>
                     <td><h4>E-mail: </h4></td>
                     <td><h4><c:out value="${user.mail}"/></h4></td>
                 </tr>
@@ -62,10 +66,10 @@
                  <tbody>
                     <c:forEach items="${reservations}" var="reservation">
                         <tr>
-                            <td><h4>Reservation to trip:</h4></td>
+                            <td><h4>R<c:out value="${reservation.id}"/></h4></td>
                             <td><h4><c:out value="${reservation.trip.name}"/></h4></td>
                             <td>
-                                <a href="/pa165/reservation/detail/${user.id}" class="btn btn-primary">Detail</a>
+                                <a href="/pa165/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
                             </td>   
                         </tr>
                     </c:forEach>
