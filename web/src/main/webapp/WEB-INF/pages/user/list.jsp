@@ -20,9 +20,36 @@
             <tr>
                 <td>${user.id}</td>
                 <td><c:out value="${user.name}"/></td>
-                <td><c:out value="${user.mail}"/></td>
+                <td><c:out value="${user.mail}"/></td>                
                 <td>
                     <a href="/pa165/user/detail/${user.id}" class="btn btn-primary">Detail</a>
+                </td>
+                
+                
+                <c:if test="${loggedUser.id==user.id}">
+                    <td>
+                        <form method="get" action="${pageContext.request.contextPath}/user/edit/${user.id}">
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+
+                    </td>
+                </c:if>   
+                <c:if test="${authUser.getIsAdmin()}">
+                    <c:if test="${loggedUser.id!=user.id}">
+                    <td>
+                        <c:if test="${user.getIsAdmin()}">
+                            <form method="get" action="${pageContext.request.contextPath}/user/changeRole/${user.id}">
+                                <button type="submit" class="btn btn-primary">Cancel admin</button>
+                            </form>
+                        </c:if>
+                        <c:if test="${!user.getIsAdmin()}">
+                            <form method="get" action="${pageContext.request.contextPath}/user/changeRole/${user.id}">
+                                <button type="submit" class="btn btn-primary">Make admin</button>
+                            </form>
+                        </c:if>
+                    </td>
+                    </c:if>
+                </c:if>
                 </td>
             </tr>
         </c:forEach>

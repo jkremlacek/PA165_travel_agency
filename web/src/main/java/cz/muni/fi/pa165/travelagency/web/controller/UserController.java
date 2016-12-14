@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,11 +42,8 @@ public class UserController {
     
     private String DEFAULT_REDIRECT = "redirect:/user/list";
 
-    //userFacade.create(ucd); NE
-    //userFacade.delete(ud); NE
     //userFacade.update(ud); NE
-    //userFacade.userAuthenticate(uad); NE
-    
+        
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model, HttpServletRequest req,
             HttpServletResponse res){   
@@ -54,11 +52,13 @@ public class UserController {
         if (loggedUser.getIsAdmin()) {
             List<UserDto> users = userFacade.findAll();
             model.addAttribute("users", users);
+            model.addAttribute("loggedUser", loggedUser);
             model.addAttribute("filter", "none");
             return "/user/list";
         } else {
             List<UserDto> users = Arrays.asList(userFacade.findById(loggedUser.getId()));            
             model.addAttribute("users", users);
+            model.addAttribute("loggedUser", loggedUser);
             model.addAttribute("filter", "none");
             return "/user/list";
         }
@@ -86,26 +86,65 @@ public class UserController {
         model.addAttribute("reservations", reservations);       
         return "/user/detail";
         
-        
     }
-    //userFacade.findByMail(string); ANO
-    //userFacade.findByBirthDate(date); ANO
-    //userFacade.findByName(string); ANO
-    //userFacade.findByPersonalNumber(Long.MIN_VALUE); ANO 
-    //userFacade.findByPhoneNumber(Integer.BYTES); ANO 
-    //userFacade.findByReservation(rd); ANO
     
-    @RequestMapping(value = {"/settings/{id}"}, method = RequestMethod.GET)
-    public String settingsAdmin(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes,HttpServletRequest req,
+    @RequestMapping(value = {"/changeRole/{id}"}, method = RequestMethod.GET)
+    public String changeRole(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes,HttpServletRequest req,
             HttpServletResponse res) {
-       
+        UserDto loggedUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!loggedUser.getIsAdmin() || loggedUser.getId().equals(id)) {
+                redirectAttributes.addFlashAttribute("error", "Only admin can change role and olny to others");
+                return DEFAULT_REDIRECT;
+        }
         UserDto updatingUser = userFacade.findById(id);
         if (userFacade.isUserAdmin(updatingUser)) {
              updatingUser.setIsAdmin(Boolean.FALSE);
         } else {
             updatingUser.setIsAdmin(Boolean.TRUE);
         }
-        userFacade.update(updatingUser);       
-        return "/user/list";
+        userFacade.update(updatingUser); 
+        model.addAttribute("updatingUser", updatingUser);
+         return DEFAULT_REDIRECT;
     }
+    
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable Long id, Model model,RedirectAttributes redirectAttributes,HttpServletResponse res, HttpServletRequest req) {
+        UserDto loggedUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!loggedUser.getId().equals(id)) {
+                redirectAttributes.addFlashAttribute("error", "You can edit only yourself");
+                return DEFAULT_REDIRECT;
+        }
+        UserDto updatingUser = userFacade.findById(id);
+        model.addAttribute("updatingUser", updatingUser);
+        return "/user/edit";
+
+    }
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@PathVariable Long id, @ModelAttribute("updatingUser") UserDto userDto
+            , Model model, RedirectAttributes redirectAttributes,HttpServletRequest req) {
+
+        if (userDto == null) {
+            redirectAttributes.addFlashAttribute("error", "User " + id + " does not exist");
+            return DEFAULT_REDIRECT;
+        }
+        UserDto loggedUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!loggedUser.getId().equals(id)) {
+            redirectAttributes.addFlashAttribute("error", "You can update only yourself");
+                return DEFAULT_REDIRECT;
+        }
+        try {
+            UserDto user = userFacade.findById(id);
+            user.setName(userDto.getName());
+            user.setPhoneNumber(userDto.getPhoneNumber());
+            userFacade.update(user);
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return DEFAULT_REDIRECT;
+        }
+
+        redirectAttributes.addFlashAttribute("success", "User with " + id
+                + " successfuly updated.");
+        return "redirect:/user/detail/" + id;
+    }
+
 }
