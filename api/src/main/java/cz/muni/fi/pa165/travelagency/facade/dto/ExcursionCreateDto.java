@@ -2,9 +2,6 @@ package cz.muni.fi.pa165.travelagency.facade.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -12,20 +9,14 @@ import javax.validation.constraints.NotNull;
  */
 public class ExcursionCreateDto {
 
-    @NotNull
     private String name;
 
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @NotNull
     private Integer duration;
 
-    @NotNull
     private String destination;
 
-    @NotNull
     private BigDecimal price;
 
     private TripDto trip;

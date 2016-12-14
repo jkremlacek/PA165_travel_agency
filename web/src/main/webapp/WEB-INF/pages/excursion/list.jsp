@@ -10,7 +10,7 @@
 --%>
 <my:pagetemplate title="Excursions">
     <jsp:attribute name="body">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>

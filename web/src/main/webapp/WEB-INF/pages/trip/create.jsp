@@ -4,15 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: martin
-  Date: 08.12.2016
-  Time: 22:06
-  To change this template use File | Settings | File Templates.
+  User: jakub_kremlacek
 --%>
-<my:pagetemplate title="Create an excursion">
+<my:pagetemplate title="Create a trip">
 <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/excursion/create" modelAttribute="newExcursion">
+<form:form method="post" action="${pageContext.request.contextPath}/trip/create" modelAttribute="newTrip">
     <table class="table">
         <tr>
             <td>Name</td>
@@ -27,31 +23,25 @@
             <td><form:input path="description" type="text" size="40"/></td>
         </tr>
         <tr>
-            <td>Trip</td>
+            <td>Date From</td>
             <td>
-                <form:select path="trip">
-                    <c:forEach items="${trips}" var="t">
-                        <form:option type="text" selected="selected"
-                                     value="${t.getId().toString()}">${t.name} ${t.destination}</form:option>
-                    </c:forEach>
-                </form:select>
-            </td>
-        </tr>
-        <tr>
-            <td>Date</td>
-            <td>
-                <form:label path="date"/>
+                <form:label path="dateFrom"/>
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
-                <form:input path="date" class="date" type="text"
+                <form:input path="dateFrom" class="date" type="text"
                             value=""/>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>
-            <td>Duration</td>
+            <td>Date To</td>
             <td>
-                <form:input path="duration" type="text" value=""/>
+                <form:label path="dateTo"/>
+                <c:set var="now" value="<%=new java.util.Date()%>"/>
+                <form:input path="dateTo" class="date" type="text"
+                            value=""/>
+                <br>
+                Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>
@@ -59,7 +49,7 @@
             <td><form:input path="price" type="text" size="10"/> CZK</td>
         </tr>
     </table>
-    <button class="btn btn-primary" type="submit">Create Excursion</button>
+    <button class="btn btn-primary" type="submit">Create Trip</button>
 </form:form>
 </jsp:attribute>
 </my:pagetemplate>

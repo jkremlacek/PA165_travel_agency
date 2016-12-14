@@ -1,14 +1,13 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 import java.util.HashSet;
 import java.util.Set;
-import javax.validation.constraints.NotNull;
+
 /**
  * DTO for user entity
  * @author Kateřina Caletková
  */
 public class UserDto extends UserCreateDto{
     
-    //@NotNull    
     private Long id;
     
     private Set<ReservationDto> reservations = new HashSet<>();

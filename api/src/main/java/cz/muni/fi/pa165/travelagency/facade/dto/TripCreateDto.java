@@ -5,11 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -17,28 +12,18 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class TripCreateDto {
     
-    @NotBlank
     private String name;
    
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateFrom;
    
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateTo;
    
-    @NotBlank
     private String destination;
    
     private String description;
    
-    @Min(1)
-    @NotNull
     private Integer capacity;
    
-    @Min(0)
-    @NotNull
     private BigDecimal price;
    
     private Set<ExcursionDto> excursions = new HashSet<>();

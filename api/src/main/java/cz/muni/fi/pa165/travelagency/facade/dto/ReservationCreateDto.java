@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.travelagency.facade.dto;
 
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -12,10 +11,8 @@ import java.util.Set;
  */
 public class ReservationCreateDto {
 
-    @NotNull
     private UserDto user;
 
-    @NotNull
     private TripDto trip;
 
     private Set<ExcursionDto> excursionSet = new HashSet<>();
