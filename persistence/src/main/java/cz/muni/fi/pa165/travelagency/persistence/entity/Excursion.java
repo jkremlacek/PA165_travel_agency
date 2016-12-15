@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -155,11 +156,7 @@ public class Excursion {
 
     @Override
     public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getDate().hashCode();
-        result = 31 * result + getDuration().hashCode();
-        result = 31 * result + getDestination().hashCode();
-        return result;
+        return Objects.hash(getName(), getDate(), getDuration(), getDestination());
     }
 
 }
