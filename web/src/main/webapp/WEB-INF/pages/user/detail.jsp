@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <td>Birth date:</td>                    
-                    <td><fmt:formatDate value="${user.birthDate}" pattern="dd. MM. yyyy" /></td>
+                    <td><fmt:formatDate value="${user.birthDate}" pattern="dd.MM.yyyy" /></td>
                 </tr>
                 <tr>
                     <td>Personal number:</td>

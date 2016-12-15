@@ -12,8 +12,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -103,7 +105,7 @@ public class UserController {
         }
         userFacade.update(user); 
         model.addAttribute("user", user);
-        redAttr.addFlashAttribute("alert_info", "Role of " + user.getName() + " was successfuly changes.");
+        redAttr.addFlashAttribute("alert_success", "Role of " + user.getName() + " was successfuly changes.");
         return DEFAULT_REDIRECT;
     }
     
@@ -124,7 +126,7 @@ public class UserController {
 
     }
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable Long id, @ModelAttribute("updatingUser") UserDto updatingUser
+    public String update(@PathVariable Long id, @Valid @ModelAttribute("updatingUser") UserDto updatingUser
             , Model model, RedirectAttributes redAttr, HttpServletRequest req) {
 
         if (updatingUser == null) {
@@ -141,29 +143,29 @@ public class UserController {
             redAttr.addFlashAttribute("alert_danger", "User does not exist.");
             return DEFAULT_REDIRECT;
         }
-        if (updatingUser.getName() == null || updatingUser.getName().length() < 1) {
+        if (updatingUser.getName().replace(" ","").length() < 1) {
             redAttr.addFlashAttribute(
                     "alert_danger", "Name can't be empty.");
             return "redirect:/user/edit/"+ id;
         }
-        /*try {updatingUser.getName();
+        try {user.setName(updatingUser.getName());     
+            user.setPhoneNumber(updatingUser.getPhoneNumber());     
+            user.setPersonalNumber(updatingUser.getPersonalNumber());
+            //user.setBirthDate(updatingUser.getBirthDate());
         } catch (Exception ex) {
             redAttr.addFlashAttribute(
-                    "alert_danger", "Wrong format of name " + ex);
+                    "alert_danger", "Wrong format of form " + ex);
             return "redirect:/user/edit/"+ id;
-        }*/
-        user.setName(updatingUser.getName());        
-        user.setPhoneNumber(updatingUser.getPhoneNumber());
-        user.setPersonalNumber(updatingUser.getPersonalNumber());
-        /*try {updatingUser.getBirthDate();
+        }        
+        
+        try {userFacade.update(user);
         } catch (Exception ex) {
             redAttr.addFlashAttribute(
-                    "alert_danger", "Wrong format of date " + ex);
+                    "alert_danger", "User cann't be updated with these informations " + ex);
             return "redirect:/user/edit/"+ id;
-        }*/
-        user.setBirthDate(updatingUser.getBirthDate());
-        userFacade.update(user);
-        redAttr.addFlashAttribute("alert_info", "User " + user.getName() + " was successfuly updated.");
+        }
+        
+        redAttr.addFlashAttribute("alert_success", "User " + user.getName() + " was successfuly updated.");
         return "redirect:/user/detail/"+ id;
     }
     @InitBinder

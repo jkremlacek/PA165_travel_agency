@@ -16,12 +16,12 @@
             <td>Phone number</td>
             <td><form:input path="phoneNumber" type="text" size="30" value="${updatingUser.phoneNumber}"/></td>
         </tr>
-        <tr>
+        <%--<tr>
             <td>Birth date</td>
             <td>
                 <form:input path="birthDate" type="text" size="30" />
             <td>    
-        </tr>
+        </tr>--%>
         <tr>
             <td>Personal number</td>
             <td><form:input path="personalNumber" type="text" size="30" value="${updatingUser.personalNumber}"/></td>
