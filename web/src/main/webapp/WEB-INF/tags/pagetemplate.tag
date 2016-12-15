@@ -49,7 +49,7 @@
             </c:if>
         </div>
     </div>
-</nav>
+</nav>   
 
 <div class="container">
 

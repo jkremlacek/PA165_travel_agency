@@ -8,38 +8,37 @@
 --%>
 <my:pagetemplate title="Edit a trip">
 <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
     <table class="table">
         <tr>
             <td>Name</td>
-            <td><form:input path="name" type="text" size="30" value="${toUpdate.name}"/></td>
+            <td><form:input path="name" type="text" size="30" value="${toUpdate.name}" required="required"/></td>
         </tr>
         <tr>
             <td>Destination</td>
-            <td><form:input path="destination" type="text" size="40" value="${toUpdate.destination}"/></td>
+            <td><form:input path="destination" type="text" size="40" value="${toUpdate.destination}" required="required"/></td>
         </tr>
         <tr>
             <td>Description</td>
-            <td><form:input path="description" type="text" size="40" value="${toUpdate.description}"/></td>
+            <td><form:input path="description" type="text" size="40" value="${toUpdate.description}" required="required"/></td>
         </tr>
         <tr>
             <td>Date From</td>
             <td>
-                    <form:input path="dateFrom" type="text"/>
-                           <%--value="<fmt:formatDate value="${toUpdate.date}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
+                <form:input path="dateFrom" type="text" required="required"/>
+                <%--value="<fmt:formatDate value="${toUpdate.date}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
             </td>
         </tr>
         <tr>
             <td>Date To</td>
             <td>
-                    <form:input path="dateFrom" type="text"/>
-                           <%--value="<fmt:formatDate value="${toUpdate.date}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
+                <form:input path="dateFrom" type="text" required="required"/>
+                <%--value="<fmt:formatDate value="${toUpdate.date}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
             </td>
         </tr>
         <tr>
             <td>Price</td>
             <td>
-                <form:input path="price" type="text" size="10" value="${toUpdate.price}"/> CZK
+                <form:input path="price" type="text" size="10" value="${toUpdate.price}" required="required"/> CZK
             </td>
         </tr>
     </table>
