@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
-  User: martin
+  User: Martin Salata
   Date: 11.12.2016
   Time: 18:05
 --%>

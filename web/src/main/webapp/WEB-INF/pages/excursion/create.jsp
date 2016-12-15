@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: martin
+  User: Martin Salata
   Date: 08.12.2016
   Time: 22:06
   To change this template use File | Settings | File Templates.
