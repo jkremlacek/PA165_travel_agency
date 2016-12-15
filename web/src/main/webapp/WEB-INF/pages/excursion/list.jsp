@@ -17,6 +17,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Destination</th>
+                    <th>Trip</th>
                     <th>Date</th>
                     <th>Duration</th>
                 </tr>
@@ -27,6 +28,9 @@
                     <td><c:out value="${excursion.name}"/></td>
                     <td><c:out value="${excursion.description}"/></td>
                     <td><c:out value="${excursion.destination}"/></td>
+                    <td>
+                        <a href="${contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
+                    </td>
                     <td><fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm"/></td>
                     <td><c:out value="${excursion.duration}"/></td>
                     <td>

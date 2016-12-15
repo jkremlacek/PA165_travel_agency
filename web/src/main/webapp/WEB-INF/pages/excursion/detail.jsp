@@ -19,12 +19,18 @@
         <td><c:out value="${excursion.name}"/></td>
     </tr>
     <tr>
+        <td>Description</td>
+        <td><c:out value="${excursion.description}"/></td>
+    </tr>
+    <tr>
         <td>Destination</td>
         <td><c:out value="${excursion.destination}"/></td>
     </tr>
     <tr>
-        <td>Description</td>
-        <td><c:out value="${excursion.description}"/></td>
+        <td>Trip</td>
+        <td>
+            <a href="${contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
+        </td>
     </tr>
     <tr>
         <td>Date</td>
