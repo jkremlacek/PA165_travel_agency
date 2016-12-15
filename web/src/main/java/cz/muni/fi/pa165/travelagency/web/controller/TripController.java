@@ -139,9 +139,8 @@ public class TripController {
             tripFacade.update(dbTripDto);
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
-            return "redirect:/trip/list";
+            return "redirect:/trip/edit/" + id;
         }
-
 
         redirectAttributes.addFlashAttribute("alert_success", "Trip with id " + id
                 + " successfuly updated.");
@@ -159,8 +158,6 @@ public class TripController {
         
         model.addAttribute("newTrip", new TripCreateDto());
         return "trip/create";
-
-
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -182,7 +179,7 @@ public class TripController {
         }
 
         redirectAttributes.addFlashAttribute("alert_success", "Trip " + tripCreateDto.getName()
-                + " (id=" + id + ")successfully created");
+                + " successfully created");
 
         return "redirect:/trip/detail/" + id;
     }
