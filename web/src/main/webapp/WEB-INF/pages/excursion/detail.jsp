@@ -15,34 +15,34 @@
 
 <table class="table">
     <tr>
-        <td>Name</td>
+        <th>Name</th>
         <td><c:out value="${excursion.name}"/></td>
     </tr>
     <tr>
-        <td>Description</td>
+        <th>Description</th>
         <td><c:out value="${excursion.description}"/></td>
     </tr>
     <tr>
-        <td>Destination</td>
+        <th>Destination</th>
         <td><c:out value="${excursion.destination}"/></td>
     </tr>
     <tr>
-        <td>Trip</td>
+        <th>Trip</th>
         <td>
             <a href="${pageContext.request.contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
         </td>
     </tr>
     <tr>
-        <td>Date</td>
+        <th>Date</th>
         <td><fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy HH:mm" /></td>
     </tr>
     <tr>
-        <td>Duration</td>
+        <th>Duration</th>
         <td><c:out value="${excursion.duration}"/></td>
         <%--<td><c:out value="${excursion.duration}"/></td>--%>
     </tr>
     <tr>
-        <td>Price</td>
+        <th>Price</th>
         <td><c:out value="${excursion.price}"/> CZK</td>
     </tr>
     <c:if test="${authUser.getIsAdmin()}">

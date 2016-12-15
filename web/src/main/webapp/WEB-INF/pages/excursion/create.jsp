@@ -15,19 +15,19 @@
 <form:form method="post" action="${pageContext.request.contextPath}/excursion/create" modelAttribute="newExcursion">
     <table class="table">
         <tr>
-            <td>Name</td>
+            <th>Name</th>
             <td><form:input path="name" type="text" size="30"/></td>
         </tr>
         <tr>
-            <td>Destination</td>
+            <th>Destination</th>
             <td><form:input path="destination" type="text" size="40"/></td>
         </tr>
         <tr>
-            <td>Description</td>
+            <th>Description</th>
             <td><form:input path="description" type="text" size="40"/></td>
         </tr>
         <tr>
-            <td>Trip</td>
+            <th>Trip</th>
             <td>
                 <form:select path="trip">
                     <c:forEach items="${trips}" var="t">
@@ -38,7 +38,7 @@
             </td>
         </tr>
         <tr>
-            <td>Date</td>
+            <th>Date</th>
             <td>
                 <form:label path="date"/>
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
@@ -49,17 +49,17 @@
             </td>
         </tr>
         <tr>
-            <td>Duration</td>
+            <th>Duration</th>
             <td>
                 <form:input path="duration" type="text" value=""/>
             </td>
         </tr>
         <tr>
-            <td>Price</td>
+            <th>Price</th>
             <td><form:input path="price" type="text" size="10"/> CZK</td>
         </tr>
     </table>
-    <button class="btn btn-primary" type="submit">Create Excursion</button>
+    <button class="btn btn-success" type="submit">Create Excursion</button>
 </form:form>
 </jsp:attribute>
 </my:pagetemplate>
