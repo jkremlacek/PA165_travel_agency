@@ -52,7 +52,7 @@ public class TripController {
         TripDto tripDto = tripFacade.findById(id);
 
         if (tripDto == null) {
-            redirectAttributes.addFlashAttribute("error", "Trip with id" + id + " doesn't exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip with id" + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
 
@@ -67,17 +67,17 @@ public class TripController {
 
         TripDto tripDto = tripFacade.findById(id);
         if (tripDto == null) {
-            redirectAttributes.addFlashAttribute("error", "Trip " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
             return DEFAULT_REDIRECT;
         }
 
         try {
             tripFacade.delete(tripFacade.findById(id));
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("error", "Trip " + id + " could not be deleted");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " could not be deleted");
             return DEFAULT_REDIRECT;
         }
-        redirectAttributes.addFlashAttribute("success", "Trip " + id + " has been successfully deleted");
+        redirectAttributes.addFlashAttribute("alert_success", "Trip " + id + " has been successfully deleted");
 
         return DEFAULT_REDIRECT;
     }
@@ -99,19 +99,19 @@ public class TripController {
     public String update(@PathVariable Long id, @ModelAttribute("toUpdate") TripDto tripDto, Model model, RedirectAttributes redirectAttributes) {
 
         if (tripDto == null) {
-            redirectAttributes.addFlashAttribute("error", "Trip " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
             return "redirect:/trip/create";
         }
 
         try {
             tripFacade.update(tripDto);
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/trip/list";
         }
 
 
-        redirectAttributes.addFlashAttribute("success", "Trip with " + id
+        redirectAttributes.addFlashAttribute("alert_success", "Trip with " + id
                 + " successfuly updated.");
         return "redirect:/trip/detail/" + id;
     }
@@ -135,11 +135,11 @@ public class TripController {
         try {
             id = tripFacade.create(tripCreateDto);
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/trip/new";
         }
 
-        redirectAttributes.addFlashAttribute("success", "Trip " + tripCreateDto.getName()
+        redirectAttributes.addFlashAttribute("alert_success", "Trip " + tripCreateDto.getName()
                 + " (id=" + id + ")successfully created");
 
         return "redirect:/trip/detail/" + id;
