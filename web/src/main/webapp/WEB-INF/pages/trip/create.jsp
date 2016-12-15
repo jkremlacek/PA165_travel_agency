@@ -12,12 +12,15 @@
     <table class="table">
         <tr>
             <td>Name</td>
+            <td><form:input path="name" type="text" size="30" required="required"/></td>
         </tr>
         <tr>
             <td>Destination</td>
+            <td><form:input path="destination" type="text" size="40" required="required"/></td>
         </tr>
         <tr>
             <td>Description</td>
+            <td><form:input path="description" type="text" size="40" required="required"/></td>
         </tr>
         <tr>
             <td>Date From</td>
@@ -43,6 +46,7 @@
         </tr>
         <tr>
             <td>Price</td>
+            <td><form:input path="price" type="text" size="10" required="required"/> CZK</td>
         </tr>
     </table>
     <button class="btn btn-primary" type="submit">Create Trip</button>

@@ -8,6 +8,7 @@
 --%>
 <my:pagetemplate title="Edit a trip">
 <jsp:attribute name="body">
+    <form:form method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
     <table class="table">
         <tr>
             <td>Name</td>
