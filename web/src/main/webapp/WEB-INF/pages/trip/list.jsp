@@ -14,21 +14,19 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Destination</th>
-                    <th>Date</th>
-                    <th>Duration</th>
+                    <th>Date from</th>
+                    <th>Date to</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${trips}" var="trip">
                 <tr>
                     <td><c:out value="${trip.name}"/></td>
-                    <td><c:out value="${trip.description}"/></td>
                     <td><c:out value="${trip.destination}"/></td>
                     <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy, HH:mm"/></td>
                     <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy, HH:mm"/></td>
-                    <td><c:out value="${trip.price}"/></td>
+                    <td><c:out value="${trip.price}"/> CZK</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/trip/detail/${trip.id}">
                             <button type="submit" class="btn btn-primary">Detail</button>

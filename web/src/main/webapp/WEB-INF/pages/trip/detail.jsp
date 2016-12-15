@@ -10,6 +10,7 @@
 
 <my:pagetemplate title="Trip detail">
 <jsp:attribute name="body">
+    <h4>Details of trip with id <c:out value="${trip.id}"/></h4>
     <table class="table">
     <tr>
         <td>Name</td>
@@ -33,11 +34,11 @@
     </tr>
     <tr>
         <td>Date From</td>
-        <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy HH:mm" /></td>
+        <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy" /></td>
     </tr>
     <tr>
         <td>Date To</td>
-        <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy HH:mm" /></td>
+        <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy" /></td>
     </tr>
     <tr>
         <td>Price</td>
