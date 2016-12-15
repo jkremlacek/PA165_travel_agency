@@ -29,7 +29,7 @@
     <tr>
         <td>Trip</td>
         <td>
-            <a href="${contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
+            <a href="${pageContext.request.contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
         </td>
     </tr>
     <tr>
