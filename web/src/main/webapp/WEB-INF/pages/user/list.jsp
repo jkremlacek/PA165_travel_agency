@@ -12,6 +12,10 @@
         <tr>
             <th>Name</th>
             <th>E-mail</th>
+            <c:if test="${authUser.getIsAdmin()}">
+                <th/>
+                <th/>
+            </c:if>
         </tr>
         </thead>
         <tbody>

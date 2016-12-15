@@ -11,12 +11,33 @@
 <h4>Log in</h4>
 <form:form method="post" action="${pageContext.request.contextPath}/auth/login/">
     <div class="jumbotron">
-            E-mail: <input type="email" name="mail"/><br/>
-            Password: <input type="password" name="password"/><br/>
-            <input type="submit"/>
+        <table class="table">
+            <tr>
+                <td>
+                    E-mail: 
+                </td>
+                <td>    
+                    <input type="email" name="mail"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password: 
+                </td>
+                <td>    
+                    <input type="password" name="password"/><br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit"/>
+                </td>
+                <td/>
+            </tr>
+        </table>
     </div>
 </form:form>
-<h4>Registered users</h4>
+<h4>Registered users (for debugging purposes)</h4>
 
 <table class="table">
         <thead>

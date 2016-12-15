@@ -17,6 +17,12 @@
                     <th>Destination</th>
                     <th>Date from</th>
                     <th>Date to</th>
+                    <th>Price</th>
+                    <c:if test="${authUser.getIsAdmin()}">
+                    <th/>
+                    <th/>
+                    <th/>
+                    </c:if>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +46,7 @@
                         </td>
                         <td>
                             <form method="post" action="${pageContext.request.contextPath}/trip/delete/${trip.id}">
-                                <button type="submit" class="btn btn-primary">Delete</button>
+                                <button type="submit" class="btn btn-primary btn-danger">Delete</button>
                             </form>
                         </td>
                     </c:if>
@@ -54,6 +60,13 @@
                                 <button type="submit" class="btn btn-primary">New trip</button>
                             </form>
                         </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
                     </c:if>
                 </tr>
             </tbody>

@@ -20,6 +20,11 @@
                     <th>Trip</th>
                     <th>Date</th>
                     <th>Duration</th>
+                    <c:if test="${authUser.getIsAdmin()}">
+                    <th/>
+                    <th/>
+                    <th/>
+                    </c:if>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +65,14 @@
                                 <button type="submit" class="btn btn-success">New excursion</button>
                             </form>
                         </td>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td/>
                     </c:if>
                 </tr>
             </tbody>
