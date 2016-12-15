@@ -8,10 +8,13 @@ package cz.muni.fi.pa165.travelagency.web.controller;
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -63,8 +66,14 @@ public class TripController {
     }
     
      @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
 
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!authUser.getIsAdmin()) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
+                return DEFAULT_REDIRECT;
+        }
+        
         TripDto tripDto = tripFacade.findById(id);
         if (tripDto == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
@@ -83,7 +92,14 @@ public class TripController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable Long id, Model model) {
+    public String edit(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
+        
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!authUser.getIsAdmin()) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
+                return DEFAULT_REDIRECT;
+        }
+        
         TripDto toUpdate = tripFacade.findById(id);
 
         model.addAttribute("toUpdate", toUpdate);
@@ -96,8 +112,14 @@ public class TripController {
 
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable Long id, @ModelAttribute("toUpdate") TripDto tripDto, Model model, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable Long id, @ModelAttribute("toUpdate") TripDto tripDto, Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
 
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!authUser.getIsAdmin()) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
+                return DEFAULT_REDIRECT;
+        }
+        
         if (tripDto == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
             return "redirect:/trip/create";
@@ -117,8 +139,14 @@ public class TripController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String newTrip(Model model) {
+    public String newTrip(Model model , RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
 
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!authUser.getIsAdmin()) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
+                return DEFAULT_REDIRECT;
+        }
+        
         model.addAttribute("newTrip", new TripCreateDto());
         return "trip/create";
 
@@ -127,9 +155,13 @@ public class TripController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@ModelAttribute("newTrip") TripCreateDto tripCreateDto, BindingResult bindingResult,
-                         Model model, RedirectAttributes redirectAttributes) {
+                         Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
 
-        //TODO: check binding errors
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!authUser.getIsAdmin()) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
+                return DEFAULT_REDIRECT;
+        }
 
         Long id;
         try {
