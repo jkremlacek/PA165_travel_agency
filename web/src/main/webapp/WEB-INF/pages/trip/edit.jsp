@@ -29,15 +29,15 @@
         <tr>
             <td>Date From</td>
             <td>
-                <form:input path="dateFrom" type="text" required="required"/>
-                <%--value="<fmt:formatDate value="${toUpdate.date}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
+                <form:input path="dateFrom" type="datetime" required="required"/>
+                <%--value="<fmt:formatDate value="${toUpdate.dateFrom}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
             </td>
         </tr>
         <tr>
             <td>Date To</td>
             <td>
-                <form:input path="dateFrom" type="text" required="required"/>
-                <%--value="<fmt:formatDate value="${toUpdate.date}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
+                <form:input path="dateTo" type="datetime" required="required"/>
+                <%--value="<fmt:formatDate value="${toUpdate.dateTo}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
             </td>
         </tr>
         <tr>

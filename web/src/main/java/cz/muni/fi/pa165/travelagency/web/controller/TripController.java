@@ -12,6 +12,8 @@ import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,23 +122,15 @@ public class TripController {
                 return DEFAULT_REDIRECT;
         }
         
-        TripDto dbTripDto = tripFacade.findById(id);
-        
-        if (dbTripDto == null) {
+        if (tripDto == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
             return "redirect:/trip/create";
         }
-
-        try {
-            dbTripDto.setName(tripDto.getName());
-            dbTripDto.setDestination(tripDto.getDestination());
-            dbTripDto.setDescription(tripDto.getDescription());
-            dbTripDto.setCapacity(tripDto.getCapacity());
-            dbTripDto.setDateFrom(tripDto.getDateFrom());
-            dbTripDto.setDateTo(tripDto.getDateTo());
-            dbTripDto.setPrice(tripDto.getPrice());
-            
-            tripFacade.update(dbTripDto);
+        
+        //try update
+        
+        try {            
+            tripFacade.update(tripDto);
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/trip/edit/" + id;

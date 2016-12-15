@@ -238,12 +238,7 @@ public class Trip {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.getName());
-        hash = 23 * hash + Objects.hashCode(this.getDateFrom());
-        hash = 23 * hash + Objects.hashCode(this.getDateTo());
-        hash = 23 * hash + Objects.hashCode(this.getDestination());
-        return hash;
+        return Objects.hash(getName(), getDateFrom(), getDateTo(), getCapacity(), getDescription(), getDestination(), getPrice());
     }
 
     @Override
@@ -268,6 +263,9 @@ public class Trip {
             return false;
         }
         if (!Objects.equals(this.getDateTo(), other.getDateTo())) {
+            return false;
+        }
+        if (!Objects.equals(this.getCapacity(), other.getCapacity())) {
             return false;
         }
         return true;
