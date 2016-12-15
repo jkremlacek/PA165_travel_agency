@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
-                                <button type="submit" class="btn btn-primary">Delete</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
                     </c:if>
@@ -57,7 +57,7 @@
                     <c:if test="${authUser.getIsAdmin()}">
                         <td>
                             <form method="get" action="${pageContext.request.contextPath}/excursion/new">
-                                <button type="submit" class="btn btn-primary">New excursion</button>
+                                <button type="submit" class="btn btn-success">New excursion</button>
                             </form>
                         </td>
                     </c:if>

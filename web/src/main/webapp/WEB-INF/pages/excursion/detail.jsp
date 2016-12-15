@@ -54,7 +54,7 @@
         </td>
         <td>
             <form method="post" action="${pageContext.request.contextPath}/excursion/delete/${excursion.id}">
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
         </tr>
