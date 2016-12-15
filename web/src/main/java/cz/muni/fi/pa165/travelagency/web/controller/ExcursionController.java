@@ -50,7 +50,7 @@ public class ExcursionController {
         ExcursionDto excursionDto = excursionFacade.findById(id);
 
         if (excursionDto == null) {
-            redirectAttributes.addFlashAttribute("error", "Excursion with id" + id + " doesn't exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion with id " + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
 
@@ -64,17 +64,17 @@ public class ExcursionController {
 
         ExcursionDto excursionDto = excursionFacade.findById(id);
         if (excursionDto == null) {
-            redirectAttributes.addFlashAttribute("error", "Excursion " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion " + id + " does not exist");
             return DEFAULT_REDIRECT;
         }
 
         try {
             excursionFacade.delete(excursionFacade.findById(id));
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("error", "Excursion " + id + " could not be deleted");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion with id " + id + " could not be deleted");
             return DEFAULT_REDIRECT;
         }
-        redirectAttributes.addFlashAttribute("success", "Excursion " + id + " has been successfully deleted");
+        redirectAttributes.addFlashAttribute("alert_success", "Excursion " + excursionDto.getName() + " has been successfully deleted");
 
         return DEFAULT_REDIRECT;
     }
@@ -96,19 +96,19 @@ public class ExcursionController {
     public String update(@PathVariable Long id, @ModelAttribute("toUpdate") ExcursionDto excursionDto, Model model, RedirectAttributes redirectAttributes) {
 
         if (excursionDto == null) {
-            redirectAttributes.addFlashAttribute("error", "Excursion " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion " + id + " does not exist");
             return "redirect:/excursion/create";
         }
 
         try {
             excursionFacade.update(excursionDto);
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/list";
         }
 
 
-        redirectAttributes.addFlashAttribute("success", "Excursion with " + id
+        redirectAttributes.addFlashAttribute("alert_success", "Excursion with id " + id
                 + " successfuly updated.");
         return "redirect:/excursion/detail/" + id;
     }
@@ -133,11 +133,11 @@ public class ExcursionController {
         try {
             id = excursionFacade.create(excursionCreateDto);
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/new";
         }
 
-        redirectAttributes.addFlashAttribute("success", "Excursion " + excursionCreateDto.getName()
+        redirectAttributes.addFlashAttribute("alert_success", "Excursion " + excursionCreateDto.getName()
                 + " (id=" + id + ")successfully created");
 
         return "redirect:/excursion/detail/" + id;
