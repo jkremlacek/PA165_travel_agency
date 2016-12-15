@@ -83,7 +83,7 @@ public class TripController {
         try {
             tripFacade.delete(tripFacade.findById(id));
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " could not be deleted");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " could not be deleted, because there are existing reservations for it. ");
             return DEFAULT_REDIRECT;
         }
         redirectAttributes.addFlashAttribute("alert_success", "Trip " + id + " has been successfully deleted");

@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>Capacity</td>
-            <td><form:input path="capacity" type="number" size="40" value="${toUpdate.capacity}" required="required" pattern=".*\S+.*"/></td>
+            <td><form:input path="capacity" type="number" size="40" value="${toUpdate.capacity}" required="required" min="1"/></td>
         </tr>
         <tr>
             <td>Date From</td>

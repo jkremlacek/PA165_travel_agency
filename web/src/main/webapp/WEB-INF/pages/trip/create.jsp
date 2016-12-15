@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td>Capacity</td>
-            <td><form:input path="capacity" type="number" size="40" required="required" pattern=".*\S+.*"/></td>
+            <td><form:input path="capacity" type="number" size="40" required="required" min="1"/></td>
         </tr>
         <tr>
             <td>Date From</td>
