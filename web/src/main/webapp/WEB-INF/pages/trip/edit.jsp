@@ -8,37 +8,28 @@
 --%>
 <my:pagetemplate title="Edit a trip">
 <jsp:attribute name="body">    
-    <script>
-    function checkform() {        
-        if(checkDate(document.frmMr.dateFrom, "Date From") === false) {return false;} 
-        if(checkDate(document.frmMr.dateTo, "Date To") === false) {return false;} 
-            
-        document.frmMr.submit();
-    }
-    </script>
-    
     <form:form name="frmMr" method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
     <table class="table">
         <tr>
             <td>Name</td>
-            <td><form:input path="name" type="text" size="30" value="${toUpdate.name}" required="required"/></td>
+            <td><form:input path="name" type="text" size="30" value="${toUpdate.name}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
             <td>Destination</td>
-            <td><form:input path="destination" type="text" size="40" value="${toUpdate.destination}" required="required"/></td>
+            <td><form:input path="destination" type="text" size="40" value="${toUpdate.destination}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
             <td>Description</td>
-            <td><form:input path="description" type="text" size="40" value="${toUpdate.description}" required="required"/></td>
+            <td><form:input path="description" type="text" size="40" value="${toUpdate.description}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
             <td>Capacity</td>
-            <td><form:input path="capacity" type="number" size="40" value="${toUpdate.capacity}" required="required"/></td>
+            <td><form:input path="capacity" type="number" size="40" value="${toUpdate.capacity}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
             <td>Date From</td>
             <td>
-                <form:input name="dateFrom" path="dateFrom" type="datetime" required="required"/>
+                <form:input name="dateFrom" path="dateFrom" type="datetime" required="required" pattern="^\d\d[.]\d\d[.]\d\d\d\d[,]\s\d\d[:]\d\d$"/>
                 <%--value="<fmt:formatDate value="${toUpdate.dateFrom}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
@@ -47,7 +38,7 @@
         <tr>
             <td>Date To</td>
             <td>
-                <form:input name="dateTo" path="dateTo" type="datetime" required="required"/>
+                <form:input name="dateTo" path="dateTo" type="datetime" required="required" pattern="^\d\d[.]\d\d[.]\d\d\d\d[,]\s\d\d[:]\d\d$"/>
                 <%--value="<fmt:formatDate value="${toUpdate.dateTo}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
@@ -56,11 +47,11 @@
         <tr>
             <td>Price</td>
             <td>
-                <form:input path="price" type="text" size="10" value="${toUpdate.price}" required="required"/> CZK
+                <form:input path="price" type="number" size="10" value="${toUpdate.price}" required="required"/> CZK
             </td>
         </tr>
     </table>
-    <button class="btn btn-primary" type="submit" onClick="return checkform()">Update Trip</button>
+    <button class="btn btn-primary" type="submit">Update Trip</button>
 </form:form>
 </jsp:attribute>
 </my:pagetemplate>
