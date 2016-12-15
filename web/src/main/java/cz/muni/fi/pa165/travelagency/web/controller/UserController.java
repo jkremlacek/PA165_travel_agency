@@ -105,7 +105,7 @@ public class UserController {
         }
         userFacade.update(user); 
         model.addAttribute("user", user);
-        redAttr.addFlashAttribute("alert_success", "Role of " + user.getName() + " was successfuly changes.");
+        redAttr.addFlashAttribute("alert_success", "Role of " + user.getName() + " was successfuly changed.");
         return DEFAULT_REDIRECT;
     }
     

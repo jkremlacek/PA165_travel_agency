@@ -24,8 +24,8 @@
                 <tr>
                     <td><c:out value="${trip.name}"/></td>
                     <td><c:out value="${trip.destination}"/></td>
-                    <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy, HH:mm"/></td>
-                    <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy, HH:mm"/></td>
+                    <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy"/></td>
+                    <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy"/></td>
                     <td><c:out value="${trip.price}"/> CZK</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/trip/detail/${trip.id}">
