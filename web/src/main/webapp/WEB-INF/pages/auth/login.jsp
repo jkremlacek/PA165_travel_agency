@@ -6,8 +6,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<my:pagetemplate>
+<my:pagetemplate title="Log in">
 <jsp:attribute name="body">
+<h4>Log in</h4>
 <form:form method="post" action="${pageContext.request.contextPath}/auth/login/">
     <div class="jumbotron">
             E-mail: <input type="email" name="mail"/><br/>
@@ -15,9 +16,38 @@
             <input type="submit"/>
     </div>
 </form:form>
-<h4>admin: admin@pa165.com, "password" <br/>
-    users: sheep@pa165.com, "password" <br/>
-        jane@pa165.com, "password" <br/>
-        pablo@pa165.com, "password"</h4>
+<h4>Registered users</h4>
+
+<table class="table">
+        <thead>
+        <tr>
+            <th>E-mail</th>
+            <th>Password</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>admin@pa165.com</td>
+                <td>password</td>
+                <td>admin</td>
+            </tr>
+            <tr>
+                <td>sheep@pa165.com</td>
+                <td>password</td>
+                <td>customer</td>
+            </tr>
+            <tr>
+                <td>jane@pa165.com</td>
+                <td>password</td>
+                <td>customer</td>
+            </tr>
+            <tr>
+                <td>pablo@pa165.com</td>
+                <td>password</td>
+                <td>customer</td>
+            </tr>
+        </tbody>
+</table>
     </jsp:attribute>
 </my:pagetemplate>

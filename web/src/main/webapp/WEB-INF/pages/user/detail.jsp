@@ -7,67 +7,74 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <my:pagetemplate title="User">
-    <jsp:attribute name="body">       
+    <jsp:attribute name="body"> 
+      <tr><h3>Detail: </h3></tr>
         <table class="table">
             <thead>
-                <tr>
-                    <td><h4>Id: </h4></td>
-                    <td><h4><c:out value="${user.id}"/></h4></td>
+               <tr>
+                    <td>Name: </td>
+                    <td><c:out value="${user.name}"/></td>
                 </tr>
                 <tr>
-                    <td><h4>Name: </h4></td>
-                    <td><h4><c:out value="${user.name}"/></h4></td>
+                    <td>E-mail: </td>
+                    <td><c:out value="${user.mail}"/></td>
                 </tr>
                 <tr>
-                    <td><h4>E-mail: </h4></td>
-                    <td><h4><c:out value="${user.mail}"/></h4></td>
+                    <td>Birth date:</td>                    
+                    <td><fmt:formatDate value="${user.birthDate}" pattern="dd. MM. yyyy" /></td>
                 </tr>
                 <tr>
-                    <td><h4>Birth date:</h4></td>
-                    <td><h4><c:out value="${user.birthDate}"/></h4></td>
+                    <td>Personal number:</td>
+                    <td><c:out value="${user.personalNumber}"/></td>
                 </tr>
                 <tr>
-                    <td><h4>Personal number:</h4></td>
-                    <td><h4><c:out value="${user.personalNumber}"/></h4></td>
-                </tr>
-                <tr>
-                    <td><h4>Phone number:</h4></td>
-                    <td><h4><c:out value="${user.phoneNumber}"/></h4></td>
+                    <td>Phone number:</td>
+                    <td><c:out value="${user.phoneNumber}"/></td>
                 </tr>        
                 <c:if test="${user.getIsAdmin()}">
                     <tr>
-                        <td><h4>Is user admin:</h4></td>
-                        <td><h4>Yes</h4></td>
+                        <td>Is user admin:</td>
+                        <td>Yes</td>
                     </tr>
                 </c:if>
                 <c:if test="${!user.getIsAdmin()}">
                     <tr>
-                        <td><h4>Is user admin:</h4></td>
-                        <td><h4>No</h4></td>
+                        <td>Is user admin:</td>
+                        <td>No</td>
 
                     </tr>   
 
                 </c:if>
                 <tr>
-                    <td><h4>Number of reservations:</h4></td>
-                    <td><h4><c:out value="${fn:length(reservations)}"/></h4></td>
-                </tr> 
-            </thead> 
+                    <td>Number of reservations:</td>
+                    <td><c:out value="${fn:length(reservations)}"/></td>
+                </tr>  
+                <c:if test="${authUser.id==user.id}">
+                    <tr>
+                        <td>                  
+                        <form method="get" action="${pageContext.request.contextPath}/user/edit/${user.id}">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>                    
+                        </td>
+                        <td></td> 
+                    </tr>
+                </c:if>                  
+            </thead>             
+        
+            
+        </table>
         <c:if test="${fn:length(reservations) > 0}">
-            </table>
-            <td><h3>Reservations:</h3></td>
+            <td><h4>Reservations:</h4></td>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Trip</th>
                     </tr>
                 </thead>
                  <tbody>
                     <c:forEach items="${reservations}" var="reservation">
                         <tr>
-                            <td><h4>R<c:out value="${reservation.id}"/></h4></td>
-                            <td><h4><c:out value="${reservation.trip.name}"/></h4></td>
+                           <td><c:out value="${reservation.trip.name}"/></td>
                             <td>
                                 <a href="/pa165/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
                             </td>   
@@ -77,6 +84,5 @@
             </table>
         </c:if>
            
-       
     </jsp:attribute>
 </my:pagetemplate>

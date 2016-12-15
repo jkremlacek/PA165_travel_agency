@@ -10,15 +10,13 @@
 <table class="table">
         <thead>
         <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>e-mail</th>
+            <th>Name</th>
+            <th>E-mail</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.mail}"/></td>                
                 <td>
@@ -26,7 +24,7 @@
                 </td>
                 
                 
-                <c:if test="${loggedUser.id==user.id}">
+                <c:if test="${authUser.id==user.id}">
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/user/edit/${user.id}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
@@ -35,7 +33,7 @@
                     </td>
                 </c:if>   
                 <c:if test="${authUser.getIsAdmin()}">
-                    <c:if test="${loggedUser.id!=user.id}">
+                    <c:if test="${authUser.id!=user.id}">
                     <td>
                         <c:if test="${user.getIsAdmin()}">
                             <form method="get" action="${pageContext.request.contextPath}/user/changeRole/${user.id}">
