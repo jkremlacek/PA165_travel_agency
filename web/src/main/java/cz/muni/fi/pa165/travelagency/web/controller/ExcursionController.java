@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * Created on 07.12.2016.
- *
+ * SpringMVC Controller for excursions
  * @author Martin Salata
  */
 @Controller
