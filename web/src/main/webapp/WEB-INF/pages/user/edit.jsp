@@ -10,21 +10,21 @@
     <table class="table">
         <tr>
             <td>Name</td>
-            <td><form:input path="name" type="text" size="30" value="${updatingUser.name}"/></td>
+            <td><form:input path="name" type="text" size="30" value="${updatingUser.name}" required="required"/></td>
         </tr>
         <tr>
             <td>Phone number</td>
-            <td><form:input path="phoneNumber" type="text" size="30" value="${updatingUser.phoneNumber}"/></td>
+            <td><form:input path="phoneNumber" type="text" size="30" value="${updatingUser.phoneNumber}" required="required"/></td>
         </tr>
         <%--<tr>
             <td>Birth date</td>
             <td>
-                <form:input path="birthDate" type="text" size="30" />
+                <form:input path="birthDate" type="text" size="30" required="required"/>
             <td>    
         </tr>--%>
         <tr>
             <td>Personal number</td>
-            <td><form:input path="personalNumber" type="text" size="30" value="${updatingUser.personalNumber}"/></td>
+            <td><form:input path="personalNumber" type="text" size="30" value="${updatingUser.personalNumber}" required="required"/></td>
         </tr>
     </table>
     <button class="btn btn-primary" type="submit">Update user</button>
