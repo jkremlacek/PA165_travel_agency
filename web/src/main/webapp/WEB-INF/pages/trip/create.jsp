@@ -8,7 +8,15 @@
 --%>
 <my:pagetemplate title="Create a trip">
 <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/trip/create" modelAttribute="newTrip">
+    <script>
+    function checkform() {        
+        if(checkDate(document.frmMr.dateFrom, "Date From") === false) {return false;} 
+        if(checkDate(document.frmMr.dateTo, "Date To") === false) {return false;} 
+            
+        document.frmMr.submit();
+    }
+    </script>
+<form:form name="frmMr" method="post" action="${pageContext.request.contextPath}/trip/create" modelAttribute="newTrip">
     <table class="table">
         <tr>
             <td>Name</td>
@@ -31,7 +39,7 @@
             <td>
                 <form:label path="dateFrom"/>
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
-                <form:input path="dateFrom" class="date" type="text"
+                <form:input name="dateFrom" path="dateFrom" class="date" type="text"
                             value="" required="required"/>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
@@ -42,7 +50,7 @@
             <td>
                 <form:label path="dateTo"/>
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
-                <form:input path="dateTo" class="date" type="text"
+                <form:input name="dateTo" path="dateTo" class="date" type="text"
                             value="" required="required"/>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
@@ -53,7 +61,7 @@
             <td><form:input path="price" type="text" size="10" required="required"/> CZK</td>
         </tr>
     </table>
-    <button class="btn btn-primary" type="submit">Create Trip</button>
+    <button class="btn btn-primary" type="submit" onClick="return checkform()">Create Trip</button>
 </form:form>
 </jsp:attribute>
 </my:pagetemplate>

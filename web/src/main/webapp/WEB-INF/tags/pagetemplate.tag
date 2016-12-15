@@ -19,6 +19,22 @@
     <jsp:invoke fragment="head"/>
 </head>
 <body>
+    <script>
+        function checkDate(date, name) {
+            var regEx = /^\d\d[.]\d\d[.]\d\d\d\d[,]\s\d\d[:]\d\d$/;
+
+            if(regEx.exec(date.value) === null) {
+                alert("Please enter a valid " + name + ".");
+
+                date.classList.add("control-group");
+                date.classList.add("error");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    
 <!-- navigation bar -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">

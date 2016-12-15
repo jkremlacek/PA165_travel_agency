@@ -12,8 +12,6 @@ import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -182,7 +180,7 @@ public class TripController {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
-        sdf.setLenient(true);
+        sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 //        SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
 //        stf.setLenient(true);

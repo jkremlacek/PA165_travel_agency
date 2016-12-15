@@ -7,8 +7,17 @@
   User: jakub_kremlacek
 --%>
 <my:pagetemplate title="Edit a trip">
-<jsp:attribute name="body">
-    <form:form method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
+<jsp:attribute name="body">    
+    <script>
+    function checkform() {        
+        if(checkDate(document.frmMr.dateFrom, "Date From") === false) {return false;} 
+        if(checkDate(document.frmMr.dateTo, "Date To") === false) {return false;} 
+            
+        document.frmMr.submit();
+    }
+    </script>
+    
+    <form:form name="frmMr" method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
     <table class="table">
         <tr>
             <td>Name</td>
@@ -29,15 +38,19 @@
         <tr>
             <td>Date From</td>
             <td>
-                <form:input path="dateFrom" type="datetime" required="required"/>
+                <form:input name="dateFrom" path="dateFrom" type="datetime" required="required"/>
                 <%--value="<fmt:formatDate value="${toUpdate.dateFrom}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
+                <br>
+                Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>
             <td>Date To</td>
             <td>
-                <form:input path="dateTo" type="datetime" required="required"/>
+                <form:input name="dateTo" path="dateTo" type="datetime" required="required"/>
                 <%--value="<fmt:formatDate value="${toUpdate.dateTo}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
+                <br>
+                Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>
@@ -47,7 +60,7 @@
             </td>
         </tr>
     </table>
-    <button class="btn btn-primary" type="submit">Update Trip</button>
+    <button class="btn btn-primary" type="submit" onClick="return checkform()">Update Trip</button>
 </form:form>
 </jsp:attribute>
 </my:pagetemplate>
