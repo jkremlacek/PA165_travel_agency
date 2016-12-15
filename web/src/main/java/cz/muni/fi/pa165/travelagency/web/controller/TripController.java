@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.travelagency.web.controller;
 
+import cz.muni.fi.pa165.travelagency.facade.ReservationFacade;
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
@@ -41,6 +42,9 @@ public class TripController {
     @Inject
     private TripFacade tripFacade;
     
+    @Inject
+    private ReservationFacade reservationFacade;
+    
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {        
@@ -60,7 +64,7 @@ public class TripController {
         }
 
         model.addAttribute("trip", tripDto);
-        model.addAttribute("availableCapacity", tripDto.getCapacity() - tripDto.getReservations().size());
+        model.addAttribute("availableCapacity", tripDto.getCapacity() - reservationFacade.findByTrip(tripDto).size());
 
         return "trip/detail";
     }
