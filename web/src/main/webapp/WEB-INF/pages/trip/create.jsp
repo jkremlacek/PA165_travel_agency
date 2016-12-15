@@ -23,6 +23,10 @@
             <td><form:input path="description" type="text" size="40" required="required"/></td>
         </tr>
         <tr>
+            <td>Capacity</td>
+            <td><form:input path="capacity" type="number" size="40" required="required"/></td>
+        </tr>
+        <tr>
             <td>Date From</td>
             <td>
                 <form:label path="dateFrom"/>

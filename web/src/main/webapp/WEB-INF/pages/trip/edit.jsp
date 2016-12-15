@@ -23,6 +23,10 @@
             <td><form:input path="description" type="text" size="40" value="${toUpdate.description}" required="required"/></td>
         </tr>
         <tr>
+            <td>Capacity</td>
+            <td><form:input path="capacity" type="number" size="40" value="${toUpdate.capacity}" required="required"/></td>
+        </tr>
+        <tr>
             <td>Date From</td>
             <td>
                 <form:input path="dateFrom" type="text" required="required"/>
