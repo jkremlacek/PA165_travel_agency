@@ -7,10 +7,7 @@
 
 <my:pagetemplate title="Travel agency">
 <jsp:attribute name="body">
-    Welcome to our Travel Agency
-    <c:if test="${authUser.isAdmin}">
-        Je admin
-    </c:if>
+     <h3>Welcome to our Travel Agency<h3>
+<img src="http://www.eccireland.ie/wp-content/uploads/2013/06/HOlidays.jpg">
 </jsp:attribute>
 </my:pagetemplate>
-
