@@ -9,14 +9,10 @@ import cz.muni.fi.pa165.travelagency.facade.dto.ReservationCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
-import java.math.BigDecimal;
 import java.util.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import cz.muni.fi.pa165.travelagency.web.converter.ListWrapper;
-import org.springframework.cglib.core.Converter;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,9 +85,10 @@ public class ReservationController {
             redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
-
+        Map reservationPrice = new HashMap<>();
+        reservationPrice.put(reservationDto.getId(), reservationFacade.getTotalPrice(reservationDto.getId()));
         model.addAttribute("reservation", reservationDto);
-
+        model.addAttribute("reservationPrice", reservationPrice);
         return "reservation/detail";
     }
 

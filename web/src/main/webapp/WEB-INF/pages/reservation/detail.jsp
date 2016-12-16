@@ -17,6 +17,10 @@
                 <td><h4>For trip </h4></td>
                 <td><h4><a href="${pageContext.request.contextPath}/trip/detail/${reservation.trip.id}"><c:out value="${reservation.trip.name}"/></a></h4></td>
             </tr>
+            <tr>
+                    <td><h4>For price </h4></td>
+                    <td><h4><c:out value="${reservationPrice[reservation.id]} CZK"/><h4></td>
+            </tr>
             <c:if test="${empty reservation.excursionSet}">
                 <tr>
                     <td><h4>Excursions</h4></td>
