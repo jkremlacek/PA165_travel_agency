@@ -56,19 +56,19 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         Trip austriaTrip = trip("Beautiful Austria", daysAfterNow(21), daysAfterNow(28), "Austria, Alps", "Enjoy marvellous hotel in the Alps.", 50, BigDecimal.valueOf(6399));
         Trip londonTrip = trip("Gorgeous London", daysAfterNow(14), daysAfterNow(18), "UK, London", "Visit the capital city of the UK.", 200, BigDecimal.valueOf(14099));
-        Trip parisTrip = trip("Day in Paris", daysAfterNow(60), daysAfterNow(61), "France, Paris", "Visit the most romantic city of Europe for one day.", 132, BigDecimal.valueOf(2399));
+        Trip parisTrip = trip("Day in Paris", daysAfterNow(59), daysAfterNow(61), "France, Paris", "Visit the most romantic city of Europe for one day.", 132, BigDecimal.valueOf(2399));
         Trip usaTrip = trip("Endurance through USA", daysAfterNow(7), daysAfterNow(38), "USA", "Tour through many states of the USA.", 181, BigDecimal.valueOf(149999));
         
         log.info("Loaded trips.");
 
         Excursion dachsteinExcursion = excursion("Dachstein tour", daysAfterNow(22), 7, "Austria, Dachstein", BigDecimal.valueOf(900), austriaTrip);
-        Excursion viennaExcursion = excursion("Vienna", daysAfterNow(16), 3, "Austria, Vienna", BigDecimal.valueOf(1200), austriaTrip);
+        Excursion viennaExcursion = excursion("Vienna", daysAfterNow(25), 3, "Austria, Vienna", BigDecimal.valueOf(1200), austriaTrip);
         Excursion bigbenExcursion = excursion("Big Ben", daysAfterNow(15), 9, "UK, London, Big Ben", BigDecimal.valueOf(800), londonTrip);
         Excursion londonEye = excursion("London eye", daysAfterNow(17), 5, "UK, London", BigDecimal.valueOf(1000), londonTrip);
         Excursion towerBridge = excursion("Tower Bridge", daysAfterNow(16), 2, "UK, London", BigDecimal.valueOf(100), londonTrip);
-        Excursion eiffelExcursion = excursion("Eiffel tower", daysAfterNowWithHour(60, 10), 10, "France, Paris, Eiffel tower", BigDecimal.valueOf(400), parisTrip);
-        Excursion notreDameExcursion = excursion("Notre Dame", daysAfterNowWithHour(60, 7), 15, "France, Paris, Notre Dame", BigDecimal.valueOf(300), parisTrip);
-        Excursion franceMuseumExcursion = excursion("National Museum of France", daysAfterNowWithHour(60, 14), 2, "France, Paris, National Museum of France", BigDecimal.valueOf(300), parisTrip);
+        Excursion eiffelExcursion = excursion("Eiffel tower", daysAfterNow(60), 1, "France, Paris, Eiffel tower", BigDecimal.valueOf(400), parisTrip);
+        Excursion notreDameExcursion = excursion("Notre Dame", daysAfterNow(60), 1, "France, Paris, Notre Dame", BigDecimal.valueOf(300), parisTrip);
+        Excursion franceMuseumExcursion = excursion("National Museum of France", daysAfterNow(60), 2, "France, Paris, National Museum of France", BigDecimal.valueOf(300), parisTrip);
         
         log.info("Loaded excursions.");
         

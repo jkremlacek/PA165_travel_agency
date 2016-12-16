@@ -4,6 +4,7 @@ package cz.muni.fi.pa165.travelagency.persistence.dao;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -112,6 +113,12 @@ public class TripDaoImpl implements TripDao {
         }
         if (entity.getPrice().compareTo(BigDecimal.ZERO)<0) {
             throw new IllegalArgumentException("Price of trip is smaller than 0.");
+        }
+        
+        Calendar c = Calendar.getInstance();
+        
+        if (entity.getDateFrom().before(c.getTime())) {
+            throw new IllegalArgumentException("Cannot create trip in past.");
         }
     }
 

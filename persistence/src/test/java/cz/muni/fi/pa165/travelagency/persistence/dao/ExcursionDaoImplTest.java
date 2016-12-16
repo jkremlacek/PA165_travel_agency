@@ -57,10 +57,10 @@ public class ExcursionDaoImplTest {
         
         calNow = Calendar.getInstance();
         Calendar cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 10);
+        cal.set(2121, 10, 1);
         Date startDay = cal.getTime();
         cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 20);
+        cal.set(2121, 10, 31);
         Date endDay = cal.getTime();
         waterTrip = new Trip();
         waterTrip.setName("Water & relax");
@@ -73,7 +73,7 @@ public class ExcursionDaoImplTest {
         em.persist(waterTrip);
         
         cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 15);
+        cal.set(2121, 10, 15);
         startDay = cal.getTime();
         cal.set(0, 0, 0, 7, 0);
         Integer duration = 5;
@@ -86,11 +86,11 @@ public class ExcursionDaoImplTest {
         aquaParkExcursion.setDescription("Nice excursion to nice crowded aqua park");
         aquaParkExcursion.setTrip(waterTrip);
         
-        cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 40);
+        calNow = Calendar.getInstance();
+        cal.set(2100, 10, 1);
         startDay = cal.getTime();
         cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 45);
+        cal.set(2100, 10, 31);
         endDay = cal.getTime();
         pragueBrnoTrip = new Trip();
         pragueBrnoTrip.setName("Sight in Prague & Brno");
@@ -103,7 +103,7 @@ public class ExcursionDaoImplTest {
                 
         
         cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 41);
+        cal.set(2100, 10, 12);
         startDay = cal.getTime();
         cal.set(0, 0, 0, 2, 0);
         duration = 6;
@@ -118,7 +118,7 @@ public class ExcursionDaoImplTest {
         
         
         cal = (Calendar) calNow.clone();
-        cal.add(Calendar.DAY_OF_MONTH, 41);
+        cal.set(2100, 10, 10);
         startDay = cal.getTime();
         cal.set(0, 0, 0, 18, 30);
         duration = 7;
@@ -185,25 +185,25 @@ public class ExcursionDaoImplTest {
     @Test
     public void testFindByDate() {
         Calendar cal = Calendar.getInstance();
-        cal.set(2017, 10, 20);
+        cal.set(2100, 10, 20);
         Date dateFrom = cal.getTime();
-        cal.set(2017, 10, 22);
+        cal.set(2100, 10, 22);
         Date dateTo = cal.getTime();
         assertThat(excursionDao.findByDate(dateFrom, dateTo))
                 .as("There should be no excursion found by findByDate")
                 .isEmpty();
-        cal.set(2017, 10, 21);
+        cal.set(2121, 10, 21);
         Date dateOfExcursion = cal.getTime();
         aquaParkExcursion.setDate(dateOfExcursion);
         excursionDao.create(aquaParkExcursion);
-        cal.set(2017, 10, 23);
+        cal.set(2100, 10, 13);
         dateOfExcursion = cal.getTime();
         artGalleryExcursion.setDate(dateOfExcursion);
         excursionDao.create(artGalleryExcursion);
-        assertThat(excursionDao.findByDate(dateFrom, dateTo))
+        assertThat(excursionDao.findByDate(dateOfExcursion, dateTo))
                 .as("It should be one excursion found by findByDate")
                 .usingFieldByFieldElementComparator()
-                .containsOnly(aquaParkExcursion);
+                .containsOnly(artGalleryExcursion);
                 
     }
     

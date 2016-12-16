@@ -116,7 +116,7 @@ public class ExcursionController {
             excursionFacade.update(toUpdate);
         } catch (Exception ex) {
             ex.printStackTrace();
-            redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be updated");
+            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/edit/{id}";
         }
 
@@ -146,7 +146,7 @@ public class ExcursionController {
         try {
             id = excursionFacade.create(excursionCreateDto);
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be created");
+            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/new";
         }
 

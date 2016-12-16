@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -98,6 +99,22 @@ public class ExcursionDaoImpl implements ExcursionDao {
     public Long create(Excursion entity) {
         if (entity == null) throw new NullPointerException("Parameter entity cannot be null.");
         if (entity.getTrip() == null) throw new ValidationException("Trip must be set!");
+        if (entity.getDate() == null) throw new ValidationException("Date must be set!");
+        
+        Calendar c = Calendar.getInstance();
+        
+        if (entity.getDate().before(c.getTime())) {
+            throw new IllegalArgumentException("Cannot create excursion in past.");
+        }
+        
+        if (entity.getDate().before(entity.getTrip().getDateFrom())) {
+            throw new IllegalArgumentException("Cannot create excursion before trip.");
+        }
+        
+        if (entity.getDate().after(entity.getTrip().getDateTo())) {
+            throw new IllegalArgumentException("Cannot create excursion after trip.");
+        }
+        
         em.persist(entity);
         //em.flush();
         return entity.getId();
@@ -113,6 +130,17 @@ public class ExcursionDaoImpl implements ExcursionDao {
         if (entity.getDuration() == null) throw new ValidationException("Duration cannot be null.");
         if (entity.getDestination() == null) throw new ValidationException("Destination cannot be null.");
         if (entity.getId() == null) throw new NullPointerException("Id cannot be null.");
+        
+        Calendar c = Calendar.getInstance();
+        
+        if (entity.getDate().before(c.getTime())) {
+            throw new IllegalArgumentException("Cannot create excursion in past.");
+        }
+        
+        if (entity.getDate().after(entity.getTrip().getDateTo())) {
+            throw new IllegalArgumentException("Cannot create excursion after trip.");
+        }
+        
         em.merge(entity);
     }
 
