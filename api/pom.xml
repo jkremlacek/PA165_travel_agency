@@ -11,6 +11,7 @@
 
     <artifactId>api</artifactId>
     <dependencies>
+        <!--Local:-->
         <dependency>
             <groupId>cz.muni.fi.pa165.travelagency</groupId>
             <artifactId>persistence</artifactId>

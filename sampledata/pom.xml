@@ -9,11 +9,14 @@
     <artifactId>sampledata</artifactId>
     <packaging>jar</packaging>
     <dependencies>
+        <!--Local:-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--Tests:-->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>

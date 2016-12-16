@@ -31,6 +31,7 @@
     <dependencyManagement>
         <dependencies>
 
+            <!--Added:-->
             <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>

@@ -12,6 +12,7 @@
     <artifactId>service</artifactId>
 
     <dependencies>
+        <!--Local:-->
         <dependency>
             <groupId>cz.muni.fi.pa165.travelagency</groupId>
             <artifactId>api</artifactId>
@@ -23,39 +24,35 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!--Added:-->
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+        </dependency>
+
         <!--Tests:-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <!--<version>4.12</version>-->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <!--<version>4.3.3.RELEASE</version>-->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <!--<version>1.10.19</version>-->
             <scope>test</scope>
         </dependency>
-        <!--assertj has manual version because of AssertThatThrownBy-->
+        <!--AssertJ has manual version because of AssertThatThrownBy-->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <!--<version>5.5.1</version>-->
-            <!--<type>jar</type>-->
-        </dependency>
-        
     </dependencies>
 
 
