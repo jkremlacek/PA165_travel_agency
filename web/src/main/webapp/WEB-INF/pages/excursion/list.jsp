@@ -15,7 +15,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Destination</th>
                     <th>Trip</th>
                     <th>Date</th>
@@ -36,7 +35,7 @@
                         <a href="${pageContext.request.contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
                     </td>
                     <td><fmt:formatDate value="${excursion.date}" pattern="dd.MM.yyyy, HH:mm"/></td>
-                    <td><c:out value="${excursion.duration}"/></td>
+                    <td><c:out value="${excursion.duration}"/> hours</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/excursion/detail/${excursion.id}">
                             <button type="submit" class="btn btn-primary">Detail</button>

@@ -38,7 +38,7 @@
     </tr>
     <tr>
         <th>Duration</th>
-        <td><c:out value="${excursion.duration}"/></td>
+        <td><c:out value="${excursion.duration}"/> hours</td>
         <%--<td><c:out value="${excursion.duration}"/></td>--%>
     </tr>
     <tr>

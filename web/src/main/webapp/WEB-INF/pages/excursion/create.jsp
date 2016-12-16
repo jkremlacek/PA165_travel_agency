@@ -51,7 +51,7 @@
         <tr>
             <th>Duration</th>
             <td>
-                <form:input path="duration" type="text" value=""/>
+                <form:input path="duration" type="text" size="10" value=""/> hours
             </td>
         </tr>
         <tr>
