@@ -51,9 +51,9 @@ public class ExcursionFacadeTest {
 
         Long tripId = 12L;
         Calendar cal = Calendar.getInstance();
-        cal.set(2016, 12, 24);
+        cal.set(2017, 12, 24);
         Date dateFrom = cal.getTime();
-        cal.set(2017,1, 1);
+        cal.set(2018,1, 1);
         Date dateTo = cal.getTime();
         String tripDestination = "Austria";
         String tripName = "Christmas Trip";
@@ -79,7 +79,7 @@ public class ExcursionFacadeTest {
 		
         when(mappingService.mapTo(tripDto, Trip.class)).thenReturn(t);
 
-        cal.set(2016, 12, 25);
+        cal.set(2017, 12, 25);
         Date excursionDate = cal.getTime();
         cal.set(0, 0, 0, 10, 0);
         Integer excursionDuration = 8;

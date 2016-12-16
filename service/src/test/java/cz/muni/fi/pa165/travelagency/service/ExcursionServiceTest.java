@@ -46,9 +46,9 @@ public class ExcursionServiceTest {
         MockitoAnnotations.initMocks(this);
 
         Calendar cal = Calendar.getInstance();
-        cal.set(2016, 12, 24);
+        cal.set(2017, 12, 24);
         Date dateFrom = cal.getTime();
-        cal.set(2017,1, 1);
+        cal.set(2018,1, 1);
         Date dateTo = cal.getTime();
 
         t = new Trip();
@@ -59,7 +59,7 @@ public class ExcursionServiceTest {
         t.setCapacity(50);
         t.setPrice(BigDecimal.valueOf(2000));
 
-        cal.set(2016, 12, 25);
+        cal.set(2017, 12, 25);
         Date excursionDate = cal.getTime();
         cal.set(0, 0, 0, 10, 0);
         Integer excursionDuration = 6;
