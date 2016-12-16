@@ -27,8 +27,15 @@
             <a class="navbar-brand" href="${pageContext.request.contextPath}/">Travel Agency</a>
             <a class="navbar-brand" href="${pageContext.request.contextPath}/trip/list">Trips</a>
             <a class="navbar-brand" href="${pageContext.request.contextPath}/excursion/list">Excursions</a>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/user/list">Users</a>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/reservation/list">Reservations</a>
+            <c:if test="${authUser.isAdmin}">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/user/list">Users</a>
+            </c:if>
+            <c:if test="${authUser.isAdmin}">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/reservation/list">Reservations</a>
+            </c:if>
+            <c:if test="${!authUser.isAdmin}">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/reservation/list">My reservations</a>
+            </c:if>
         </div>
         <div>
             <c:if test="${empty authUser}">

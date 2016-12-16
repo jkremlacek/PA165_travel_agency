@@ -34,6 +34,11 @@
                     <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy"/></td>
                     <td><c:out value="${trip.price}"/> CZK</td>
                     <td>
+                        <form method="get" action="${pageContext.request.contextPath}/reservation/create/${trip.id}">
+                            <button type="submit" class="btn btn-primary">Book</button>
+                        </form>
+                    </td>
+                    <td>
                         <form method="get" action="${pageContext.request.contextPath}/trip/detail/${trip.id}">
                             <button type="submit" class="btn btn-primary">Detail</button>
                         </form>

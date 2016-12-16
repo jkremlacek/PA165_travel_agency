@@ -12,21 +12,29 @@
 <table class="table">
         <thead>
         <tr>
-            <th>id</th>
-            <th>trip</th>
-            <th>excursions number</th>
-            <th></th>
+            <th>Trip</th>
+            <th>Period</th>
+            <th>Excursions number</th>
+            <th>Price</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${reservations}" var="reservation">
             <tr>
-                <td>${reservation.id}</td>
                 <td><c:out value="${reservation.trip.name}"/></td>
+                <td><fmt:formatDate value="${reservation.trip.dateFrom}" pattern="dd.MM.yyyy"/> -
+                   <fmt:formatDate value="${reservation.trip.dateTo}" pattern="dd.MM.yyyy"/></td> 
                 <td><c:out value="${fn:length(reservation.excursionSet)}"/></td>
+                <td>
+                    <c:out value="${reservationPrice[reservation]}"/>
+                </td>
                 <td>
                     <a href="${pageContext.request.contextPath}/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
                 </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" class="btn btn-primary">Delete</a>
+                </td>    
+                
             </tr>
         </c:forEach>
         </tbody>
