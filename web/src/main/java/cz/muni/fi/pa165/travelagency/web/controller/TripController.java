@@ -10,11 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ValidationException;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -137,8 +140,12 @@ public class TripController {
         
         try {            
             tripFacade.update(tripDto);
+        } catch (TransactionSystemException ex) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be in past");
+            return "redirect:/trip/edit/" + id;
+       
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be updated" + ex.getMessage());
             return "redirect:/trip/edit/" + id;
         }
 
@@ -173,8 +180,14 @@ public class TripController {
         Long id;
         try {
             id = tripFacade.create(tripCreateDto);
+        } catch (ValidationException ex) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be in past");
+            return "redirect:/trip/new";
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created"+ ex.getMessage());
+            return "redirect:/trip/new";
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created" + ex.getMessage());
             return "redirect:/trip/new";
         }
 
