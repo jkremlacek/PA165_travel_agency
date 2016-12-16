@@ -111,9 +111,10 @@ public class ReservationController {
     }
     private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
         Set<ExcursionDto> dtos = new HashSet<>();
-
-        for (String excursionId:excursions) {
-            dtos.add(excursionFacade.findById(Long.parseLong(excursionId)));
+        if (excursions != null) {
+            for (String excursionId:excursions) {
+                dtos.add(excursionFacade.findById(Long.parseLong(excursionId)));
+            }
         }
         return dtos;
     }
@@ -128,11 +129,9 @@ public class ReservationController {
         UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
         ReservationCreateDto newReservation = new ReservationCreateDto();
         newReservation.setTrip(tripFacade.findById(trip.getId()));
-        try {           
-            newReservation.setExcursionSet(getExcursionsFromList(checkedExcursions.getFunctionList()));            
-        } catch (Exception e) {
-            
-        }
+                 
+        newReservation.setExcursionSet(getExcursionsFromList(checkedExcursions.getFunctionList()));            
+        
         newReservation.setUser(authUser);
         Long reservationId;
         try {
@@ -144,7 +143,7 @@ public class ReservationController {
         }
 
         redirectAttributes.addFlashAttribute("alert_success", "Reservation no. "
-                +  reservationId + " successfully created");
+                +  reservationId + " successfully created with " + newReservation.getExcursionSet().size() + " excursions");
 
         return "redirect:/";
     
