@@ -76,7 +76,7 @@
                         <tr>
                            <td><c:out value="${reservation.trip.name}"/></td>
                             <td>
-                                <a href="/pa165/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
+                                <a href="${pageContext.request.contextPath}/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
                             </td>   
                         </tr>
                     </c:forEach>

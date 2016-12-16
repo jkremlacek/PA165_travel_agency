@@ -24,7 +24,7 @@
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.mail}"/></td>                
                 <td>
-                    <a href="/pa165/user/detail/${user.id}" class="btn btn-primary">Detail</a>
+                    <a href="${pageContext.request.contextPath}/user/detail/${user.id}" class="btn btn-primary">Detail</a>
                 </td>
                 
                 
