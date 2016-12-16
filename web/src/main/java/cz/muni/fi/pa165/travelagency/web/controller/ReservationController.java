@@ -10,13 +10,13 @@ import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.TripDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cz.muni.fi.pa165.travelagency.web.converter.ListWrapper;
+import org.springframework.cglib.core.Converter;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,33 +101,46 @@ public class ReservationController {
         }
         
         UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
-        
-        ReservationCreateDto reservationCreateDto =  new ReservationCreateDto();
-        reservationCreateDto.setTrip(tripDto);
-        model.addAttribute("createReservation", reservationCreateDto);
+
         model.addAttribute("tripExcursions", excursionFacade.findByTrip(tripDto));
+        model.addAttribute("checkedExcursions", new ListWrapper());
+        model.addAttribute("trip", tripDto);
 
         return "reservation/create";
     }
-    
+
+    private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
+        Set<ExcursionDto> dtos = new HashSet<>();
+
+        for (String excursionId:excursions) {
+            dtos.add(excursionFacade.findById(Long.parseLong(excursionId)));
+        }
+        return dtos;
+    }
+
     @RequestMapping(value = "/create/{id}", method = RequestMethod.POST)
     public String create(@PathVariable Long id,
-            @ModelAttribute("createReservation") ReservationCreateDto reservationCreateDto,
+            @ModelAttribute("checkedExcursions") ListWrapper checkedExcursions,
+                         @ModelAttribute("trip") TripDto trip,
             Model model,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes, HttpServletRequest request
     ) {
+        UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
+        ReservationCreateDto newReservation = new ReservationCreateDto();
+        newReservation.setTrip(tripFacade.findById(trip.getId()));
+        newReservation.setExcursionSet(getExcursionsFromList(checkedExcursions.getFunctionList()));
+        newReservation.setUser(authUser);
 
         Long reservationId;
         try {
-            reservationId = reservationFacade.create(reservationCreateDto);
+            reservationId = reservationFacade.create(newReservation);
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot create reservation for trip " +
-                    reservationCreateDto.getTrip().getName() + " due to " +ex.getMessage());
+                    newReservation.getTrip().getName() + " due to " +ex.getMessage());
             return "redirect:/";
         }
 
-        redirectAttributes.addFlashAttribute("alert_success", "Reservation for trip to " + 
-                reservationCreateDto.getTrip().getDestination()
+        redirectAttributes.addFlashAttribute("alert_success", "Reservation for trip to "
                 + " (id=" + reservationId + ") successfully created");
 
         return "redirect:/";
