@@ -77,9 +77,14 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes,HttpServletRequest req) {
         ReservationDto reservationDto = reservationFacade.findById(id);
-
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        
+        if (!authUser.getIsAdmin() && !authUser.getId().equals(reservationDto.getUser().getId())) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can see other user's reservations.");
+                return DEFAULT_REDIRECT;
+        }  
         if (reservationDto == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
             return DEFAULT_REDIRECT;
@@ -92,20 +97,17 @@ public class ReservationController {
 
     @RequestMapping(value = "/create/{id}", method = RequestMethod.GET)
     public String create(@PathVariable Long id, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
         TripDto tripDto = tripFacade.findById(id);
         if (!tripFacade.hasTripAvailableCapacity(tripDto)) {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Trip no. " + id + " doesn't have available capacity");
             return "redirect:/trip/list";
         }
-
-        UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
-
+        
         model.addAttribute("tripExcursions", excursionFacade.findByTrip(tripDto));
         model.addAttribute("checkedExcursions", new ListWrapper());
         model.addAttribute("trip", tripDto);
-
+        
         return "reservation/create";
 
     }
