@@ -81,10 +81,10 @@ public class ReservationController {
         ReservationDto reservationDto = reservationFacade.findById(id);
 
         if (reservationDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Reservation with id" + id + " doesn't exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
-
+        
         model.addAttribute("reservation", reservationDto);
 
         return "reservation/detail";
@@ -96,7 +96,7 @@ public class ReservationController {
         TripDto tripDto = tripFacade.findById(id);
         if (!tripFacade.hasTripAvailableCapacity(tripDto)) {
             redirectAttributes.addFlashAttribute(
-                    "alert_danger", "Trip with id" + id + " doesn't have available capacity");
+                    "alert_danger", "Trip no. " + id + " doesn't have available capacity");
             return "redirect:/trip/list";
         }
         
@@ -108,7 +108,6 @@ public class ReservationController {
 
         return "reservation/create";
     }
-
     private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
         Set<ExcursionDto> dtos = new HashSet<>();
 
@@ -151,14 +150,14 @@ public class ReservationController {
 
         /*ReservationDto reservationDto = reservationFacade.findById(id);
         if (reservationDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Reservation with " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " does not exist");
             return DEFAULT_REDIRECT;
         }
 
         try {
             reservationFacade.delete(reservationDto);
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Reservation with id " + id + 
+            redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + 
                     " could not be delete due to " + ex.getMessage());
             return DEFAULT_REDIRECT;
         }

@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +53,7 @@ public class ExcursionController {
         ExcursionDto excursionDto = excursionFacade.findById(id);
 
         if (excursionDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Excursion with id " + id + " doesn't exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
 
@@ -68,14 +67,14 @@ public class ExcursionController {
 
         ExcursionDto excursionDto = excursionFacade.findById(id);
         if (excursionDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Excursion " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " does not exist");
             return DEFAULT_REDIRECT;
         }
 
         try {
             excursionFacade.delete(excursionFacade.findById(id));
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Excursion with id " + id + " could not be deleted");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " could not be deleted");
             return DEFAULT_REDIRECT;
         }
         redirectAttributes.addFlashAttribute("alert_success", "Excursion " + excursionDto.getName() + " has been successfully deleted");
@@ -109,7 +108,7 @@ public class ExcursionController {
                          RedirectAttributes redirectAttributes) {
 
         if (toUpdate == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Excursion " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion no." + id + " does not exist");
             return "redirect:/excursion/create";
         }
 
@@ -122,7 +121,7 @@ public class ExcursionController {
         }
 
 
-        redirectAttributes.addFlashAttribute("alert_success", "Excursion with id " + id
+        redirectAttributes.addFlashAttribute("alert_success", "Excursion no. " + id
                 + " successfuly updated.");
         return "redirect:/excursion/detail/" + id;
     }

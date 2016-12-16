@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthController {
     
     @Inject
-    UserFacade userFacade;
+    private UserFacade userFacade;
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String authForm(

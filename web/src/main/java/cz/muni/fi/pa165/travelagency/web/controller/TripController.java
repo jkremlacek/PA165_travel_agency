@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.travelagency.web.controller;
 
 import cz.muni.fi.pa165.travelagency.facade.ExcursionFacade;
@@ -63,7 +58,7 @@ public class TripController {
         TripDto tripDto = tripFacade.findById(id);
 
         if (tripDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip with id" + id + " doesn't exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip no. " + id + " doesn't exist");
             return DEFAULT_REDIRECT;
         }
 
@@ -85,17 +80,17 @@ public class TripController {
         
         TripDto tripDto = tripFacade.findById(id);
         if (tripDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip no. " + id + " does not exist");
             return DEFAULT_REDIRECT;
         }
 
         try {
             tripFacade.delete(tripFacade.findById(id));
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " could not be deleted, because there are existing reservations for it. ");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip no. " + id + " could not be deleted, because there are existing reservations for it. ");
             return DEFAULT_REDIRECT;
         }
-        redirectAttributes.addFlashAttribute("alert_success", "Trip " + id + " has been successfully deleted");
+        redirectAttributes.addFlashAttribute("alert_success", "Trip no. " + id + " has been successfully deleted");
 
         return DEFAULT_REDIRECT;
     }
@@ -130,7 +125,7 @@ public class TripController {
         }
         
         if (tripDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip " + id + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip no. " + id + " does not exist");
             return "redirect:/trip/create";
         }
         
@@ -143,7 +138,7 @@ public class TripController {
             return "redirect:/trip/edit/" + id;
         }
 
-        redirectAttributes.addFlashAttribute("alert_success", "Trip with id " + id
+        redirectAttributes.addFlashAttribute("alert_success", "Trip no. " + id
                 + " successfuly updated.");
         return "redirect:/trip/detail/" + id;
     }
