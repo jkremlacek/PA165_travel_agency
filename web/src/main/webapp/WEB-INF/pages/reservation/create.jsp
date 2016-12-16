@@ -32,11 +32,6 @@
             element.innerHTML = '' + (i + price) + '.00 CZK';
         }
     };
-    
-    function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
-    
-    $(document).on("keydown", disableF5);
-});
 </script>
 <form:form method="post" action="${pageContext.request.contextPath}/reservation/create/${trip.id}" modelAttribute="checkedExcursions">
     <%--<form:hidden path="trip"/>--%>
