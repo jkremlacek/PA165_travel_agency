@@ -31,7 +31,6 @@
                 <c:forEach items="${excursions}" var="excursion">
                 <tr>
                     <td><c:out value="${excursion.name}"/></td>
-                    <td><c:out value="${excursion.description}"/></td>
                     <td><c:out value="${excursion.destination}"/></td>
                     <td>
                         <a href="${pageContext.request.contextPath}/trip/detail/${excursion.trip.id}" ><c:out value="${excursion.trip.name}" /></a>
