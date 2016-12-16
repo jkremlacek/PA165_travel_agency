@@ -61,7 +61,7 @@ public class ReservationController {
             }
 
             for (ReservationDto res : reservations) {
-                reservationPrice.put(res, reservationFacade.getTotalPrice(res.getId()));
+                reservationPrice.put(res.getId(), reservationFacade.getTotalPrice(res.getId()));
             }
 
         } catch (DataAccessException ex) {
@@ -139,7 +139,7 @@ public class ReservationController {
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Cannot create reservation for trip " +
                     newReservation.getTrip().getName() + " due to " +ex.getMessage());
-            return "redirect:/";
+            return "redirect:/trip/list";
         }
 
         try {
@@ -148,14 +148,14 @@ public class ReservationController {
             }
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Problem occurred during excursion additions.");
-            return "redirect:/";
+            return "redirect:/trip/list";
         }
 
 
         redirectAttributes.addFlashAttribute("alert_success", "Reservation no. "
                 +  reservationId + " successfully created");
 
-        return "redirect:/";
+        return "redirect:/reservation/detail/" + reservationId;
 
     }
 
@@ -187,11 +187,11 @@ public class ReservationController {
 
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
 
-        if (authUser.getIsAdmin()) {
+        /*if (authUser.getIsAdmin()) {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Administrator cannot delete reservations");
             return "redirect:/reservation/list";
-        }
+        }*/
 
         ReservationDto reservationDto = reservationFacade.findById(id);
 

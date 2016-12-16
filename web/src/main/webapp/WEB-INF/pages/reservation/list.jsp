@@ -26,7 +26,7 @@
                    <fmt:formatDate value="${reservation.trip.dateTo}" pattern="dd.MM.yyyy"/></td> 
                 <td><c:out value="${fn:length(reservation.excursionSet)}"/></td>
                 <td>
-                    <c:out value="${reservationPrice[reservation]}"/>
+                    <c:out value="${reservationPrice[reservation.id]}"/>
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
