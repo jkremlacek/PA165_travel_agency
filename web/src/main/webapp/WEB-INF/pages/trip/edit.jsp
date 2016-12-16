@@ -11,43 +11,43 @@
     <form:form name="frmMr" method="post" action="${pageContext.request.contextPath}/trip/update/${toUpdate.id}" modelAttribute="toUpdate">
     <table class="table">
         <tr>
-            <td>Name</td>
+            <th>Name</th>
             <td><form:input path="name" type="text" size="30" value="${toUpdate.name}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
-            <td>Destination</td>
+            <th>Destination</th>
             <td><form:input path="destination" type="text" size="40" value="${toUpdate.destination}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
-            <td>Description</td>
+            <th>Description</th>
             <td><form:input path="description" type="text" size="40" value="${toUpdate.description}" required="required" pattern=".*\S+.*"/></td>
         </tr>
         <tr>
-            <td>Capacity</td>
+            <th>Capacity</td>
             <td><form:input path="capacity" type="number" size="40" value="${toUpdate.capacity}" required="required" min="1"/></td>
         </tr>
         <tr>
-            <td>Date From</td>
+            <th>Date From</th>
             <td>
-                <form:input name="dateFrom" path="dateFrom" type="datetime" required="required" pattern="^\d\d[.]\d\d[.]\d\d\d\d[,]\s\d\d[:]\d\d$"/>
+                <form:input name="dateFrom" path="dateFrom" type="datetime" required="required" pattern="^([1-9]|([012][0-9])|(3[01])).([0]{0,1}[1-9]|1[012]).\d\d\d\d, [012]{0,1}[0-9]:[0-5][0-9]$"/>
                 <%--value="<fmt:formatDate value="${toUpdate.dateFrom}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>
-            <td>Date To</td>
+            <th>Date To</th>
             <td>
-                <form:input name="dateTo" path="dateTo" type="datetime" required="required" pattern="^\d\d[.]\d\d[.]\d\d\d\d[,]\s\d\d[:]\d\d$"/>
+                <form:input name="dateTo" path="dateTo" type="datetime" required="required" pattern="^([1-9]|([012][0-9])|(3[01])).([0]{0,1}[1-9]|1[012]).\d\d\d\d, [012]{0,1}[0-9]:[0-5][0-9]$"/>
                 <%--value="<fmt:formatDate value="${toUpdate.dateTo}" pattern="dd.MM.yyyy, HH:mm" />"/>--%>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
             </td>
         </tr>
         <tr>
-            <td>Price</td>
+            <th>Price</th>
             <td>
-                <form:input path="price" type="number" size="10" value="${toUpdate.price}" required="required"/> CZK
+                <form:input path="price" type="number" size="10" value="${toUpdate.price}" min="1" required="required"/> CZK
             </td>
         </tr>
     </table>

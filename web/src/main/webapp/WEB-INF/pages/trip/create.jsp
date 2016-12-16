@@ -58,7 +58,7 @@
         </tr>
         <tr>
             <td>Price</td>
-            <td><form:input path="price" type="number" size="10" required="required" pattern=".*\S+.*"/> CZK</td>
+            <td><form:input path="price" type="number" size="10" required="required" min="1"/> CZK</td>
         </tr>
     </table>
     <button class="btn btn-primary" type="submit" onClick="return checkform()">Create Trip</button>

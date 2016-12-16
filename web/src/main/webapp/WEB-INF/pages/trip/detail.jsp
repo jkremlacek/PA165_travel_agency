@@ -13,35 +13,35 @@
     <h4>Details of trip with id <c:out value="${trip.id}"/></h4>
     <table class="table">
     <tr>
-        <td>Name</td>
+        <th>Name</th>
         <td><c:out value="${trip.name}"/></td>
     </tr>
     <tr>
-        <td>Destination</td>
+        <th>Destination</th>
         <td><c:out value="${trip.destination}"/></td>
     </tr>
     <tr>
-        <td>Description</td>
+        <th>Description</th>
         <td><c:out value="${trip.description}"/></td>
     </tr>
     <tr>
-        <td>Total Capacity</td>
+        <th>Total Capacity</th>
         <td><c:out value="${trip.capacity}"/></td>
     </tr>
     <tr>
-        <td>Available Capacity</td>
+        <th>Available Capacity</th>
         <td><c:out value="${availableCapacity}"/></td>
     </tr>
     <tr>
-        <td>Date From</td>
+        <th>Date From</th>
         <td><fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy" /></td>
     </tr>
     <tr>
-        <td>Date To</td>
+        <th>Date To</th>
         <td><fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy" /></td>
     </tr>
     <tr>
-        <td>Price</td>
+        <th>Price</th>
         <td><c:out value="${trip.price}"/> CZK</td>
     </tr>
     <c:if test="${authUser.getIsAdmin()}">
@@ -53,11 +53,38 @@
         </td>
         <td>
             <form method="post" action="${pageContext.request.contextPath}/trip/delete/${trip.id}">
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-primary btn-danger">Delete</button>
             </form>
         </td>
         </tr>
     </c:if>
+</table>
+<h4>Available Excursions</h4>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th/>
+    </tr>
+    <c:forEach items="${excursions}" var="excursion">
+        <tr>
+            <td>
+                <c:out value="${excursion.name}"/>
+            </td>
+            <td>
+                <c:out value="${excursion.price} CZK"/>
+            </td>
+            <td>
+                <form method="get" action="${pageContext.request.contextPath}/excursion/detail/${excursion.id}">
+                    <button type="submit" class="btn btn-primary">Detail</button>
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
 </table>
 </jsp:attribute>
 </my:pagetemplate>
