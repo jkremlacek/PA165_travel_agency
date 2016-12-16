@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.travelagency.facade.ReservationFacade;
 import cz.muni.fi.pa165.travelagency.facade.UserFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.ReservationDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -150,7 +151,15 @@ public class UserController {
         try {user.setName(updatingUser.getName());     
             user.setPhoneNumber(updatingUser.getPhoneNumber());     
             user.setPersonalNumber(updatingUser.getPersonalNumber());
-            //user.setBirthDate(updatingUser.getBirthDate());
+            
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            if (updatingUser.getBirthDate().after(date)) {
+                redAttr.addFlashAttribute(
+                    "alert_danger", "Date must be in past.");
+            return "redirect:/user/edit/"+ id;
+            }
+            user.setBirthDate(updatingUser.getBirthDate());
         } catch (Exception ex) {
             redAttr.addFlashAttribute(
                     "alert_danger", "Wrong format of form " + ex);

@@ -16,13 +16,13 @@
     <table class="table">
         <tr>
             <th>Name</th>
-            <td><form:input path="name" type="text" size="30"/></td>
+            <td><form:input path="name" type="text" size="30" required="required"  pattern=".*\S+.*"/></td>
         </tr>
         <tr>
             <th>Destination</th>
-            <td><form:input path="destination" type="text" size="40"/></td>
+            <td><form:input path="destination" type="text" size="40" required="required"  pattern=".*\S+.*"/></td>
         </tr>
-        <tr>
+       <tr>
             <th>Description</th>
             <td><form:input path="description" type="text" size="40"/></td>
         </tr>
@@ -43,7 +43,7 @@
                 <form:label path="date"/>
                 <c:set var="now" value="<%=new java.util.Date()%>"/>
                 <form:input path="date" class="date" type="text"
-                            value=""/>
+                            value="" required="required" pattern="^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})[,] [012]{0,1}[0-9]:[0-5][0-9]$"/>
                 <br>
                 Format: dd.MM.yyyy, HH:mm
             </td>
@@ -51,12 +51,12 @@
         <tr>
             <th>Duration</th>
             <td>
-                <form:input path="duration" type="text" size="10" value=""/> hours
+                <form:input path="duration" type="number" size="10" required="required" min="1" value=""/> hours
             </td>
         </tr>
         <tr>
             <th>Price</th>
-            <td><form:input path="price" type="text" size="10"/> CZK</td>
+            <td><form:input path="price" type="number" min="1" size="10"/> CZK</td>
         </tr>
     </table>
     <button class="btn btn-success" type="submit">Create Excursion</button>
