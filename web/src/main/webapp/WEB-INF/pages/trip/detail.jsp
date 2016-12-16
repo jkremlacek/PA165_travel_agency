@@ -4,13 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   User: jakub_kremlacek
 --%>
 
 <my:pagetemplate title="Trip detail">
 <jsp:attribute name="body">
-    <h4>Details of trip with id <c:out value="${trip.id}"/></h4>
+    <h4>Details of trip no. <c:out value="${trip.id}"/></h4>
     <table class="table">
     <tr>
         <th>Name</th>
@@ -59,6 +60,7 @@
         </tr>
     </c:if>
 </table>
+ <c:if test="${fn:length(excursions) > 0}">
 <h4>Available Excursions</h4>
 <table class="table">
     <tr>
@@ -70,6 +72,7 @@
         </th>
         <th/>
     </tr>
+   
     <c:forEach items="${excursions}" var="excursion">
         <tr>
             <td>
@@ -85,6 +88,8 @@
             </td>
         </tr>
     </c:forEach>
+
 </table>
+</c:if>
 </jsp:attribute>
 </my:pagetemplate>

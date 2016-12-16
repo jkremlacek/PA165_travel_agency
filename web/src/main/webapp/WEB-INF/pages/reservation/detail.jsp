@@ -7,7 +7,7 @@
 
 <my:pagetemplate title="Reservation">
     <jsp:attribute name="body">
-        <h4>Details of reservation with id <c:out value="${reservation.id}"/></h4>
+        <h4>Details of reservation no. <c:out value="${reservation.id}"/></h4>
         <table class="table">
             <tr>
                 <td><h4>Reserved by </h4></td>
@@ -34,6 +34,11 @@
                     </h4></td>
                 </tr>
                 </c:if>    
+                <tr>
+                    <td>
+                    <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" class="btn btn-danger">Delete</a>
+                </td> <td></td>
+                </tr>
             
         </table>
     </jsp:attribute>

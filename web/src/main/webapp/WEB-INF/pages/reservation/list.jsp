@@ -32,7 +32,7 @@
                     <a href="${pageContext.request.contextPath}/reservation/detail/${reservation.id}" class="btn btn-primary">Detail</a>
                 </td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" class="btn btn-primary">Delete</a>
+                    <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" class="btn btn-danger">Delete</a>
                 </td>    
                 
             </tr>

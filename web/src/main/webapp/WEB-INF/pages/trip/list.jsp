@@ -62,7 +62,7 @@
                     <c:if test="${authUser.getIsAdmin()}">
                         <td>
                             <form method="get" action="${pageContext.request.contextPath}/trip/new">
-                                <button type="submit" class="btn btn-primary">New trip</button>
+                                <button type="submit" class="btn btn-success">New trip</button>
                             </form>
                         </td>
                         <td/>

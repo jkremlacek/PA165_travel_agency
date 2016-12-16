@@ -15,8 +15,7 @@
         <tr>
             <td>Phone number</td>
             <td><form:input path="phoneNumber" type="text" size="30" value="${updatingUser.phoneNumber}" required="required" pattern="^[0-9]{9}$"/>
-            <br>
-                Format: XXXXXXXXX</td>
+            
         </tr>
         <tr>
             <td>Birth date</td>
@@ -32,8 +31,7 @@
             <td>Personal number</td>
 
             <td><form:input path="personalNumber" type="text" size="30" value="${updatingUser.personalNumber}" required="required" pattern="^[0-9]{10}$" />
-            <br>
-                Format: XXXXXXXXXX</td>
+            
         </tr>
     </table>
     <button class="btn btn-primary" type="submit">Update user</button>
