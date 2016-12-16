@@ -107,6 +107,7 @@ public class ReservationController {
         model.addAttribute("trip", tripDto);
 
         return "reservation/create";
+       
     }
     private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
         Set<ExcursionDto> dtos = new HashSet<>();
@@ -123,13 +124,16 @@ public class ReservationController {
                          @ModelAttribute("trip") TripDto trip,
             Model model,
             RedirectAttributes redirectAttributes, HttpServletRequest request
-    ) {
+    ) { 
         UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
         ReservationCreateDto newReservation = new ReservationCreateDto();
         newReservation.setTrip(tripFacade.findById(trip.getId()));
-        newReservation.setExcursionSet(getExcursionsFromList(checkedExcursions.getFunctionList()));
+        try {           
+            newReservation.setExcursionSet(getExcursionsFromList(checkedExcursions.getFunctionList()));            
+        } catch (Exception e) {
+            
+        }
         newReservation.setUser(authUser);
-
         Long reservationId;
         try {
             reservationId = reservationFacade.create(newReservation);
@@ -139,10 +143,11 @@ public class ReservationController {
             return "redirect:/";
         }
 
-        redirectAttributes.addFlashAttribute("alert_success", "Reservation for trip to "
-                + " (id=" + reservationId + ") successfully created");
+        redirectAttributes.addFlashAttribute("alert_success", "Reservation no. "
+                +  reservationId + " successfully created");
 
         return "redirect:/";
+    
     }
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)

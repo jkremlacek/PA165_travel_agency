@@ -151,7 +151,7 @@ public class ExcursionController {
         }
 
         redirectAttributes.addFlashAttribute("alert_success", "Excursion " + excursionCreateDto.getName()
-                + " (id=" + id + ") successfully created");
+                 + " successfully created");
 
         return "redirect:/excursion/detail/" + id;
     }
