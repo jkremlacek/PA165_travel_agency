@@ -19,6 +19,9 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.RollbackException;
+import javax.validation.ValidationException;
+import org.springframework.transaction.TransactionSystemException;
 
 /**
  * Created on 07.12.2016.
@@ -114,6 +117,10 @@ public class ExcursionController {
 
         try {
             excursionFacade.update(toUpdate);
+        } catch (TransactionSystemException ex) {
+            ex.printStackTrace();
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
+            return "redirect:/excursion/edit/{id}";
         } catch (Exception ex) {
             ex.printStackTrace();
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
@@ -145,6 +152,9 @@ public class ExcursionController {
         Long id;
         try {
             id = excursionFacade.create(excursionCreateDto);
+        } catch (ValidationException | RollbackException ex) {
+             redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
+            return "redirect:/excursion/new";
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/new";
