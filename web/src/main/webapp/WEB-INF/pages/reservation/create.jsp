@@ -21,16 +21,26 @@
 </table>
 <br/>
 <br/>
-<script>
+<script>    
     function toggleCheckbox(checkbox, price) {
         var element = document.getElementById("totalPrice");
         var i = parseFloat(element.innerHTML.substring(0, element.innerHTML.length - 4));
         
+        $("#totalPrice").fadeOut(400);
+        
+        setTimeout(function(){
+
         if (!checkbox.checked) {
             element.innerHTML = '' + (i - price) + '.00 CZK';
         } else {
             element.innerHTML = '' + (i + price) + '.00 CZK';
         }
+        
+        $("#totalPrice").fadeIn();
+
+        }, 400); 
+        
+        
     };
 </script>
 <form:form method="post" action="${pageContext.request.contextPath}/reservation/create/${trip.id}" modelAttribute="checkedExcursions">
