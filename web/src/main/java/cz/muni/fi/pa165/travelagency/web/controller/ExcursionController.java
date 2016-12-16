@@ -4,8 +4,8 @@ import cz.muni.fi.pa165.travelagency.facade.ExcursionFacade;
 import cz.muni.fi.pa165.travelagency.facade.TripFacade;
 import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto;
 import cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto;
+import cz.muni.fi.pa165.travelagency.facade.dto.UserDto;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.List;
 /**
  * Created on 07.12.2016.
  * SpringMVC Controller for excursions
+ *
  * @author Martin Salata
  */
 @Controller
@@ -70,7 +74,7 @@ public class ExcursionController {
 
         try {
             excursionFacade.delete(excursionFacade.findById(id));
-        } catch (DataAccessException ex) {
+        } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion with id " + id + " could not be deleted");
             return DEFAULT_REDIRECT;
         }
@@ -80,7 +84,13 @@ public class ExcursionController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable Long id, Model model) {
+    public String edit(@PathVariable Long id, Model model, RedirectAttributes redAttr, HttpServletResponse res, HttpServletRequest req) {
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        if (!authUser.getIsAdmin()) {
+            redAttr.addFlashAttribute("alert_danger", "You cannot edit Excursions");
+            return DEFAULT_REDIRECT;
+        }
+
         ExcursionDto toUpdate = excursionFacade.findById(id);
 
         model.addAttribute("toUpdate", toUpdate);
@@ -93,17 +103,21 @@ public class ExcursionController {
 
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable Long id, @ModelAttribute("toUpdate") ExcursionDto excursionDto, Model model, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable Long id,
+                         @Valid @ModelAttribute("toUpdate") ExcursionDto toUpdate,
+                         Model model,
+                         RedirectAttributes redirectAttributes) {
 
-        if (excursionDto == null) {
+        if (toUpdate == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion " + id + " does not exist");
             return "redirect:/excursion/create";
         }
 
         try {
-            excursionFacade.update(excursionDto);
+            excursionFacade.update(toUpdate);
         } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
+            ex.printStackTrace();
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be updated");
             return "redirect:/excursion/list";
         }
 
@@ -132,13 +146,13 @@ public class ExcursionController {
         Long id;
         try {
             id = excursionFacade.create(excursionCreateDto);
-        } catch (DataAccessException ex) {
+        } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/new";
         }
 
         redirectAttributes.addFlashAttribute("alert_success", "Excursion " + excursionCreateDto.getName()
-                + " (id=" + id + ")successfully created");
+                + " (id=" + id + ") successfully created");
 
         return "redirect:/excursion/detail/" + id;
     }
