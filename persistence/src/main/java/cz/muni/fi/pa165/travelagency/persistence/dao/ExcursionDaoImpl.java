@@ -134,11 +134,14 @@ public class ExcursionDaoImpl implements ExcursionDao {
         Calendar c = Calendar.getInstance();
         
         if (entity.getDate().before(c.getTime())) {
-            throw new IllegalArgumentException("Cannot create excursion in past.");
+            throw new IllegalArgumentException("Cannot update excursion in past.");
+        }
+        if (entity.getDate().before(entity.getTrip().getDateFrom())) {
+            throw new IllegalArgumentException("Cannot update excursion before trip.");
         }
         
         if (entity.getDate().after(entity.getTrip().getDateTo())) {
-            throw new IllegalArgumentException("Cannot create excursion after trip.");
+            throw new IllegalArgumentException("Cannot update excursion after trip.");
         }
         
         em.merge(entity);
