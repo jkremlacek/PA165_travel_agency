@@ -3,23 +3,27 @@ package cz.muni.fi.pa165.travelagency.persistence.dao;
 import cz.muni.fi.pa165.travelagency.persistence.config.InMemorySpring;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Excursion;
 import cz.muni.fi.pa165.travelagency.persistence.entity.Trip;
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.validation.ValidationException;
-import static org.hamcrest.CoreMatchers.is;
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.validation.ValidationException;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 
 /**
  *
