@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.validation.constraints.Future;
 
 /**
  * Created on 19.10.2016.
@@ -29,6 +30,7 @@ public class Excursion {
     private String name;
 
     @NotNull
+    @Future
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 

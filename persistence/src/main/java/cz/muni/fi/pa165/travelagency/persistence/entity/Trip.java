@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
@@ -38,10 +39,12 @@ public class Trip {
    private String name;
    
    @NotNull
+   @Future
    @Temporal(TemporalType.TIMESTAMP)
    private Date dateFrom;
    
    @NotNull
+   @Future
    @Temporal(TemporalType.TIMESTAMP)
    private Date dateTo;
    
