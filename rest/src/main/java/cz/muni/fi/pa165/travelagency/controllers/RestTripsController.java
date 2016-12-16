@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
