@@ -13,6 +13,8 @@ import java.util.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import cz.muni.fi.pa165.travelagency.web.converter.ListWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,12 +40,19 @@ public class ReservationController {
 
     @Inject
     private ExcursionFacade excursionFacade;
+    
+    final static Logger log = LoggerFactory.getLogger(ReservationController.class);
 
-    private static final String DEFAULT_REDIRECT = "redirect:/reservation/list";
+    private static final String DEFAULT_REDIRECT = "redirect:/";
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String listAll(Model model, HttpServletRequest req, RedirectAttributes redirectAttributes) {
+    public String listAll(
+            Model model, 
+            HttpServletRequest req, 
+            RedirectAttributes redirectAttributes) {
 
+        log.debug("reservation/list");
+        
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
 
         List<ReservationDto> reservations;
@@ -73,28 +82,60 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes,HttpServletRequest req) {
-        ReservationDto reservationDto = reservationFacade.findById(id);
-        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+    public String detail(
+            @PathVariable Long id,
+            Model model, 
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest req) {
         
-        if (!authUser.getIsAdmin() && !authUser.getId().equals(reservationDto.getUser().getId())) {
-                redirectAttributes.addFlashAttribute("alert_danger", "Only admin can see other user's reservations.");
+        log.debug("reservation/detail/"+id);
+        
+        ReservationDto reservationDto;
+        UserDto authUser;
+        
+        try {        
+            reservationDto = reservationFacade.findById(id);
+            authUser = (UserDto) req.getSession().getAttribute("authUser");
+
+            if (reservationDto == null) {
+                redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
                 return DEFAULT_REDIRECT;
-        }  
-        if (reservationDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
+            }
+
+            if (!authUser.getIsAdmin() && !authUser.getId().equals(reservationDto.getUser().getId())) {
+                    redirectAttributes.addFlashAttribute("alert_danger", "You don't have permission to show other people's reservation");
+                    return DEFAULT_REDIRECT;
+            } 
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute(
+                    "alert_danger", "Reservation no. "+id+" isn't accessible, due to " + ex.getMessage());
             return DEFAULT_REDIRECT;
         }
-        Map reservationPrice = new HashMap<>();
-        reservationPrice.put(reservationDto.getId(), reservationFacade.getTotalPrice(reservationDto.getId()));
+        
         model.addAttribute("reservation", reservationDto);
-        model.addAttribute("reservationPrice", reservationPrice);
+        model.addAttribute("reservationPrice", reservationFacade.getTotalPrice(reservationDto.getId()));
+        
         return "reservation/detail";
     }
 
     @RequestMapping(value = "/create/{id}", method = RequestMethod.GET)
-    public String create(@PathVariable Long id, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String create(
+            @PathVariable Long id, 
+            Model model, 
+            HttpServletRequest request, 
+            RedirectAttributes redirectAttributes) {
+        
+        log.debug("reservation/create/"+id);
+        
+                
         TripDto tripDto = tripFacade.findById(id);
+        
+        if (tripDto==null)  {
+            redirectAttributes.addFlashAttribute(
+                    "alert_danger", "Trip no. " + id + " doesn't exist");
+            return "redirect:/trip/list";
+        }
+        
         if (!tripFacade.hasTripAvailableCapacity(tripDto)) {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Trip no. " + id + " doesn't have available capacity");
@@ -108,6 +149,7 @@ public class ReservationController {
         return "reservation/create";
 
     }
+    
     private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
         Set<ExcursionDto> dtos = new HashSet<>();
         if (excursions != null) {
@@ -119,12 +161,13 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/create/{id}", method = RequestMethod.POST)
-    public String create(@PathVariable Long id,
-                         @ModelAttribute("checkedExcursions") ListWrapper checkedExcursions,
-                         @ModelAttribute("trip") TripDto trip,
-                         Model model,
-                         RedirectAttributes redirectAttributes, HttpServletRequest request
-    ) {
+    public String create(
+            @PathVariable Long id,
+            @ModelAttribute("checkedExcursions") ListWrapper checkedExcursions,
+            @ModelAttribute("trip") TripDto trip,
+            Model model,
+            RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        
         UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
         ReservationCreateDto newReservation = new ReservationCreateDto();
         newReservation.setTrip(tripFacade.findById(trip.getId()));
@@ -159,7 +202,10 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String delete(
+            @PathVariable Long id, 
+            Model model, 
+            RedirectAttributes redirectAttributes) {
 
         /*ReservationDto reservationDto = reservationFacade.findById(id);
         if (reservationDto == null) {
@@ -182,7 +228,11 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable Long id, Model model, HttpServletRequest req, RedirectAttributes redirectAttributes) {
+    public String delete(
+            @PathVariable Long id, 
+            Model model, 
+            HttpServletRequest req, 
+            RedirectAttributes redirectAttributes) {
 
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
 

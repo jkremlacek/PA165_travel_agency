@@ -11,15 +11,19 @@
         <table class="table">
             <tr>
                 <td><h4>Reserved by </h4></td>
-                <td><h4><a href="${pageContext.request.contextPath}/user/detail/${reservation.user.id}"><c:out value="${reservation.user.name}"/></a></h4></td>
+                <td><h4><a href="${pageContext.request.contextPath}/user/detail/${reservation.user.id}">
+                            <c:out value="${reservation.user.name}"/>
+                </a></h4></td>
             </tr>
             <tr>
                 <td><h4>For trip </h4></td>
-                <td><h4><a href="${pageContext.request.contextPath}/trip/detail/${reservation.trip.id}"><c:out value="${reservation.trip.name}"/></a></h4></td>
+                <td><h4><a href="${pageContext.request.contextPath}/trip/detail/${reservation.trip.id}">
+                            <c:out value="${reservation.trip.name}"/>
+                </a></h4></td>
             </tr>
             <tr>
                     <td><h4>For price </h4></td>
-                    <td><h4><c:out value="${reservationPrice[reservation.id]} CZK"/><h4></td>
+                    <td><h4><c:out value="${reservationPrice} CZK"/></h4></td>
             </tr>
             <c:if test="${empty reservation.excursionSet}">
                 <tr>
@@ -40,10 +44,13 @@
                 </c:if>    
                 <tr>
                     <td>
-                    <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" class="btn btn-danger">Delete</a>
-                </td> <td></td>
+                        <a href="${pageContext.request.contextPath}/reservation/edit/${reservation.id}" 
+                           class="btn btn-primary">Edit</a>
+                    
+                        <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" 
+                           class="btn btn-danger">Delete</a>
+                    <td></td> 
                 </tr>
-            
         </table>
     </jsp:attribute>
 </my:pagetemplate>
