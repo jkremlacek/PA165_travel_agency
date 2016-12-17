@@ -86,9 +86,17 @@
                     <button type="submit" class="btn btn-primary">Detail</button>
                 </form>
             </td>
+            
         </tr>
     </c:forEach>
-
+        <tr>
+        <td>
+            <form method="get" action="${pageContext.request.contextPath}/reservation/create/${trip.id}">
+                <button type="submit" class="btn btn-success">Make reservation</button>
+            </form>
+        </td>
+        <td></td><td></td>
+        </tr>
 </table>
 </c:if>
 </jsp:attribute>

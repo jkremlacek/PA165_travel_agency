@@ -43,11 +43,9 @@
         
     };
 </script>
-<form:form method="post" action="${pageContext.request.contextPath}/reservation/create/${trip.id}" modelAttribute="checkedExcursions">
-    <%--<form:hidden path="trip"/>--%>
-    <%--<form:hidden path="user"/>--%>
+<form:form method="post" action="${pageContext.request.contextPath}/reservation/create/${trip.id}" modelAttribute="chosenExcursions">
     
-<c:if test="${fn:length(tripExcursions) > 0}">
+<c:if test="${fn:length(trip.excursions) > 0}">
 <table class="table">
     <tr>
         <th>
@@ -66,7 +64,7 @@
         <th>
         </th>
     </tr>
-    <c:forEach items="${tripExcursions}" var="excursion">
+    <c:forEach items="${trip.excursions}" var="excursion">
         <tr>
             <td>    
                 <a target="_blank" href="${pageContext.request.contextPath}/excursion/detail/${excursion.id}"><c:out value="${excursion.name}"/></a>

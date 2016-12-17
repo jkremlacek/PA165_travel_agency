@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Reservation">
+<my:pagetemplate title="Reservation detail">
     <jsp:attribute name="body">
         <h4>Details of reservation no. <c:out value="${reservation.id}"/></h4>
         <table class="table">
@@ -44,8 +44,8 @@
                 </c:if>    
                 <tr>
                     <td>
-                        <a href="${pageContext.request.contextPath}/reservation/edit/${reservation.id}" 
-                           class="btn btn-primary">Edit</a>
+                        <!--<a href="${pageContext.request.contextPath}/reservation/edit/${reservation.id}" 
+                           class="btn btn-primary">Edit</a>-->
                     
                         <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" 
                            class="btn btn-danger">Delete</a>

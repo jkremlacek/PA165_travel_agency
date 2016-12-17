@@ -75,4 +75,11 @@ public interface ReservationService {
      * @return total price of reservation
      */
     BigDecimal getTotalPrice(Long reservationId);
+    
+    /**
+     * Find all excursions of reservation
+     * @param reservationId ID of reservation
+     * @return excursions as List
+     */
+    List<Excursion> findExcursionByReservation(Long reservationId);
 }

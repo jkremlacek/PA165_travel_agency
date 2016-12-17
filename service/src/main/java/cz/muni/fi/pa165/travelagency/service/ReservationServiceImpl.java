@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import javax.validation.ValidationException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -135,6 +137,16 @@ public class ReservationServiceImpl implements ReservationService {
         } catch (Exception ex) {
             throw new PersistenceException(ex.getMessage());
         }
+    }
+    
+    @Override
+    public List<Excursion> findExcursionByReservation(Long reservationId) {
+        List<Excursion> excursions = new ArrayList<>();
+        for (Excursion exc : reservationDao.findById(reservationId).getExcursionSet()) {
+            excursions.add(exc);
+        }
+        return excursions;
+        
     }
 
 }

@@ -43,7 +43,7 @@ public class ReservationController {
     
     final static Logger log = LoggerFactory.getLogger(ReservationController.class);
 
-    private static final String DEFAULT_REDIRECT = "redirect:/";
+    private static final String REDIRECT_RESERVATION_LIST = "redirect:/reservation/list";
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listAll(
@@ -72,7 +72,7 @@ public class ReservationController {
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation list isn't accessible, due to " + ex.getMessage());
-            return DEFAULT_REDIRECT;
+            return "";
         }
 
         model.addAttribute("reservationPrice", reservationPrice);
@@ -99,17 +99,17 @@ public class ReservationController {
 
             if (reservationDto == null) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
-                return DEFAULT_REDIRECT;
+                return REDIRECT_RESERVATION_LIST;
             }
 
             if (!authUser.getIsAdmin() && !authUser.getId().equals(reservationDto.getUser().getId())) {
                     redirectAttributes.addFlashAttribute("alert_danger", "You don't have permission to show other people's reservation");
-                    return DEFAULT_REDIRECT;
+                    return REDIRECT_RESERVATION_LIST;
             } 
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation no. "+id+" isn't accessible, due to " + ex.getMessage());
-            return DEFAULT_REDIRECT;
+            return REDIRECT_RESERVATION_LIST;
         }
         
         model.addAttribute("reservation", reservationDto);
@@ -128,8 +128,11 @@ public class ReservationController {
         log.debug("reservation/create/"+id);
         
                 
-        TripDto tripDto = tripFacade.findById(id);
-        
+        TripDto tripDto;
+
+        try {
+            tripDto = tripFacade.findById(id);
+            
         if (tripDto==null)  {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Trip no. " + id + " doesn't exist");
@@ -140,56 +143,52 @@ public class ReservationController {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Trip no. " + id + " doesn't have available capacity");
             return "redirect:/trip/list";
+            }
+
+        for (ExcursionDto exc : excursionFacade.findByTrip(tripDto)) {
+            tripDto.addExcursion(exc);
         }
         
-        model.addAttribute("tripExcursions", excursionFacade.findByTrip(tripDto));
-        model.addAttribute("checkedExcursions", new ListWrapper());
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute(
+                    "alert_danger", "Reservation for trip no. " + id + 
+                            " is not possible create now, due to "+ex.getMessage());
+            return "redirect:/trip/list";
+        }
+        model.addAttribute("chosenExcursions", new ListWrapper());
         model.addAttribute("trip", tripDto);
         
         return "reservation/create";
 
     }
-    
-    private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
-        Set<ExcursionDto> dtos = new HashSet<>();
-        if (excursions != null) {
-            for (String excursionId:excursions) {
-                dtos.add(excursionFacade.findById(Long.parseLong(excursionId)));
-            }
-        }
-        return dtos;
-    }
 
     @RequestMapping(value = "/create/{id}", method = RequestMethod.POST)
     public String create(
             @PathVariable Long id,
-            @ModelAttribute("checkedExcursions") ListWrapper checkedExcursions,
+            @ModelAttribute("chosenExcursions") ListWrapper chosenExcursions,
             @ModelAttribute("trip") TripDto trip,
             Model model,
             RedirectAttributes redirectAttributes, HttpServletRequest request) {
         
         UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
         ReservationCreateDto newReservation = new ReservationCreateDto();
-        newReservation.setTrip(tripFacade.findById(trip.getId()));
-
-//        newReservation.setExcursionSet(getExcursionsFromList(checkedExcursions.getFunctionList()));
-
-        newReservation.setUser(authUser);
         Long reservationId;
         try {
+            newReservation.setTrip(tripFacade.findById(trip.getId()));
+            newReservation.setUser(authUser);
             reservationId = reservationFacade.create(newReservation);
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Cannot create reservation for trip " +
+            redirectAttributes.addFlashAttribute("alert_danger", "Cannot create reservation for trip no. " +
                     newReservation.getTrip().getName() + " due to " +ex.getMessage());
             return "redirect:/trip/list";
         }
 
         try {
-            for (ExcursionDto excursion : getExcursionsFromList(checkedExcursions.getFunctionList())) {
+            for (ExcursionDto excursion : getExcursionsFromList(chosenExcursions.getFunctionList())) {
                 reservationFacade.addExcursion(reservationId, excursion);
             }
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Problem occurred during excursion additions.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Problem occurred during creating reservation for trip no."+trip.getId());
             return "redirect:/trip/list";
         }
 
@@ -207,26 +206,117 @@ public class ReservationController {
             Model model, 
             RedirectAttributes redirectAttributes) {
 
-        /*ReservationDto reservationDto = reservationFacade.findById(id);
-        if (reservationDto == null) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " does not exist");
-            return DEFAULT_REDIRECT;
+        return "redirect:/reservation/delete/"+id;
+    }
+    
+    private Set<ExcursionDto> getExcursionsFromList(List<String> excursions) {
+        Set<ExcursionDto> dtos = new HashSet<>();
+        if (excursions != null) {
+            for (String excursionId:excursions) {
+                dtos.add(excursionFacade.findById(Long.parseLong(excursionId)));
+            }
+        }
+        return dtos;
+    }
+    
+    private List<String> getListFromExcursion(List<ExcursionDto> excursions) {
+        List<String> ids = new ArrayList<>();
+        if (excursions == null) {
+            return ids;
+        }
+        for (ExcursionDto exc : excursions) {
+            ids.add(exc.getId().toString());
+        }
+        return ids;
+    }
+    
+    /*@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(
+            @PathVariable Long id, 
+            Model model, 
+            HttpServletRequest request, 
+            RedirectAttributes redirectAttributes) {
+        
+        log.debug("reservation/edit/"+id);
+        
+        UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
+        ReservationDto reservationDto;
+        List<ExcursionDto> excursions;
+        List<ExcursionDto> checkedExcursions;
+        
+
+        try {
+            reservationDto = reservationFacade.findById(id);
+            checkedExcursions = reservationFacade.findExcursionByReservation(id);
+            excursions = excursionFacade.findByTrip(reservationDto.getTrip());
+            
+            
+        if (reservationDto==null)  {
+            redirectAttributes.addFlashAttribute(
+                    "alert_danger", "Resrevation no. " + id + " doesn't exist");
+            return REDIRECT_RESERVATION_LIST;
+        }
+        
+        if (!authUser.getIsAdmin() && !authUser.getId().equals(reservationDto.getUser().getId())) {
+                redirectAttributes.addFlashAttribute(
+                        "alert_danger", "You don't have permission to edit reservation of other users.");
+                return REDIRECT_RESERVATION_LIST;
+            }
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute(
+                    "alert_danger", "An error occurred during editing reservation no. "+id+", due to "+ex.getMessage());
+            return "redirect:/trip/list";
+        }
+        model.addAttribute("chosenExcursions", new ListWrapper());
+        model.addAttribute("checkedExcursions", checkedExcursions);
+        model.addAttribute("excursions", excursions);
+        model.addAttribute("reservation", reservationDto);
+        
+        return "reservation/edit";
+
+    }
+    
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(
+            @PathVariable Long id, 
+            Model model, 
+            @ModelAttribute("chosenExcursions") ListWrapper chosenExcursions,
+            HttpServletRequest request, 
+            RedirectAttributes redirectAttributes) {
+        
+        log.debug("reservation/edit/"+id);
+        
+        UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
+        ReservationDto reservationToUpdate;
+        try {
+            reservationToUpdate = reservationFacade.findById(id);
+            if (reservationToUpdate.getTrip()==null) {
+                redirectAttributes.addFlashAttribute("alert_danger", "trip null");
+            return "redirect:/trip/list";
+            }
+            reservationToUpdate.setUser(authUser);
+            reservationFacade.update(reservationToUpdate);
+        } catch (DataAccessException ex) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Cannot edit reservation no. " +
+                    id + " due to " +ex.getMessage());
+            return "redirect:/trip/list";
         }
 
         try {
-            reservationFacade.delete(reservationDto);
+            for (ExcursionDto excursion : getExcursionsFromList(chosenExcursions.getFunctionList())) {
+                reservationFacade.addExcursion(id, excursion);
+            }
         } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + 
-                    " could not be delete due to " + ex.getMessage());
-            return DEFAULT_REDIRECT;
+            redirectAttributes.addFlashAttribute("alert_danger", "Problem occurred during updating reservation no."+id);
+            return "redirect:/trip/list";
         }
-        redirectAttributes.addFlashAttribute("alert_success", "Reservation for trip " + reservationDto.getTrip().getName() + " has been successfully deleted");
+        
+        redirectAttributes.addFlashAttribute("alert_danger", "controler");
+        return "redirect:reservation/list";
 
-        return DEFAULT_REDIRECT;*/
-
-        return "redirect:/reservation/delete/"+id;
     }
-
+    */
+        
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(
             @PathVariable Long id, 
@@ -236,32 +326,34 @@ public class ReservationController {
 
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
 
-        /*if (authUser.getIsAdmin()) {
-            redirectAttributes.addFlashAttribute(
-                    "alert_danger", "Administrator cannot delete reservations");
-            return "redirect:/reservation/list";
-        }*/
-
-        ReservationDto reservationDto = reservationFacade.findById(id);
-
-        if (authUser.getId() != reservationDto.getUser().getId()) {
-            redirectAttributes.addFlashAttribute(
-                    "alert_danger", "You don't have permission to delete reservation of other users.");
-            return "redirect:/reservation/list";
-        }
-
+        ReservationDto reservationDto;
+        
         try {
+            reservationDto = reservationFacade.findById(id);
+            
+            if (reservationDto == null) {
+                redirectAttributes.addFlashAttribute(
+                        "alert_danger", "Reservation with no. "+id+" doesn't exist");
+                return "redirect:/reservation/list";
+            }
+
+            if (!authUser.getIsAdmin() && !authUser.getId().equals(reservationDto.getUser().getId())) {
+                redirectAttributes.addFlashAttribute(
+                        "alert_danger", "You don't have permission to delete reservation of other users.");
+                return "redirect:/reservation/list";
+            }
             reservationFacade.delete(reservationDto);
-            redirectAttributes.addFlashAttribute("alert_success", "Reservation for trip " +
-                    reservationDto.getTrip().getName() + " was deleted.");
         } catch (DataAccessException ex) {
             redirectAttributes.addFlashAttribute(
-                    "alert_danger", "Reservation for trip "+reservationDto.getTrip().getName() +
+                    "alert_danger", "Reservation no. "+ id +
                             " couldn't be deleted due to " + ex.getMessage());
-            return "redirect:/reservation/list";
+            return REDIRECT_RESERVATION_LIST;
+            
         }
-
-        return "redirect:/reservation/list";
+        redirectAttributes.addFlashAttribute(
+                    "alert_success", "Reservation no. "+ id +
+                            " was deleted.");
+        return REDIRECT_RESERVATION_LIST;
     }
 
 }
