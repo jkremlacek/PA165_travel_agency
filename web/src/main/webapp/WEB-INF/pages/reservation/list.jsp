@@ -9,10 +9,14 @@
 
 <my:pagetemplate title="Reservation">
 <jsp:attribute name="body">
-<table class="table">
+    
+    <table class="table">
         <thead>
         <tr>
             <th>Trip</th>
+            <c:if test="${authUser.getIsAdmin()}">
+                <th>User</th>
+            </c:if>
             <th>Period</th>
             <th>Excursions number</th>
             <th>Price</th>
@@ -22,6 +26,9 @@
         <c:forEach items="${reservations}" var="reservation">
             <tr>
                 <td><c:out value="${reservation.trip.name}"/></td>
+                <c:if test="${authUser.getIsAdmin()}">
+                    <td><c:out value="${reservation.user.name}"/></td>
+                </c:if>
                 <td><fmt:formatDate value="${reservation.trip.dateFrom}" pattern="dd.MM.yyyy"/> -
                    <fmt:formatDate value="${reservation.trip.dateTo}" pattern="dd.MM.yyyy"/></td> 
                 <td><c:out value="${fn:length(reservation.excursionSet)}"/></td>
@@ -39,5 +46,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <a href="${pageContext.request.contextPath}/trip/list" 
+                           class="btn btn-success">Trips to book</a>
 </jsp:attribute>
 </my:pagetemplate>

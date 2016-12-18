@@ -35,7 +35,7 @@
                     <td><c:out value="${trip.price}"/> CZK</td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/reservation/create/${trip.id}">
-                            <button type="submit" class="btn btn-primary">Book</button>
+                            <button type="submit" class="btn btn-success    ">Book</button>
                         </form>
                     </td>
                     <td>

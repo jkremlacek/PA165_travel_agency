@@ -44,12 +44,13 @@
                 </c:if>    
                 <tr>
                     <td>
-                        <!--<a href="${pageContext.request.contextPath}/reservation/edit/${reservation.id}" 
-                           class="btn btn-primary">Edit</a>-->
-                    
+                        <a href="${pageContext.request.contextPath}/reservation/list" 
+                           class="btn btn-primary">Back to list</a>
+                    </td>
+                    <td>
                         <a href="${pageContext.request.contextPath}/reservation/delete/${reservation.id}" 
                            class="btn btn-danger">Delete</a>
-                    <td></td> 
+                    </td> 
                 </tr>
         </table>
     </jsp:attribute>
