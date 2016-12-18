@@ -10,3 +10,4 @@
 /web/target
 /sampledata/target/
 web/nbactions.xml
+/web/logs/

@@ -1,4 +1,3 @@
-
 package cz.muni.fi.pa165.travelagency.service;
 
 import cz.muni.fi.pa165.travelagency.persistence.dao.ReservationDao;

@@ -6,12 +6,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>travelagency</name>
-    <!--<parent>-->
-        <!--<groupId>io.spring.platform</groupId>-->
-        <!--<artifactId>platform-bom</artifactId>-->
-        <!--<version>1.1.4.RELEASE</version>-->
-        <!--<relativePath/>-->
-    <!--</parent>-->
 
     <modules>
         <module>persistence</module>

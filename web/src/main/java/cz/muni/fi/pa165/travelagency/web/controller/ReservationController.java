@@ -51,10 +51,9 @@ public class ReservationController {
             HttpServletRequest req, 
             RedirectAttributes redirectAttributes) {
 
-        log.debug("reservation/list");
-        
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
-
+        
+        log.info("request: GET resrvation/list; user id={}",authUser.getId());
         List<ReservationDto> reservations;
         Map reservationPrice = new HashMap<>();
 
@@ -70,6 +69,8 @@ public class ReservationController {
             }
 
         } catch (DataAccessException ex) {
+        log.error("request: GET reservation/list, user id. ={}, admin={}"
+                ,authUser.getId(),authUser.getIsAdmin(), ex);
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation list isn't accessible, due to " + ex.getMessage());
             return "";
@@ -88,14 +89,13 @@ public class ReservationController {
             RedirectAttributes redirectAttributes,
             HttpServletRequest req) {
         
-        log.debug("reservation/detail/"+id);
+        log.info("request: GET reservation/detail/{}",id);
         
         ReservationDto reservationDto;
-        UserDto authUser;
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         
         try {        
             reservationDto = reservationFacade.findById(id);
-            authUser = (UserDto) req.getSession().getAttribute("authUser");
 
             if (reservationDto == null) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Reservation no. " + id + " doesn't exist");
@@ -107,6 +107,7 @@ public class ReservationController {
                     return REDIRECT_RESERVATION_LIST;
             } 
         } catch (DataAccessException ex) {
+            log.error("request: GET reservation/detail/{}; user id={}", id, authUser.getId(), ex);
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation no. "+id+" isn't accessible, due to " + ex.getMessage());
             return REDIRECT_RESERVATION_LIST;
@@ -125,7 +126,7 @@ public class ReservationController {
             HttpServletRequest request, 
             RedirectAttributes redirectAttributes) {
         
-        log.debug("reservation/create/"+id);
+        log.info("request: GET reservation/create/{}",id);
         
                 
         TripDto tripDto;
@@ -133,23 +134,24 @@ public class ReservationController {
         try {
             tripDto = tripFacade.findById(id);
             
-        if (tripDto==null)  {
+            if (tripDto==null)  {
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Trip no. " + id + " doesn't exist");
             return "redirect:/trip/list";
-        }
+            }
         
-        if (!tripFacade.hasTripAvailableCapacity(tripDto)) {
-            redirectAttributes.addFlashAttribute(
-                    "alert_danger", "Trip no. " + id + " doesn't have available capacity");
-            return "redirect:/trip/list";
+            if (!tripFacade.hasTripAvailableCapacity(tripDto)) {
+                redirectAttributes.addFlashAttribute(
+                        "alert_danger", "Trip no. " + id + " doesn't have available capacity");
+                return "redirect:/trip/list";
             }
 
-        for (ExcursionDto exc : excursionFacade.findByTrip(tripDto)) {
-            tripDto.addExcursion(exc);
-        }
+            for (ExcursionDto exc : excursionFacade.findByTrip(tripDto)) {
+                tripDto.addExcursion(exc);
+            }
         
         } catch (DataAccessException ex) {
+            log.error("GET reservation/create/{}", id, ex);
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation for trip no. " + id + 
                             " is not possible create now, due to "+ex.getMessage());
@@ -170,6 +172,8 @@ public class ReservationController {
             Model model,
             RedirectAttributes redirectAttributes, HttpServletRequest request) {
         
+        log.info("request: POST /reservation/create/{}", id);
+        
         UserDto authUser = (UserDto) request.getSession().getAttribute("authUser");
         ReservationCreateDto newReservation = new ReservationCreateDto();
         Long reservationId;
@@ -177,17 +181,13 @@ public class ReservationController {
             newReservation.setTrip(tripFacade.findById(trip.getId()));
             newReservation.setUser(authUser);
             reservationId = reservationFacade.create(newReservation);
-        } catch (DataAccessException ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Cannot create reservation for trip no. " +
-                    newReservation.getTrip().getName() + " due to " +ex.getMessage());
-            return "redirect:/trip/list";
-        }
 
-        try {
             for (ExcursionDto excursion : getExcursionsFromList(chosenExcursions.getFunctionList())) {
                 reservationFacade.addExcursion(reservationId, excursion);
             }
+            
         } catch (DataAccessException ex) {
+            log.error("request: POST /reservatin/create/{}", id, ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Problem occurred during creating reservation for trip no."+trip.getId());
             return "redirect:/trip/list";
         }
@@ -205,7 +205,7 @@ public class ReservationController {
             @PathVariable Long id, 
             Model model, 
             RedirectAttributes redirectAttributes) {
-
+        log.info("request: POST /reservation/delete/{}",id);
         return "redirect:/reservation/delete/"+id;
     }
     
@@ -226,8 +226,9 @@ public class ReservationController {
             HttpServletRequest req, 
             RedirectAttributes redirectAttributes) {
 
+        log.info("request: GET /reservation/delete/{}", id);
+        
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
-
         ReservationDto reservationDto;
         
         try {
@@ -246,9 +247,10 @@ public class ReservationController {
             }
             reservationFacade.delete(reservationDto);
         } catch (DataAccessException ex) {
+            log.error("request: GET /reservatin/delete/{}", id, ex);
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation no. "+ id +
-                            " couldn't be deleted due to " + ex.getMessage());
+                            " couldn't be deleted now.");
             return REDIRECT_RESERVATION_LIST;
             
         }

@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.RollbackException;
 import javax.validation.ValidationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.TransactionSystemException;
 
 /**
@@ -39,11 +41,13 @@ public class ExcursionController {
     @Inject
     private TripFacade tripFacade;
 
+    final static Logger log = LoggerFactory.getLogger(ExcursionController.class);
 
     private String DEFAULT_REDIRECT = "redirect:/excursion/list";
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listAll(Model model) {
+        log.info("request: GET /excursion/list");
         List<ExcursionDto> excursions = excursionFacade.findAll();
         model.addAttribute("excursions", excursions);
         model.addAttribute("filter", "none");
@@ -53,6 +57,7 @@ public class ExcursionController {
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        log.info("request: GET /excursion/detai/{}", id);
         ExcursionDto excursionDto = excursionFacade.findById(id);
 
         if (excursionDto == null) {
@@ -68,6 +73,8 @@ public class ExcursionController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
 
+        log.info("request: POST excursion/delete/{}",id);
+        
         ExcursionDto excursionDto = excursionFacade.findById(id);
         if (excursionDto == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " does not exist");
@@ -77,6 +84,7 @@ public class ExcursionController {
         try {
             excursionFacade.delete(excursionFacade.findById(id));
         } catch (Exception ex) {
+            log.error("request: POST /delete/{}", id, ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion no. " + id + " could not be deleted");
             return DEFAULT_REDIRECT;
         }
@@ -87,6 +95,7 @@ public class ExcursionController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable Long id, Model model, RedirectAttributes redAttr, HttpServletResponse res, HttpServletRequest req) {
+        log.info("request: GET /edit/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
             redAttr.addFlashAttribute("alert_danger", "You cannot edit Excursions");
@@ -109,6 +118,8 @@ public class ExcursionController {
                          @Valid @ModelAttribute("toUpdate") ExcursionDto toUpdate,
                          Model model,
                          RedirectAttributes redirectAttributes) {
+        
+        log.info("request: POST /update/{}",id);
 
         if (toUpdate == null) {
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion no." + id + " does not exist");
@@ -118,10 +129,12 @@ public class ExcursionController {
         try {
             excursionFacade.update(toUpdate);
         } catch (TransactionSystemException ex) {
+        log.error("request: POST /update/{}", id, ex);            
             ex.printStackTrace();
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
             return "redirect:/excursion/edit/{id}";
         } catch (Exception ex) {
+            log.error("request: POST /update/{}", id, ex);
             ex.printStackTrace();
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/edit/{id}";
@@ -135,6 +148,8 @@ public class ExcursionController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newExcursion(Model model) {
+        
+        log.info("request: GET /excursion/new/");
 
         model.addAttribute("newExcursion", new ExcursionCreateDto());
         model.addAttribute("trips", tripFacade.findAll());
@@ -146,14 +161,17 @@ public class ExcursionController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@ModelAttribute("newExcursion") ExcursionCreateDto excursionCreateDto, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes) {
+        log.info("request: POST /excursion/create/");
 
         Long id;
         try {
             id = excursionFacade.create(excursionCreateDto);
         } catch (ValidationException | RollbackException ex) {
-             redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
+            log.error("request: POST /excursion/create/", ex);
+            redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
             return "redirect:/excursion/new";
         } catch (Exception ex) {
+            log.error("request: POST /excursion/create/", ex);
             redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
             return "redirect:/excursion/new";
         }

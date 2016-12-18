@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,9 +42,12 @@ public class UserController {
     private UserFacade userFacade;
     
     private final String DEFAULT_REDIRECT = "redirect:/user/list";
+    
+    final static Logger log = LoggerFactory.getLogger(UserController.class);
         
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model, HttpServletRequest req, RedirectAttributes redAttr) {   
+        log.info("request: GET /user/list");
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         List<UserDto> users;
         if (authUser.getIsAdmin()) {
@@ -62,6 +67,7 @@ public class UserController {
     
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable Long id, Model model, RedirectAttributes redAttr, HttpServletRequest req) {
+        log.info("request: GET /user/detail/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin() && !authUser.getId().equals(id)) {
                 redAttr.addFlashAttribute("alert_danger", "Only admin can see other user's detail.");
@@ -84,6 +90,7 @@ public class UserController {
     @RequestMapping(value = {"/changeRole/{id}"}, method = RequestMethod.GET)
     public String changeRole(@PathVariable Long id, Model model, RedirectAttributes redAttr,HttpServletRequest req,
             HttpServletResponse res) {
+        log.info("request: GET /user/changeRole/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
                 redAttr.addFlashAttribute("alert_danger", "Only admin can change role.");
@@ -111,6 +118,7 @@ public class UserController {
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable Long id, Model model,RedirectAttributes redAttr,HttpServletResponse res, HttpServletRequest req) {
+        log.info("request: GET /user/edit/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getId().equals(id)) {
                 redAttr.addFlashAttribute("alert_danger", "You can edit only yourself.");
@@ -128,7 +136,7 @@ public class UserController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable Long id, @Valid @ModelAttribute("updatingUser") UserDto updatingUser
             , Model model, RedirectAttributes redAttr, HttpServletRequest req) {
-
+        log.info("request: POST /user/update/{}",id);
         if (updatingUser == null) {
             redAttr.addFlashAttribute("alert_danger", "User does not exist.");
             return DEFAULT_REDIRECT;
@@ -161,6 +169,7 @@ public class UserController {
             }
             user.setBirthDate(updatingUser.getBirthDate());
         } catch (Exception ex) {
+            log.error("request: POST /user/update/{}",id,ex);
             redAttr.addFlashAttribute(
                     "alert_danger", "Wrong format of form " + ex);
             return "redirect:/user/edit/"+ id;
@@ -168,6 +177,7 @@ public class UserController {
         
         try {userFacade.update(user);
         } catch (Exception ex) {
+            log.error("request: POST /user/update/{}",id,ex);
             redAttr.addFlashAttribute(
                     "alert_danger", "User cann't be updated with these informations " + ex);
             return "redirect:/user/edit/"+ id;

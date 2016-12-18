@@ -10,10 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ValidationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -47,9 +48,12 @@ public class TripController {
     @Inject
     private ExcursionFacade excursionFacade;
     
+    final static Logger log = LoggerFactory.getLogger(TripController.class);
+    
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {        
+        log.info("request: GET /trip/list");
         List<TripDto> trips = tripFacade.findAll();
         model.addAttribute("trips", trips);
         model.addAttribute("filter", "none");
@@ -58,6 +62,7 @@ public class TripController {
     
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        log.info("request: GET /excursion/detai/{}", id);
         TripDto tripDto = tripFacade.findById(id);
 
         if (tripDto == null) {
@@ -75,6 +80,7 @@ public class TripController {
      @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
 
+        log.info("request: POST /trip/delete/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
@@ -93,7 +99,7 @@ public class TripController {
             if (!reservationFacade.findByTrip(tripDto).isEmpty()) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Trip no. " + id + " could not be deleted, because there are existing reservations for it. ");
             }
-            
+            log.error("request: POST /trip/delete/{}",id);
             redirectAttributes.addFlashAttribute("alert_danger", "Trip no. " + id + " could not be deleted, because of: " + ex.getMessage());
             return DEFAULT_REDIRECT;
         }
@@ -104,7 +110,7 @@ public class TripController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
-        
+        log.info("request: GET /trip/edit/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
@@ -125,6 +131,7 @@ public class TripController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable Long id, @ModelAttribute("toUpdate") TripDto tripDto, Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
 
+        log.info("request: POST /trip/update/{}",id);
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
@@ -139,10 +146,12 @@ public class TripController {
         try {            
             tripFacade.update(tripDto);
         } catch (TransactionSystemException ex) {
+            log.error("request: POST /trip/update/{}",id,ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be in past");
             return "redirect:/trip/edit/" + id;
        
         } catch (Exception ex) {
+            log.error("request: POST /trip/update/{}",id,ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be updated" + ex.getMessage());
             return "redirect:/trip/edit/" + id;
         }
@@ -154,7 +163,7 @@ public class TripController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newTrip(Model model , RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
-
+        log.info("request: GET /trip/new/");
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
@@ -168,7 +177,7 @@ public class TripController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@ModelAttribute("newTrip") TripCreateDto tripCreateDto, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, HttpServletResponse res, HttpServletRequest req) {
-
+        log.info("request: POST /trip/create/");
         UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
         if (!authUser.getIsAdmin()) {
                 redirectAttributes.addFlashAttribute("alert_danger", "Only admin can create new trips.");
@@ -179,12 +188,15 @@ public class TripController {
         try {
             id = tripFacade.create(tripCreateDto);
         } catch (ValidationException ex) {
+            log.error("request: POST /trip/create/",ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be in past");
             return "redirect:/trip/new";
         } catch (DataAccessException ex) {
+            log.error("request: POST /trip/create/",ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created"+ ex.getMessage());
             return "redirect:/trip/new";
         } catch (Exception ex) {
+            log.error("request: POST /trip/create/",ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created" + ex.getMessage());
             return "redirect:/trip/new";
         }
