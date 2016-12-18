@@ -73,10 +73,4 @@ public interface ReservationFacade {
      */
     ReservationDto addExcursion(Long reservationId, ExcursionDto excursionDto);
     
-    /**
-     * Find all excursions of reservation
-     * @param reservationId ID of reservation
-     * @return excursionDto as List
-     */
-    List<ExcursionDto> findExcursionByReservation(Long reservationId);
 }

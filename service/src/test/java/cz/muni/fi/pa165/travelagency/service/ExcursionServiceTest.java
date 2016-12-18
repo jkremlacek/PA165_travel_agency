@@ -129,12 +129,6 @@ public class ExcursionServiceTest {
         verify(excursionDao).findByDestination(e.getDestination());
     }
 
-//    @Test
-//    public void testFindByDuration() throws Exception {
-//        excursionService.findByDuration(e.getDuration(), e.getDuration());
-//        verify(excursionDao).findByDuration(e.getDuration(), e.getDuration());
-//    }
-
     @Test
     public void testFindByTrip() throws Exception {
         excursionService.findByTrip(e.getTrip());
@@ -153,8 +147,6 @@ public class ExcursionServiceTest {
         doThrow(new NullPointerException()).when(excursionDao).findByDestination(null);
         doThrow(new NullPointerException()).when(excursionDao).findByPrice(any(), isNull(BigDecimal.class));
         doThrow(new NullPointerException()).when(excursionDao).findByPrice(isNull(BigDecimal.class), any());
-//        doThrow(new NullPointerException()).when(excursionDao).findByDuration(isNull(Date.class), any());
-//        doThrow(new NullPointerException()).when(excursionDao).findByDuration(any(), isNull(Date.class));
         doThrow(new NullPointerException()).when(excursionDao).findByTrip(null);
 
         assertThatThrownBy(() -> excursionService.create(null))
@@ -198,14 +190,6 @@ public class ExcursionServiceTest {
                 .as("findByPrice(any(), null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
 
-//        assertThatThrownBy(() -> excursionService.findByDuration(null, e.getDuration()))
-//                .as("findByDuration(null,any()) should throw NullPointerException")
-//                .isInstanceOf(NullPointerException.class);
-//
-//        assertThatThrownBy(() -> excursionService.findByDuration(e.getDuration(), null))
-//                .as("findByDuration(any(),null) should throw NullPointerException")
-//                .isInstanceOf(NullPointerException.class);
-
         assertThatThrownBy(() -> excursionService.findByTrip(null))
                 .as("findByTrip(null) should throw NullPointerException")
                 .isInstanceOf(NullPointerException.class);
@@ -221,7 +205,6 @@ public class ExcursionServiceTest {
         doThrow(new EntityNotFoundException()).when(excursionDao).findByDate(any(), any());
         doThrow(new EntityNotFoundException()).when(excursionDao).findByDestination(any());
         doThrow(new EntityNotFoundException()).when(excursionDao).findByPrice(any(), any());
-//        doThrow(new EntityNotFoundException()).when(excursionDao).findByDuration(any(), any());
         doThrow(new EntityNotFoundException()).when(excursionDao).findByTrip(any());
 
         assertThatThrownBy(() -> excursionService.create(any()))
@@ -255,10 +238,6 @@ public class ExcursionServiceTest {
         assertThatThrownBy(() -> excursionService.findByPrice(any(), any()))
                 .as("findByPrice(any()) should throw DataAccessException")
                 .isInstanceOf(DataAccessException.class);
-
-//        assertThatThrownBy(() -> excursionService.findByDuration(any(), any()))
-//                .as("findByDuration(any()) should throw DataAccessException")
-//                .isInstanceOf(DataAccessException.class);
 
         assertThatThrownBy(() -> excursionService.findByTrip(any()))
                 .as("findByTrip(any()) should throw DataAccessException")

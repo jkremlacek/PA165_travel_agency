@@ -78,10 +78,5 @@ public class ReservationFacadeImpl implements ReservationFacade {
         return mappingService.mapTo(reservationService.addExcursion(reservationId,excursion), ReservationDto.class);
     }
     
-    @Override
-    public List<ExcursionDto> findExcursionByReservation(Long reservationId) {
-        return mappingService.mapTo(
-            reservationService.findExcursionByReservation(reservationId), ExcursionDto.class);
-        
-    }
+    
 }

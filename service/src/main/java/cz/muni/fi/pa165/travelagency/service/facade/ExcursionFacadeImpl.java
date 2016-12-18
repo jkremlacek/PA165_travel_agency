@@ -78,11 +78,6 @@ public class ExcursionFacadeImpl implements ExcursionFacade {
         return mappingService.mapTo(excursionService.findByDestination(destination), ExcursionDto.class);
     }
 
-//    @Override
-//    public List<ExcursionDto> findByDuration(Date dateFrom, Date dateTo) {
-//        return mappingService.mapTo(excursionService.findByDuration(dateFrom, dateTo), ExcursionDto.class);
-//    }
-
     @Override
     public List<ExcursionDto> findByTrip(TripDto trip) {
         Trip mapped = mappingService.mapTo(trip, Trip.class);

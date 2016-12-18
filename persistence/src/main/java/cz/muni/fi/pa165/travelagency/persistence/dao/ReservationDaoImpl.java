@@ -35,7 +35,6 @@ public class ReservationDaoImpl implements ReservationDao {
     public Long create(Reservation reservation) {
         validateAttributes(reservation);
         em.persist(reservation);
-        //em.flush();
         return reservation.getId();
     }
 

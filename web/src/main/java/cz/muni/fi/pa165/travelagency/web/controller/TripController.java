@@ -136,8 +136,6 @@ public class TripController {
             return "redirect:/trip/create";
         }
         
-        //try update
-        
         try {            
             tripFacade.update(tripDto);
         } catch (TransactionSystemException ex) {
@@ -203,9 +201,5 @@ public class TripController {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-//        SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
-//        stf.setLenient(true);
-//        binder.registerCustomEditor(Date.class, new CustomDateEditor(stf, true));
-
     }
 }

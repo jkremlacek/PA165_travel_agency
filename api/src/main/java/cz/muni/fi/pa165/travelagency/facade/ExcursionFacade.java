@@ -76,14 +76,6 @@ public interface ExcursionFacade {
      */
     List<ExcursionDto> findByDestination(String destination);
     
-//    /**
-//     * Find excursions with duration in given time interval. Border values are included.
-//     * @param dateFrom start date of interval. Included into interval.
-//     * @param dateTo end date of interval. Included into interval.
-//     * @return excursion DTOs in given duration time interval as List
-//     */
-//    List<ExcursionDto> findByDuration(Date dateFrom, Date dateTo);
-    
     /**
      * Find excursions a given trip
      * @param trip trip DTO to find excursion

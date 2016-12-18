@@ -155,12 +155,6 @@ public class ExcursionFacadeTest {
         verify(excursionService).findByDate(e.getDate(),e.getDate());
     }
     
-//    @Test
-//    public void testFindByDuration() throws Exception {
-//        excursionFacade.findByDuration(e.getDuration(), e.getDuration());
-//        verify(excursionService).findByDuration(e.getDuration(), e.getDuration());
-//    }
-
     @Test
     public void testFindByDestination() throws Exception {
         excursionFacade.findByDestination("dst");

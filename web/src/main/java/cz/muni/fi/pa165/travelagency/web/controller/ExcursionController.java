@@ -147,8 +147,6 @@ public class ExcursionController {
     public String create(@ModelAttribute("newExcursion") ExcursionCreateDto excursionCreateDto, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes) {
 
-        //TODO: check binding errors
-
         Long id;
         try {
             id = excursionFacade.create(excursionCreateDto);
@@ -172,10 +170,6 @@ public class ExcursionController {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
         sdf.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-//        SimpleDateFormat stf = new SimpleDateFormat("HH:mm");
-//        stf.setLenient(true);
-//        binder.registerCustomEditor(Date.class, new CustomDateEditor(stf, true));
-
     }
 
 }

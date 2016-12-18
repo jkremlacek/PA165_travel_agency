@@ -129,7 +129,6 @@ public class TripDaoImpl implements TripDao {
             throw new ValidationException("Id should be null.");
         }
         em.persist(entity);
-        //em.flush();
         return entity.getId();
     }
 

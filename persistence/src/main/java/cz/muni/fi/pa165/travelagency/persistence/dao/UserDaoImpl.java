@@ -90,7 +90,6 @@ public class UserDaoImpl implements UserDao {
          if (user.getPersonalNumber() == null)
              throw new NullPointerException("User's personal number can not be null.");      
         em.persist(user);
-        //em.flush();
         return user.getId();
 
     }

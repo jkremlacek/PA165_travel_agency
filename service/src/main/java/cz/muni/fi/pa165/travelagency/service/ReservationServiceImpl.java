@@ -139,14 +139,4 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
     
-    @Override
-    public List<Excursion> findExcursionByReservation(Long reservationId) {
-        List<Excursion> excursions = new ArrayList<>();
-        for (Excursion exc : reservationDao.findById(reservationId).getExcursionSet()) {
-            excursions.add(exc);
-        }
-        return excursions;
-        
-    }
-
 }
