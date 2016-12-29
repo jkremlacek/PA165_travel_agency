@@ -18,7 +18,7 @@
                 <th>User</th>
             </c:if>
             <th>Period</th>
-            <th>Excursions number</th>
+            <th>Excursions count</th>
             <th>Price</th>
         </tr>
         </thead>

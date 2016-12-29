@@ -32,7 +32,7 @@
                 <form:select path="trip">
                     <c:forEach items="${trips}" var="t">
                         <form:option type="text" selected="selected"
-                                     value="${t.getId().toString()}">${t.name} ${t.destination}</form:option>
+                             value="${t.getId().toString()}">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy"/></form:option>
                     </c:forEach>
                 </form:select>
             </td>

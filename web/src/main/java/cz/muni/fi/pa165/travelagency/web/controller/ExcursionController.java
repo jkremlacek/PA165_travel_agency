@@ -147,7 +147,16 @@ public class ExcursionController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String newExcursion(Model model) {
+    public String newExcursion(Model model, 
+                               RedirectAttributes redAttr,
+                               HttpServletRequest req) {
+        
+        UserDto authUser = (UserDto) req.getSession().getAttribute("authUser");
+        
+        if (!authUser.getIsAdmin()) {
+            redAttr.addFlashAttribute("alert_danger", "You don't have permission to create new excursion");
+            return DEFAULT_REDIRECT;
+        }
         
         log.info("request: GET /excursion/new/");
 

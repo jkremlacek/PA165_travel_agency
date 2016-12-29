@@ -34,10 +34,10 @@
                     <c:forEach items="${trips}"  var="t">
                         <c:choose>
                             <c:when test="${toUpdate.trip.id==t.id}">
-                                <form:option type="text" value="${t.getId().toString()}" selected="selected">${t.name} ${t.destination}</form:option>
+                                <form:option type="text" value="${t.getId().toString()}" selected="selected">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy"/></form:option>
                             </c:when>
                             <c:otherwise>
-                                <form:option type="text" value="${t.getId().toString()}">${t.name} ${t.destination}</form:option>
+                                <form:option type="text" value="${t.getId().toString()}">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy"/></form:option>
                             </c:otherwise>
                         </c:choose>
 
