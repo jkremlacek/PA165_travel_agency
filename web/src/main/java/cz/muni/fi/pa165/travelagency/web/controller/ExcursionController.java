@@ -129,14 +129,14 @@ public class ExcursionController {
         try {
             excursionFacade.update(toUpdate);
         } catch (TransactionSystemException ex) {
-        log.error("request: POST /update/{}", id, ex);            
+            log.error("request: POST /update/{}", id, ex);            
             ex.printStackTrace();
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
             return "redirect:/excursion/edit/{id}";
         } catch (Exception ex) {
             log.error("request: POST /update/{}", id, ex);
             ex.printStackTrace();
-            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger", "Some error occurred during updating excursion no. "+id);
             return "redirect:/excursion/edit/{id}";
         }
 
@@ -181,7 +181,7 @@ public class ExcursionController {
             return "redirect:/excursion/new";
         } catch (Exception ex) {
             log.error("request: POST /excursion/create/", ex);
-            redirectAttributes.addFlashAttribute("alert_danger", ex.getMessage());
+            redirectAttributes.addFlashAttribute("alert_danger",  "Some error occurred during creating excursion.");
             return "redirect:/excursion/new";
         }
 

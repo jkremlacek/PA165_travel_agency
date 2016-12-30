@@ -72,7 +72,7 @@ public class ReservationController {
         log.error("request: GET reservation/list, user id. ={}, admin={}"
                 ,authUser.getId(),authUser.getIsAdmin(), ex);
             redirectAttributes.addFlashAttribute(
-                    "alert_danger", "Reservation list isn't accessible, due to " + ex.getMessage());
+                    "alert_danger", "Reservation list isn't accessible.");
             return "";
         }
 
@@ -109,7 +109,7 @@ public class ReservationController {
         } catch (DataAccessException ex) {
             log.error("request: GET reservation/detail/{}; user id={}", id, authUser.getId(), ex);
             redirectAttributes.addFlashAttribute(
-                    "alert_danger", "Reservation no. "+id+" isn't accessible, due to " + ex.getMessage());
+                    "alert_danger", "Reservation no. "+id+" isn't accessible.");
             return REDIRECT_RESERVATION_LIST;
         }
         
@@ -154,7 +154,7 @@ public class ReservationController {
             log.error("GET reservation/create/{}", id, ex);
             redirectAttributes.addFlashAttribute(
                     "alert_danger", "Reservation for trip no. " + id + 
-                            " is not possible create now, due to "+ex.getMessage());
+                            " is not possible create now. Try it later");
             return "redirect:/trip/list";
         }
         model.addAttribute("chosenExcursions", new ListWrapper());
