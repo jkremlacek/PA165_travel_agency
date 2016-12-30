@@ -56,7 +56,7 @@
         </tr>
         <tr>
             <th>Price</th>
-            <td><form:input path="price" type="number" min="1" size="10"/> CZK</td>
+            <td><form:input path="price" type="number" min="1" size="10" required="required"/> CZK</td>
         </tr>
     </table>
     <button class="btn btn-success" type="submit">Create Excursion</button>
