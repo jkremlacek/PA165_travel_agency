@@ -128,14 +128,17 @@ public class ExcursionController {
 
         try {
             excursionFacade.update(toUpdate);
+        } catch (IllegalArgumentException ex) {
+            log.error("request: POST /update/{}", id, ex);
+            redirectAttributes.addFlashAttribute("alert_danger", "Date and time of excursion have to be in time interval of chosen trip.");
+            return "redirect:/excursion/edit/{id}";
         } catch (TransactionSystemException ex) {
             log.error("request: POST /update/{}", id, ex);            
-            ex.printStackTrace();
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");
             return "redirect:/excursion/edit/{id}";
+        
         } catch (Exception ex) {
             log.error("request: POST /update/{}", id, ex);
-            ex.printStackTrace();
             redirectAttributes.addFlashAttribute("alert_danger", "Some error occurred during updating excursion no. "+id);
             return "redirect:/excursion/edit/{id}";
         }
@@ -175,6 +178,10 @@ public class ExcursionController {
         Long id;
         try {
             id = excursionFacade.create(excursionCreateDto);
+        } catch (IllegalArgumentException ex) {
+            log.error("request: POST /excursion/create/", ex);
+            redirectAttributes.addFlashAttribute("alert_danger", "Date and time of excursion have to be in time interval of chosen trip.");
+            return "redirect:/excursion/new";
         } catch (ValidationException | RollbackException ex) {
             log.error("request: POST /excursion/create/", ex);
             redirectAttributes.addFlashAttribute("alert_danger", "Excursion could not be in past");

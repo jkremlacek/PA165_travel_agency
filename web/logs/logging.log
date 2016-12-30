@@ -1354,3 +1354,1115 @@ delete from Trip where id=? [23503-190]
 2016-12-30 19:15:14 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
 2016-12-30 19:15:14 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
 2016-12-30 19:15:14 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:18:50 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2016-12-30 19:18:50 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing Root WebApplicationContext: startup date [Fri Dec 30 19:18:50 CET 2016]; root of context hierarchy
+2016-12-30 19:18:50 INFO  AnnotationConfigWebApplicationContext:208 - Registering annotated classes: [class cz.muni.fi.pa165.travelagency.web.config.WebConfig]
+2016-12-30 19:18:51 INFO  ConfigurationClassBeanDefinitionReader:299 - Skipping bean definition for [BeanMethod:name=idToTripConverter,declaringClass=cz.muni.fi.pa165.travelagency.web.config.WebConfig]: a definition for bean 'idToTripConverter' already exists. This top-level bean definition is considered as an override.
+2016-12-30 19:18:51 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:18:51 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'testdb'
+2016-12-30 19:18:52 INFO  LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:18:52 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-12-30 19:18:52 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2016-12-30 19:18:52 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2016-12-30 19:18:52 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2016-12-30 19:18:52 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-12-30 19:18:52 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-12-30 19:18:52 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2016-12-30 19:18:53 INFO  Version:27 - HV000001: Hibernate Validator 5.1.3.Final
+2016-12-30 19:18:53 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:18:53 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:18:53 INFO  GlobalSettings:113 - Trying to find Dozer configuration file: dozer.properties
+2016-12-30 19:18:53 WARN  GlobalSettings:118 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2016-12-30 19:18:53 INFO  DozerInitializer:70 - Initializing Dozer. Version: 5.4.0, Thread Name: localhost-startStop-1
+2016-12-30 19:18:53 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2016-12-30 19:18:53 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2016-12-30 19:18:53 INFO  DozerBeanMapper:175 - Initializing a new instance of dozer bean mapper.
+2016-12-30 19:18:54 INFO  SampleDataLoadingFacadeImpl:55 - Loaded users.
+2016-12-30 19:18:54 INFO  SampleDataLoadingFacadeImpl:62 - Loaded trips.
+2016-12-30 19:18:54 INFO  SampleDataLoadingFacadeImpl:73 - Loaded excursions.
+2016-12-30 19:18:54 INFO  SampleDataLoadingFacadeImpl:84 - Prepared excursion sets.
+2016-12-30 19:18:54 INFO  SampleDataLoadingFacadeImpl:90 - Loaded reservations.
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authForm(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/logout],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.logout(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authenticate(java.lang.String,java.lang.String,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.listAll(org.springframework.ui.Model)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.newExcursion(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.listAll(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,cz.muni.fi.pa165.travelagency.web.converter.ListWrapper,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.newTrip(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.create(cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.list(org.springframework.ui.Model)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/changeRole/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.changeRole(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.UserDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:18:55 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.list(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:18:55 INFO  SimpleUrlHandlerMapping:301 - Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-30 19:18:55 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Dec 30 19:18:50 CET 2016]; root of context hierarchy
+2016-12-30 19:18:55 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 5479 ms
+2016-12-30 19:18:56 INFO  DispatcherServlet:485 - FrameworkServlet 'dispatcher': initialization started
+2016-12-30 19:18:56 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:18:56 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:18:56 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:18:56 INFO  DispatcherServlet:504 - FrameworkServlet 'dispatcher': initialization completed in 47 ms
+2016-12-30 19:19:06 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:19:18 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:19:18 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:21:18 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:21:21 INFO  ExcursionController:161 - request: GET /excursion/new/
+2016-12-30 19:21:53 INFO  ExcursionController:173 - request: POST /excursion/create/
+2016-12-30 19:21:53 ERROR ExcursionController:183 - request: POST /excursion/create/
+java.lang.IllegalArgumentException: Cannot create excursion before trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:96)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy73.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:21:53 INFO  ExcursionController:161 - request: GET /excursion/new/
+2016-12-30 19:23:40 INFO  ExcursionController:173 - request: POST /excursion/create/
+2016-12-30 19:23:40 ERROR ExcursionController:183 - request: POST /excursion/create/
+java.lang.IllegalArgumentException: Cannot create excursion in past.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:92)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy73.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:23:40 INFO  ExcursionController:161 - request: GET /excursion/new/
+2016-12-30 19:30:11 INFO  AnnotationConfigWebApplicationContext:866 - Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:18:56 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:30:12 INFO  AnnotationConfigWebApplicationContext:866 - Closing Root WebApplicationContext: startup date [Fri Dec 30 19:18:50 CET 2016]; root of context hierarchy
+2016-12-30 19:30:12 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:30:12 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:30:12 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:30:35 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2016-12-30 19:30:35 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing Root WebApplicationContext: startup date [Fri Dec 30 19:30:35 CET 2016]; root of context hierarchy
+2016-12-30 19:30:35 INFO  AnnotationConfigWebApplicationContext:208 - Registering annotated classes: [class cz.muni.fi.pa165.travelagency.web.config.WebConfig]
+2016-12-30 19:30:36 INFO  ConfigurationClassBeanDefinitionReader:299 - Skipping bean definition for [BeanMethod:name=idToTripConverter,declaringClass=cz.muni.fi.pa165.travelagency.web.config.WebConfig]: a definition for bean 'idToTripConverter' already exists. This top-level bean definition is considered as an override.
+2016-12-30 19:30:36 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:30:36 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'testdb'
+2016-12-30 19:30:36 INFO  LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:30:36 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-12-30 19:30:36 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2016-12-30 19:30:36 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2016-12-30 19:30:36 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2016-12-30 19:30:37 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-12-30 19:30:37 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-12-30 19:30:37 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2016-12-30 19:30:37 INFO  Version:27 - HV000001: Hibernate Validator 5.1.3.Final
+2016-12-30 19:30:38 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:30:38 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:30:38 INFO  GlobalSettings:113 - Trying to find Dozer configuration file: dozer.properties
+2016-12-30 19:30:38 WARN  GlobalSettings:118 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2016-12-30 19:30:38 INFO  DozerInitializer:70 - Initializing Dozer. Version: 5.4.0, Thread Name: localhost-startStop-1
+2016-12-30 19:30:38 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2016-12-30 19:30:38 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2016-12-30 19:30:38 INFO  DozerBeanMapper:175 - Initializing a new instance of dozer bean mapper.
+2016-12-30 19:30:40 INFO  SampleDataLoadingFacadeImpl:55 - Loaded users.
+2016-12-30 19:30:40 INFO  SampleDataLoadingFacadeImpl:62 - Loaded trips.
+2016-12-30 19:30:40 INFO  SampleDataLoadingFacadeImpl:73 - Loaded excursions.
+2016-12-30 19:30:40 INFO  SampleDataLoadingFacadeImpl:84 - Prepared excursion sets.
+2016-12-30 19:30:40 INFO  SampleDataLoadingFacadeImpl:90 - Loaded reservations.
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/logout],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.logout(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authForm(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authenticate(java.lang.String,java.lang.String,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.listAll(org.springframework.ui.Model)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.newExcursion(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.listAll(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,cz.muni.fi.pa165.travelagency.web.converter.ListWrapper,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.newTrip(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.create(cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.list(org.springframework.ui.Model)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/changeRole/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.changeRole(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.UserDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:30:40 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.list(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:30:40 INFO  SimpleUrlHandlerMapping:301 - Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-30 19:30:41 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Dec 30 19:30:35 CET 2016]; root of context hierarchy
+2016-12-30 19:30:41 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 5346 ms
+2016-12-30 19:30:41 INFO  DispatcherServlet:485 - FrameworkServlet 'dispatcher': initialization started
+2016-12-30 19:30:41 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:30:41 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:30:41 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:30:41 INFO  DispatcherServlet:504 - FrameworkServlet 'dispatcher': initialization completed in 54 ms
+2016-12-30 19:31:29 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:31:37 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:31:37 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:31:42 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:31:44 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:31:55 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:31:55 ERROR ExcursionController:185 - request: POST /update/{}
+java.lang.IllegalArgumentException: Cannot create excursion before trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:96)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:34:52 INFO  AnnotationConfigWebApplicationContext:866 - Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:30:41 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:34:52 INFO  AnnotationConfigWebApplicationContext:866 - Closing Root WebApplicationContext: startup date [Fri Dec 30 19:30:35 CET 2016]; root of context hierarchy
+2016-12-30 19:34:52 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:34:52 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:34:52 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:35:02 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2016-12-30 19:35:02 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing Root WebApplicationContext: startup date [Fri Dec 30 19:35:02 CET 2016]; root of context hierarchy
+2016-12-30 19:35:02 INFO  AnnotationConfigWebApplicationContext:208 - Registering annotated classes: [class cz.muni.fi.pa165.travelagency.web.config.WebConfig]
+2016-12-30 19:35:03 INFO  ConfigurationClassBeanDefinitionReader:299 - Skipping bean definition for [BeanMethod:name=idToTripConverter,declaringClass=cz.muni.fi.pa165.travelagency.web.config.WebConfig]: a definition for bean 'idToTripConverter' already exists. This top-level bean definition is considered as an override.
+2016-12-30 19:35:03 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:35:03 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'testdb'
+2016-12-30 19:35:04 INFO  LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:35:04 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-12-30 19:35:04 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2016-12-30 19:35:04 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2016-12-30 19:35:04 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2016-12-30 19:35:04 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-12-30 19:35:04 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-12-30 19:35:05 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2016-12-30 19:35:05 INFO  Version:27 - HV000001: Hibernate Validator 5.1.3.Final
+2016-12-30 19:35:05 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:35:05 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:35:06 INFO  GlobalSettings:113 - Trying to find Dozer configuration file: dozer.properties
+2016-12-30 19:35:06 WARN  GlobalSettings:118 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2016-12-30 19:35:06 INFO  DozerInitializer:70 - Initializing Dozer. Version: 5.4.0, Thread Name: localhost-startStop-1
+2016-12-30 19:35:06 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2016-12-30 19:35:06 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2016-12-30 19:35:06 INFO  DozerBeanMapper:175 - Initializing a new instance of dozer bean mapper.
+2016-12-30 19:35:06 INFO  SampleDataLoadingFacadeImpl:55 - Loaded users.
+2016-12-30 19:35:06 INFO  SampleDataLoadingFacadeImpl:62 - Loaded trips.
+2016-12-30 19:35:06 INFO  SampleDataLoadingFacadeImpl:73 - Loaded excursions.
+2016-12-30 19:35:06 INFO  SampleDataLoadingFacadeImpl:84 - Prepared excursion sets.
+2016-12-30 19:35:06 INFO  SampleDataLoadingFacadeImpl:90 - Loaded reservations.
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authForm(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/logout],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.logout(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authenticate(java.lang.String,java.lang.String,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.listAll(org.springframework.ui.Model)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.newExcursion(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.listAll(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,cz.muni.fi.pa165.travelagency.web.converter.ListWrapper,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.newTrip(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.create(cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.list(org.springframework.ui.Model)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/changeRole/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.changeRole(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.UserDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:35:07 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.list(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:35:07 INFO  SimpleUrlHandlerMapping:301 - Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-30 19:35:07 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Dec 30 19:35:02 CET 2016]; root of context hierarchy
+2016-12-30 19:35:07 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 5103 ms
+2016-12-30 19:35:08 INFO  DispatcherServlet:485 - FrameworkServlet 'dispatcher': initialization started
+2016-12-30 19:35:08 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:35:08 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:35:08 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:35:08 INFO  DispatcherServlet:504 - FrameworkServlet 'dispatcher': initialization completed in 45 ms
+2016-12-30 19:35:13 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:35:19 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:35:20 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:35:22 INFO  TripController:56 - request: GET /trip/list
+2016-12-30 19:35:25 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:35:26 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:35:49 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:35:49 INFO  ExcursionController:60 - request: GET /excursion/detai/9
+2016-12-30 19:35:53 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:35:54 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:36:07 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:36:07 ERROR ExcursionController:185 - request: POST /update/{}
+java.lang.IllegalArgumentException: Cannot create excursion before trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:96)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy73.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:37:12 INFO  AnnotationConfigWebApplicationContext:866 - Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:35:08 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:37:12 INFO  AnnotationConfigWebApplicationContext:866 - Closing Root WebApplicationContext: startup date [Fri Dec 30 19:35:02 CET 2016]; root of context hierarchy
+2016-12-30 19:37:12 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:37:12 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:37:12 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:37:23 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2016-12-30 19:37:23 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing Root WebApplicationContext: startup date [Fri Dec 30 19:37:23 CET 2016]; root of context hierarchy
+2016-12-30 19:37:23 INFO  AnnotationConfigWebApplicationContext:208 - Registering annotated classes: [class cz.muni.fi.pa165.travelagency.web.config.WebConfig]
+2016-12-30 19:37:23 INFO  ConfigurationClassBeanDefinitionReader:299 - Skipping bean definition for [BeanMethod:name=idToTripConverter,declaringClass=cz.muni.fi.pa165.travelagency.web.config.WebConfig]: a definition for bean 'idToTripConverter' already exists. This top-level bean definition is considered as an override.
+2016-12-30 19:37:23 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:37:24 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'testdb'
+2016-12-30 19:37:24 INFO  LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:37:24 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-12-30 19:37:24 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2016-12-30 19:37:24 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2016-12-30 19:37:24 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2016-12-30 19:37:24 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-12-30 19:37:24 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-12-30 19:37:25 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2016-12-30 19:37:25 INFO  Version:27 - HV000001: Hibernate Validator 5.1.3.Final
+2016-12-30 19:37:25 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:37:25 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:37:26 INFO  GlobalSettings:113 - Trying to find Dozer configuration file: dozer.properties
+2016-12-30 19:37:26 WARN  GlobalSettings:118 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2016-12-30 19:37:26 INFO  DozerInitializer:70 - Initializing Dozer. Version: 5.4.0, Thread Name: localhost-startStop-1
+2016-12-30 19:37:26 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2016-12-30 19:37:26 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2016-12-30 19:37:26 INFO  DozerBeanMapper:175 - Initializing a new instance of dozer bean mapper.
+2016-12-30 19:37:26 INFO  SampleDataLoadingFacadeImpl:55 - Loaded users.
+2016-12-30 19:37:27 INFO  SampleDataLoadingFacadeImpl:62 - Loaded trips.
+2016-12-30 19:37:27 INFO  SampleDataLoadingFacadeImpl:73 - Loaded excursions.
+2016-12-30 19:37:27 INFO  SampleDataLoadingFacadeImpl:84 - Prepared excursion sets.
+2016-12-30 19:37:27 INFO  SampleDataLoadingFacadeImpl:90 - Loaded reservations.
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/logout],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.logout(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authForm(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authenticate(java.lang.String,java.lang.String,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.listAll(org.springframework.ui.Model)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.newExcursion(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.listAll(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,cz.muni.fi.pa165.travelagency.web.converter.ListWrapper,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.newTrip(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.create(cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.list(org.springframework.ui.Model)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/changeRole/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.changeRole(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.UserDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:37:27 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.list(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:37:27 INFO  SimpleUrlHandlerMapping:301 - Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-30 19:37:27 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Dec 30 19:37:23 CET 2016]; root of context hierarchy
+2016-12-30 19:37:27 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 4652 ms
+2016-12-30 19:37:27 INFO  DispatcherServlet:485 - FrameworkServlet 'dispatcher': initialization started
+2016-12-30 19:37:27 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:37:27 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:37:27 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:37:27 INFO  DispatcherServlet:504 - FrameworkServlet 'dispatcher': initialization completed in 38 ms
+2016-12-30 19:37:32 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:37:40 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:37:40 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:37:53 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:37:55 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:38:05 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:38:05 ERROR ExcursionController:185 - request: POST /update/{}
+java.lang.IllegalArgumentException: Cannot create excursion before trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:96)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:38:05 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:38:51 INFO  AnnotationConfigWebApplicationContext:866 - Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:37:27 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:38:51 INFO  AnnotationConfigWebApplicationContext:866 - Closing Root WebApplicationContext: startup date [Fri Dec 30 19:37:23 CET 2016]; root of context hierarchy
+2016-12-30 19:38:51 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:38:51 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:38:51 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:39:11 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2016-12-30 19:39:11 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing Root WebApplicationContext: startup date [Fri Dec 30 19:39:11 CET 2016]; root of context hierarchy
+2016-12-30 19:39:11 INFO  AnnotationConfigWebApplicationContext:208 - Registering annotated classes: [class cz.muni.fi.pa165.travelagency.web.config.WebConfig]
+2016-12-30 19:39:12 INFO  ConfigurationClassBeanDefinitionReader:299 - Skipping bean definition for [BeanMethod:name=idToTripConverter,declaringClass=cz.muni.fi.pa165.travelagency.web.config.WebConfig]: a definition for bean 'idToTripConverter' already exists. This top-level bean definition is considered as an override.
+2016-12-30 19:39:12 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:39:12 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'testdb'
+2016-12-30 19:39:12 INFO  LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:39:13 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-12-30 19:39:13 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2016-12-30 19:39:13 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2016-12-30 19:39:13 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2016-12-30 19:39:13 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-12-30 19:39:13 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-12-30 19:39:13 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2016-12-30 19:39:13 INFO  Version:27 - HV000001: Hibernate Validator 5.1.3.Final
+2016-12-30 19:39:14 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:39:14 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:39:14 INFO  GlobalSettings:113 - Trying to find Dozer configuration file: dozer.properties
+2016-12-30 19:39:15 WARN  GlobalSettings:118 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2016-12-30 19:39:15 INFO  DozerInitializer:70 - Initializing Dozer. Version: 5.4.0, Thread Name: localhost-startStop-1
+2016-12-30 19:39:15 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2016-12-30 19:39:15 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2016-12-30 19:39:15 INFO  DozerBeanMapper:175 - Initializing a new instance of dozer bean mapper.
+2016-12-30 19:39:15 INFO  SampleDataLoadingFacadeImpl:55 - Loaded users.
+2016-12-30 19:39:15 INFO  SampleDataLoadingFacadeImpl:62 - Loaded trips.
+2016-12-30 19:39:16 INFO  SampleDataLoadingFacadeImpl:73 - Loaded excursions.
+2016-12-30 19:39:16 INFO  SampleDataLoadingFacadeImpl:84 - Prepared excursion sets.
+2016-12-30 19:39:16 INFO  SampleDataLoadingFacadeImpl:90 - Loaded reservations.
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/logout],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.logout(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authForm(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authenticate(java.lang.String,java.lang.String,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.listAll(org.springframework.ui.Model)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.newExcursion(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.listAll(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,cz.muni.fi.pa165.travelagency.web.converter.ListWrapper,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.newTrip(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.create(cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.list(org.springframework.ui.Model)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/changeRole/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.changeRole(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.UserDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:39:16 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.list(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:39:16 INFO  SimpleUrlHandlerMapping:301 - Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-30 19:39:16 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Dec 30 19:39:11 CET 2016]; root of context hierarchy
+2016-12-30 19:39:16 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 4909 ms
+2016-12-30 19:39:16 INFO  DispatcherServlet:485 - FrameworkServlet 'dispatcher': initialization started
+2016-12-30 19:39:16 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:39:16 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:39:16 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:39:16 INFO  DispatcherServlet:504 - FrameworkServlet 'dispatcher': initialization completed in 45 ms
+2016-12-30 19:39:22 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:39:30 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:39:30 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:39:42 INFO  UserController:50 - request: GET /user/list
+2016-12-30 19:43:00 INFO  AuthController:81 - request: GET /logout
+2016-12-30 19:43:00 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:43:09 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:43:09 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:43:14 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:43:15 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:43:33 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:43:33 ERROR ExcursionController:185 - request: POST /update/{}
+java.lang.IllegalArgumentException: Cannot create excursion in past.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:92)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:43:33 WARN  PageNotFound:198 - Request method 'GET' not supported
+2016-12-30 19:43:58 INFO  AnnotationConfigWebApplicationContext:866 - Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:39:16 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:43:58 INFO  AnnotationConfigWebApplicationContext:866 - Closing Root WebApplicationContext: startup date [Fri Dec 30 19:39:11 CET 2016]; root of context hierarchy
+2016-12-30 19:43:58 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:43:58 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:43:58 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:45:08 INFO  ContextLoader:285 - Root WebApplicationContext: initialization started
+2016-12-30 19:45:08 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing Root WebApplicationContext: startup date [Fri Dec 30 19:45:08 CET 2016]; root of context hierarchy
+2016-12-30 19:45:08 INFO  AnnotationConfigWebApplicationContext:208 - Registering annotated classes: [class cz.muni.fi.pa165.travelagency.web.config.WebConfig]
+2016-12-30 19:45:08 INFO  ConfigurationClassBeanDefinitionReader:299 - Skipping bean definition for [BeanMethod:name=idToTripConverter,declaringClass=cz.muni.fi.pa165.travelagency.web.config.WebConfig]: a definition for bean 'idToTripConverter' already exists. This top-level bean definition is considered as an override.
+2016-12-30 19:45:09 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:45:09 INFO  EmbeddedDatabaseFactory:147 - Creating embedded database 'testdb'
+2016-12-30 19:45:09 INFO  LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-12-30 19:45:09 INFO  LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-12-30 19:45:09 INFO  Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2016-12-30 19:45:09 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2016-12-30 19:45:09 INFO  Environment:346 - HHH000021: Bytecode provider name : javassist
+2016-12-30 19:45:09 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-12-30 19:45:10 INFO  Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-12-30 19:45:10 INFO  ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2016-12-30 19:45:10 INFO  Version:27 - HV000001: Hibernate Validator 5.1.3.Final
+2016-12-30 19:45:11 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 19:45:11 INFO  SchemaExport:406 - HHH000230: Schema export complete
+2016-12-30 19:45:11 INFO  GlobalSettings:113 - Trying to find Dozer configuration file: dozer.properties
+2016-12-30 19:45:11 WARN  GlobalSettings:118 - Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2016-12-30 19:45:11 INFO  DozerInitializer:70 - Initializing Dozer. Version: 5.4.0, Thread Name: localhost-startStop-1
+2016-12-30 19:45:11 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2016-12-30 19:45:11 INFO  JMXPlatformImpl:66 - Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2016-12-30 19:45:11 INFO  DozerBeanMapper:175 - Initializing a new instance of dozer bean mapper.
+2016-12-30 19:45:12 INFO  SampleDataLoadingFacadeImpl:55 - Loaded users.
+2016-12-30 19:45:12 INFO  SampleDataLoadingFacadeImpl:62 - Loaded trips.
+2016-12-30 19:45:12 INFO  SampleDataLoadingFacadeImpl:73 - Loaded excursions.
+2016-12-30 19:45:12 INFO  SampleDataLoadingFacadeImpl:84 - Prepared excursion sets.
+2016-12-30 19:45:12 INFO  SampleDataLoadingFacadeImpl:90 - Loaded reservations.
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/logout],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.logout(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authForm(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/auth/login],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.AuthController.authenticate(java.lang.String,java.lang.String,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.listAll(org.springframework.ui.Model)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.newExcursion(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.ExcursionDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/excursion/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(cz.muni.fi.pa165.travelagency.facade.dto.ExcursionCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.listAll(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/reservation/create/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.ReservationController.create(java.lang.Long,cz.muni.fi.pa165.travelagency.web.converter.ListWrapper,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/new],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.newTrip(org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.TripDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/delete/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.delete(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/create],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.create(cz.muni.fi.pa165.travelagency.facade.dto.TripCreateDto,org.springframework.validation.BindingResult,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/trip/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.TripController.list(org.springframework.ui.Model)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/changeRole/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.changeRole(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/edit/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.edit(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/detail/{id}],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.detail(java.lang.Long,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/update/{id}],methods=[POST]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.update(java.lang.Long,cz.muni.fi.pa165.travelagency.facade.dto.UserDto,org.springframework.ui.Model,org.springframework.web.servlet.mvc.support.RedirectAttributes,javax.servlet.http.HttpServletRequest)
+2016-12-30 19:45:13 INFO  RequestMappingHandlerMapping:217 - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String cz.muni.fi.pa165.travelagency.web.controller.UserController.list(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-12-30 19:45:13 INFO  SimpleUrlHandlerMapping:301 - Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-30 19:45:13 INFO  RequestMappingHandlerAdapter:517 - Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Dec 30 19:45:08 CET 2016]; root of context hierarchy
+2016-12-30 19:45:13 INFO  ContextLoader:325 - Root WebApplicationContext: initialization completed in 5232 ms
+2016-12-30 19:45:13 INFO  DispatcherServlet:485 - FrameworkServlet 'dispatcher': initialization started
+2016-12-30 19:45:13 INFO  AnnotationConfigWebApplicationContext:511 - Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:45:13 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 19:45:13 INFO  AutowiredAnnotationBeanPostProcessor:153 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-30 19:45:13 INFO  DispatcherServlet:504 - FrameworkServlet 'dispatcher': initialization completed in 50 ms
+2016-12-30 19:46:14 INFO  AuthController:38 - request: GET /auth/login
+2016-12-30 19:46:19 INFO  AuthController:55 - requset: POST /auth/login
+2016-12-30 19:46:20 INFO  AuthController:71 - request: POST /auth/login; user with id 1 has been logged in
+2016-12-30 19:46:23 INFO  ExcursionController:50 - request: GET /excursion/list
+2016-12-30 19:46:24 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:46:41 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:46:41 ERROR ExcursionController:185 - request: POST /excursion/create/
+java.lang.IllegalArgumentException: Cannot create excursion in past.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:92)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:46:41 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:52:24 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:52:24 ERROR ExcursionController:185 - request: POST /excursion/create/
+java.lang.IllegalArgumentException: Cannot create excursion after trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:100)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:52:24 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:52:41 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:52:41 ERROR ExcursionController:185 - request: POST /excursion/create/
+java.lang.IllegalArgumentException: Cannot create excursion before trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:96)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:52:41 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:53:16 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:54:11 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:56:04 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:56:04 ERROR ExcursionController:185 - request: POST /excursion/create/
+java.lang.IllegalArgumentException: Cannot create excursion before trip.
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:96)
+	at cz.muni.fi.pa165.travelagency.persistence.dao.ExcursionDaoImpl.create(ExcursionDaoImpl.java:22)
+	at cz.muni.fi.pa165.travelagency.service.ExcursionServiceImpl.create(ExcursionServiceImpl.java:27)
+	at cz.muni.fi.pa165.travelagency.service.facade.ExcursionFacadeImpl.create(ExcursionFacadeImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy74.create(Unknown Source)
+	at cz.muni.fi.pa165.travelagency.web.controller.ExcursionController.create(ExcursionController.java:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:967)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:869)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:843)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at cz.muni.fi.pa165.travelagency.web.security.ProtectFilter.doFilter(ProtectFilter.java:30)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2016-12-30 19:56:04 INFO  ExcursionController:167 - request: GET /excursion/new/
+2016-12-30 19:56:44 INFO  ExcursionController:179 - request: POST /excursion/create/
+2016-12-30 19:56:44 INFO  ExcursionController:60 - request: GET /excursion/detai/9
+2016-12-30 20:00:15 INFO  AnnotationConfigWebApplicationContext:866 - Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Fri Dec 30 19:45:13 CET 2016]; parent: Root WebApplicationContext
+2016-12-30 20:00:15 INFO  AnnotationConfigWebApplicationContext:866 - Closing Root WebApplicationContext: startup date [Fri Dec 30 19:45:08 CET 2016]; root of context hierarchy
+2016-12-30 20:00:15 INFO  LocalContainerEntityManagerFactoryBean:462 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-12-30 20:00:15 INFO  SchemaExport:344 - HHH000227: Running hbm2ddl schema export
+2016-12-30 20:00:15 INFO  SchemaExport:406 - HHH000230: Schema export complete
