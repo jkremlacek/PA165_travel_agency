@@ -7,7 +7,9 @@
 
 <my:pagetemplate title="Book a trip and excursions">
 <jsp:attribute name="body">
-<h4>Creating reservation to trip ${trip.name}</h4>
+    <h4>Creating reservation to trip <c:out value="${trip.name}"/><br/>
+<fmt:formatDate value="${trip.dateFrom}" pattern="dd.MM.yyyy, HH:mm"/> - 
+<fmt:formatDate value="${trip.dateTo}" pattern="dd.MM.yyyy, HH:mm"/></h4>
 
 <table class="table">
     <tr>
@@ -21,7 +23,63 @@
 </table>
 <br/>
 <br/>
-<script>    
+
+<form:form method="post" action="${pageContext.request.contextPath}/reservation/create/${trip.id}" modelAttribute="chosenExcursions">
+    
+<c:if test="${fn:length(trip.excursions) > 0}">
+<table class="table">
+    <tr>
+        <th>
+            Choose excursions for this trip:
+        </th>
+        <th/>
+        <th/>
+    </tr>
+    <tr>
+        <th>
+            Excursion name
+        </th>
+        <th>
+            Date & time
+        </th>
+        <th>
+            Duration
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+        </th>
+    </tr>
+    <c:forEach items="${trip.excursions}" var="excursion">
+        <tr>
+            <td>    
+                <a target="_blank" href="${pageContext.request.contextPath}/excursion/detail/${excursion.id}"><c:out value="${excursion.name}"/></a>
+            </td>
+            <td>
+                <fmt:formatDate value="${excursion.getDate()}" pattern="dd.MM.yyyy, HH:mm"/>
+            </td>
+            <td>
+                <c:out value="${excursion.getDuration()}"/>
+            </td>
+            <td class="cashBX">
+                <c:out value="${excursion.price} CZK"/>
+            </td>
+            <td class="checkBX">
+                <form:checkbox path="functionList" value="${excursion.id.toString()}" onchange="toggleCheckbox(this, ${excursion.price})"/>
+            </td>
+        </tr>
+    </c:forEach>
+    </table>
+</c:if>
+    <br/>
+    <h4>Total reservation price:</h4>
+    <h4 id="totalPrice"><c:out value="${trip.price} CZK"/></h4>
+    
+    <br/>
+    <br/>
+    <button class="btn btn-success" type="submit">Make reservation</button>
+    <script>    
     function toggleCheckbox(checkbox, price) {
         var element = document.getElementById("totalPrice");
         var i = parseFloat(element.innerHTML.substring(0, element.innerHTML.length - 4));
@@ -43,49 +101,6 @@
         
     };
 </script>
-<form:form method="post" action="${pageContext.request.contextPath}/reservation/create/${trip.id}" modelAttribute="chosenExcursions">
-    
-<c:if test="${fn:length(trip.excursions) > 0}">
-<table class="table">
-    <tr>
-        <th>
-            Choose excursions for this trip:
-        </th>
-        <th/>
-        <th/>
-    </tr>
-    <tr>
-        <th>
-            Excursion name
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-        </th>
-    </tr>
-    <c:forEach items="${trip.excursions}" var="excursion">
-        <tr>
-            <td>    
-                <a target="_blank" href="${pageContext.request.contextPath}/excursion/detail/${excursion.id}"><c:out value="${excursion.name}"/></a>
-            </td>
-            <td class="cashBX">
-                <c:out value="${excursion.price} CZK"/>
-            </td>
-            <td class="checkBX">
-                <form:checkbox path="functionList" value="${excursion.id.toString()}" onchange="toggleCheckbox(this, ${excursion.price})"/>
-            </td>
-        </tr>
-    </c:forEach>
-    </table>
-</c:if>
-    <br/>
-    <h4>Total reservation price:</h4>
-    <h4 id="totalPrice"><c:out value="${trip.price} CZK"/></h4>
-    
-    <br/>
-    <br/>
-    <button class="btn btn-success" type="submit">Make reservation</button>
 </form:form>
 </jsp:attribute>
 </my:pagetemplate>

@@ -30,14 +30,13 @@
             <td>
                 <form:label path="trip"/>
                 <form:select path="trip" class="selectpicker" data-live-search="true" data-container="body">
-                    <%--<form:options items="${trips}" itemValue="id" itemLabel="name" />--%>
                     <c:forEach items="${trips}"  var="t">
                         <c:choose>
                             <c:when test="${toUpdate.trip.id==t.id}">
-                                <form:option type="text" value="${t.getId().toString()}" selected="selected">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy"/></form:option>
+                                <form:option type="text" value="${t.getId().toString()}" selected="selected">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy, HH:mm"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy, HH:mm"/></form:option>
                             </c:when>
                             <c:otherwise>
-                                <form:option type="text" value="${t.getId().toString()}">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy"/></form:option>
+                                <form:option type="text" value="${t.getId().toString()}">${t.name}; <fmt:formatDate value="${t.dateFrom}" pattern="dd.MM.yyyy, HH:mm"/> - <fmt:formatDate value="${t.dateTo}" pattern="dd.MM.yyyy, HH:mm"/></form:option>
                             </c:otherwise>
                         </c:choose>
 

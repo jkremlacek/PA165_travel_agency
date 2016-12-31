@@ -54,21 +54,46 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         log.info("Loaded users.");
         
-        Trip austriaTrip = trip("Beautiful Austria", daysAfterNow(21), daysAfterNow(28), "Austria, Alps", "Enjoy marvellous hotel in the Alps.", 50, BigDecimal.valueOf(6399));
-        Trip londonTrip = trip("Gorgeous London", daysAfterNow(14), daysAfterNow(18), "UK, London", "Visit the capital city of the UK.", 200, BigDecimal.valueOf(14099));
-        Trip parisTrip = trip("Day in Paris", daysAfterNow(59), daysAfterNow(61), "France, Paris", "Visit the most romantic city of Europe for one day.", 132, BigDecimal.valueOf(2399));
-        Trip usaTrip = trip("Endurance through USA", daysAfterNow(7), daysAfterNow(38), "USA", "Tour through many states of the USA.", 181, BigDecimal.valueOf(149999));
+        Trip austriaTrip = trip("Beautiful Austria", addDaysAfterNowAndSetExactlyDayHourAndMinutes(21, 8, 0),
+                                addDaysAfterNowAndSetExactlyDayHourAndMinutes(28, 17, 0), 
+                                "Austria, Alps", "Enjoy marvellous hotel in the Alps.", 50, 
+                                BigDecimal.valueOf(6399));
+        Trip londonTrip = trip("Gorgeous London", addDaysAfterNowAndSetExactlyDayHourAndMinutes(14, 7, 0),
+                                addDaysAfterNowAndSetExactlyDayHourAndMinutes(18, 21, 30), "UK, London", 
+                                "Visit the capital city of the UK.", 200, BigDecimal.valueOf(14099));
+        Trip parisTrip = trip("Day in Paris", addDaysAfterNowAndSetExactlyDayHourAndMinutes(59, 6, 0), 
+                              addDaysAfterNowAndSetExactlyDayHourAndMinutes(61, 18, 30), "France, Paris", 
+                              "Visit the most romantic city of Europe for one day.", 132, BigDecimal.valueOf(2399));
+        Trip usaTrip = trip("Endurance through USA", addDaysAfterNowAndSetExactlyDayHourAndMinutes(7, 22, 0), 
+                            addDaysAfterNowAndSetExactlyDayHourAndMinutes(38, 6, 45), "USA", 
+                            "Tour through many states of the USA.", 181, BigDecimal.valueOf(149999));
         
         log.info("Loaded trips.");
 
-        Excursion dachsteinExcursion = excursion("Dachstein tour", daysAfterNow(22), 7, "Austria, Dachstein", BigDecimal.valueOf(900), austriaTrip);
-        Excursion viennaExcursion = excursion("Vienna", daysAfterNow(25), 3, "Austria, Vienna", BigDecimal.valueOf(1200), austriaTrip);
-        Excursion bigbenExcursion = excursion("Big Ben", daysAfterNow(15), 9, "UK, London, Big Ben", BigDecimal.valueOf(800), londonTrip);
-        Excursion londonEye = excursion("London eye", daysAfterNow(17), 5, "UK, London", BigDecimal.valueOf(1000), londonTrip);
-        Excursion towerBridge = excursion("Tower Bridge", daysAfterNow(16), 2, "UK, London", BigDecimal.valueOf(100), londonTrip);
-        Excursion eiffelExcursion = excursion("Eiffel tower", daysAfterNow(60), 1, "France, Paris, Eiffel tower", BigDecimal.valueOf(400), parisTrip);
-        Excursion notreDameExcursion = excursion("Notre Dame", daysAfterNow(60), 1, "France, Paris, Notre Dame", BigDecimal.valueOf(300), parisTrip);
-        Excursion franceMuseumExcursion = excursion("National Museum of France", daysAfterNow(60), 2, "France, Paris, National Museum of France", BigDecimal.valueOf(300), parisTrip);
+        Excursion dachsteinExcursion = excursion(
+                "Dachstein tour", addDaysAfterNowAndSetExactlyDayHourAndMinutes(22, 10, 0),
+                7, "Austria, Dachstein", BigDecimal.valueOf(900), austriaTrip);
+        Excursion viennaExcursion = excursion(
+                "Vienna", addDaysAfterNowAndSetExactlyDayHourAndMinutes(25, 9, 0),
+                3, "Austria, Vienna", BigDecimal.valueOf(1200), austriaTrip);
+        Excursion bigbenExcursion = excursion(
+                "Big Ben", addDaysAfterNowAndSetExactlyDayHourAndMinutes(15, 7, 30),
+                9, "UK, London, Big Ben", BigDecimal.valueOf(800), londonTrip);
+        Excursion londonEye = excursion(
+                "London eye", addDaysAfterNowAndSetExactlyDayHourAndMinutes(17, 14, 0),
+                5, "UK, London", BigDecimal.valueOf(1000), londonTrip);
+        Excursion towerBridge = excursion(
+                "Tower Bridge", addDaysAfterNowAndSetExactlyDayHourAndMinutes(16, 9, 30),
+                2, "UK, London", BigDecimal.valueOf(100), londonTrip);
+        Excursion eiffelExcursion = excursion(
+                "Eiffel tower", addDaysAfterNowAndSetExactlyDayHourAndMinutes(60, 9, 0), 
+                1, "France, Paris, Eiffel tower", BigDecimal.valueOf(400), parisTrip);
+        Excursion notreDameExcursion = excursion(
+                "Notre Dame", addDaysAfterNowAndSetExactlyDayHourAndMinutes(60, 13, 0), 
+                1, "France, Paris, Notre Dame", BigDecimal.valueOf(300), parisTrip);
+        Excursion franceMuseumExcursion = excursion(
+                "National Museum of France", addDaysAfterNowAndSetExactlyDayHourAndMinutes(60, 15, 30), 
+                2, "France, Paris, National Museum of France", BigDecimal.valueOf(300), parisTrip);
         
         log.info("Loaded excursions.");
         
@@ -91,7 +116,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             
     }
     
-    private Excursion excursion(String name, Date date, Integer duration, String destination, BigDecimal price, Trip trip) {
+    private Excursion excursion(String name, Date date, Integer duration, 
+            String destination, BigDecimal price, Trip trip) {
         Excursion e = new Excursion(name, date, duration, destination, price);
         
         e.setTrip(trip);
@@ -116,7 +142,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return r;
     }
     
-    private Trip trip(String name, Date dateFrom, Date dateTo, String destination, String description, Integer capacity, BigDecimal price) {
+    private Trip trip(String name, Date dateFrom, Date dateTo, String destination,
+                      String description, Integer capacity, BigDecimal price) {
         Trip t = new Trip(name, dateFrom, dateTo, destination, description, capacity, price);
         
         tripService.create(t);
@@ -124,18 +151,27 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return t;
     }
     
-    private User user(String mail, String password, String name, Date birthDate, String personalNumber, String phoneNumber, Boolean isAdmin) {
+    private User user(String mail, String password, String name, Date birthDate,
+                      String personalNumber, String phoneNumber, Boolean isAdmin) {
         User u = new User(name, birthDate, personalNumber, mail, phoneNumber);
         u.setIsAdmin(isAdmin);
         userService.createRegisteredUser(u, password);
         
         return u;
     }
-
-    private static Date daysAfterNow(int days) {
-        return Date.from(ZonedDateTime.now().plusDays(days).toInstant());
-    }
     
+    private static Date addDaysAfterNowAndSetExactlyDayHourAndMinutes(
+                        int days, int hour, int minute) {
+        Calendar cal = Calendar.getInstance();
+        
+        cal.add(Calendar.DAY_OF_MONTH, days);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.SECOND, 0);
+        
+        return cal.getTime();
+    }
+
     private static Date date(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
         
@@ -146,16 +182,4 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return cal.getTime();
     }
     
-    private static Date daysAfterNowWithHour(int days, int hour) {
-        Calendar cal = Calendar.getInstance();
-        
-        ZonedDateTime d = ZonedDateTime.now().plusDays(days);
-        
-        cal.set(Calendar.YEAR, d.getYear());
-        cal.set(Calendar.MONTH, d.getMonthValue());
-        cal.set(Calendar.DAY_OF_MONTH, d.getDayOfMonth());
-        cal.set(Calendar.HOUR_OF_DAY, d.getHour() + hour);
-        
-        return cal.getTime();
-    }
 }
