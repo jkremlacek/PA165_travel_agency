@@ -194,11 +194,11 @@ public class TripController {
             return "redirect:/trip/new";
         } catch (DataAccessException ex) {
             log.error("request: POST /trip/create/",ex);
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created (the same trip probably already exists).");
             return "redirect:/trip/new";
         } catch (Exception ex) {
             log.error("request: POST /trip/create/",ex);
-            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Trip could not be created (internal error).");
             return "redirect:/trip/new";
         }
 
